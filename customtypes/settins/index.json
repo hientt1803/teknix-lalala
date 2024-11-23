@@ -6,6 +6,21 @@
   "status": true,
   "json": {
     "Main": {
+      "logo": {
+        "type": "Image",
+        "config": {
+          "label": "Logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "site_name": {
+        "type": "Text",
+        "config": {
+          "label": "Site name",
+          "placeholder": ""
+        }
+      },
       "navigation": {
         "type": "Group",
         "config": {
@@ -30,21 +45,6 @@
               }
             }
           }
-        }
-      },
-      "logo": {
-        "type": "Image",
-        "config": {
-          "label": "Logo",
-          "constraint": {},
-          "thumbnails": []
-        }
-      },
-      "site_name": {
-        "type": "Text",
-        "config": {
-          "label": "Site name",
-          "placeholder": ""
         }
       },
       "host": {
@@ -109,6 +109,14 @@
               }
             }
           }
+        }
+      },
+      "footers": {
+        "type": "Group",
+        "config": {
+          "label": "Footers",
+          "repeat": true,
+          "fields": {}
         }
       },
       "slices": {

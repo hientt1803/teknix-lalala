@@ -164,23 +164,17 @@ export interface SettinsDocumentDataSocialsItem {
   link: prismic.LinkField;
 }
 
+/**
+ * Item in *Setting → Footers*
+ */
+export interface SettinsDocumentDataFootersItem {}
+
 type SettinsDocumentDataSlicesSlice = never;
 
 /**
  * Content for Setting documents
  */
 interface SettinsDocumentData {
-  /**
-   * Navigation field in *Setting*
-   *
-   * - **Field Type**: Group
-   * - **Placeholder**: *None*
-   * - **API ID Path**: settins.navigation[]
-   * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/field#group
-   */
-  navigation: prismic.GroupField<Simplify<SettinsDocumentDataNavigationItem>>;
-
   /**
    * Logo field in *Setting*
    *
@@ -204,6 +198,17 @@ interface SettinsDocumentData {
   site_name: prismic.KeyTextField;
 
   /**
+   * Navigation field in *Setting*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  navigation: prismic.GroupField<Simplify<SettinsDocumentDataNavigationItem>>;
+
+  /**
    * Host field in *Setting*
    *
    * - **Field Type**: Group
@@ -224,6 +229,17 @@ interface SettinsDocumentData {
    * - **Documentation**: https://prismic.io/docs/field#group
    */
   socials: prismic.GroupField<Simplify<SettinsDocumentDataSocialsItem>>;
+
+  /**
+   * Footers field in *Setting*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.footers[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  footers: prismic.GroupField<Simplify<SettinsDocumentDataFootersItem>>;
 
   /**
    * Slice Zone field in *Setting*
@@ -342,6 +358,7 @@ declare module "@prismicio/client" {
       SettinsDocumentDataNavigationItem,
       SettinsDocumentDataHostItem,
       SettinsDocumentDataSocialsItem,
+      SettinsDocumentDataFootersItem,
       SettinsDocumentDataSlicesSlice,
       AllDocumentTypes,
       HeroSlice,
