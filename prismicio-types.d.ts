@@ -70,88 +70,198 @@ export type HomepageDocument<Lang extends string = string> =
   >;
 
 /**
- * Item in *Settings → Navigations*
+ * Item in *Setting → Navigation*
  */
-export interface SettingsDocumentDataNavigationsItem {}
+export interface SettinsDocumentDataNavigationItem {
+  /**
+   * Title field in *Setting → Navigation*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.navigation[].title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
 
-type SettingsDocumentDataSlicesSlice = never;
+  /**
+   * Link field in *Setting → Navigation*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.navigation[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
 
 /**
- * Content for Settings documents
+ * Item in *Setting → Host*
  */
-interface SettingsDocumentData {
+export interface SettinsDocumentDataHostItem {
   /**
-   * Logo field in *Settings*
+   * Label field in *Setting → Host*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.host[].label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Address field in *Setting → Host*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.host[].address
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  address: prismic.KeyTextField;
+
+  /**
+   * Active time field in *Setting → Host*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.host[].active_time
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  active_time: prismic.KeyTextField;
+
+  /**
+   * Mail field in *Setting → Host*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.host[].mail
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  mail: prismic.KeyTextField;
+}
+
+/**
+ * Item in *Setting → Socials*
+ */
+export interface SettinsDocumentDataSocialsItem {
+  /**
+   * Icon field in *Setting → Socials*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.socials[].icon
+   * - **Documentation**: https://prismic.io/docs/field#select
+   */
+  icon: prismic.SelectField<"facebook" | "instagram" | "twitter" | "youtube">;
+
+  /**
+   * Link field in *Setting → Socials*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.socials[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+}
+
+type SettinsDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Setting documents
+ */
+interface SettinsDocumentData {
+  /**
+   * Navigation field in *Setting*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.navigation[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  navigation: prismic.GroupField<Simplify<SettinsDocumentDataNavigationItem>>;
+
+  /**
+   * Logo field in *Setting*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.logo
+   * - **API ID Path**: settins.logo
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   logo: prismic.ImageField<never>;
 
   /**
-   * Site Name field in *Settings*
+   * Site name field in *Setting*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.site_name
+   * - **API ID Path**: settins.site_name
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   site_name: prismic.KeyTextField;
 
   /**
-   * Navigations field in *Settings*
+   * Host field in *Setting*
    *
    * - **Field Type**: Group
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.navigations[]
+   * - **API ID Path**: settins.host[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#group
    */
-  navigations: prismic.GroupField<
-    Simplify<SettingsDocumentDataNavigationsItem>
-  >;
+  host: prismic.GroupField<Simplify<SettinsDocumentDataHostItem>>;
 
   /**
-   * Slice Zone field in *Settings*
+   * Socials field in *Setting*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settins.socials[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  socials: prismic.GroupField<Simplify<SettinsDocumentDataSocialsItem>>;
+
+  /**
+   * Slice Zone field in *Setting*
    *
    * - **Field Type**: Slice Zone
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.slices[]
+   * - **API ID Path**: settins.slices[]
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/field#slices
    */
-  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice> /**
-   * Meta Title field in *Settings*
+  slices: prismic.SliceZone<SettinsDocumentDataSlicesSlice> /**
+   * Meta Title field in *Setting*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A title of the page used for social media and search engines
-   * - **API ID Path**: settings.meta_title
+   * - **API ID Path**: settins.meta_title
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */;
   meta_title: prismic.KeyTextField;
 
   /**
-   * Meta Description field in *Settings*
+   * Meta Description field in *Setting*
    *
    * - **Field Type**: Text
    * - **Placeholder**: A brief summary of the page
-   * - **API ID Path**: settings.meta_description
+   * - **API ID Path**: settins.meta_description
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   meta_description: prismic.KeyTextField;
 
   /**
-   * Meta Image field in *Settings*
+   * Meta Image field in *Setting*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: settings.meta_image
+   * - **API ID Path**: settins.meta_image
    * - **Tab**: SEO & Metadata
    * - **Documentation**: https://prismic.io/docs/field#image
    */
@@ -159,22 +269,22 @@ interface SettingsDocumentData {
 }
 
 /**
- * Settings document from Prismic
+ * Setting document from Prismic
  *
- * - **API ID**: `settings`
+ * - **API ID**: `settins`
  * - **Repeatable**: `false`
  * - **Documentation**: https://prismic.io/docs/custom-types
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type SettingsDocument<Lang extends string = string> =
+export type SettinsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<
-    Simplify<SettingsDocumentData>,
-    "settings",
+    Simplify<SettinsDocumentData>,
+    "settins",
     Lang
   >;
 
-export type AllDocumentTypes = HomepageDocument | SettingsDocument;
+export type AllDocumentTypes = HomepageDocument | SettinsDocument;
 
 /**
  * Default variation for Hero Slice
@@ -227,10 +337,12 @@ declare module "@prismicio/client" {
       HomepageDocument,
       HomepageDocumentData,
       HomepageDocumentDataSlicesSlice,
-      SettingsDocument,
-      SettingsDocumentData,
-      SettingsDocumentDataNavigationsItem,
-      SettingsDocumentDataSlicesSlice,
+      SettinsDocument,
+      SettinsDocumentData,
+      SettinsDocumentDataNavigationItem,
+      SettinsDocumentDataHostItem,
+      SettinsDocumentDataSocialsItem,
+      SettinsDocumentDataSlicesSlice,
       AllDocumentTypes,
       HeroSlice,
       HeroSliceVariation,
