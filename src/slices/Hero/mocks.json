@@ -7,25 +7,25 @@
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
-						"type": "paragraph",
+						"type": "heading6",
 						"content": {
-							"text": "Consectetur eu aliquip dolor reprehenderit ex proident mollit."
+							"text": "Accurate"
 						}
 					}
 				]
 			},
-			"title": {
+			"heading": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
 					{
 						"type": "heading1",
 						"content": {
-							"text": "Beauty"
+							"text": "Spider"
 						}
 					}
 				]
 			},
-			"title_description": {
+			"heading_description_list": {
 				"__TYPE__": "GroupContentType",
 				"value": [
 					{

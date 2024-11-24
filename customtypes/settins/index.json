@@ -1,0 +1,173 @@
+{
+   "format": "page",
+   "id": "settins",
+   "label": "Setting",
+   "repeatable": false,
+   "status": true,
+   "json": {
+      "Main": {
+         "logo": {
+            "type": "Image",
+            "config": {
+               "label": "Logo",
+               "constraint": {},
+               "thumbnails": []
+            }
+         },
+         "site_name": {
+            "type": "Text",
+            "config": {
+               "label": "Site name",
+               "placeholder": ""
+            }
+         },
+         "navigation": {
+            "type": "Group",
+            "config": {
+               "label": "Navigation",
+               "repeat": true,
+               "fields": {
+                  "title": {
+                     "type": "Text",
+                     "config": {
+                        "label": "Title",
+                        "placeholder": ""
+                     }
+                  },
+                  "link": {
+                     "type": "Link",
+                     "config": {
+                        "label": "Link",
+                        "placeholder": "",
+                        "allowTargetBlank": true,
+                        "select": null,
+                        "allowText": true
+                     }
+                  },
+                  "icon": {
+                     "type": "Select",
+                     "config": {
+                        "label": "Icon",
+                        "placeholder": "",
+                        "options": ["flight", "hotel", "tour", "car"]
+                     }
+                  },
+                  "description": {
+                     "type": "Text",
+                     "config": {
+                        "label": "Description",
+                        "placeholder": ""
+                     }
+                  }
+               }
+            }
+         },
+         "host": {
+            "type": "Group",
+            "config": {
+               "label": "Host",
+               "repeat": true,
+               "fields": {
+                  "label": {
+                     "type": "Text",
+                     "config": {
+                        "label": "Label",
+                        "placeholder": ""
+                     }
+                  },
+                  "address": {
+                     "type": "Text",
+                     "config": {
+                        "label": "Address",
+                        "placeholder": ""
+                     }
+                  },
+                  "active_time": {
+                     "type": "Text",
+                     "config": {
+                        "label": "Active time",
+                        "placeholder": ""
+                     }
+                  },
+                  "mail": {
+                     "type": "Text",
+                     "config": {
+                        "label": "Mail",
+                        "placeholder": ""
+                     }
+                  }
+               }
+            }
+         },
+         "socials": {
+            "type": "Group",
+            "config": {
+               "label": "Socials",
+               "repeat": true,
+               "fields": {
+                  "icon": {
+                     "type": "Select",
+                     "config": {
+                        "label": "Icon",
+                        "placeholder": "",
+                        "options": ["facebook", "instagram", "twitter", "youtube"]
+                     }
+                  },
+                  "link": {
+                     "type": "Link",
+                     "config": {
+                        "label": "Link",
+                        "placeholder": "",
+                        "allowTargetBlank": true,
+                        "select": null,
+                        "allowText": true
+                     }
+                  }
+               }
+            }
+         },
+         "footers": {
+            "type": "Group",
+            "config": {
+               "label": "Footers",
+               "repeat": true,
+               "fields": {}
+            }
+         },
+         "slices": {
+            "type": "Slices",
+            "fieldset": "Slice Zone",
+            "config": {
+               "choices": {}
+            }
+         }
+      },
+      "SEO & Metadata": {
+         "meta_title": {
+            "config": {
+               "label": "Meta Title",
+               "placeholder": "A title of the page used for social media and search engines"
+            },
+            "type": "Text"
+         },
+         "meta_description": {
+            "config": {
+               "label": "Meta Description",
+               "placeholder": "A brief summary of the page"
+            },
+            "type": "Text"
+         },
+         "meta_image": {
+            "config": {
+               "constraint": {
+                  "height": 1260,
+                  "width": 2400
+               },
+               "label": "Meta Image",
+               "thumbnails": []
+            },
+            "type": "Image"
+         }
+      }
+   }
+}
