@@ -11,6 +11,27 @@
             "fieldset": "Slice Zone",
             "config": {
                "choices": {
+                  "payment_section": {
+                     "type": "SharedSlice"
+                  },
+                  "total_section": {
+                     "type": "SharedSlice"
+                  },
+                  "tour_section": {
+                     "type": "SharedSlice"
+                  },
+                  "stay_section": {
+                     "type": "SharedSlice"
+                  },
+                  "flight_section": {
+                     "type": "SharedSlice"
+                  },
+                  "video_section": {
+                     "type": "SharedSlice"
+                  },
+                  "how_it_work": {
+                     "type": "SharedSlice"
+                  },
                   "top_author": {
                      "type": "SharedSlice"
                   },

@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import Bounded from '../containers/bounded';
 import { createClient } from '@/prismicio';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Skeleton } from '@/components/ui/skeleton';
 import { PrismicImage } from '@prismicio/react';
 import { Button } from '@/components/ui/button';
-import { Grip, Menu } from 'lucide-react';
+import { Grip } from 'lucide-react';
 const SwitchTypeLazy = dynamic(() => import('./switch-type'), {
     loading: () => <Skeleton className="h-10 w-28" />,
 });
