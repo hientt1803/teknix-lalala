@@ -6,14 +6,15 @@ import { Plus } from "lucide-react";
 
 type Props = {
     data: Flight;
+    index: number;
 };
 
-const FlightCard = ({ data }: Props) => {
+const FlightCard = ({ data, index }: Props) => {
     return <AccordionItem
-        value={data.imageUrl}
+        value={"item" + index}
     // className="rounded-2xl hover:shadow-lg transition-shadow"
     >
-        <AccordionHeader icon={<Plus />}>
+        <AccordionHeader >
             {/* <Link href={"#"} className="w-full cursor-pointer relative"> */}
             <div className="flex flex-1 flex-col sm:flex-row sm:items-center space-y-6 sm:space-y-0">
                 <div className="w-24 lg:w-32 flex-shrink-0">
