@@ -177,7 +177,49 @@ export type SettingsDocument<Lang extends string = string> =
 export type AllDocumentTypes = HomepageDocument | SettingsDocument;
 
 /**
- * Default variation for Hero Slice
+ * Item in *Hero → Plane → Primary → Title Description*
+ */
+export interface HeroSliceDefaultPrimaryTitleDescriptionItem {}
+
+/**
+ * Primary content in *Hero → Plane → Primary*
+ */
+export interface HeroSliceDefaultPrimary {
+  /**
+   * Sub Title field in *Hero → Plane → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: The Best Booking System
+   * - **API ID Path**: hero.default.primary.sub_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  sub_title: prismic.RichTextField;
+
+  /**
+   * Title field in *Hero → Plane → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: Find The Best Flight For The Amazing Places
+   * - **API ID Path**: hero.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Title Description field in *Hero → Plane → Primary*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: hero.default.primary.title_description[]
+   * - **Documentation**: https://prismic.io/docs/field#group
+   */
+  title_description: prismic.GroupField<
+    Simplify<HeroSliceDefaultPrimaryTitleDescriptionItem>
+  >;
+}
+
+/**
+ * Plane variation for Hero Slice
  *
  * - **API ID**: `default`
  * - **Description**: Default
@@ -185,7 +227,7 @@ export type AllDocumentTypes = HomepageDocument | SettingsDocument;
  */
 export type HeroSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Record<string, never>,
+  Simplify<HeroSliceDefaultPrimary>,
   never
 >;
 
@@ -202,48 +244,6 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<"hero", HeroSliceVariation>;
-
-/**
- * Primary content in *Test → Default → Primary*
- */
-export interface TestSliceDefaultPrimary {
-  /**
-   * tesst field in *Test → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: test.default.primary.tesst
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  tesst: prismic.KeyTextField;
-}
-
-/**
- * Default variation for Test Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TestSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<TestSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *Test*
- */
-type TestSliceVariation = TestSliceDefault;
-
-/**
- * Test Shared Slice
- *
- * - **API ID**: `test`
- * - **Description**: Test
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type TestSlice = prismic.SharedSlice<"test", TestSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -275,12 +275,10 @@ declare module "@prismicio/client" {
       SettingsDocumentDataSlicesSlice,
       AllDocumentTypes,
       HeroSlice,
+      HeroSliceDefaultPrimaryTitleDescriptionItem,
+      HeroSliceDefaultPrimary,
       HeroSliceVariation,
       HeroSliceDefault,
-      TestSlice,
-      TestSliceDefaultPrimary,
-      TestSliceVariation,
-      TestSliceDefault,
     };
   }
 }

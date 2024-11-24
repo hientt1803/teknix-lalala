@@ -1,3 +1,5 @@
+import { BackgroundImage } from "@/features/home/banner/BackgroundImage";
+import { MainContent } from "@/features/home/banner/mainContent";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 
@@ -15,7 +17,12 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      Placeholder component for hero (variation: {slice.variation}) Slices
+      {slice.variation == "default" && (
+        <div className="relative">
+          <BackgroundImage />
+          <MainContent />
+        </div>
+      )}
     </section>
   );
 };

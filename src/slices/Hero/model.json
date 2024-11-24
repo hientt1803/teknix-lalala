@@ -6,11 +6,40 @@
   "variations": [
     {
       "id": "default",
-      "name": "Default",
+      "name": "Plane",
       "docURL": "...",
       "version": "initial",
       "description": "Default",
-      "imageUrl": ""
+      "imageUrl": "",
+      "primary": {
+        "sub_title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Sub Title",
+            "placeholder": "The Best Booking System",
+            "allowTargetBlank": true,
+            "multi": "heading6,strong,em,paragraph"
+          }
+        },
+        "title": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Title",
+            "placeholder": "Find The Best Flight For The Amazing Places",
+            "allowTargetBlank": true,
+            "multi": "heading1,strong,em"
+          }
+        },
+        "title_description": {
+          "type": "Group",
+          "config": {
+            "label": "Title Description",
+            "repeat": true,
+            "fields": {}
+          }
+        }
+      },
+      "items": {}
     }
   ]
 }
