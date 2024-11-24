@@ -4,6 +4,13 @@ import dynamic from 'next/dynamic';
 
 export const components = {
    explore_stay: dynamic(() => import('./ExploreStay')),
+   flight_section: dynamic(() => import('./FlightSection')),
    hero: dynamic(() => import('./Hero')),
+   how_it_work: dynamic(() => import('./HowItWork')),
+   payment_section: dynamic(() => import('./PaymentSection')),
+   stay_section: dynamic(() => import('./StaySection')),
    top_author: dynamic(() => import('./TopAuthor')),
+   total_section: dynamic(() => import('./TotalSection')),
+   tour_section: dynamic(() => import('./TourSection')),
+   video_section: dynamic(() => import('./VideoSection')),
 };

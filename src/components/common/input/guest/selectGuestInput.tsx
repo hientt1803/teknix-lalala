@@ -5,8 +5,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
-import useMediaQuery from '@/hooks/use-media-query';
 import dynamic from 'next/dynamic';
 
 const GroupInputSelectDrawerContent = dynamic(
@@ -15,7 +15,7 @@ const GroupInputSelectDrawerContent = dynamic(
 );
 
 export const GroupPeopleInput = React.memo(() => {
-   const matches = useMediaQuery('(max-width: 768px)');
+   const matches = useMediaQuery('(min-width:768px)');
    const [opened, setOpened] = useState(false);
    const searchGlobalPeople = [
       {
