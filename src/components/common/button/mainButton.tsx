@@ -9,15 +9,32 @@ type MainButtonType = {
    color?: string;
    rightIcon?: React.ReactNode;
    leftIcon?: React.ReactNode;
+   children?: React.ReactNode;
 };
 
 export const MainButton = (props: MainButtonType) => {
-   const { className, text, variant = 'default', color = '#fefa17', rightIcon, leftIcon } = props;
+   const {
+      className,
+      text,
+      variant = 'default',
+      color = '#fefa17',
+      rightIcon,
+      leftIcon,
+      children,
+   } = props;
+
    return (
-      <Button variant={variant} color={color} className={cn(className)}>
+      <Button
+         variant={variant}
+         color={color}
+         className={cn(
+            `bg-[#fefa17] hover:bg-neutral-50 text-black hover:text-black font-medium rounded-[1.75rem] text-xl px-5 py-7 transition-all duration-200 ease-in-out overflow-hidden`,
+            className,
+         )}
+      >
          {leftIcon}
 
-         {text || 'View More'}
+         {children ? <>{children}</> : <>{text || 'View More'}</>}
 
          {rightIcon}
       </Button>

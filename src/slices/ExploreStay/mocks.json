@@ -1,0 +1,31 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Everyone"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Tempor esse reprehenderit in nisi cillum nulla eu officia tempor. Nisi fugiat ipsum ea ea exercitation elit ad tempor sint qui anim."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

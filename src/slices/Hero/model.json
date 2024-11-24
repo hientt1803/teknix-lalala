@@ -12,13 +12,13 @@
       "description": "Default",
       "imageUrl": "",
       "primary": {
-        "sub_title": {
+        "sub_heading": {
           "type": "StructuredText",
           "config": {
             "label": "Sub Heading",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "heading6,strong,em"
+            "multi": "paragraph,strong,em"
           }
         },
         "heading": {
@@ -27,15 +27,65 @@
             "label": "Heading",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "heading1,strong,em"
+            "multi": "heading1,heading2"
           }
         },
-        "heading_description_list": {
+        "benefits": {
           "type": "Group",
           "config": {
-            "label": "Heading Description List",
+            "label": "Benefits",
             "repeat": true,
-            "fields": {}
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "button_text": {
+          "type": "Text",
+          "config": {
+            "label": "Button Text",
+            "placeholder": ""
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "Button_Link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null,
+            "allowText": true
+          }
+        },
+        "video_text": {
+          "type": "Text",
+          "config": {
+            "label": "Video_Text",
+            "placeholder": ""
+          }
+        },
+        "video_link": {
+          "type": "Link",
+          "config": {
+            "label": "Video_Link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null,
+            "allowText": true
+          }
+        },
+        "background": {
+          "type": "Image",
+          "config": {
+            "label": "Background",
+            "constraint": {},
+            "thumbnails": []
           }
         }
       },

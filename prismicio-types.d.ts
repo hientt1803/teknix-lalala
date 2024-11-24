@@ -4,7 +4,7 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = never;
+type HomepageDocumentDataSlicesSlice = TopAuthorSlice | ExploreStaySlice | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -321,9 +321,71 @@ export type SettinsDocument<Lang extends string = string> = prismic.PrismicDocum
 export type AllDocumentTypes = HomepageDocument | SettinsDocument;
 
 /**
- * Item in *Hero → Default → Primary → Heading Description List*
+ * Primary content in *ExploreStay → Default → Primary*
  */
-export interface HeroSliceDefaultPrimaryHeadingDescriptionListItem {}
+export interface ExploreStaySliceDefaultPrimary {
+   /**
+    * Heading field in *ExploreStay → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: explore_stay.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *ExploreStay → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: explore_stay.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for ExploreStay Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExploreStaySliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<ExploreStaySliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *ExploreStay*
+ */
+type ExploreStaySliceVariation = ExploreStaySliceDefault;
+
+/**
+ * ExploreStay Shared Slice
+ *
+ * - **API ID**: `explore_stay`
+ * - **Description**: ExploreStay
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExploreStaySlice = prismic.SharedSlice<'explore_stay', ExploreStaySliceVariation>;
+
+/**
+ * Item in *Hero → Default → Primary → Benefits*
+ */
+export interface HeroSliceDefaultPrimaryBenefitsItem {
+   /**
+    * Name field in *Hero → Default → Primary → Benefits*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: hero.default.primary.benefits[].name
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   name: prismic.KeyTextField;
+}
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -334,10 +396,10 @@ export interface HeroSliceDefaultPrimary {
     *
     * - **Field Type**: Rich Text
     * - **Placeholder**: *None*
-    * - **API ID Path**: hero.default.primary.sub_title
+    * - **API ID Path**: hero.default.primary.sub_heading
     * - **Documentation**: https://prismic.io/docs/field#rich-text-title
     */
-   sub_title: prismic.RichTextField;
+   sub_heading: prismic.RichTextField;
 
    /**
     * Heading field in *Hero → Default → Primary*
@@ -350,16 +412,64 @@ export interface HeroSliceDefaultPrimary {
    heading: prismic.RichTextField;
 
    /**
-    * Heading Description List field in *Hero → Default → Primary*
+    * Benefits field in *Hero → Default → Primary*
     *
     * - **Field Type**: Group
     * - **Placeholder**: *None*
-    * - **API ID Path**: hero.default.primary.heading_description_list[]
+    * - **API ID Path**: hero.default.primary.benefits[]
     * - **Documentation**: https://prismic.io/docs/field#group
     */
-   heading_description_list: prismic.GroupField<
-      Simplify<HeroSliceDefaultPrimaryHeadingDescriptionListItem>
-   >;
+   benefits: prismic.GroupField<Simplify<HeroSliceDefaultPrimaryBenefitsItem>>;
+
+   /**
+    * Button Text field in *Hero → Default → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: hero.default.primary.button_text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   button_text: prismic.KeyTextField;
+
+   /**
+    * Button_Link field in *Hero → Default → Primary*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: hero.default.primary.button_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   button_link: prismic.LinkField;
+
+   /**
+    * Video_Text field in *Hero → Default → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: hero.default.primary.video_text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   video_text: prismic.KeyTextField;
+
+   /**
+    * Video_Link field in *Hero → Default → Primary*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: hero.default.primary.video_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   video_link: prismic.LinkField;
+
+   /**
+    * Background field in *Hero → Default → Primary*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: hero.default.primary.background
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   background: prismic.ImageField<never>;
 }
 
 /**
@@ -388,6 +498,58 @@ type HeroSliceVariation = HeroSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
+
+/**
+ * Primary content in *TopAuthor → Default → Primary*
+ */
+export interface TopAuthorSliceDefaultPrimary {
+   /**
+    * Heading field in *TopAuthor → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: top_author.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *TopAuthor → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: top_author.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TopAuthor Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TopAuthorSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<TopAuthorSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *TopAuthor*
+ */
+type TopAuthorSliceVariation = TopAuthorSliceDefault;
+
+/**
+ * TopAuthor Shared Slice
+ *
+ * - **API ID**: `top_author`
+ * - **Description**: TopAuthor
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TopAuthorSlice = prismic.SharedSlice<'top_author', TopAuthorSliceVariation>;
 
 declare module '@prismicio/client' {
    interface CreateClient {
@@ -421,11 +583,19 @@ declare module '@prismicio/client' {
          SettinsDocumentDataFootersItem,
          SettinsDocumentDataSlicesSlice,
          AllDocumentTypes,
+         ExploreStaySlice,
+         ExploreStaySliceDefaultPrimary,
+         ExploreStaySliceVariation,
+         ExploreStaySliceDefault,
          HeroSlice,
-         HeroSliceDefaultPrimaryHeadingDescriptionListItem,
+         HeroSliceDefaultPrimaryBenefitsItem,
          HeroSliceDefaultPrimary,
          HeroSliceVariation,
          HeroSliceDefault,
+         TopAuthorSlice,
+         TopAuthorSliceDefaultPrimary,
+         TopAuthorSliceVariation,
+         TopAuthorSliceDefault,
       };
    }
 }
