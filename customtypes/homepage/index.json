@@ -11,6 +11,12 @@
             "fieldset": "Slice Zone",
             "config": {
                "choices": {
+                  "top_author": {
+                     "type": "SharedSlice"
+                  },
+                  "explore_stay": {
+                     "type": "SharedSlice"
+                  },
                   "hero": {
                      "type": "SharedSlice"
                   }
