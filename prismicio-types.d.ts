@@ -4,7 +4,17 @@ import type * as prismic from '@prismicio/client';
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
-type HomepageDocumentDataSlicesSlice = TopAuthorSlice | ExploreStaySlice | HeroSlice;
+type HomepageDocumentDataSlicesSlice =
+   | PaymentSectionSlice
+   | TotalSectionSlice
+   | TourSectionSlice
+   | StaySectionSlice
+   | FlightSectionSlice
+   | VideoSectionSlice
+   | HowItWorkSlice
+   | TopAuthorSlice
+   | ExploreStaySlice
+   | HeroSlice;
 
 /**
  * Content for Homepage documents
@@ -373,6 +383,58 @@ type ExploreStaySliceVariation = ExploreStaySliceDefault;
 export type ExploreStaySlice = prismic.SharedSlice<'explore_stay', ExploreStaySliceVariation>;
 
 /**
+ * Primary content in *FlightSection → Default → Primary*
+ */
+export interface FlightSectionSliceDefaultPrimary {
+   /**
+    * Heading field in *FlightSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *FlightSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_section.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for FlightSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FlightSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<FlightSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *FlightSection*
+ */
+type FlightSectionSliceVariation = FlightSectionSliceDefault;
+
+/**
+ * FlightSection Shared Slice
+ *
+ * - **API ID**: `flight_section`
+ * - **Description**: FlightSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FlightSectionSlice = prismic.SharedSlice<'flight_section', FlightSectionSliceVariation>;
+
+/**
  * Item in *Hero → Default → Primary → Benefits*
  */
 export interface HeroSliceDefaultPrimaryBenefitsItem {
@@ -500,6 +562,335 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Item in *HowItWork → Default → Primary → HowItWorks*
+ */
+export interface HowItWorkSliceDefaultPrimaryHowitworksItem {
+   /**
+    * Image_Light field in *HowItWork → Default → Primary → HowItWorks*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.howitworks[].image_light
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image_light: prismic.ImageField<never>;
+
+   /**
+    * Image_Dark field in *HowItWork → Default → Primary → HowItWorks*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.howitworks[].image_dark
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image_dark: prismic.ImageField<never>;
+
+   /**
+    * Title field in *HowItWork → Default → Primary → HowItWorks*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.howitworks[].title
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   title: prismic.RichTextField;
+
+   /**
+    * Description field in *HowItWork → Default → Primary → HowItWorks*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.howitworks[].description
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *HowItWork → Default → Primary*
+ */
+export interface HowItWorkSliceDefaultPrimary {
+   /**
+    * Heading field in *HowItWork → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *HowItWork → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * HowItWorks field in *HowItWork → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.default.primary.howitworks[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   howitworks: prismic.GroupField<Simplify<HowItWorkSliceDefaultPrimaryHowitworksItem>>;
+}
+
+/**
+ * Default variation for HowItWork Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HowItWorkSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<HowItWorkSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *HowItWork*
+ */
+type HowItWorkSliceVariation = HowItWorkSliceDefault;
+
+/**
+ * HowItWork Shared Slice
+ *
+ * - **API ID**: `how_it_work`
+ * - **Description**: HowItWork
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HowItWorkSlice = prismic.SharedSlice<'how_it_work', HowItWorkSliceVariation>;
+
+/**
+ * Item in *PaymentSection → Default → Primary → Images*
+ */
+export interface PaymentSectionSliceDefaultPrimaryImagesItem {
+   /**
+    * Image field in *PaymentSection → Default → Primary → Images*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.images[].image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
+}
+
+/**
+ * Item in *PaymentSection → Default → Primary → Benefits*
+ */
+export interface PaymentSectionSliceDefaultPrimaryBenefitsItem {
+   /**
+    * Text field in *PaymentSection → Default → Primary → Benefits*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.benefits[].text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   text: prismic.KeyTextField;
+}
+
+/**
+ * Item in *PaymentSection → Default → Primary → Payments*
+ */
+export interface PaymentSectionSliceDefaultPrimaryPaymentsItem {
+   /**
+    * Logo field in *PaymentSection → Default → Primary → Payments*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.payments[].logo
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   logo: prismic.ImageField<never>;
+
+   /**
+    * Title field in *PaymentSection → Default → Primary → Payments*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.payments[].title
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   title: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *PaymentSection → Default → Primary*
+ */
+export interface PaymentSectionSliceDefaultPrimary {
+   /**
+    * Images field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.images[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   images: prismic.GroupField<Simplify<PaymentSectionSliceDefaultPrimaryImagesItem>>;
+
+   /**
+    * Video Link field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.video_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   video_link: prismic.LinkField;
+
+   /**
+    * Tag field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.tag
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   tag: prismic.KeyTextField;
+
+   /**
+    * Heading field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Title field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.title
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   title: prismic.RichTextField;
+
+   /**
+    * Benefits field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.benefits[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   benefits: prismic.GroupField<Simplify<PaymentSectionSliceDefaultPrimaryBenefitsItem>>;
+
+   /**
+    * Payment Label field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.payment_label
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   payment_label: prismic.RichTextField;
+
+   /**
+    * Payments field in *PaymentSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: payment_section.default.primary.payments[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   payments: prismic.GroupField<Simplify<PaymentSectionSliceDefaultPrimaryPaymentsItem>>;
+}
+
+/**
+ * Default variation for PaymentSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PaymentSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<PaymentSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *PaymentSection*
+ */
+type PaymentSectionSliceVariation = PaymentSectionSliceDefault;
+
+/**
+ * PaymentSection Shared Slice
+ *
+ * - **API ID**: `payment_section`
+ * - **Description**: PaymentSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type PaymentSectionSlice = prismic.SharedSlice<
+   'payment_section',
+   PaymentSectionSliceVariation
+>;
+
+/**
+ * Primary content in *StaySection → Default → Primary*
+ */
+export interface StaySectionSliceDefaultPrimary {
+   /**
+    * Heading field in *StaySection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: stay_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *StaySection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: stay_section.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for StaySection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StaySectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<StaySectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *StaySection*
+ */
+type StaySectionSliceVariation = StaySectionSliceDefault;
+
+/**
+ * StaySection Shared Slice
+ *
+ * - **API ID**: `stay_section`
+ * - **Description**: StaySection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type StaySectionSlice = prismic.SharedSlice<'stay_section', StaySectionSliceVariation>;
+
+/**
  * Primary content in *TopAuthor → Default → Primary*
  */
 export interface TopAuthorSliceDefaultPrimary {
@@ -551,6 +942,232 @@ type TopAuthorSliceVariation = TopAuthorSliceDefault;
  */
 export type TopAuthorSlice = prismic.SharedSlice<'top_author', TopAuthorSliceVariation>;
 
+/**
+ * Item in *TotalSection → Default → Primary → Totals*
+ */
+export interface TotalSectionSliceDefaultPrimaryTotalsItem {
+   /**
+    * Title field in *TotalSection → Default → Primary → Totals*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: total_section.default.primary.totals[].title
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   title: prismic.RichTextField;
+
+   /**
+    * Description field in *TotalSection → Default → Primary → Totals*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: total_section.default.primary.totals[].description
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   description: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *TotalSection → Default → Primary*
+ */
+export interface TotalSectionSliceDefaultPrimary {
+   /**
+    * Background field in *TotalSection → Default → Primary*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: total_section.default.primary.background
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   background: prismic.ImageField<never>;
+
+   /**
+    * Totals field in *TotalSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: total_section.default.primary.totals[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   totals: prismic.GroupField<Simplify<TotalSectionSliceDefaultPrimaryTotalsItem>>;
+}
+
+/**
+ * Default variation for TotalSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TotalSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<TotalSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *TotalSection*
+ */
+type TotalSectionSliceVariation = TotalSectionSliceDefault;
+
+/**
+ * TotalSection Shared Slice
+ *
+ * - **API ID**: `total_section`
+ * - **Description**: TotalSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TotalSectionSlice = prismic.SharedSlice<'total_section', TotalSectionSliceVariation>;
+
+/**
+ * Primary content in *TourSection → Default → Primary*
+ */
+export interface TourSectionSliceDefaultPrimary {
+   /**
+    * Heading field in *TourSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: tour_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *TourSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: tour_section.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for TourSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TourSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<TourSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *TourSection*
+ */
+type TourSectionSliceVariation = TourSectionSliceDefault;
+
+/**
+ * TourSection Shared Slice
+ *
+ * - **API ID**: `tour_section`
+ * - **Description**: TourSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TourSectionSlice = prismic.SharedSlice<'tour_section', TourSectionSliceVariation>;
+
+/**
+ * Item in *VideoSection → Default → Primary → Videos*
+ */
+export interface VideoSectionSliceDefaultPrimaryVideosItem {
+   /**
+    * Title field in *VideoSection → Default → Primary → Videos*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: video_section.default.primary.videos[].title
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   title: prismic.KeyTextField;
+
+   /**
+    * Link field in *VideoSection → Default → Primary → Videos*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: video_section.default.primary.videos[].link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   link: prismic.LinkField;
+
+   /**
+    * Thumbnail field in *VideoSection → Default → Primary → Videos*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: video_section.default.primary.videos[].thumbnail
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   thumbnail: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *VideoSection → Default → Primary*
+ */
+export interface VideoSectionSliceDefaultPrimary {
+   /**
+    * Heading field in *VideoSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: video_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *VideoSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: video_section.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Videos field in *VideoSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: video_section.default.primary.videos[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   videos: prismic.GroupField<Simplify<VideoSectionSliceDefaultPrimaryVideosItem>>;
+}
+
+/**
+ * Default variation for VideoSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type VideoSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<VideoSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *VideoSection*
+ */
+type VideoSectionSliceVariation = VideoSectionSliceDefault;
+
+/**
+ * VideoSection Shared Slice
+ *
+ * - **API ID**: `video_section`
+ * - **Description**: VideoSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type VideoSectionSlice = prismic.SharedSlice<'video_section', VideoSectionSliceVariation>;
+
 declare module '@prismicio/client' {
    interface CreateClient {
       (
@@ -587,15 +1204,49 @@ declare module '@prismicio/client' {
          ExploreStaySliceDefaultPrimary,
          ExploreStaySliceVariation,
          ExploreStaySliceDefault,
+         FlightSectionSlice,
+         FlightSectionSliceDefaultPrimary,
+         FlightSectionSliceVariation,
+         FlightSectionSliceDefault,
          HeroSlice,
          HeroSliceDefaultPrimaryBenefitsItem,
          HeroSliceDefaultPrimary,
          HeroSliceVariation,
          HeroSliceDefault,
+         HowItWorkSlice,
+         HowItWorkSliceDefaultPrimaryHowitworksItem,
+         HowItWorkSliceDefaultPrimary,
+         HowItWorkSliceVariation,
+         HowItWorkSliceDefault,
+         PaymentSectionSlice,
+         PaymentSectionSliceDefaultPrimaryImagesItem,
+         PaymentSectionSliceDefaultPrimaryBenefitsItem,
+         PaymentSectionSliceDefaultPrimaryPaymentsItem,
+         PaymentSectionSliceDefaultPrimary,
+         PaymentSectionSliceVariation,
+         PaymentSectionSliceDefault,
+         StaySectionSlice,
+         StaySectionSliceDefaultPrimary,
+         StaySectionSliceVariation,
+         StaySectionSliceDefault,
          TopAuthorSlice,
          TopAuthorSliceDefaultPrimary,
          TopAuthorSliceVariation,
          TopAuthorSliceDefault,
+         TotalSectionSlice,
+         TotalSectionSliceDefaultPrimaryTotalsItem,
+         TotalSectionSliceDefaultPrimary,
+         TotalSectionSliceVariation,
+         TotalSectionSliceDefault,
+         TourSectionSlice,
+         TourSectionSliceDefaultPrimary,
+         TourSectionSliceVariation,
+         TourSectionSliceDefault,
+         VideoSectionSlice,
+         VideoSectionSliceDefaultPrimaryVideosItem,
+         VideoSectionSliceDefaultPrimary,
+         VideoSectionSliceVariation,
+         VideoSectionSliceDefault,
       };
    }
 }

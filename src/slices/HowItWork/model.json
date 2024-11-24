@@ -1,0 +1,80 @@
+{
+  "id": "how_it_work",
+  "type": "SharedSlice",
+  "name": "HowItWork",
+  "description": "HowItWork",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        },
+        "howitworks": {
+          "type": "Group",
+          "config": {
+            "label": "HowItWorks",
+            "repeat": true,
+            "fields": {
+              "image_light": {
+                "type": "Image",
+                "config": {
+                  "label": "Image_Light",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "image_dark": {
+                "type": "Image",
+                "config": {
+                  "label": "Image_Dark",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "title": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Title",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading3"
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em"
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
