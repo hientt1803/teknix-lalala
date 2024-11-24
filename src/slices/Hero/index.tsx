@@ -1,3 +1,4 @@
+import Bounded from '@/components/common/containers/bounded';
 import { SearchGroup } from '@/components/common/searchGroup/searchGroup';
 import Heading from '@/components/common/typography/heading';
 import Paragraph from '@/components/common/typography/paragraph';
@@ -31,22 +32,25 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       <section
          data-slice-type={slice.slice_type}
          data-slice-variation={slice.variation}
-         className="block"
+         className="w-full"
       >
          {slice.variation == 'default' && (
-            <div className="relative block h-[60.625rem]">
+            <div className="relative block w-full h-[60.625rem]">
                {/* Background */}
                <PrismicNextImage
                   field={slice.primary.background}
                   alt=""
                   className="absolute w-full h-[60.625rem] object-cover z-[2]"
+                  loading="lazy"
                />
 
                {/* Content */}
                <MainContent slice={slice} index={0} slices={[]} context={undefined} />
 
                {/* Search Group */}
-               <SearchGroup />
+               <Bounded className='relative'>
+                  <SearchGroup />
+               </Bounded>
             </div>
          )}
       </section>

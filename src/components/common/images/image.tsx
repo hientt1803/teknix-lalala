@@ -29,6 +29,7 @@ const Image: React.FC<ImageProps> = ({
                {...rest}
                onError={handleError}
                className="object-cover w-full h-full"
+               loading="lazy"
             />
          ) : (
             <div className="flex items-center justify-center w-full overflow-hidden h-full border border-slate-100 rounded-2xl">

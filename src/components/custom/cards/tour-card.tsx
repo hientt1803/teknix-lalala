@@ -103,9 +103,9 @@ const TourCard = ({
                               className="w-[18px] h-[18px] text-orange-500"
                            >
                               <path
-                                 fill-rule="evenodd"
+                                 fillRule="evenodd"
                                  d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                 clip-rule="evenodd"
+                                 clipRule="evenodd"
                               ></path>
                            </svg>
                         </div>
@@ -143,7 +143,7 @@ const TourCard = ({
                   <path
                      strokeLinecap="round"
                      strokeLinejoin="round"
-                     stroke-width="1.5"
+                     strokeWidth="1.5"
                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                   ></path>
                </svg>
