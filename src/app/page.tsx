@@ -8,7 +8,11 @@ export default async function Page() {
    const client = createClient();
    const page = await client.getSingle('homepage');
 
-   return <SliceZone slices={page.data.slices} components={components} />;
+   return (
+      <div className="flex flex-col gap-8 lg:gap-16 justify-center items-center">
+         <SliceZone slices={page.data.slices} components={components} />
+      </div>
+   );
 }
 
 export async function generateMetadata(): Promise<Metadata> {

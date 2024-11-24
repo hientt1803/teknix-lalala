@@ -5,8 +5,8 @@ import { Content } from '@prismicio/client';
 import { JSXMapSerializer, PrismicRichText, SliceComponentProps } from '@prismicio/react';
 import { cards } from './mock';
 import Link from 'next/link';
-import Image from 'next/image';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Image from '@/components/common/images/image';
 
 /**
  * Props for `TopAuthor`.
@@ -49,7 +49,7 @@ const TopAuthor = ({ slice }: TopAuthorProps): JSX.Element => {
                         >
                             <div className="relative flex-shrink-0 ">
                                 <div className="flex aspect-[7/3] md:aspect-[7/4] w-full">
-                                    <img
+                                    <Image
                                         alt=""
                                         sizes="(max-width: 400px) 100vw, 400px"
                                         className="absolute object-cover inset-0 w-full h-full"

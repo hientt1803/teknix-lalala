@@ -23,7 +23,7 @@ const ExploreStay = ({ slice }: ExploreStayProps): JSX.Element => {
         <Bounded
             data-slice-type={slice.slice_type}
             data-slice-variation={slice.variation}
-            className="py-16"
+            className="py-16 mt-16"
         >
             <Carousel
                 opts={{

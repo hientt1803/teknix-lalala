@@ -1,8 +1,10 @@
+
 'use client';
 import React, { ReactNode, ReactElement } from 'react';
 import { AnimatePresence, motion, Variants } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 // Type for AccordionContext
 interface AccordionContextType {
@@ -133,30 +135,33 @@ export function AccordionHeader({
 
     return (
         <motion.div
-            className={`p-4 cursor-pointer transition-all font-semibold dark:text-white text-black dark:hover:bg-slate-600  hover:text-black flex justify-between items-center ${isActive
+            className={`p-4 cursor-pointer transition-all font-semibold dark:text-white text-black dark:hover:bg-slate-600  hover:text-black flex justify-between items-center gap-4 ${isActive
                 ? 'active dark:bg-slate-700 bg-white'
                 : 'dark:bg-slate-800  bg-white'
                 }`}
             onClick={() => onChangeIndex(value)}
         >
             {children}
-            {icon ? (
-                <motion.div
-                    variants={chevronVariants}
-                    animate={isActive ? 'expanded' : 'collapsed'}
-                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                >
-                    {icon}
-                </motion.div>
-            ) : (
-                <motion.div
-                    variants={chevronVariants}
-                    animate={isActive ? 'expanded' : 'collapsed'}
-                    transition={{ type: 'spring', stiffness: 300, damping: 15 }}
-                >
-                    <ChevronDown />
-                </motion.div>
-            )}
+
+            <Button size='icon' variant='ghost' className='rounded-full'>
+                {icon ? (
+                    <motion.div
+                        variants={chevronVariants}
+                        animate={isActive ? 'expanded' : 'collapsed'}
+                        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    >
+                        {icon}
+                    </motion.div>
+                ) : (
+                    <motion.div
+                        variants={chevronVariants}
+                        animate={isActive ? 'expanded' : 'collapsed'}
+                        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+                    >
+                        <ChevronDown />
+                    </motion.div>
+                )}
+            </Button>
         </motion.div>
     );
 }

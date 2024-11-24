@@ -1,12 +1,3 @@
-import React from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import Bounded from '../containers/bounded';
-import { Search, User } from 'lucide-react';
-import { InputSearchLocation } from '../input/location/inputSearchLocation';
-import { MainButton } from '../button/mainButton';
-import { InputSearchDateRange } from '../input/dateRange/inputSearchDateRange';
-import { InputSearchGuest } from '../input/guest/inputSearchGuest';
-import { Separator } from '@/components/ui/separator';
 import {
    Select,
    SelectContent,
@@ -14,8 +5,13 @@ import {
    SelectTrigger,
    SelectValue,
 } from '@/components/ui/select';
-import { GroupInputSelectDrawerContent } from '../input/guest/selectGuestContent';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Search, User } from 'lucide-react';
+import { MainButton } from '../button/mainButton';
+import { InputSearchDateRange } from '../input/dateRange/inputSearchDateRange';
+import { InputSearchGuest } from '../input/guest/inputSearchGuest';
 import { GroupPeopleInput } from '../input/guest/selectGuestInput';
+import { InputSearchLocation } from '../input/location/inputSearchLocation';
 
 export const SearchGroup = () => {
    const TabContent = ({ type }: { type: 'hotel' | 'fligh' }) => (
@@ -140,54 +136,56 @@ export const SearchGroup = () => {
    );
 
    return (
-      <Bounded className="absolute -bottom-10 left-0 right-0 w-full bg-white dark:bg-neutral-900 p-7 shadow-md rounded-xl z-10">
-         <Tabs defaultValue="hotel" className="min-w-full w-full h-full">
-            <TabsList className="w-full h-fit flex justify-betweenitems-center bg-transparent">
-               <div className="w-full">
-                  <TabsTrigger
-                     value="hotel"
-                     className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                  >
-                     Hotels
-                  </TabsTrigger>
-                  <TabsTrigger
-                     value="tour"
-                     className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                  >
-                     Tour
-                  </TabsTrigger>
-                  <TabsTrigger
-                     value="flight"
-                     className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                  >
-                     Flight
-                  </TabsTrigger>
-                  {/* <TabsTrigger
+      <div className="relative -top-36 pb-16 z-30 w-full">
+         <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
+            <Tabs defaultValue="hotel" className='w-full'>
+               <TabsList className="w-full h-full flex justify-betweenitems-center bg-transparent">
+                  <div className="w-full">
+                     <TabsTrigger
+                        value="hotel"
+                        className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                     >
+                        Hotels
+                     </TabsTrigger>
+                     <TabsTrigger
+                        value="tour"
+                        className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                     >
+                        Tour
+                     </TabsTrigger>
+                     <TabsTrigger
+                        value="flight"
+                        className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                     >
+                        Flight
+                     </TabsTrigger>
+                     {/* <TabsTrigger
                      value="rentals"
                      className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
                   >
                      Rentals
                   </TabsTrigger> */}
-               </div>
+                  </div>
 
-               <div className="font-normal text-neutral-500 flex items-center gap-1 flex-nowrap">
-                  <User className="w-4 h-4" />
-                  <span className="text-md text-nowrap">Need some help?</span>
-               </div>
-            </TabsList>
-            <TabsContent value="hotel">
-               <TabContent type="hotel" />
-            </TabsContent>
-            <TabsContent value="tour">
-               <TabContent type="hotel" />
-            </TabsContent>
-            <TabsContent value="flight">
-               <TabContent type="fligh" />
-            </TabsContent>
-            {/* <TabsContent value="rentals">
+                  <div className="font-normal text-neutral-500 flex items-center gap-1 flex-nowrap">
+                     <User className="w-4 h-4" />
+                     <span className="text-md text-nowrap">Need some help?</span>
+                  </div>
+               </TabsList>
+               <TabsContent value="hotel">
+                  <TabContent type="hotel" />
+               </TabsContent>
+               <TabsContent value="tour">
+                  <TabContent type="hotel" />
+               </TabsContent>
+               <TabsContent value="flight">
+                  <TabContent type="fligh" />
+               </TabsContent>
+               {/* <TabsContent value="rentals">
                <TabContent />
             </TabsContent> */}
-         </Tabs>
-      </Bounded>
+            </Tabs>
+         </div>
+      </div>
    );
 };
