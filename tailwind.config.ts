@@ -6,6 +6,7 @@ const config: Config = {
       './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
       './src/components/**/*.{js,ts,jsx,tsx,mdx}',
       './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+      './src/**/*.{js,ts,jsx,tsx,mdx}',
    ],
    theme: {
       extend: {
@@ -51,6 +52,13 @@ const config: Config = {
                '5': 'hsl(var(--chart-5))',
             },
          },
+         keyframes: {
+            shimmer: {
+               '100%': {
+                  transform: 'translateX(100%)',
+               },
+            },
+         },
          borderRadius: {
             lg: 'var(--radius)',
             md: 'calc(var(--radius) - 2px)',
@@ -58,6 +66,7 @@ const config: Config = {
          },
       },
    },
+   // eslint-disable-next-line @typescript-eslint/no-require-imports
    plugins: [require('tailwindcss-animate')],
 };
 export default config;
