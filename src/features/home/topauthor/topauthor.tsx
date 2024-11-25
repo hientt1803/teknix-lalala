@@ -1,7 +1,6 @@
-import Image from '@/components/common/images/image';
 import Heading from '@/components/common/typography/heading';
 import Paragraph from '@/components/common/typography/paragraph';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { cards } from '@/slices/TopAuthor/mock';
 import { RichTextField } from '@prismicio/client';

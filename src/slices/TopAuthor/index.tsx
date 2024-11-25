@@ -1,5 +1,4 @@
 import Bounded from '@/components/common/containers/bounded';
-import { Skeleton } from '@/components/ui/skeleton';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 import dynamic from 'next/dynamic';
@@ -11,15 +10,10 @@ export type TopAuthorProps = SliceComponentProps<Content.TopAuthorSlice>;
 /**
  * Component for "TopAuthor" Slices.
  */
+const TopAuthorLazy = dynamic(() => import('@/features/home/topauthor/topauthor').then((mob) => mob.default), {
+    loading: () => <div>Kiad</div>,
+ });
 
-const TopAuthorLazy = dynamic(() => import('@/features/home/topauthor'), {
-   loading: () => (
-      <div className="">
-         Hello
-         <Skeleton className="h-screen w-full" />
-      </div>
-   ),
-});
 const TopAuthor = ({ slice }: TopAuthorProps): JSX.Element => {
    return (
       <Bounded
@@ -28,7 +22,6 @@ const TopAuthor = ({ slice }: TopAuthorProps): JSX.Element => {
          data-slice-variation={slice.variation}
       >
          <TopAuthorLazy body={slice.primary.heading} heading={slice.primary.body} />
-        
       </Bounded>
    );
 };
