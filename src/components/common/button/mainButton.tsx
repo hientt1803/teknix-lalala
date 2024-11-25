@@ -10,6 +10,7 @@ type MainButtonType = {
    rightIcon?: React.ReactNode;
    leftIcon?: React.ReactNode;
    children?: React.ReactNode;
+   fullWidth?: boolean;
 };
 
 export const MainButton = (props: MainButtonType) => {
@@ -21,6 +22,7 @@ export const MainButton = (props: MainButtonType) => {
       rightIcon,
       leftIcon,
       children,
+      fullWidth = false,
    } = props;
 
    return (
@@ -30,6 +32,7 @@ export const MainButton = (props: MainButtonType) => {
          className={cn(
             `bg-[#fefa17] hover:bg-neutral-50 text-black hover:text-black font-medium rounded-[1.75rem] text-xl px-5 py-7 transition-all duration-200 ease-in-out overflow-hidden`,
             className,
+            fullWidth && 'w-full',
          )}
       >
          {leftIcon}

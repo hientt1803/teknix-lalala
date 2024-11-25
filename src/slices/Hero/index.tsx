@@ -1,11 +1,24 @@
 import Bounded from '@/components/common/containers/bounded';
-import { SearchGroup } from '@/components/common/searchGroup/searchGroup';
 import Heading from '@/components/common/typography/heading';
 import Paragraph from '@/components/common/typography/paragraph';
-import { MainContent } from '@/features/home/banner/mainContent';
 import { Content } from '@prismicio/client';
-import { PrismicNextImage } from '@prismicio/next';
 import { JSXMapSerializer, SliceComponentProps } from '@prismicio/react';
+import dynamic from 'next/dynamic';
+
+export const BackGroundImageSkeleton = dynamic(() =>
+   import('@/features/home/banner/backgroundImage').then((mod) => mod.BackGroundImageSkeleton),
+);
+export const BackgroundImage = dynamic(
+   () => import('@/features/home/banner/backgroundImage').then((mod) => mod.BackgroundImage),
+   { loading: () => <BackGroundImageSkeleton /> },
+);
+
+export const MainContent = dynamic(() =>
+   import('@/features/home/banner/mainContent').then((mod) => mod.MainContent),
+);
+export const SearchGroup = dynamic(() =>
+   import('@/components/common/searchGroup/searchGroup').then((mod) => mod.SearchGroup),
+);
 
 /**
  * Props for `Hero`.
@@ -37,14 +50,10 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
          {slice.variation == 'default' && (
             <div className="relative block w-full h-[60.625rem]">
                {/* Background */}
-               <PrismicNextImage
-                  field={slice.primary.background}
-                  alt=""
-                  className="absolute w-full h-[60.625rem] object-cover z-[2]"
-               />
+               <BackgroundImage image={slice.primary.background} />
 
                {/* Content */}
-               <MainContent slice={slice} index={0} slices={[]} context={undefined} />
+               <MainContent slice={slice} />
 
                {/* Search Group */}
                <Bounded className="relative">

@@ -11,6 +11,24 @@
             "fieldset": "Slice Zone",
             "config": {
                "choices": {
+                  "grid_section": {
+                     "type": "SharedSlice"
+                  },
+                  "service_section": {
+                     "type": "SharedSlice"
+                  },
+                  "images_section": {
+                     "type": "SharedSlice"
+                  },
+                  "news_section": {
+                     "type": "SharedSlice"
+                  },
+                  "promotion_section": {
+                     "type": "SharedSlice"
+                  },
+                  "ask_and_questions": {
+                     "type": "SharedSlice"
+                  },
                   "payment_section": {
                      "type": "SharedSlice"
                   },

@@ -1,0 +1,31 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"heading": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading2",
+						"content": {
+							"text": "Discussion"
+						}
+					}
+				]
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Anim commodo aute anim aliqua reprehenderit enim aliquip culpa aute. Excepteur nulla ad fugiat labore laborum mollit nostrud reprehenderit pariatur tempor aliquip ipsum adipisicing pariatur. Lorem dolor proident deserunt in proident ea deserunt dolor."
+						}
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]

@@ -32,31 +32,45 @@ const TotalSection = ({ slice }: TotalSectionProps): JSX.Element => {
       <section
          data-slice-type={slice.slice_type}
          data-slice-variation={slice.variation}
-         className="block py-16"
+         className="py-16 min-w-full w-full"
       >
-         <Bounded className="relative w-full h-fit flex justify-center items-center">
-            <PrismicNextImage
-               field={slice.primary.background}
-               alt=""
-               className="absolute w-fit h-fit object-cover z-[2]"
-            />
+         <Bounded>
+            <div className="relative w-full min-h-[18.75rem] md:min-h-[18.75rem] h-full flex justify-center items-center">
+               {/* Background image */}
+               <div className="absolute inset-0 w-full min-h-[18.75rem] md:min-h-[18.75rem] h-full">
+                  <PrismicNextImage
+                     field={slice.primary.background}
+                     alt=""
+                     height={350}
+                     className="w-full min-h-[18.75rem] md:min-h-[18.75rem] h-full object-fill lg:object-contain z-[1]"
+                  />
+               </div>
 
-            <div className="w-full h-full flex flex-col justify-center items-center">
-               <div className="w-full max-w-[800px] h-full mx-auto flex justify-between items-center gap-2 z-10">
-                  {slice.primary.totals.map((total, index) => (
-                     <React.Fragment key={index}>
-                        <div className="flex flex-col justify-start items-start gap-3">
-                           <PrismicRichText field={total.title} components={totalComponents} />
-                           <PrismicRichText
-                              field={total.description}
-                              components={totalComponents}
-                           />
+               <div className="w-full h-full flex flex-col justify-center items-center">
+                  <div className="w-full max-w-full md:max-w-[62.5rem] h-full grid grid-cols-12 place-content-center place-items-start gap-3 lg:flex lg:justify-between lg:items-center lg:flex-wrap lg:gap-2 z-10 p-5">
+                     {slice.primary.totals.map((total, index) => (
+                        <div key={index} className="col-span-6">
+                           <div className="flex gap-10 items-center">
+                              <div className="flex flex-col justify-start items-start gap-3">
+                                 <PrismicRichText
+                                    field={total.title}
+                                    components={totalComponents}
+                                 />
+                                 <PrismicRichText
+                                    field={total.description}
+                                    components={totalComponents}
+                                 />
+                              </div>
+                              {index !== slice.primary.totals.length - 1 && (
+                                 <Separator
+                                    orientation="vertical"
+                                    className="mx-6 w-[1px] h-16"
+                                 />
+                              )}
+                           </div>
                         </div>
-                        {index !== slice.primary.totals.length - 1 && (
-                           <Separator orientation="vertical" className="mx-6 w-[1px] h-16" />
-                        )}
-                     </React.Fragment>
-                  ))}
+                     ))}
+                  </div>
                </div>
             </div>
          </Bounded>
