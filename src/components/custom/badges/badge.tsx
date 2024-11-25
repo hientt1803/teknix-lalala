@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 
 type BadgeProps = {
    children: string;
-   color: 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'gray' | 'orange' | 'teal';
+   color: 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'gray' | 'orange' | 'teal' | 'white';
    className?: string;
 };
 
@@ -16,6 +16,7 @@ const Badge: React.FC<BadgeProps> = ({ children, color, className }) => {
       gray: { bg: 'bg-gray-100', text: 'text-gray-800' },
       orange: { bg: 'bg-orange-100', text: 'text-orange-800' },
       teal: { bg: 'bg-teal-100', text: 'text-teal-800' },
+      white: { bg: 'bg-white', text: 'text-neutral-900' },
    };
 
    const selectedColor = colorClasses[color];

@@ -1,12 +1,13 @@
 import { MainButton } from '@/components/common/button/mainButton';
 import Bounded from '@/components/common/containers/bounded';
-import { heroComponents, HeroProps } from '@/slices/Hero';
+import { heroComponents } from '@/slices/Hero';
+import { Content } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicRichText } from '@prismicio/react';
 import { ArrowRight, Play } from 'lucide-react';
 import Image from 'next/image';
 
-export const MainContent = ({ slice }: HeroProps) => {
+export const MainContent = ({ slice }: { slice: Content.HeroSlice }) => {
    return (
       <Bounded className="w-full h-full flex flex-col justify-center items-center">
          <div className="w-full flex flex-col justify-start items-start gap-3 z-10">
@@ -18,7 +19,7 @@ export const MainContent = ({ slice }: HeroProps) => {
                <PrismicRichText field={slice.primary.heading} components={heroComponents} />
             </div>
 
-            <div className="flex items-center gap-8">
+            <div className="flex items-center flex-wrap gap-8">
                {slice?.primary?.benefits?.map((benefit, index) => (
                   <div className="flex gap-2 items-center" key={index}>
                      <Image
