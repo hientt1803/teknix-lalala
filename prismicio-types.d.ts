@@ -1270,16 +1270,6 @@ export interface PaymentSectionSliceImagePrimary {
    heading: prismic.RichTextField;
 
    /**
-    * Title field in *PaymentSection → Image Right → Primary*
-    *
-    * - **Field Type**: Rich Text
-    * - **Placeholder**: *None*
-    * - **API ID Path**: payment_section.image.primary.title
-    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-    */
-   title: prismic.RichTextField;
-
-   /**
     * Benefits field in *PaymentSection → Image Right → Primary*
     *
     * - **Field Type**: Group
@@ -1288,16 +1278,6 @@ export interface PaymentSectionSliceImagePrimary {
     * - **Documentation**: https://prismic.io/docs/field#group
     */
    benefits: prismic.GroupField<Simplify<PaymentSectionSliceImagePrimaryBenefitsItem>>;
-
-   /**
-    * Payment Label field in *PaymentSection → Image Right → Primary*
-    *
-    * - **Field Type**: Rich Text
-    * - **Placeholder**: *None*
-    * - **API ID Path**: payment_section.image.primary.payment_label
-    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-    */
-   payment_label: prismic.RichTextField;
 
    /**
     * Payments field in *PaymentSection → Image Right → Primary*
