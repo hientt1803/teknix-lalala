@@ -49,40 +49,40 @@ const PaymentSection = ({ slice }: PaymentSectionProps): JSX.Element => {
                      <div className="col-span-6">
                         <div className="grid grid-cols-12 gap-6">
                            <div className="col-span-6">
-                              <PrismicNextImage
-                                 field={slice.primary.images[0]?.image}
-                                 alt=""
-                                 width={300}
-                                 height={350}
-                                 className="object-cover h-[21.875rem] rounded-lg"
-                              />
+                              <div className="aspect-square">
+                                 <PrismicNextImage
+                                    field={slice.primary.images[0]?.image}
+                                    alt=""
+                                    className="object-cover w-full h-full rounded-lg"
+                                 />
+                              </div>
                            </div>
                            <div className="col-span-6 mt-12">
-                              <PrismicNextImage
-                                 field={slice.primary.images[1]?.image}
-                                 alt=""
-                                 width={300}
-                                 height={350}
-                                 className="object-cover h-[21.875rem] rounded-lg"
-                              />
+                              <div className="aspect-square">
+                                 <PrismicNextImage
+                                    field={slice.primary.images[1]?.image}
+                                    alt=""
+                                    className="object-cover w-full h-full rounded-lg"
+                                 />
+                              </div>
                            </div>
                            <div className="col-span-6 -mt-12">
-                              <PrismicNextImage
-                                 field={slice.primary.images[2]?.image}
-                                 alt=""
-                                 width={300}
-                                 height={350}
-                                 className="object-cover h-[21.875rem] rounded-lg"
-                              />
+                              <div className="aspect-square">
+                                 <PrismicNextImage
+                                    field={slice.primary.images[2]?.image}
+                                    alt=""
+                                    className="object-cover h-full w-full rounded-lg"
+                                 />
+                              </div>
                            </div>
                            <div className="col-span-6">
-                              <PrismicNextImage
-                                 field={slice.primary.images[3]?.image}
-                                 alt=""
-                                 width={300}
-                                 height={350}
-                                 className="object-cover h-[21.875rem] rounded-lg"
-                              />
+                              <div className="aspect-square">
+                                 <PrismicNextImage
+                                    field={slice.primary.images[3]?.image}
+                                    alt=""
+                                    className="object-cover w-full h-full rounded-lg"
+                                 />
+                              </div>
                            </div>
                         </div>
                      </div>
@@ -131,7 +131,9 @@ const PaymentSection = ({ slice }: PaymentSectionProps): JSX.Element => {
                            field={slice.primary.payment_label}
                            components={{
                               paragraph: ({ children }) => (
-                                 <p className="text-neutral-900 dark:text-neutral-300 font-normal text-md">{children}</p>
+                                 <p className="text-neutral-900 dark:text-neutral-300 font-normal text-md">
+                                    {children}
+                                 </p>
                               ),
                            }}
                         />
