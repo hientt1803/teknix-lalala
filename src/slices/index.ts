@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 
 export const components = {
+   ask_and_questions: dynamic(() => import('./AskAndQuestions')),
    explore_stay: dynamic(() => import('./ExploreStay')),
    flight_section: dynamic(() => import('./FlightSection')),
    hero: dynamic(() => import('./Hero')),
