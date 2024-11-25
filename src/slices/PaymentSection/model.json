@@ -167,15 +167,6 @@
             "multi": "heading2"
           }
         },
-        "title": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Title",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
-          }
-        },
         "benefits": {
           "type": "Group",
           "config": {
@@ -190,15 +181,6 @@
                 }
               }
             }
-          }
-        },
-        "payment_label": {
-          "type": "StructuredText",
-          "config": {
-            "label": "Payment Label",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "multi": "paragraph,strong,em"
           }
         },
         "payments": {

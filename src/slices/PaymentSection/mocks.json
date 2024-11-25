@@ -214,17 +214,6 @@
 					}
 				]
 			},
-			"title": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Do aliqua cupidatat dolor laborum tempor qui reprehenderit ea amet sunt cillum."
-						}
-					}
-				]
-			},
 			"benefits": {
 				"__TYPE__": "GroupContentType",
 				"value": [
@@ -240,17 +229,6 @@
 								}
 							]
 						]
-					}
-				]
-			},
-			"payment_label": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Esse officia et est in cillum officia cillum consequat culpa velit. Aliqua dolore amet non ex sunt. Laborum do dolore eiusmod dolor ea incididunt velit sint amet velit do."
-						}
 					}
 				]
 			},
