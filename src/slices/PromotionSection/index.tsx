@@ -1,3 +1,6 @@
+import Bounded from '@/components/common/containers/bounded';
+import PromotionCarousel from '@/features/home/promotion/carousel';
+import Promotion from '@/features/home/promotion/promotion';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 
@@ -11,9 +14,12 @@ export type PromotionSectionProps = SliceComponentProps<Content.PromotionSection
  */
 const PromotionSection = ({ slice }: PromotionSectionProps): JSX.Element => {
    return (
-      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-         Placeholder component for promotion_section (variation: {slice.variation}) Slices
-      </section>
+      <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+         {slice.variation === 'carousel' && (
+            <PromotionCarousel promotions={slice.primary.promotions} />
+         )}
+         {slice.variation === 'default' && <Promotion promotions={slice.primary.promotions} />}
+      </Bounded>
    );
 };
 

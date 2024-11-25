@@ -90,6 +90,15 @@
                   "multi": "heading2"
                 }
               },
+              "heading2": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Heading2",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading2"
+                }
+              },
               "button_text": {
                 "type": "Text",
                 "config": {
@@ -113,6 +122,27 @@
                   "label": "Background Image",
                   "constraint": {},
                   "thumbnails": []
+                }
+              },
+              "type": {
+                "type": "Select",
+                "config": {
+                  "label": "Type",
+                  "placeholder": "",
+                  "options": [
+                    "left",
+                    "right"
+                  ],
+                  "default_value": "left"
+                }
+              },
+              "withbackgroundtext": {
+                "type": "Boolean",
+                "config": {
+                  "label": "withBackgroundText",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
                 }
               }
             }

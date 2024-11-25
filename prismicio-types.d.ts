@@ -1390,6 +1390,16 @@ export interface PromotionSectionSliceCarouselPrimaryPromotionsItem {
    heading: prismic.RichTextField;
 
    /**
+    * Heading2 field in *PromotionSection → Carousel → Primary → Promotions*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: promotion_section.carousel.primary.promotions[].heading2
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading2: prismic.RichTextField;
+
+   /**
     * Button Text field in *PromotionSection → Carousel → Primary → Promotions*
     *
     * - **Field Type**: Text
@@ -1418,6 +1428,28 @@ export interface PromotionSectionSliceCarouselPrimaryPromotionsItem {
     * - **Documentation**: https://prismic.io/docs/field#image
     */
    background_image: prismic.ImageField<never>;
+
+   /**
+    * Type field in *PromotionSection → Carousel → Primary → Promotions*
+    *
+    * - **Field Type**: Select
+    * - **Placeholder**: *None*
+    * - **Default Value**: left
+    * - **API ID Path**: promotion_section.carousel.primary.promotions[].type
+    * - **Documentation**: https://prismic.io/docs/field#select
+    */
+   type: prismic.SelectField<'left' | 'right', 'filled'>;
+
+   /**
+    * withBackgroundText field in *PromotionSection → Carousel → Primary → Promotions*
+    *
+    * - **Field Type**: Boolean
+    * - **Placeholder**: *None*
+    * - **Default Value**: false
+    * - **API ID Path**: promotion_section.carousel.primary.promotions[].withbackgroundtext
+    * - **Documentation**: https://prismic.io/docs/field#boolean
+    */
+   withbackgroundtext: prismic.BooleanField;
 }
 
 /**

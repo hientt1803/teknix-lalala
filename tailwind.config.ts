@@ -67,11 +67,6 @@ const config: Config = {
                to: { transform: 'translateY(calc(-100% - var(--gap)))' },
             },
          },
-         borderRadius: {
-            lg: 'var(--radius)',
-            md: 'calc(var(--radius) - 2px)',
-            sm: 'calc(var(--radius) - 4px)',
-         },
          container: {
             padding: {
                DEFAULT: '1rem',
