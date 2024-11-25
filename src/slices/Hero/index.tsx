@@ -41,14 +41,13 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                   field={slice.primary.background}
                   alt=""
                   className="absolute w-full h-[60.625rem] object-cover z-[2]"
-                  loading="lazy"
                />
 
                {/* Content */}
                <MainContent slice={slice} index={0} slices={[]} context={undefined} />
 
                {/* Search Group */}
-               <Bounded className='relative'>
+               <Bounded className="relative">
                   <SearchGroup />
                </Bounded>
             </div>
