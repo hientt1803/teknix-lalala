@@ -331,6 +331,76 @@ export type SettinsDocument<Lang extends string = string> = prismic.PrismicDocum
 export type AllDocumentTypes = HomepageDocument | SettinsDocument;
 
 /**
+ * Item in *AskAndQuestions → Default → Primary → Services*
+ */
+export interface AskAndQuestionsSliceDefaultPrimaryServicesItem {}
+
+/**
+ * Primary content in *AskAndQuestions → Default → Primary*
+ */
+export interface AskAndQuestionsSliceDefaultPrimary {
+   /**
+    * Heading field in *AskAndQuestions → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: ask_and_questions.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *AskAndQuestions → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: ask_and_questions.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Services field in *AskAndQuestions → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: ask_and_questions.default.primary.services[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   services: prismic.GroupField<Simplify<AskAndQuestionsSliceDefaultPrimaryServicesItem>>;
+}
+
+/**
+ * Default variation for AskAndQuestions Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AskAndQuestionsSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<AskAndQuestionsSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *AskAndQuestions*
+ */
+type AskAndQuestionsSliceVariation = AskAndQuestionsSliceDefault;
+
+/**
+ * AskAndQuestions Shared Slice
+ *
+ * - **API ID**: `ask_and_questions`
+ * - **Description**: AskAndQuestions
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AskAndQuestionsSlice = prismic.SharedSlice<
+   'ask_and_questions',
+   AskAndQuestionsSliceVariation
+>;
+
+/**
  * Primary content in *ExploreStay → Default → Primary*
  */
 export interface ExploreStaySliceDefaultPrimary {
@@ -1200,6 +1270,11 @@ declare module '@prismicio/client' {
          SettinsDocumentDataFootersItem,
          SettinsDocumentDataSlicesSlice,
          AllDocumentTypes,
+         AskAndQuestionsSlice,
+         AskAndQuestionsSliceDefaultPrimaryServicesItem,
+         AskAndQuestionsSliceDefaultPrimary,
+         AskAndQuestionsSliceVariation,
+         AskAndQuestionsSliceDefault,
          ExploreStaySlice,
          ExploreStaySliceDefaultPrimary,
          ExploreStaySliceVariation,
