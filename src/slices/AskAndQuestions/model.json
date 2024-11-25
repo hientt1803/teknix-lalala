@@ -35,7 +35,58 @@
           "config": {
             "label": "Services",
             "repeat": true,
-            "fields": {}
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icon",
+                  "placeholder": "",
+                  "options": [
+                    "tour",
+                    "hotal",
+                    "car",
+                    "flight",
+                    "active",
+                    "destination",
+                    "property"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "questions": {
+          "type": "Group",
+          "config": {
+            "label": "Questions",
+            "repeat": true,
+            "fields": {
+              "question": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Question",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading4"
+                }
+              },
+              "ask": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Ask",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,strong,em"
+                }
+              }
+            }
           }
         }
       },
