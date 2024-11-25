@@ -76,8 +76,8 @@ const TourCard = ({
             <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
                <div className="space-y-4 w-full">
                   <div className="inline-flex flex-wrap gap-3">
-                     {amenities.map((amenity) => (
-                        <Badge color="blue">{amenity.label}</Badge>
+                     {amenities.map((amenity, index) => (
+                        <Badge key={index} color="blue">{amenity.label}</Badge>
                      ))}
                   </div>
                   <div className="flex items-center space-x-2">
