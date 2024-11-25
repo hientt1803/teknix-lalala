@@ -4,7 +4,7 @@ import { DatePickerWithRange } from './dateRangeInput';
 export const InputSearchDateRange = ({ title = 'CheckIn - CheckOut' }: { title?: string }) => {
    return (
       <div className="flex flex-col justify-start items-start gap-2">
-         <div className="text-neutral-500 dark:text-neutral-300 text-md">{title}</div>
+         <div className="text-neutral-500 dark:text-neutral-300 text-md font-medium">{title}</div>
 
          <div className="flex justify-start items-center gap-2">
             <DatePickerWithRange />

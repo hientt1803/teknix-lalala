@@ -11,7 +11,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                <p className="text-sm font-medium text-center text-neutral-500">
                   Sorry, we cannot find this place {`:(`}
                </p>
-               <p className="text-sm font-medium text-blue-700 cursor-pointer mx-auto">Reset</p>
+               <p className="text-sm font-bold text-black cursor-pointer mx-auto">Reset</p>
             </div>
          </div>
       );
@@ -47,16 +47,16 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
 
    return (
       <div className="flex flex-col justify-start items-start gap-2">
-         <div className="text-neutral-500 dark:text-neutral-300 text-md">{title}</div>
+         <div className="text-neutral-500 dark:text-neutral-300 text-md font-medium">{title}</div>
 
          <Popover>
             <PopoverTrigger>
-               <div className="flex justify-start items-center gap-2">
+               <div className="flex justify-start items-center gap-1">
                   <MapPin className="text-neutral-400 w-5 h-5" />
                   <Input
                      type="text"
                      placeholder="New York, USA"
-                     className="placeholder:text-neutral-800 dark:placeholder:dark:text-neutral-50 placeholder:font-medium shadow-none border-none outline-none focus:border-none focus:outline-none"
+                     className="placeholder:text-neutral-800 dark:placeholder:dark:text-neutral-50 placeholder:font-medium w-fit shadow-none border-none outline-none focus:border-none focus:outline-none"
                   />
                   <ChevronDown className="text-black w-5 h-5" />
                </div>

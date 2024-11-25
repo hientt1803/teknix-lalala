@@ -18,31 +18,34 @@ export const SearchGroup = () => {
       <div className="border border-neutral-200 p-4 rounded-xl">
          {/* Hotels */}
          {type == 'hotel' && (
-            <div className="flex justify-between items-center gap-2">
+            <div className="grid grid-cols-12 place-items-center place-content-start gap-3">
                {/* Location */}
-               <div className="flex-[2]">
+               <div className="col-span-3">
                   <InputSearchLocation />
                </div>
 
-               <div className="w-[1px] h-12 bg-neutral-200 mx-10 " />
+               <div className="col-span-1 w-[1px] h-12 bg-neutral-200 mx-5 " />
 
                {/* Daterange */}
-               <div className="flex-[2]">
+               <div className="col-span-2">
                   <InputSearchDateRange />
                </div>
 
-               <div className="w-[1px] h-12 bg-neutral-200 mx-10 " />
+               <div className="col-span-1 w-[1px] h-12 bg-neutral-200 mx-5 " />
 
                {/* Guest */}
-               <div className="flex-[2] mr-6">
+               <div className="col-span-3 mr-6">
                   <InputSearchGuest />
                </div>
 
                {/* Button */}
                <MainButton
                   variant="default"
-                  className="flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white"
-                  leftIcon={<Search className="w-6 h-6 text-white dark:text-neutral-800 mr-2" />}
+                  className="col-span-2 flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                  leftIcon={
+                     <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
+                  }
+                  fullWidth
                >
                   Search
                </MainButton>
@@ -52,7 +55,7 @@ export const SearchGroup = () => {
          {/* Fligh */}
          {type == 'fligh' && (
             <>
-               <div className="flex gap-2 items-center mb-2">
+               <div className="flex gap-2 items-center flex-wrap mb-2">
                   <MainButton
                      variant="default"
                      className="bg-black text-white text-sm px-4 py-1 rounded-2xl"
@@ -124,8 +127,11 @@ export const SearchGroup = () => {
                   {/* Button */}
                   <MainButton
                      variant="default"
-                     className="flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white"
-                     leftIcon={<Search className="w-6 h-6 text-white dark:text-neutral-800 mr-2" />}
+                     className="flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                     leftIcon={
+                        <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
+                     }
+                     fullWidth
                   >
                      Search
                   </MainButton>
@@ -138,8 +144,8 @@ export const SearchGroup = () => {
    return (
       <div className="relative -top-36 pb-16 z-30 w-full">
          <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
-            <Tabs defaultValue="hotel" className='w-full'>
-               <TabsList className="w-full h-full flex justify-betweenitems-center bg-transparent">
+            <Tabs defaultValue="hotel" className="w-full">
+               <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
                   <div className="w-full">
                      <TabsTrigger
                         value="hotel"
@@ -167,7 +173,7 @@ export const SearchGroup = () => {
                   </TabsTrigger> */}
                   </div>
 
-                  <div className="font-normal text-neutral-500 flex items-center gap-1 flex-nowrap">
+                  <div className="font-normal text-neutral-500 flex items-center gap-1 flex-nowrap mt-3 md:mt-0">
                      <User className="w-4 h-4" />
                      <span className="text-md text-nowrap">Need some help?</span>
                   </div>
