@@ -14,6 +14,10 @@ export const PaymentCaroucel = ({
    return (
       <Carousel
          className="w-fit"
+         opts={{
+            align: 'start',
+            loop: true,
+         }}
          plugins={[
             Autoplay({
                delay: 2000,
