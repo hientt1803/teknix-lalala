@@ -57,10 +57,10 @@ const SwitchType = ({ navigation }: NavigationType) => {
          <PopoverTrigger className="text-opacity-90 group self-center py-2 h-10 sm:h-12 rounded-md text-sm sm:text-base font-medium hover:text-opacity-100 focus:outline-none">
             <span className="inline-flex space-x-2 items-center">
                Travel
-               <ChevronDownIcon className="w-5 h-5 text-slate-500" />
+               <ChevronDownIcon className="w-5 h-5 text-neutral-600 dark:text-neutral-300" />
             </span>
          </PopoverTrigger>
-         <PopoverContent className="w-[320px] px-4 sm:px-0 overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
+         <PopoverContent className="w-[320px] py-0 px-4 sm:px-0 overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
             <nav>
                <ul className="relative grid grid-cols-1 gap-7 p-7">
                   {navigation?.map(({ title, href, description, icon }) => (
@@ -74,7 +74,7 @@ const SwitchType = ({ navigation }: NavigationType) => {
                            </div>
                            <div className="ml-4 space-y-0.5">
                               <p className="text-sm font-medium">{title}</p>
-                              <p className="text-xs ">{description}</p>
+                              <p className="text-xs">{description}</p>
                            </div>
                         </li>
                      </PrismicNextLink>

@@ -6,42 +6,43 @@ import {
    SelectValue,
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { cn } from '@/lib/utils';
 import { Search, User } from 'lucide-react';
 import { MainButton } from '../button/mainButton';
 import { InputSearchDateRange } from '../input/dateRange/inputSearchDateRange';
 import { InputSearchGuest } from '../input/guest/inputSearchGuest';
-import { GroupPeopleInput } from '../input/guest/selectGuestInput';
 import { InputSearchLocation } from '../input/location/inputSearchLocation';
+import { GroupInputQuantity } from '@/components/custom/input/group-input-quantity';
 
-export const SearchGroup = () => {
+export const SearchGroup = ({ className }: { className?: string }) => {
    const TabContent = ({ type }: { type: 'hotel' | 'fligh' }) => (
       <div className="border border-neutral-200 p-4 rounded-xl">
          {/* Hotels */}
          {type == 'hotel' && (
-            <div className="grid grid-cols-12 place-items-center place-content-start gap-3">
+            <div className="flex justify-between items-center gap-x-3 gap-y-5 flex-wrap">
                {/* Location */}
-               <div className="col-span-3">
+               <div className="flex-1">
                   <InputSearchLocation />
                </div>
 
-               <div className="col-span-1 w-[1px] h-12 bg-neutral-200 mx-5 " />
+               <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
 
                {/* Daterange */}
-               <div className="col-span-2">
+               <div className="flex-1">
                   <InputSearchDateRange />
                </div>
 
-               <div className="col-span-1 w-[1px] h-12 bg-neutral-200 mx-5 " />
+               <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
 
                {/* Guest */}
-               <div className="col-span-3 mr-6">
+               <div className="flex-1 mr-6">
                   <InputSearchGuest />
                </div>
 
                {/* Button */}
                <MainButton
                   variant="default"
-                  className="col-span-2 flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                  className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
                   leftIcon={
                      <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
                   }
@@ -55,79 +56,112 @@ export const SearchGroup = () => {
          {/* Fligh */}
          {type == 'fligh' && (
             <>
-               <div className="flex gap-2 items-center flex-wrap mb-2">
-                  <MainButton
-                     variant="default"
-                     className="bg-black text-white text-sm px-4 py-1 rounded-2xl"
-                  >
-                     Round-trip
-                  </MainButton>
-                  <MainButton
-                     variant="default"
-                     className="bg-black text-white text-sm px-4 py-1 rounded-2xl"
-                  >
-                     One-way
-                  </MainButton>
+               {/* HEADER */}
+               <div>
+                  <div className="flex gap-2 items-center flex-wrap mb-2">
+                     <MainButton
+                        variant="default"
+                        className="bg-black text-white text-sm px-4 py-1 rounded-2xl"
+                     >
+                        Round-trip
+                     </MainButton>
+                     <MainButton
+                        variant="default"
+                        className="bg-black text-white text-sm px-4 py-1 rounded-2xl"
+                     >
+                        One-way
+                     </MainButton>
 
-                  <div className="w-[1px] h-12 bg-neutral-200 mx-6 " />
+                     <div className="w-[1px] h-12 bg-neutral-200 mx-6 " />
 
-                  <Select>
-                     <SelectTrigger className="w-fit rounded-2xl">
-                        <SelectValue
-                           defaultValue={'business'}
-                           placeholder={'business'}
-                           defaultChecked
-                           className="rounded-2xl"
-                        />
-                     </SelectTrigger>
-                     <SelectContent>
-                        <SelectItem value="economy">Economy</SelectItem>
-                        <SelectItem value="business">Business</SelectItem>
-                        <SelectItem value="miltiple">Miltiple</SelectItem>
-                     </SelectContent>
-                  </Select>
+                     <Select>
+                        <SelectTrigger className="w-fit rounded-2xl">
+                           <SelectValue
+                              defaultValue={'business'}
+                              placeholder={'business'}
+                              defaultChecked
+                              className="rounded-2xl"
+                           />
+                        </SelectTrigger>
+                        <SelectContent>
+                           <SelectItem value="economy">Economy</SelectItem>
+                           <SelectItem value="business">Business</SelectItem>
+                           <SelectItem value="miltiple">Miltiple</SelectItem>
+                        </SelectContent>
+                     </Select>
 
-                  <Select>
-                     <SelectTrigger className="w-fit rounded-2xl">
-                        <SelectValue
-                           defaultValue={'2 Guest'}
-                           placeholder={'2 Guest'}
-                           defaultChecked
-                           className="rounded-2xl"
-                        />
-                     </SelectTrigger>
-                     <SelectContent>
-                        <GroupPeopleInput />
-                     </SelectContent>
-                  </Select>
+                     <Select>
+                        <SelectTrigger className="w-fit rounded-2xl">
+                           <SelectValue
+                              defaultValue={'2 Guest'}
+                              placeholder={'2 Guest'}
+                              defaultChecked
+                              className="rounded-2xl"
+                           />
+                        </SelectTrigger>
+                        <SelectContent className="min-w-[21.875rem] p-4 rounded-lg">
+                           <div className="flex justify-between items-center gap-3 mb-4">
+                              <div className="flex flex-col items-start justify-start gap-0">
+                                 <span className="font-medium text-md">Adults</span>
+                                 <span className="font-medium text-sm text-neutral-500">
+                                    Ages 13 or above
+                                 </span>
+                              </div>
+
+                              <GroupInputQuantity quantity={1} />
+                           </div>
+                           <div className="flex justify-between items-center gap-3 mb-4">
+                              <div className="flex flex-col items-start justify-start gap-0">
+                                 <span className="font-medium text-md">Children</span>
+                                 <span className="font-medium text-sm text-neutral-500">
+                                    Ages 2 - 12
+                                 </span>
+                              </div>
+
+                              <GroupInputQuantity quantity={1} />
+                           </div>
+                           <div className="flex justify-between items-center gap-3">
+                              <div className="flex flex-col items-start justify-start gap-0">
+                                 <span className="font-medium text-md">Infants</span>
+                                 <span className="font-medium text-sm text-neutral-500">
+                                    Ages 0-2
+                                 </span>
+                              </div>
+
+                              <GroupInputQuantity quantity={1} />
+                           </div>
+                        </SelectContent>
+                     </Select>
+                  </div>
+
+                  <div className="w-full h-[1px] bg-neutral-200 mt-2" />
                </div>
 
-               <div className="w-full h-[1px] bg-neutral-200 mt-2" />
-
-               <div className="flex justify-between items-center gap-2 mt-3">
+               {/* MAIN CONTENT */}
+               <div className="flex justify-between items-center gap-x-3 gap-y-5 flex-wrap mt-2">
                   {/* Location */}
                   <div className="flex-[2]">
                      <InputSearchLocation title="Flying from" />
                   </div>
 
-                  <div className="w-[1px] h-12 bg-neutral-200 mx-10 " />
+                  <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
 
                   {/* Location */}
                   <div className="flex-[2]">
                      <InputSearchLocation title="Flying to" />
                   </div>
 
-                  <div className="w-[1px] h-12 bg-neutral-200 mx-10 " />
+                  <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
 
                   {/* Daterange */}
-                  <div className="flex-[2]">
+                  <div className="flex-grow flex-[2]">
                      <InputSearchDateRange title="Pick up Date" />
                   </div>
 
                   {/* Button */}
                   <MainButton
                      variant="default"
-                     className="flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                     className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
                      leftIcon={
                         <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
                      }
@@ -142,8 +176,8 @@ export const SearchGroup = () => {
    );
 
    return (
-      <div className="relative -top-36 pb-16 z-30 w-full">
-         <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
+      <div className={cn('relative -top-60 md:-top-40 lg:-top-48 z-30 w-full', className)}>
+         <div className="bg-white dark:bg-neutral-900 shadow-lg rounded-xl p-7">
             <Tabs defaultValue="hotel" className="w-full">
                <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
                   <div className="w-full">
@@ -165,12 +199,6 @@ export const SearchGroup = () => {
                      >
                         Flight
                      </TabsTrigger>
-                     {/* <TabsTrigger
-                     value="rentals"
-                     className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                  >
-                     Rentals
-                  </TabsTrigger> */}
                   </div>
 
                   <div className="font-normal text-neutral-500 flex items-center gap-1 flex-nowrap mt-3 md:mt-0">
@@ -187,9 +215,6 @@ export const SearchGroup = () => {
                <TabsContent value="flight">
                   <TabContent type="fligh" />
                </TabsContent>
-               {/* <TabsContent value="rentals">
-               <TabContent />
-            </TabsContent> */}
             </Tabs>
          </div>
       </div>

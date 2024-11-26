@@ -41,13 +41,13 @@ export const MainContent = ({ slice }: { slice: Content.HeroSlice }) => {
                   <MainButton
                      text={slice.primary.button_text || ''}
                      rightIcon={<ArrowRight className="w-6 h-6 ml-3" />}
-                     className="text-black"
+                     className="text-black text-lg"
                   />
                </PrismicNextLink>
                <MainButton
                   text={slice.primary.video_text || ''}
                   variant="ghost"
-                  className="bg-transparent text-white hover:bg-transparent hover:text-white"
+                  className="bg-transparent text-white hover:bg-transparent hover:text-white text-lg"
                   leftIcon={
                      <span className="bg-white rounded-full flex justify-center items-center p-4">
                         <Play className="w-5 h-5 text-black" />

@@ -9,9 +9,9 @@ import React from 'react';
 export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) => {
    return (
       <Bounded>
-         <div className="grid grid-cols-12 gap-6 place-items-center">
+         <div className="grid grid-cols-12 gap-6 place-content-center place-items-center">
             <div className="col-span-12 md:col-span-6">
-               <div className="columns-2 lg:columns-3 gap-3 mx-auto">
+               <div className="columns-2 lg:columns-3 gap-3 place-content-center place-items-center mx-auto">
                   {slice.primary.images.map((image, index) => (
                      <div
                         className="w-full md:max-w-[11.25rem] h-fit mb-3 rounded-[2.5rem] overflow-hidden"
@@ -29,7 +29,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
             </div>
 
             <div className="col-span-12 md:col-span-6 mt-10 md:mt-0">
-               <div className="flex flex-col justify-start items-start gap-6">
+               <div className="flex flex-col justify-start items-start gap-4">
                   <Badge color="white" className="px-7 py-2 text-lg cursor-pointer">
                      {slice.primary.tag || ''}
                   </Badge>

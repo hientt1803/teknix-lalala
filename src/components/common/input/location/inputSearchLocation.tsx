@@ -47,7 +47,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
 
    return (
       <div className="flex flex-col justify-start items-start gap-2">
-         <div className="text-neutral-500 dark:text-neutral-300 text-md font-medium">{title}</div>
+         <div className="text-neutral-600 dark:text-neutral-300 text-sm font-medium">{title}</div>
 
          <Popover>
             <PopoverTrigger>
@@ -56,9 +56,9 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                   <Input
                      type="text"
                      placeholder="New York, USA"
-                     className="placeholder:text-neutral-800 dark:placeholder:dark:text-neutral-50 placeholder:font-medium w-fit shadow-none border-none outline-none focus:border-none focus:outline-none"
+                     className="placeholder:text-neutral-800 dark:placeholder:dark:text-neutral-50 placeholder:font-medium min-w-[7.5rem] w-full shadow-none border-none outline-none focus:border-none focus:outline-none"
                   />
-                  <ChevronDown className="text-black w-5 h-5" />
+                  {/* <ChevronDown className="text-black w-5 h-5" /> */}
                </div>
             </PopoverTrigger>
             <PopoverContent className="p-0 min-w-[17.5rem] w-fit">

@@ -95,7 +95,7 @@ export const GroupPeopleInput = React.memo(() => {
    }, [matches]);
 
    return (
-      <div className="px-4 py-2">
+      <div>
          <Popover open={opened} onOpenChange={setOpened}>
             <PopoverTrigger asChild>
                <div className="flex justify-start items-center gap-2">
@@ -103,12 +103,12 @@ export const GroupPeopleInput = React.memo(() => {
                   <Input
                      type="text"
                      placeholder="2 adults, 0 children"
-                     className="placeholder:text-neutral-800 dark:placeholder:text-neutral-200 placeholder:font-medium w-fit shadow-none border-none outline-none focus:border-none focus:outline-none"
+                     className="placeholder:text-neutral-800 dark:placeholder:text-neutral-200 placeholder:font-medium min-w-[9.375rem] w-full shadow-none border-none outline-none focus:border-none focus:outline-none"
                      onClick={() => {
                         setOpened(true);
                      }}
                   />
-                  <ChevronDown className="text-black w-5 h-5" />
+                  {/* <ChevronDown className="text-black w-5 h-5" /> */}
                </div>
             </PopoverTrigger>
             <PopoverContent className="w-[25rem]">
