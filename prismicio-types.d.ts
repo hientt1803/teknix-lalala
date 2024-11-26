@@ -1507,6 +1507,17 @@ export interface LogosSectionSliceDefaultPrimary {
     * - **Documentation**: https://prismic.io/docs/field#group
     */
    logos: prismic.GroupField<Simplify<LogosSectionSliceDefaultPrimaryLogosItem>>;
+
+   /**
+    * Is Marquee field in *LogosSection → Default → Primary*
+    *
+    * - **Field Type**: Boolean
+    * - **Placeholder**: *None*
+    * - **Default Value**: false
+    * - **API ID Path**: logos_section.default.primary.is_marquee
+    * - **Documentation**: https://prismic.io/docs/field#boolean
+    */
+   is_marquee: prismic.BooleanField;
 }
 
 /**

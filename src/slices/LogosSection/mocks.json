@@ -38,6 +38,10 @@
 						]
 					}
 				]
+			},
+			"is_marquee": {
+				"__TYPE__": "BooleanContent",
+				"value": true
 			}
 		},
 		"items": []

@@ -13,8 +13,11 @@ import { InputSearchGuest } from '../input/guest/inputSearchGuest';
 import { GroupPeopleInput } from '../input/guest/selectGuestInput';
 import { InputSearchLocation } from '../input/location/inputSearchLocation';
 
-export const SearchGroup = () => {
-   const TabContent = ({ type }: { type: 'hotel' | 'fligh' }) => (
+interface SearchGroupType {
+   typeProp?: 'hotel' | 'flight';
+}
+export const SearchGroup = ({ typeProp = 'hotel' }: SearchGroupType) => {
+   const TabContent = ({ type = typeProp }: { type: 'hotel' | 'flight' }) => (
       <div className="border border-neutral-200 p-4 rounded-xl">
          {/* Hotels */}
          {type == 'hotel' && (
@@ -41,7 +44,7 @@ export const SearchGroup = () => {
                {/* Button */}
                <MainButton
                   variant="default"
-                  className="col-span-2 flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                  className="col-span-2 flex-1 bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-base xl:text-xl hover:bg-neutral-800 hover:text-white font-normal"
                   leftIcon={
                      <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
                   }
@@ -53,7 +56,7 @@ export const SearchGroup = () => {
          )}
 
          {/* Fligh */}
-         {type == 'fligh' && (
+         {type == 'flight' && (
             <>
                <div className="flex gap-2 items-center flex-wrap mb-2">
                   <MainButton
@@ -144,7 +147,7 @@ export const SearchGroup = () => {
    return (
       <div className="relative -top-36 pb-16 z-30 w-full">
          <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
-            <Tabs defaultValue="hotel" className="w-full">
+            <Tabs value={typeProp} className="w-full">
                <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
                   <div className="w-full">
                      <TabsTrigger
@@ -185,7 +188,7 @@ export const SearchGroup = () => {
                   <TabContent type="hotel" />
                </TabsContent>
                <TabsContent value="flight">
-                  <TabContent type="fligh" />
+                  <TabContent type="flight" />
                </TabsContent>
                {/* <TabsContent value="rentals">
                <TabContent />

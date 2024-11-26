@@ -1,3 +1,4 @@
+import FlightFeatures from '@/features/flights';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 
@@ -12,7 +13,7 @@ export type FlightListingProps = SliceComponentProps<Content.FlightListingSlice>
 const FlightListing = ({ slice }: FlightListingProps): JSX.Element => {
    return (
       <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-         Placeholder component for flight_listing (variation: {slice.variation}) Slices
+         <FlightFeatures {...slice} />
       </section>
    );
 };

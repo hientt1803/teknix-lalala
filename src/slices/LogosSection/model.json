@@ -28,6 +28,15 @@
               }
             }
           }
+        },
+        "is_marquee": {
+          "type": "Boolean",
+          "config": {
+            "label": "Is Marquee",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {}
