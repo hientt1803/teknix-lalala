@@ -1,0 +1,28 @@
+{
+  "id": "hotel_listing",
+  "type": "SharedSlice",
+  "name": "HotelListing",
+  "description": "HotelListing",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "with_map": {
+          "type": "Boolean",
+          "config": {
+            "label": "With Map",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

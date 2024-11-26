@@ -14,19 +14,26 @@ const Image: React.FC<ImageProps> = ({
    className, // className dành cho div
    ...rest
 }) => {
+   const [isLoading, setIsLoading] = useState(true);
    const [hasError, setHasError] = useState(false);
+
+   const handleLoad = () => {
+      setIsLoading(false);
+   };
 
    const handleError = () => {
       setHasError(true);
+      setIsLoading(false);
    };
 
    return (
       <div className={cn('relative overflow-hidden', className)}>
-         {!hasError ? (
+         {!hasError || !isLoading ? (
             <img
                src={src}
                alt={alt}
                {...rest}
+               onLoad={handleLoad}
                onError={handleError}
                className="object-cover w-full h-full"
                loading="lazy"

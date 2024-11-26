@@ -5,6 +5,12 @@ import type * as prismic from '@prismicio/client';
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+   | HotelListingSlice
+   | SubcribleSectionSlice
+   | SpecialOfferSlice
+   | LogosSectionSlice
+   | FlightListingSlice
+   | FacilitiesSectionSlice
    | GridSectionSlice
    | ServiceSectionSlice
    | ImagesSectionSlice
@@ -81,6 +87,92 @@ interface HomepageDocumentData {
 export type HomepageDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
    Simplify<HomepageDocumentData>,
    'homepage',
+   Lang
+>;
+
+type PagesDocumentDataSlicesSlice =
+   | TopAuthorSlice
+   | SubcribleSectionSlice
+   | SpecialOfferSlice
+   | HeroSlice
+   | VideoSectionSlice
+   | TourSectionSlice
+   | StaySectionSlice
+   | NewsSectionSlice
+   | PaymentSectionSlice
+   | GridSectionSlice
+   | HotelListingSlice
+   | TotalSectionSlice
+   | PromotionSectionSlice
+   | ServiceSectionSlice
+   | ImagesSectionSlice
+   | HowItWorkSlice
+   | LogosSectionSlice
+   | FlightListingSlice
+   | FacilitiesSectionSlice
+   | ExploreStaySlice
+   | FlightSectionSlice
+   | AskAndQuestionsSlice;
+
+/**
+ * Content for Pages documents
+ */
+interface PagesDocumentData {
+   /**
+    * Slice Zone field in *Pages*
+    *
+    * - **Field Type**: Slice Zone
+    * - **Placeholder**: *None*
+    * - **API ID Path**: pages.slices[]
+    * - **Tab**: Main
+    * - **Documentation**: https://prismic.io/docs/field#slices
+    */
+   slices: prismic.SliceZone<PagesDocumentDataSlicesSlice> /**
+    * Meta Title field in *Pages*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: A title of the page used for social media and search engines
+    * - **API ID Path**: pages.meta_title
+    * - **Tab**: SEO & Metadata
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */;
+   meta_title: prismic.KeyTextField;
+
+   /**
+    * Meta Description field in *Pages*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: A brief summary of the page
+    * - **API ID Path**: pages.meta_description
+    * - **Tab**: SEO & Metadata
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   meta_description: prismic.KeyTextField;
+
+   /**
+    * Meta Image field in *Pages*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: pages.meta_image
+    * - **Tab**: SEO & Metadata
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Pages document from Prismic
+ *
+ * - **API ID**: `pages`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type PagesDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+   Simplify<PagesDocumentData>,
+   'pages',
    Lang
 >;
 
@@ -334,7 +426,7 @@ export type SettinsDocument<Lang extends string = string> = prismic.PrismicDocum
    Lang
 >;
 
-export type AllDocumentTypes = HomepageDocument | SettinsDocument;
+export type AllDocumentTypes = HomepageDocument | PagesDocument | SettinsDocument;
 
 /**
  * Item in *AskAndQuestions → Default → Primary → Services*
@@ -514,6 +606,262 @@ type ExploreStaySliceVariation = ExploreStaySliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type ExploreStaySlice = prismic.SharedSlice<'explore_stay', ExploreStaySliceVariation>;
+
+/**
+ * Item in *FacilitiesSection → Default → Primary → Facilities*
+ */
+export interface FacilitiesSectionSliceDefaultPrimaryFacilitiesItem {
+   /**
+    * Name field in *FacilitiesSection → Default → Primary → Facilities*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.facilities[].name
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   name: prismic.KeyTextField;
+
+   /**
+    * Icon field in *FacilitiesSection → Default → Primary → Facilities*
+    *
+    * - **Field Type**: Select
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.facilities[].icon
+    * - **Documentation**: https://prismic.io/docs/field#select
+    */
+   icon: prismic.SelectField<
+      | 'wifi'
+      | 'swimming_pool'
+      | 'private_workshop'
+      | 'breakfast'
+      | 'electricity'
+      | 'gym'
+      | 'spa'
+      | 'other'
+   >;
+}
+
+/**
+ * Item in *FacilitiesSection → Default → Primary → Destinations*
+ */
+export interface FacilitiesSectionSliceDefaultPrimaryDestinationsItem {
+   /**
+    * Image field in *FacilitiesSection → Default → Primary → Destinations*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.destinations[].image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
+
+   /**
+    * Type field in *FacilitiesSection → Default → Primary → Destinations*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.destinations[].type
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   type: prismic.RichTextField;
+
+   /**
+    * Name field in *FacilitiesSection → Default → Primary → Destinations*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.destinations[].name
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   name: prismic.RichTextField;
+
+   /**
+    * Button Text field in *FacilitiesSection → Default → Primary → Destinations*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.destinations[].button_text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   button_text: prismic.KeyTextField;
+
+   /**
+    * Button Link field in *FacilitiesSection → Default → Primary → Destinations*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.destinations[].button_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   button_link: prismic.LinkField;
+}
+
+/**
+ * Primary content in *FacilitiesSection → Default → Primary*
+ */
+export interface FacilitiesSectionSliceDefaultPrimary {
+   /**
+    * Heading field in *FacilitiesSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *FacilitiesSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Button Text field in *FacilitiesSection → Default → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.button_text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   button_text: prismic.KeyTextField;
+
+   /**
+    * Button_Link field in *FacilitiesSection → Default → Primary*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.button_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   button_link: prismic.LinkField;
+
+   /**
+    * Facilities field in *FacilitiesSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.facilities[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   facilities: prismic.GroupField<Simplify<FacilitiesSectionSliceDefaultPrimaryFacilitiesItem>>;
+
+   /**
+    * Destinations field in *FacilitiesSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: facilities_section.default.primary.destinations[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   destinations: prismic.GroupField<Simplify<FacilitiesSectionSliceDefaultPrimaryDestinationsItem>>;
+}
+
+/**
+ * Default variation for FacilitiesSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FacilitiesSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<FacilitiesSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *FacilitiesSection*
+ */
+type FacilitiesSectionSliceVariation = FacilitiesSectionSliceDefault;
+
+/**
+ * FacilitiesSection Shared Slice
+ *
+ * - **API ID**: `facilities_section`
+ * - **Description**: FacilitiesSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FacilitiesSectionSlice = prismic.SharedSlice<
+   'facilities_section',
+   FacilitiesSectionSliceVariation
+>;
+
+/**
+ * Primary content in *FlightListing → Default → Primary*
+ */
+export interface FlightListingSliceDefaultPrimary {
+   /**
+    * Title field in *FlightListing → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_listing.default.primary.title
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   title: prismic.RichTextField;
+
+   /**
+    * Body field in *FlightListing → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_listing.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Button Text field in *FlightListing → Default → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_listing.default.primary.button_text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   button_text: prismic.KeyTextField;
+
+   /**
+    * Button Link field in *FlightListing → Default → Primary*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_listing.default.primary.button_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   button_link: prismic.LinkField;
+}
+
+/**
+ * Default variation for FlightListing Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FlightListingSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<FlightListingSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *FlightListing*
+ */
+type FlightListingSliceVariation = FlightListingSliceDefault;
+
+/**
+ * FlightListing Shared Slice
+ *
+ * - **API ID**: `flight_listing`
+ * - **Description**: FlightListing
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FlightListingSlice = prismic.SharedSlice<'flight_listing', FlightListingSliceVariation>;
 
 /**
  * Primary content in *FlightSection → Default → Primary*
@@ -772,6 +1120,49 @@ type HeroSliceVariation = HeroSliceDefault;
 export type HeroSlice = prismic.SharedSlice<'hero', HeroSliceVariation>;
 
 /**
+ * Primary content in *HotelListing → Default → Primary*
+ */
+export interface HotelListingSliceDefaultPrimary {
+   /**
+    * With Map field in *HotelListing → Default → Primary*
+    *
+    * - **Field Type**: Boolean
+    * - **Placeholder**: *None*
+    * - **Default Value**: false
+    * - **API ID Path**: hotel_listing.default.primary.with_map
+    * - **Documentation**: https://prismic.io/docs/field#boolean
+    */
+   with_map: prismic.BooleanField;
+}
+
+/**
+ * Default variation for HotelListing Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HotelListingSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<HotelListingSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *HotelListing*
+ */
+type HotelListingSliceVariation = HotelListingSliceDefault;
+
+/**
+ * HotelListing Shared Slice
+ *
+ * - **API ID**: `hotel_listing`
+ * - **Description**: HotelListing
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HotelListingSlice = prismic.SharedSlice<'hotel_listing', HotelListingSliceVariation>;
+
+/**
  * Item in *HowItWork → Default → Primary → HowItWorks*
  */
 export interface HowItWorkSliceDefaultPrimaryHowitworksItem {
@@ -814,6 +1205,41 @@ export interface HowItWorkSliceDefaultPrimaryHowitworksItem {
     * - **Documentation**: https://prismic.io/docs/field#rich-text-title
     */
    description: prismic.RichTextField;
+}
+
+/**
+ * Item in *HowItWork → With Banner → Primary → HowItWorks*
+ */
+export interface HowItWorkSliceWithBannerPrimaryHowitworksItem {
+   /**
+    * Title field in *HowItWork → With Banner → Primary → HowItWorks*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.howitworks[].title
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   title: prismic.RichTextField;
+
+   /**
+    * Description field in *HowItWork → With Banner → Primary → HowItWorks*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.howitworks[].description
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   description: prismic.RichTextField;
+
+   /**
+    * Image field in *HowItWork → With Banner → Primary → HowItWorks*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.howitworks[].image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
 }
 
 /**
@@ -865,9 +1291,97 @@ export type HowItWorkSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *HowItWork → With Banner → Primary*
+ */
+export interface HowItWorkSliceWithBannerPrimary {
+   /**
+    * Heading field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * HowItWorks field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.howitworks[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   howitworks: prismic.GroupField<Simplify<HowItWorkSliceWithBannerPrimaryHowitworksItem>>;
+
+   /**
+    * Banner Heading field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.banner_heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   banner_heading: prismic.RichTextField;
+
+   /**
+    * Banner Body field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.banner_body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   banner_body: prismic.RichTextField;
+
+   /**
+    * Button Text field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.button_text
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   button_text: prismic.KeyTextField;
+
+   /**
+    * Button Link field in *HowItWork → With Banner → Primary*
+    *
+    * - **Field Type**: Link
+    * - **Placeholder**: *None*
+    * - **API ID Path**: how_it_work.withBanner.primary.button_link
+    * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+    */
+   button_link: prismic.LinkField;
+}
+
+/**
+ * With Banner variation for HowItWork Slice
+ *
+ * - **API ID**: `withBanner`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type HowItWorkSliceWithBanner = prismic.SharedSliceVariation<
+   'withBanner',
+   Simplify<HowItWorkSliceWithBannerPrimary>,
+   never
+>;
+
+/**
  * Slice variation for *HowItWork*
  */
-type HowItWorkSliceVariation = HowItWorkSliceDefault;
+type HowItWorkSliceVariation = HowItWorkSliceDefault | HowItWorkSliceWithBanner;
 
 /**
  * HowItWork Shared Slice
@@ -964,6 +1478,63 @@ type ImagesSectionSliceVariation = ImagesSectionSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type ImagesSectionSlice = prismic.SharedSlice<'images_section', ImagesSectionSliceVariation>;
+
+/**
+ * Item in *LogosSection → Default → Primary → Logos*
+ */
+export interface LogosSectionSliceDefaultPrimaryLogosItem {
+   /**
+    * Image field in *LogosSection → Default → Primary → Logos*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: logos_section.default.primary.logos[].image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
+}
+
+/**
+ * Primary content in *LogosSection → Default → Primary*
+ */
+export interface LogosSectionSliceDefaultPrimary {
+   /**
+    * Logos field in *LogosSection → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: logos_section.default.primary.logos[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   logos: prismic.GroupField<Simplify<LogosSectionSliceDefaultPrimaryLogosItem>>;
+}
+
+/**
+ * Default variation for LogosSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LogosSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<LogosSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *LogosSection*
+ */
+type LogosSectionSliceVariation = LogosSectionSliceDefault;
+
+/**
+ * LogosSection Shared Slice
+ *
+ * - **API ID**: `logos_section`
+ * - **Description**: LogosSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type LogosSectionSlice = prismic.SharedSlice<'logos_section', LogosSectionSliceVariation>;
 
 /**
  * Primary content in *NewsSection → Default → Primary*
@@ -1646,6 +2217,267 @@ export type ServiceSectionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Item in *SpecialOffer → Default → Primary → Coupons*
+ */
+export interface SpecialOfferSliceDefaultPrimaryCouponsItem {
+   /**
+    * Logo field in *SpecialOffer → Default → Primary → Coupons*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.coupons[].logo
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   logo: prismic.ImageField<never>;
+
+   /**
+    * Type field in *SpecialOffer → Default → Primary → Coupons*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.coupons[].type
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   type: prismic.KeyTextField;
+
+   /**
+    * Sale Off field in *SpecialOffer → Default → Primary → Coupons*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.coupons[].sale_off
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   sale_off: prismic.RichTextField;
+
+   /**
+    * UseWith field in *SpecialOffer → Default → Primary → Coupons*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.coupons[].usewith
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   usewith: prismic.RichTextField;
+
+   /**
+    * Code field in *SpecialOffer → Default → Primary → Coupons*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.coupons[].code
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   code: prismic.KeyTextField;
+}
+
+/**
+ * Item in *SpecialOffer → Carousel → Primary → Coupons*
+ */
+export interface SpecialOfferSliceCarouselPrimaryCouponsItem {
+   /**
+    * Image field in *SpecialOffer → Carousel → Primary → Coupons*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.coupons[].image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
+
+   /**
+    * Name field in *SpecialOffer → Carousel → Primary → Coupons*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.coupons[].name
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   name: prismic.RichTextField;
+
+   /**
+    * Description field in *SpecialOffer → Carousel → Primary → Coupons*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.coupons[].description
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   description: prismic.RichTextField;
+
+   /**
+    * Code field in *SpecialOffer → Carousel → Primary → Coupons*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.coupons[].code
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   code: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *SpecialOffer → Default → Primary*
+ */
+export interface SpecialOfferSliceDefaultPrimary {
+   /**
+    * Heading field in *SpecialOffer → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *SpecialOffer → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Coupons field in *SpecialOffer → Default → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.default.primary.coupons[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   coupons: prismic.GroupField<Simplify<SpecialOfferSliceDefaultPrimaryCouponsItem>>;
+}
+
+/**
+ * Default variation for SpecialOffer Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SpecialOfferSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<SpecialOfferSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Primary content in *SpecialOffer → Carousel → Primary*
+ */
+export interface SpecialOfferSliceCarouselPrimary {
+   /**
+    * Heading field in *SpecialOffer → Carousel → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *SpecialOffer → Carousel → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Coupons field in *SpecialOffer → Carousel → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.carousel.primary.coupons[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   coupons: prismic.GroupField<Simplify<SpecialOfferSliceCarouselPrimaryCouponsItem>>;
+}
+
+/**
+ * Carousel variation for SpecialOffer Slice
+ *
+ * - **API ID**: `carousel`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SpecialOfferSliceCarousel = prismic.SharedSliceVariation<
+   'carousel',
+   Simplify<SpecialOfferSliceCarouselPrimary>,
+   never
+>;
+
+/**
+ * Primary content in *SpecialOffer → Single → Primary*
+ */
+export interface SpecialOfferSliceSinglePrimary {
+   /**
+    * Heading field in *SpecialOffer → Single → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.single.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *SpecialOffer → Single → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.single.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+
+   /**
+    * Code field in *SpecialOffer → Single → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: special_offer.single.primary.code
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   code: prismic.KeyTextField;
+}
+
+/**
+ * Single variation for SpecialOffer Slice
+ *
+ * - **API ID**: `single`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SpecialOfferSliceSingle = prismic.SharedSliceVariation<
+   'single',
+   Simplify<SpecialOfferSliceSinglePrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *SpecialOffer*
+ */
+type SpecialOfferSliceVariation =
+   | SpecialOfferSliceDefault
+   | SpecialOfferSliceCarousel
+   | SpecialOfferSliceSingle;
+
+/**
+ * SpecialOffer Shared Slice
+ *
+ * - **API ID**: `special_offer`
+ * - **Description**: SpecialOffer
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SpecialOfferSlice = prismic.SharedSlice<'special_offer', SpecialOfferSliceVariation>;
+
+/**
  * Primary content in *StaySection → Default → Primary*
  */
 export interface StaySectionSliceDefaultPrimary {
@@ -1696,6 +2528,61 @@ type StaySectionSliceVariation = StaySectionSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slice
  */
 export type StaySectionSlice = prismic.SharedSlice<'stay_section', StaySectionSliceVariation>;
+
+/**
+ * Primary content in *SubcribleSection → Default → Primary*
+ */
+export interface SubcribleSectionSliceDefaultPrimary {
+   /**
+    * Heading field in *SubcribleSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: subcrible_section.default.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *SubcribleSection → Default → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: subcrible_section.default.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Default variation for SubcribleSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SubcribleSectionSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<SubcribleSectionSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *SubcribleSection*
+ */
+type SubcribleSectionSliceVariation = SubcribleSectionSliceDefault;
+
+/**
+ * SubcribleSection Shared Slice
+ *
+ * - **API ID**: `subcrible_section`
+ * - **Description**: SubcribleSection
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type SubcribleSectionSlice = prismic.SharedSlice<
+   'subcrible_section',
+   SubcribleSectionSliceVariation
+>;
 
 /**
  * Primary content in *TopAuthor → Default → Primary*
@@ -1999,6 +2886,9 @@ declare module '@prismicio/client' {
          HomepageDocument,
          HomepageDocumentData,
          HomepageDocumentDataSlicesSlice,
+         PagesDocument,
+         PagesDocumentData,
+         PagesDocumentDataSlicesSlice,
          SettinsDocument,
          SettinsDocumentData,
          SettinsDocumentDataNavigationItem,
@@ -2017,6 +2907,16 @@ declare module '@prismicio/client' {
          ExploreStaySliceDefaultPrimary,
          ExploreStaySliceVariation,
          ExploreStaySliceDefault,
+         FacilitiesSectionSlice,
+         FacilitiesSectionSliceDefaultPrimaryFacilitiesItem,
+         FacilitiesSectionSliceDefaultPrimaryDestinationsItem,
+         FacilitiesSectionSliceDefaultPrimary,
+         FacilitiesSectionSliceVariation,
+         FacilitiesSectionSliceDefault,
+         FlightListingSlice,
+         FlightListingSliceDefaultPrimary,
+         FlightListingSliceVariation,
+         FlightListingSliceDefault,
          FlightSectionSlice,
          FlightSectionSliceDefaultPrimary,
          FlightSectionSliceVariation,
@@ -2031,16 +2931,28 @@ declare module '@prismicio/client' {
          HeroSliceDefaultPrimary,
          HeroSliceVariation,
          HeroSliceDefault,
+         HotelListingSlice,
+         HotelListingSliceDefaultPrimary,
+         HotelListingSliceVariation,
+         HotelListingSliceDefault,
          HowItWorkSlice,
          HowItWorkSliceDefaultPrimaryHowitworksItem,
          HowItWorkSliceDefaultPrimary,
+         HowItWorkSliceWithBannerPrimaryHowitworksItem,
+         HowItWorkSliceWithBannerPrimary,
          HowItWorkSliceVariation,
          HowItWorkSliceDefault,
+         HowItWorkSliceWithBanner,
          ImagesSectionSlice,
          ImagesSectionSliceDefaultPrimaryImagesItem,
          ImagesSectionSliceDefaultPrimary,
          ImagesSectionSliceVariation,
          ImagesSectionSliceDefault,
+         LogosSectionSlice,
+         LogosSectionSliceDefaultPrimaryLogosItem,
+         LogosSectionSliceDefaultPrimary,
+         LogosSectionSliceVariation,
+         LogosSectionSliceDefault,
          NewsSectionSlice,
          NewsSectionSliceDefaultPrimary,
          NewsSectionSliceVariation,
@@ -2070,10 +2982,24 @@ declare module '@prismicio/client' {
          ServiceSectionSliceDefaultPrimary,
          ServiceSectionSliceVariation,
          ServiceSectionSliceDefault,
+         SpecialOfferSlice,
+         SpecialOfferSliceDefaultPrimaryCouponsItem,
+         SpecialOfferSliceDefaultPrimary,
+         SpecialOfferSliceCarouselPrimaryCouponsItem,
+         SpecialOfferSliceCarouselPrimary,
+         SpecialOfferSliceSinglePrimary,
+         SpecialOfferSliceVariation,
+         SpecialOfferSliceDefault,
+         SpecialOfferSliceCarousel,
+         SpecialOfferSliceSingle,
          StaySectionSlice,
          StaySectionSliceDefaultPrimary,
          StaySectionSliceVariation,
          StaySectionSliceDefault,
+         SubcribleSectionSlice,
+         SubcribleSectionSliceDefaultPrimary,
+         SubcribleSectionSliceVariation,
+         SubcribleSectionSliceDefault,
          TopAuthorSlice,
          TopAuthorSliceDefaultPrimary,
          TopAuthorSliceVariation,
