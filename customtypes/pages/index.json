@@ -1,23 +1,68 @@
 {
    "format": "page",
-   "id": "homepage",
-   "label": "Homepage",
-   "repeatable": false,
+   "id": "pages",
+   "label": "Pages",
+   "repeatable": true,
    "status": true,
    "json": {
       "Main": {
+         "uid": {
+            "type": "UID",
+            "config": {
+               "label": "UID"
+            }
+         },
          "slices": {
             "type": "Slices",
             "fieldset": "Slice Zone",
             "config": {
                "choices": {
-                  "hotel_listing": {
+                  "top_author": {
                      "type": "SharedSlice"
                   },
                   "subcrible_section": {
                      "type": "SharedSlice"
                   },
                   "special_offer": {
+                     "type": "SharedSlice"
+                  },
+                  "hero": {
+                     "type": "SharedSlice"
+                  },
+                  "video_section": {
+                     "type": "SharedSlice"
+                  },
+                  "tour_section": {
+                     "type": "SharedSlice"
+                  },
+                  "stay_section": {
+                     "type": "SharedSlice"
+                  },
+                  "news_section": {
+                     "type": "SharedSlice"
+                  },
+                  "payment_section": {
+                     "type": "SharedSlice"
+                  },
+                  "grid_section": {
+                     "type": "SharedSlice"
+                  },
+                  "hotel_listing": {
+                     "type": "SharedSlice"
+                  },
+                  "total_section": {
+                     "type": "SharedSlice"
+                  },
+                  "promotion_section": {
+                     "type": "SharedSlice"
+                  },
+                  "service_section": {
+                     "type": "SharedSlice"
+                  },
+                  "images_section": {
+                     "type": "SharedSlice"
+                  },
+                  "how_it_work": {
                      "type": "SharedSlice"
                   },
                   "logos_section": {
@@ -29,52 +74,13 @@
                   "facilities_section": {
                      "type": "SharedSlice"
                   },
-                  "grid_section": {
-                     "type": "SharedSlice"
-                  },
-                  "service_section": {
-                     "type": "SharedSlice"
-                  },
-                  "images_section": {
-                     "type": "SharedSlice"
-                  },
-                  "news_section": {
-                     "type": "SharedSlice"
-                  },
-                  "promotion_section": {
-                     "type": "SharedSlice"
-                  },
-                  "ask_and_questions": {
-                     "type": "SharedSlice"
-                  },
-                  "payment_section": {
-                     "type": "SharedSlice"
-                  },
-                  "total_section": {
-                     "type": "SharedSlice"
-                  },
-                  "tour_section": {
-                     "type": "SharedSlice"
-                  },
-                  "stay_section": {
+                  "explore_stay": {
                      "type": "SharedSlice"
                   },
                   "flight_section": {
                      "type": "SharedSlice"
                   },
-                  "video_section": {
-                     "type": "SharedSlice"
-                  },
-                  "how_it_work": {
-                     "type": "SharedSlice"
-                  },
-                  "top_author": {
-                     "type": "SharedSlice"
-                  },
-                  "explore_stay": {
-                     "type": "SharedSlice"
-                  },
-                  "hero": {
+                  "ask_and_questions": {
                      "type": "SharedSlice"
                   }
                }

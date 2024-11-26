@@ -1,0 +1,139 @@
+{
+  "id": "facilities_section",
+  "type": "SharedSlice",
+  "name": "FacilitiesSection",
+  "description": "FacilitiesSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2"
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em"
+          }
+        },
+        "button_text": {
+          "type": "Text",
+          "config": {
+            "label": "Button Text",
+            "placeholder": ""
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "Button_Link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null,
+            "allowText": true
+          }
+        },
+        "facilities": {
+          "type": "Group",
+          "config": {
+            "label": "Facilities",
+            "repeat": true,
+            "fields": {
+              "name": {
+                "type": "Text",
+                "config": {
+                  "label": "Name",
+                  "placeholder": ""
+                }
+              },
+              "icon": {
+                "type": "Select",
+                "config": {
+                  "label": "Icon",
+                  "placeholder": "",
+                  "options": [
+                    "wifi",
+                    "swimming_pool",
+                    "private_workshop",
+                    "breakfast",
+                    "electricity",
+                    "gym",
+                    "spa",
+                    "other"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "destinations": {
+          "type": "Group",
+          "config": {
+            "label": "Destinations",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "type": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Type",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph"
+                }
+              },
+              "name": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "Name",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "heading3,heading4"
+                }
+              },
+              "button_text": {
+                "type": "Text",
+                "config": {
+                  "label": "Button Text",
+                  "placeholder": ""
+                }
+              },
+              "button_link": {
+                "type": "Link",
+                "config": {
+                  "label": "Button Link",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "select": null,
+                  "allowText": true
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,8 +1,8 @@
 {
-  "id": "how_it_work",
+  "id": "special_offer",
   "type": "SharedSlice",
-  "name": "HowItWork",
-  "description": "HowItWork",
+  "name": "SpecialOffer",
+  "description": "SpecialOffer",
   "variations": [
     {
       "id": "default",
@@ -30,44 +30,50 @@
             "multi": "paragraph,strong,em"
           }
         },
-        "howitworks": {
+        "coupons": {
           "type": "Group",
           "config": {
-            "label": "HowItWorks",
+            "label": "Coupons",
             "repeat": true,
             "fields": {
-              "image_light": {
+              "logo": {
                 "type": "Image",
                 "config": {
-                  "label": "Image_Light",
+                  "label": "Logo",
                   "constraint": {},
                   "thumbnails": []
                 }
               },
-              "image_dark": {
-                "type": "Image",
+              "type": {
+                "type": "Text",
                 "config": {
-                  "label": "Image_Dark",
-                  "constraint": {},
-                  "thumbnails": []
+                  "label": "Type",
+                  "placeholder": ""
                 }
               },
-              "title": {
+              "sale_off": {
                 "type": "StructuredText",
                 "config": {
-                  "label": "Title",
+                  "label": "Sale Off",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "heading3"
+                  "multi": "heading4,heading3"
                 }
               },
-              "description": {
+              "usewith": {
                 "type": "StructuredText",
                 "config": {
-                  "label": "Description",
+                  "label": "UseWith",
                   "placeholder": "",
                   "allowTargetBlank": true,
                   "multi": "paragraph,strong,em"
+                }
+              },
+              "code": {
+                "type": "Text",
+                "config": {
+                  "label": "Code",
+                  "placeholder": ""
                 }
               }
             }
@@ -77,8 +83,8 @@
       "items": {}
     },
     {
-      "id": "withBanner",
-      "name": "With Banner",
+      "id": "carousel",
+      "name": "Carousel",
       "docURL": "...",
       "version": "initial",
       "description": "Default",
@@ -102,19 +108,27 @@
             "multi": "paragraph,strong,em"
           }
         },
-        "howitworks": {
+        "coupons": {
           "type": "Group",
           "config": {
-            "label": "HowItWorks",
+            "label": "Coupons",
             "repeat": true,
             "fields": {
-              "title": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "Image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "name": {
                 "type": "StructuredText",
                 "config": {
-                  "label": "Title",
+                  "label": "Name",
                   "placeholder": "",
                   "allowTargetBlank": true,
-                  "multi": "heading3"
+                  "multi": "heading3,heading4"
                 }
               },
               "description": {
@@ -126,50 +140,50 @@
                   "multi": "paragraph,strong,em"
                 }
               },
-              "image": {
-                "type": "Image",
+              "code": {
+                "type": "Text",
                 "config": {
-                  "label": "Image",
-                  "constraint": {},
-                  "thumbnails": []
+                  "label": "Code",
+                  "placeholder": ""
                 }
               }
             }
           }
-        },
-        "banner_heading": {
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "single",
+      "name": "Single",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
           "type": "StructuredText",
           "config": {
-            "label": "Banner Heading",
+            "label": "Heading",
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "heading2"
           }
         },
-        "banner_body": {
+        "body": {
           "type": "StructuredText",
           "config": {
-            "label": "Banner Body",
+            "label": "Body",
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "paragraph,strong,em"
           }
         },
-        "button_text": {
+        "code": {
           "type": "Text",
           "config": {
-            "label": "Button Text",
+            "label": "Code",
             "placeholder": ""
-          }
-        },
-        "button_link": {
-          "type": "Link",
-          "config": {
-            "label": "Button Link",
-            "placeholder": "",
-            "allowTargetBlank": true,
-            "select": null,
-            "allowText": true
           }
         }
       },

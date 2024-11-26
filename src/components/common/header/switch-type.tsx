@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { KeyTextField, LinkField, SelectField } from '@prismicio/client';
 import { title } from 'process';
+import { PrismicNextLink } from '@prismicio/next';
 const categoriesList = [
    {
       link: '/category/car',
@@ -63,7 +64,7 @@ const SwitchType = ({ navigation }: NavigationType) => {
             <nav>
                <ul className="relative grid grid-cols-1 gap-7 p-7">
                   {navigation?.map(({ title, href, description, icon }) => (
-                     <Link key={title} href={'#'} onClick={handleClose}>
+                     <PrismicNextLink key={title} field={href} onClick={handleClose}>
                         <li className="flex items-center p-2 -m-3 text-slate-800 transition duration-150 ease-in-out rounded-lg hover:bg-slate-100 hover:text-neutral-900 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  dark:hover:bg-slate-800 dark:text-neutral-100 dark:hover:text-neutral-200">
                            <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md dark:text-slate-100 sm:h-12 sm:w-12 bg-slate-100 dark:bg-slate-700">
                               {icon === 'car' && <CarFrontIcon className="w-7 h-7" />}
@@ -76,7 +77,7 @@ const SwitchType = ({ navigation }: NavigationType) => {
                               <p className="text-xs ">{description}</p>
                            </div>
                         </li>
-                     </Link>
+                     </PrismicNextLink>
                   ))}
                </ul>
             </nav>

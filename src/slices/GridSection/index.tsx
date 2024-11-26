@@ -31,8 +31,7 @@ const GridSection = ({ slice }: GridSectionProps): JSX.Element => {
                      alt=""
                      field={slice.primary.items[0]?.image}
                      className="object-cover rounded-2xl group-hover:scale-105 transition-transform duration-300 absolute inset-0 h-full w-full text-transparent"
-                  />
-                  <Image src="https://images.pexels.com/photos/2064534/pexels-photo-2064534.jpeg?auto=compress&cs=tinysrgb&w=600" />
+                  />               
                   <div className="absolute bottom-0 inset-x-0 p-4 sm:p-6 text-white">
                      <span className="absolute inset-0 bg-gradient-to-t from-black/60"></span>
                      <PrismicRichText
