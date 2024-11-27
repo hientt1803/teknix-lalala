@@ -23,7 +23,7 @@ import {
 const FlightModal = ({ open, setOpen }: GlobalModal) => {
    return (
       <Dialog open={open} onOpenChange={setOpen} modal>
-         <DialogContent className="md:min-w-[800px] translate-y-20 min-h-[300px] top-[20%] flex flex-col justify-start items-start">
+         <DialogContent className="md:min-w-[800px]  min-h-[300px] translate-y-0 top-[5%] flex flex-col justify-start items-start">
             <DialogHeader>
                <DialogTitle>Flight Details</DialogTitle>
                <DialogDescription></DialogDescription>

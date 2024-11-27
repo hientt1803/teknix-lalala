@@ -57,7 +57,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
                {/* Search Group */}
                <Bounded className="relative">
-                  <SearchGroup />
+                  <SearchGroup className='-top-60 md:-top-40 lg:-top-48'/>
                </Bounded>
             </div>
          )}

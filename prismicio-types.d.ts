@@ -834,6 +834,16 @@ export interface FlightListingSliceDefaultPrimary {
     * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
     */
    button_link: prismic.LinkField;
+
+   /**
+    * Image field in *FlightListing → Default → Primary*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: flight_listing.default.primary.image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
 }
 
 /**

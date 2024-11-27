@@ -34,7 +34,7 @@ const Header = async () => {
         icon: nav.icon,
     }));
     return (
-        <div className="sticky top-0 w-full left-0 right-0 z-40 border-b border-neutral-100 dark:border-b-slate-700 bg-white dark:bg-transparent bg-opacity-60 backdrop-blur-2xl py-1">
+        <div className="fixed top-0 w-full left-0 right-0 z-40 dark:bg-transparent bg-opacity-60 backdrop-blur-2xl py-1">
             <Bounded as="header" className="p-0">
                 <div className="relative">
                     <div className="px-4 h-16 sm:h-20 lg:container flex justify-between items-center">
@@ -43,7 +43,7 @@ const Header = async () => {
                             <Link href="/">
                                 <PrismicImage field={settings.data.logo} alt='' className='w-16 h-auto object-contain' />
                             </Link>
-                            <div className="hidden lg:block self-center h-10 border-l border-slate-300 dark:border-slate-600" />
+                            <div className="hidden lg:block self-center h-10 border-l border-neutral-600 dark:border-neutral-300" />
                             <div className="hidden lg:block">
                                 <SwitchTypeLazy navigation={navigations} />
                             </div>

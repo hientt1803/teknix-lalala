@@ -6,7 +6,7 @@ import Image from '@/components/common/images/image';
 export const FlightListing = () => {
    return (
       <div className="grid grid-cols-1 gap-6">
-         <div className="flex w-full justify-between items-center px-5 py-3 bg-teal-50 rounded-lg">
+         <div className="flex w-full justify-between items-center px-5 py-3 bg-teal-100/60 rounded-lg">
             <div className="flex items-center gap-2">
                <div className="relative aspect-square w-10 h-10">
                   <Image src="/assets/images/flight/tag-neww.svg" />

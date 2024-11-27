@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 type BadgeProps = {
-   children: string;
+   children: string | React.ReactNode;
    color: 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'gray' | 'orange' | 'teal' | 'white';
    className?: string;
 };

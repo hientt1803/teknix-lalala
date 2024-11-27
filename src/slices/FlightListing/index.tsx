@@ -12,7 +12,7 @@ export type FlightListingProps = SliceComponentProps<Content.FlightListingSlice>
  */
 const FlightListing = ({ slice }: FlightListingProps): JSX.Element => {
    return (
-      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation} className='w-full'>
          <FlightFeatures {...slice} />
       </section>
    );

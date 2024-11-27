@@ -12,11 +12,13 @@ import { InputSearchDateRange } from '../input/dateRange/inputSearchDateRange';
 import { InputSearchGuest } from '../input/guest/inputSearchGuest';
 import { GroupPeopleInput } from '../input/guest/selectGuestInput';
 import { InputSearchLocation } from '../input/location/inputSearchLocation';
+import { cn } from '@/lib/utils';
 
 interface SearchGroupType {
    typeProp?: 'hotel' | 'flight';
+   className?: string;
 }
-export const SearchGroup = ({ typeProp = 'hotel' }: SearchGroupType) => {
+export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) => {
    const TabContent = ({ type = typeProp }: { type: 'hotel' | 'flight' }) => (
       <div className="border border-neutral-200 p-4 rounded-xl">
          {/* Hotels */}
@@ -145,7 +147,7 @@ export const SearchGroup = ({ typeProp = 'hotel' }: SearchGroupType) => {
    );
 
    return (
-      <div className="relative -top-36 pb-16 z-30 w-full">
+      <div className={cn('relative  z-30 w-full', className)}>
          <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
             <Tabs value={typeProp} className="w-full">
                <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
