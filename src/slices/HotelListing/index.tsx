@@ -23,22 +23,23 @@ export type HotelListingProps = SliceComponentProps<Content.HotelListingSlice>;
  */
 const HotelListing = ({ slice }: HotelListingProps): JSX.Element => {
    return (
-      <Bounded
+      <section
          data-slice-type={slice.slice_type}
          data-slice-variation={slice.variation}
          className="w-full"
       >
          {/* BANNER */}
-         <div className="block mt-28">
+         <Bounded className="block mt-28">
             <HotelBanner />
-         </div>
+         </Bounded>
 
          {/* WITH MAP */}
-         <div className="block">{slice.primary.with_map && <ListHotel />}</div>
+
+         {slice.primary.with_map && <ListHotel />}
 
          {/* WITHOUT MAP */}
-         <div className="block">{!slice.primary.with_map && <WithoutMapContainer />}</div>
-      </Bounded>
+         <Bounded className="block">{!slice.primary.with_map && <WithoutMapContainer />}</Bounded>
+      </section>
    );
 };
 

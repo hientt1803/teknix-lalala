@@ -98,7 +98,7 @@ const tabs = [
 const AccountFeatures = () => {
     const [currentTab, setCurrentTab] = useState("account");
     return (
-        <Bounded className="relative py-16">
+        <Bounded className="relative py-16 my-12">
             <CustomTab value={currentTab} onChange={setCurrentTab} tabs={tabs} />
             <div className="py-4">
                 {currentTab === "account" && <TabInfo />}

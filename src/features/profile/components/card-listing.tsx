@@ -5,7 +5,7 @@ import HistoryListing from "./history-listing";
 
 const CardListing = () => {
     return (
-        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pl-10 flex-shrink-0">
+        <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pl-10 flex-shrink-0 mt-12">
             <div className="flex flex-col p-4 border space-y-8 rounded-2xl">
                 <div>
                     <h2 className="text-2xl font-semibold">Kevin Francis&apos;s listings</h2>
