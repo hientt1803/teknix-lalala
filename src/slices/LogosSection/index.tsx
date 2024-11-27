@@ -1,9 +1,7 @@
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
-import { logos } from './mock';
-import Image from '@/components/common/images/image';
 import Bounded from '@/components/common/containers/bounded';
+import { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
+import { SliceComponentProps } from '@prismicio/react';
 
 /**
  * Props for `LogosSection`.

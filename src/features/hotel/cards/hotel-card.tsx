@@ -38,13 +38,36 @@ const HotelCard = ({ imageUrl, promotion, name, location, pricePerPerson, displa
    const items = imageUrl.map((item, index) => (
       <CarouselItem
          key={index}
-         className={cn(
-            displayType == 'list'
-               ? 'aspect-square md:aspect-[3/2] m-0 p-0'
-               : 'aspect-square md:aspect-[7/8] m-0 p-0',
-         )}
+         className={cn(displayType == 'list' ? 'aspect-square m-0 p-0' : 'aspect-square  m-0 p-0')}
       >
-         <Image src={item} className="w-full h-full object-cover rounded-md" alt={name} />
+         <Image
+            src={item}
+            className="w-full h-full object-cover rounded-md"
+            alt={name}
+            fallback={
+               <div className="w-fit h-full flex flex-1 justify-center items-center bg-slate-100">
+                  <svg
+                     className="w-fit h-full text-white"
+                     xmlns="http://www.w3.org/2000/svg"
+                     width="1em"
+                     height="1em"
+                     viewBox="0 0 24 24"
+                  >
+                     <g
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="1"
+                     >
+                        <path d="M15 8h.01M12 3c7.2 0 9 1.8 9 9s-1.8 9-9 9s-9-1.8-9-9s1.8-9 9-9" />
+                        <path d="M3.5 15.5L8 11c.928-.893 2.072-.893 3 0l5 5" />
+                        <path d="m14 14l1-1c.928-.893 2.072-.893 3 0l2.5 2.5" />
+                     </g>
+                  </svg>
+               </div>
+            }
+         />
       </CarouselItem>
    ));
 
@@ -56,14 +79,8 @@ const HotelCard = ({ imageUrl, promotion, name, location, pricePerPerson, displa
                displayType == 'list' ? 'flex-col md:flex-row' : 'flex-col',
             )}
          >
-            <div
-               className={cn(
-                  displayType == 'list'
-                     ? 'flex-1 p-2 w-full sm:w-64'
-                     : 'flex-1 p-2 min-w-full w-full',
-               )}
-            >
-               <div className="relative">
+            <div className={cn('flex-1 h-full p-2')}>
+               <div className="relative h-full">
                   <Carousel
                      opts={{
                         loop: true,
@@ -84,7 +101,7 @@ const HotelCard = ({ imageUrl, promotion, name, location, pricePerPerson, displa
             {/* Main Content */}
             <div
                className={cn(
-                  'w-full flex-[2] flex-grow flex flex-col items-start',
+                  'flex-[2] flex flex-col items-start',
                   displayType == 'list' ? ' p-5 md:pr-2' : ' p-5',
                )}
             >
@@ -102,17 +119,16 @@ const HotelCard = ({ imageUrl, promotion, name, location, pricePerPerson, displa
                         variant={'default'}
                         className="text-white bg-neutral-900 text-sm py-1 px-2"
                      >
-                        ⭐ 4.8
+                        ⭐️ 4.8
                      </Button>
                   )}
-
                   <div className="flex gap-1 items-center">
                      <Button
                         variant={'default'}
                         size={'icon'}
                         className="bg-neutral-100 hover:bg-neutral-900 text-black hover:text-white rounded-full text-md"
                      >
-                        ❤
+                        ❤️
                      </Button>
                      <Button
                         variant={'default'}

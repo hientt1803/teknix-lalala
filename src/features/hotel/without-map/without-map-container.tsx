@@ -12,20 +12,21 @@ const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => 
 export const WithoutMapContainer = () => {
    return (
       <div className="w-full">
-         <Tabs defaultValue="list" className="w-full">
+         <Tabs defaultValue="list" className="w-full overflow-hidden">
             {/* TOGGLE NAVIGATION */}
-            <div className="flex items-start justify-between gap-3 mb-6">
+            <div className="flex justify-between items-start gap-3 mb-6">
                <div className="block md:hidden">
                   <FilterDrawer />
                </div>
+
                <div className="hidden md:block w-full">
                   <FilterCollapse />
                </div>
 
                <div className="hidden md:block" />
 
-               <div className="flex items-center justify-end gap-3">
-                  <div className="text-neutral-600 text-base">1 - 10 of 18 hotel found</div>
+               <div className="flex items-center justify-end gap-3 mt-5">
+                  <div className="text-neutral-600 text-base text-nowrap">1 - 10 of 18 hotel found</div>
                   <TabsList>
                      <TabsTrigger
                         value="list"

@@ -1,5 +1,4 @@
 'use client';
-import Badge from '@/components/custom/badges/badge';
 import ComboboxDemo from '@/components/custom/combobox/combobox';
 import { SliderRange } from '@/components/custom/sliders/slider-range';
 import {
@@ -12,15 +11,15 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { cn } from '@/lib/utils';
 import { FILTER_MOCK } from '@/slices/HotelListing/mock';
-import { Filter, Grip, SlidersHorizontal } from 'lucide-react';
+import { SlidersHorizontal } from 'lucide-react';
 import { useState } from 'react';
 
 export const FilterCollapse = () => {
    const [priceRange, setPriceRange] = useState([100, 500]);
+
    return (
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible className="w-[170%] lg:w-[143%] xl:w-[131%]">
          <AccordionItem value="item-1" className="border-b-0">
             <AccordionTrigger>
                <div className="flex gap-2 px-3 py-2 rounded bg-primary/10 text-primary">
