@@ -17,7 +17,7 @@ export const FacilitiCaroucel = dynamic(
 export const FacilitiesContainer = ({ slice }: { slice: Content.FacilitiesSectionSlice }) => {
    return (
       <div className="grid grid-cols-12 gap-6">
-         <div className="col-span-7">
+         <div className="col-span-12 md:col-span-12 lg:col-span-7">
             <PrismicRichText field={slice.primary.heading} components={facilityComponents} />
             <PrismicRichText
                field={slice.primary.body}
@@ -45,12 +45,12 @@ export const FacilitiesContainer = ({ slice }: { slice: Content.FacilitiesSectio
                            className: 'text-yellow-600',
                         })}
                      </span>
-                     <span className='font-medium'>{facility.name}</span>
+                     <span className="font-medium">{facility.name}</span>
                   </div>
                ))}
             </div>
          </div>
-         <div className="col-span-5">
+         <div className="col-span-12 md:col-span-12 lg:col-span-5">
             <FacilitiCaroucel destinations={slice.primary.destinations} />
          </div>
       </div>

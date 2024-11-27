@@ -1,9 +1,13 @@
 'use client';
 
+import Heading from '@/components/common/typography/heading';
+import Paragraph from '@/components/common/typography/paragraph';
 import {
    Carousel,
    CarouselContent,
-   CarouselItem
+   CarouselItem,
+   CarouselNext,
+   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Content, GroupField } from '@prismicio/client';
 import { PrismicNextImage, PrismicNextLink } from '@prismicio/next';
@@ -21,43 +25,65 @@ export const FacilitiCaroucel = ({
    const plugin = React.useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
    return (
-      <Carousel
-         className="w-fit"
-         opts={{
-            align: 'start',
-            loop: true,
-         }}
-         plugins={[plugin.current]}
-         onMouseEnter={plugin.current.stop}
-         onMouseLeave={plugin.current.reset}
-      >
-         <CarouselContent>
-            {destinations.map((des, index) => (
-               <CarouselItem key={index} className="w-full">
-                  <div className="flex justify-between items-center gap-4 pointer-events-none">
-                     <div className="aspect-video w-full h-full rounded-lg overflow-hidden">
-                        <PrismicNextImage
-                           field={des.image}
-                           alt=""
-                           className="w-full h-full object-cover"
-                        />
-                     </div>
-                     <div>
-                        <PrismicRichText field={des.type} />
-                        <PrismicRichText field={des.name} />
-                        <PrismicNextLink field={des.button_link}>
-                           <div className="bg-transparent text-yellow-600 flex justify-start items-center gap-0">
-                              <span className="font-medium">{des.button_text}</span>
-                              <ArrowRight className="w-5 h-5 ml-3" />
+      <div className="bg-[#eff0f1] p-5 rounded-lg overflow-hidden">
+         <Carousel
+            className="w-fit"
+            opts={{
+               align: 'start',
+               loop: true,
+            }}
+            plugins={[plugin.current]}
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
+         >
+            <CarouselContent className="w-fit">
+               {destinations.map((des, index) => (
+                  <CarouselItem key={index} className="w-full">
+                     <div className="flex justify-between items-center gap-4">
+                        <div className="flex-1 aspect-auto md:aspect-[2/3] lg:aspect-[3/4] w-full h-full rounded-lg overflow-hidden">
+                           <PrismicNextImage
+                              field={des.image}
+                              alt=""
+                              className="w-full h-full object-cover"
+                           />
+                        </div>
+                        <div className="flex-1">
+                           <PrismicRichText
+                              field={des.type}
+                              components={{
+                                 paragraph: ({ children }) => (
+                                    <Paragraph className="font-[500] !text-sm text-neutral-800 mb-2 pointer-events-none">
+                                       {children}
+                                    </Paragraph>
+                                 ),
+                              }}
+                           />
+                           <PrismicRichText
+                              field={des.name}
+                              components={{
+                                 heading3: ({ children }) => (
+                                    <Heading className="text-base font-[600] text-wrap">
+                                       {children}
+                                    </Heading>
+                                 ),
+                              }}
+                           />
+                           <div className="mt-4 w-fit py-3 px-2 hover:bg-yellow-100 hover:text-yellow-800 hover:rounded-lg">
+                              <PrismicNextLink field={des.button_link}>
+                                 <div className="bg-transparent text-yellow-600 flex justify-start items-center gap-0">
+                                    <span className="font-medium">{des.button_text}</span>
+                                    <ArrowRight className="w-5 h-5 ml-3" />
+                                 </div>
+                              </PrismicNextLink>
                            </div>
-                        </PrismicNextLink>
+                        </div>
                      </div>
-                  </div>
-               </CarouselItem>
-            ))}
-         </CarouselContent>
-         {/* <CarouselPrevious />
-         <CarouselNext /> */}
-      </Carousel>
+                  </CarouselItem>
+               ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-3 w-10 h-10 bg-neutral-800 hover:bg-neutral-900 border-neutral-400 bg-opacity-40 text-white hover:text-neutral-100" />
+            <CarouselNext className="-right-0 w-10 h-10 bg-neutral-800 hover:bg-neutral-900 border-neutral-400 bg-opacity-40 text-white hover:text-neutral-100" />
+         </Carousel>
+      </div>
    );
 };

@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { ArrowRight, MapPin } from 'lucide-react';
+import Link from 'next/link';
 
 export interface Tour {
    id: number;
@@ -34,6 +35,7 @@ export interface Tour {
    isFavorite: boolean;
    displayType: 'list' | 'grid';
 }
+
 const HotelCard = ({ imageUrl, promotion, name, location, pricePerPerson, displayType }: Tour) => {
    const items = imageUrl.map((item, index) => (
       <CarouselItem
@@ -142,9 +144,11 @@ const HotelCard = ({ imageUrl, promotion, name, location, pricePerPerson, displa
 
                {/* NAME & LOCATION */}
                <div className="mb-4">
-                  <div className="text-xl font-bold capitalize line-clamp-2 mb-1 hover:text-yellow-700 cursor-pointer">
-                     {name}
-                  </div>
+                  <Link href={'/hotel/test_hotel'}>
+                     <div className="text-xl font-bold capitalize line-clamp-2 mb-1 hover:text-yellow-700 cursor-pointer">
+                        {name}
+                     </div>
+                  </Link>
                   <p className="flex items-center gap-2">
                      <MapPin className="w-4 h-4 text-slate-500" />
                      <span className="text-sm text-slate-500">{location}</span>
