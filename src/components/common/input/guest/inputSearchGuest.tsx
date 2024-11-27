@@ -1,4 +1,8 @@
-import { GroupPeopleInput } from './selectGuestInput';
+import dynamic from 'next/dynamic';
+
+const GroupPeopleInput = dynamic(() =>
+   import('./selectGuestInput').then((mod) => mod.GroupPeopleInput),
+);
 
 export const InputSearchGuest = () => {
    return (

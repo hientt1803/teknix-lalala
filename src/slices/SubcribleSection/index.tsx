@@ -4,7 +4,7 @@ import Paragraph from '@/components/common/typography/paragraph';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Content } from '@prismicio/client';
-import { JSXMapSerializer, PrismicRichText, SliceComponentProps } from '@prismicio/react';
+import { PrismicRichText, SliceComponentProps } from '@prismicio/react';
 
 /**
  * Props for `SubcribleSection`.
@@ -50,7 +50,7 @@ const SubcribleSection = ({ slice }: SubcribleSectionProps): JSX.Element => {
                         type="email"
                         placeholder="Enter your email"
                         required
-                        className="border-none outline-none shadow-none focus:ring-0 placeholder:text-neutral-400 placeholder:text-lg"
+                        className="border-none outline-none shadow-none focus-visible:ring-0 focus:ring-0 placeholder:text-neutral-400 placeholder:text-lg"
                      />
 
                      <Button className="rounded-lg font-medium text-lg py-5 px-5 dark:bg-neutral-900 dark:text-neutral-200">

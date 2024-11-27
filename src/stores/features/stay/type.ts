@@ -561,4 +561,5 @@ export interface IHotelSearchGeoEngineRequest extends IHotelSearchEngineRequest 
    longitude: number;
    latitude: number;
    radius: number;
+   place_id?: number;
 }

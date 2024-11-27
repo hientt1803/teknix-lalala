@@ -70,14 +70,14 @@ export const StaySlice = createSlice({
          },
       );
       builder.addMatcher(
-         endpoints.getListHotelByRegionSearchEngine.matchFulfilled,
+         endpoints.getListHotelByGeoSearchEngine.matchFulfilled,
          (state, action) => {
             // state.hotels = action.payload;
             state.isTriggerGlobal = false;
          },
       );
       builder.addMatcher(
-         endpoints.getListHotelByRegionSearchEngine.matchRejected,
+         endpoints.getListHotelByGeoSearchEngine.matchRejected,
          (state, action) => {
             state.isTriggerGlobal = false;
          },

@@ -1,13 +1,15 @@
 'use client';
 
-import { ChevronDown, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useMediaQuery } from '@/hooks/use-media-query';
 
+import { setSearchGlobalPeople } from '@/stores/features/global/global-slice';
+import { useAppSelector } from '@/stores/hook';
 import dynamic from 'next/dynamic';
+import { useDispatch } from 'react-redux';
 
 const GroupInputSelectDrawerContent = dynamic(
    () => import('./selectGuestContent').then((mod) => mod.GroupInputSelectDrawerContent),
@@ -15,32 +17,49 @@ const GroupInputSelectDrawerContent = dynamic(
 );
 
 export const GroupPeopleInput = React.memo(() => {
-   const matches = useMediaQuery('(min-width:768px)');
-   const [opened, setOpened] = useState(false);
-   const searchGlobalPeople = [
-      {
-         adults: 1,
-         children: [],
-      },
-   ];
+   // Redux
+   const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal);
+   const dispatch = useDispatch();
 
+   // State
+   const [opened, setOpened] = useState(false);
    const [listRoom, setListRoom] = useState<{ adults: number; children: number[] }[]>(
-      searchGlobalPeople
-         ? searchGlobalPeople.map((person) => ({
+      searchGlobal.people[0]
+         ? searchGlobal.people.map((person) => ({
               adults: person.adults,
-              children: person.children.length > 0 ? person.children : [],
+              children: person.children.length > 0 ? person.children.map((child) => child) : [],
            }))
-         : [{ adults: 1, children: [] }],
+         : [
+              {
+                 adults: 1,
+                 children: [],
+              },
+           ],
    );
 
-   useEffect(() => {
-      if (!matches) {
-         const params = new URLSearchParams(window.location.search);
-         if (params.get('showSelectPeople') && params.get('fromChooseDateRange')) {
-            setOpened(true);
-         }
-      }
-   }, [matches]);
+   // Hooks
+   const matches = useMediaQuery('(min-width:768px)');
+
+   // Logic
+   // useEffect(() => {
+   //    if (!matches) {
+   //       const params = new URLSearchParams(window.location.search);
+   //       if (params.get('showSelectPeople') && params.get('fromChooseDateRange')) {
+   //          setOpened(true);
+   //       }
+   //    }
+   // }, [matches]);
+
+   const handleStorePeopleToStorage = useCallback(() => {
+      const newPeople = listRoom.map((room) => ({
+         adults: room.adults,
+         children: room.children.map(Number),
+      }));
+
+      console.log(newPeople);
+
+      dispatch(setSearchGlobalPeople(newPeople));
+   }, [dispatch, listRoom]);
 
    const handleOnChangeChildren = useCallback((roomIndex: number, value: string | null) => {
       if (value) {
@@ -91,27 +110,62 @@ export const GroupPeopleInput = React.memo(() => {
          const newUrl = `${window.location.pathname}?${params.toString()}`;
          window.history.replaceState(null, document.title, newUrl);
       }
+      handleStorePeopleToStorage()
       setOpened(false);
-   }, [matches]);
+   }, [handleStorePeopleToStorage, matches]);
+
+   const totalAdults = useMemo(() => {
+      let total = 0;
+      listRoom.forEach((room) => {
+         total += room.adults;
+      });
+      return total;
+   }, [listRoom]);
+
+   const totalChildren = useMemo(() => {
+      let total = 0;
+      listRoom.forEach((room) => {
+         total += room.children.length;
+      });
+      return total;
+   }, [listRoom]);
+
+   const inputPlaceHolderValue = `${totalAdults} adult${
+      totalAdults > 1 ? 's' : ''
+   } · ${totalChildren || 0} children${totalChildren > 1 ? 's' : ''} · ${
+      listRoom.length
+   } room${listRoom.length > 1 ? 's' : ''}`;
 
    return (
       <div>
-         <Popover open={opened} onOpenChange={setOpened}>
-            <PopoverTrigger asChild>
+         <Popover
+            open={opened}
+            onOpenChange={(isOpen) => {
+               setOpened(isOpen);
+               if (isOpen == false) {
+                  handleStorePeopleToStorage();
+               }
+            }}
+         >
+            <PopoverTrigger
+               onClick={() => {
+                  setOpened(true);
+               }}
+               asChild
+            >
                <div className="flex justify-start items-center gap-2">
                   <User className="text-neutral-400 w-5 h-5" />
-                  <Input
-                     type="text"
-                     placeholder="2 adults, 0 children"
-                     className="placeholder:text-neutral-800 dark:placeholder:text-neutral-200 placeholder:font-medium min-w-[9.375rem] w-full shadow-none border-none outline-none focus:border-none focus:outline-none"
-                     onClick={() => {
-                        setOpened(true);
-                     }}
-                  />
-                  {/* <ChevronDown className="text-black w-5 h-5" /> */}
+                  <span className="min-w-[9.375rem] w-full text-sm text-neutral-700 font-medium line-clamp-1">
+                     {inputPlaceHolderValue}
+                  </span>
                </div>
             </PopoverTrigger>
-            <PopoverContent className="w-[25rem]">
+            <PopoverContent
+               onOpenAutoFocus={(e) => {
+                  e.preventDefault();
+               }}
+               className="w-[25rem]"
+            >
                <GroupInputSelectDrawerContent
                   listRoom={listRoom}
                   handleDeleteChildren={handleDeleteChildren}

@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import {
    Select,
@@ -8,33 +10,169 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
+import { setTriggerSearch } from '@/stores/features/stay';
+import { useAppSelector } from '@/stores/hook';
+import {
+   convertStringToDate,
+   daysBetweenDateRange,
+   formatDateToYearMonthDay,
+} from '@/utilities/datetime';
+import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
+import { usePathname, useRouter } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { InputSearchDateRangeSkeleton } from '../input/dateRange/input-search-date-range-skeleton';
+import { InputSearchGuestSkeleton } from '../input/guest/input-search-guest-skeleton';
+import { InputSearchLocationSkeleton } from '../input/location/inputSearchLocationSkeleton';
 
-const InputSearchLocation = dynamic(() =>
-   import('../input/location/inputSearchLocation').then((mod) => mod.InputSearchLocation),
+const InputSearchLocation = dynamic(
+   () => import('../input/location/inputSearchLocation').then((mod) => mod.InputSearchLocation),
+   {
+      loading: () => <InputSearchLocationSkeleton />,
+   },
 );
-const InputSearchDateRange = dynamic(() =>
-   import('../input/dateRange/inputSearchDateRange').then((mod) => mod.InputSearchDateRange),
+const InputSearchDateRange = dynamic(
+   () => import('../input/dateRange/inputSearchDateRange').then((mod) => mod.InputSearchDateRange),
+   {
+      loading: () => <InputSearchDateRangeSkeleton />,
+   },
 );
-const InputSearchGuest = dynamic(() =>
-   import('../input/guest/inputSearchGuest').then((mod) => mod.InputSearchGuest),
-);
-const GroupInputQuantity = dynamic(() =>
-   import('@/components/custom/input/group-input-quantity').then((mod) => mod.GroupInputQuantity),
+const InputSearchGuest = dynamic(
+   () => import('../input/guest/inputSearchGuest').then((mod) => mod.InputSearchGuest),
+   {
+      loading: () => <InputSearchGuestSkeleton />,
+   },
 );
 
 interface SearchGroupType {
    typeProp?: 'hotel' | 'flight';
    className?: string;
+   isFromHotelDetail?: boolean;
 }
 
-export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) => {
+export const SearchGroup = ({
+   typeProp = 'hotel',
+   className,
+   isFromHotelDetail = false,
+}: SearchGroupType) => {
+   // Next api
+   const router = useRouter();
+   const pathname = usePathname();
+
+   // Redux
+   const globalState = useAppSelector((state) => state.globalSlice.searchGlobal);
+   const hotelSearchLoadingState = useAppSelector((state) => state.staySlice.isTriggerGlobal);
+   const dispatch = useDispatch();
+
+   // State
+
+   // Logic
+   const handleSearchDirection = () => {
+      // convert data
+      const startDate = formatDateToYearMonthDay(
+         convertStringToDate(globalState.dateRange.startDate),
+      );
+      const endDate = formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.endDate));
+
+      let adults = 0;
+      globalState.people
+         ? globalState.people.forEach((item) => {
+              adults += item.adults;
+           })
+         : [];
+
+      // add data to params
+      const params = new URLSearchParams({
+         checkin: startDate,
+         checkout: endDate,
+         language: 'en',
+         adults: adults.toString(),
+         currency: 'VND',
+      });
+
+      let childrens = 0;
+      globalState.people.map((item) => {
+         item.children.forEach((child, index) => {
+            childrens++;
+            params.append(`childrens[${index}]`, String(child));
+         });
+      });
+
+      params.append('latitude', String(globalState?.location?.lat) || '10.0364634');
+      params.append('longtitude', String(globalState?.location?.lon) || '105.7875821');
+      params.append('region', String(globalState?.location.name) || '');
+
+      const nightCount = daysBetweenDateRange(
+         convertStringToDate(globalState.dateRange.startDate),
+         convertStringToDate(globalState.dateRange.endDate),
+      );
+
+      // dispatch(
+      //    setMemorizeLocation({
+      //       location: globalState.location.name,
+      //    }),
+      // );
+
+      // dispatch(
+      //    setMemorizeStayInformation({
+      //       adults: adults,
+      //       childrens: childrens,
+      //       nightCount: nightCount,
+      //    }),
+      // );
+
+      if (isFromHotelDetail) {
+         dispatch(setTriggerSearch(true));
+      } else {
+         if (globalState.location.searchType === 'hotel') {
+            params.append('id', globalState.location.hotelId!);
+            router.push(`/hotel/${globalState.location.hotelId}?${params.toString()}`);
+         } else {
+            if (pathname == '/hotel') {
+               dispatch(setTriggerSearch(true));
+
+               const searchUrl = new URLSearchParams(window.location.search);
+               if (searchUrl.toString().includes('msg=notfound')) {
+                  // router.push(`/hotel?${params.toString()}`);
+                  window.history.pushState({}, '', `/hotel?${params.toString()}`);
+               }
+
+               // set cookie for Meta Data
+               setCookie('locationSearch', globalState.location.name);
+               setCookie(
+                  'dateRange',
+                  `${globalState.dateRange.startDate} - ${globalState.dateRange.endDate}`,
+               );
+
+               // direct to new route
+               window.history.pushState({}, '', `/hotel?${params.toString()}`);
+               // router.replace(`/hotel?${params.toString()}`, {
+               //   scroll: false,
+               // });
+            } else {
+               // trigger search
+               dispatch(setTriggerSearch(true));
+
+               // set cookie for Meta Data
+               setCookie('locationSearch', globalState.location.name);
+               setCookie(
+                  'dateRange',
+                  `${globalState.dateRange.startDate} - ${globalState.dateRange.endDate}`,
+               );
+
+               // direct to new route
+               router.push(`/hotel?${params.toString()}`);
+            }
+         }
+      }
+   };
+
    const TabContent = ({ type = typeProp }: { type: 'hotel' | 'flight' }) => (
-      <div className="border border-neutral-200 p-4 rounded-xl">
+      <div className="w-full border border-neutral-200 p-4 rounded-xl">
          {/* Hotels */}
          {type == 'hotel' && (
-            <div className="flex justify-between items-center gap-x-3 gap-y-5 flex-wrap">
+            <div className="w-full flex justify-between items-center gap-x-3 gap-y-5 flex-wrap">
                {/* Location */}
                <div className="flex-1">
                   <InputSearchLocation />
@@ -57,10 +195,18 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                {/* Button */}
                <Button
                   variant="default"
-                  className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                  className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                  onClick={() => handleSearchDirection()}
+                  disabled={hotelSearchLoadingState && pathname == '/'}
                >
-                  <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
-                  Search
+                  {hotelSearchLoadingState && pathname == '/' ? (
+                     <span className="h-5 w-5 animate-spin rounded-full border-4 border-gray-200 border-t-neutral-800" />
+                  ) : (
+                     <>
+                        <Search className="w-5 h-5 text-neutral-200 dark:text-neutral-800" />
+                        Search
+                     </>
+                  )}
                </Button>
             </div>
          )}
@@ -120,7 +266,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                                  </span>
                               </div>
 
-                              <GroupInputQuantity quantity={1} />
+                              {/* <GroupInputQuantity quantity={1} /> */}
                            </div>
                            <div className="flex justify-between items-center gap-3 mb-4">
                               <div className="flex flex-col items-start justify-start gap-0">
@@ -130,7 +276,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                                  </span>
                               </div>
 
-                              <GroupInputQuantity quantity={1} />
+                              {/* <GroupInputQuantity quantity={1} /> */}
                            </div>
                            <div className="flex justify-between items-center gap-3">
                               <div className="flex flex-col items-start justify-start gap-0">
@@ -140,7 +286,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                                  </span>
                               </div>
 
-                              <GroupInputQuantity quantity={1} />
+                              {/* <GroupInputQuantity quantity={1} /> */}
                            </div>
                         </SelectContent>
                      </Select>
@@ -173,9 +319,9 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                   {/* Button */}
                   <Button
                      variant="default"
-                     className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                     className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
                   >
-                     <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
+                     <Search className="w-5 h-5 text-neutral-200 dark:text-neutral-800" />
                      Search
                   </Button>
                </div>
@@ -185,8 +331,8 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
    );
 
    return (
-      <div className={cn('relative  z-30 w-full', className)}>
-         <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
+      <div className={cn('w-full relative z-30', className)}>
+         <div className="w-full bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
             <Tabs value={typeProp} className="w-full">
                <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
                   <div className="w-full">
@@ -215,13 +361,13 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                      <span className="text-md text-nowrap">Need some help?</span>
                   </div>
                </TabsList>
-               <TabsContent value="hotel">
+               <TabsContent value="hotel" className="w-full">
                   <TabContent type="hotel" />
                </TabsContent>
-               <TabsContent value="tour">
+               <TabsContent value="tour" className="w-full">
                   <TabContent type="hotel" />
                </TabsContent>
-               <TabsContent value="flight">
+               <TabsContent value="flight" className="w-full">
                   <TabContent type="flight" />
                </TabsContent>
             </Tabs>

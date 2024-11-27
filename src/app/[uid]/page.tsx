@@ -4,6 +4,7 @@ import { SliceZone } from '@prismicio/react';
 
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
+import { cookies } from 'next/headers';
 
 type Params = { uid: string };
 
@@ -24,9 +25,37 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
    const client = createClient();
    const page = await client.getByUID('pages', uid).catch(() => notFound());
 
+   const cookieStore = await cookies();
+   const locationSearch = cookieStore.get('locationSearch')?.value || 'Top destinations';
+   const dateRange = cookieStore.get('dateRange')?.value || 'Top destinations';
+
+   const title = locationSearch + ' - ' + dateRange;
+   const seoDescription = `Book your ideal hotel stay in ${locationSearch} from ${dateRange}, with great prices and reviews.`;
+   const image = '/assets/favicon/lalala.svg';
+
    return {
-      title: page.data.meta_title,
+      title: title || page.data.meta_title,
       description: page.data.meta_description,
+      openGraph: {
+         title: title,
+         description: seoDescription,
+         url: '/',
+         locale: 'en-US',
+         siteName: title,
+         type: 'website',
+         images: [
+            {
+               url: image,
+               width: 1024,
+               height: 576,
+               alt: title,
+            },
+         ],
+      },
+
+      alternates: {
+         canonical: `/hotel`,
+      },
    };
 }
 
