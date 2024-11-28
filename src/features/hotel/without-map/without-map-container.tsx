@@ -1,21 +1,28 @@
 'use client';
 
+import {
+   Select,
+   SelectContent,
+   SelectItem,
+   SelectTrigger,
+   SelectValue,
+} from '@/components/ui/select';
+import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Category } from '@/lib/MarkerCategories';
 import { PlaceValues } from '@/lib/Places';
-import { useAppSelector } from '@/stores/hook';
 import {
    setTriggerSearch,
    useLazyGetListHotelByGeoSearchEngineQuery,
 } from '@/stores/features/stay';
 import { IHotelDataMapHotels, IHotelSearchGeoEngineRequest } from '@/stores/features/stay/type';
+import { useAppSelector } from '@/stores/hook';
 import { formatDateToYearMonthDay } from '@/utilities/datetime';
 import { getDistance } from 'geolib';
-import { LayoutGrid, List } from 'lucide-react';
+import { LayoutGrid, LayoutList } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { FilterCollapseContent, FilterCollapseTrigger } from '../filters/filter-collapse';
 
 const ListHotelWithoutMap = dynamic(() =>
    import('./list-hotel').then((mod) => mod.ListHotelWithoutMap),
@@ -24,7 +31,6 @@ const FilterDrawer = dynamic(() =>
    import('../filters/filter-drawer').then((mod) => mod.FilterDrawer),
 );
 const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter));
-const FilterMap = dynamic(() => import('../filters/filter-map').then((mod) => mod.FilterMap));
 
 export const WithoutMapContainer = () => {
    // redux
@@ -33,8 +39,8 @@ export const WithoutMapContainer = () => {
    const dispatch = useDispatch();
 
    // state
-   const [displayType, setDisplayType] = useState<'grid' | 'list'>('list');
-   const [filterCollapse, setFilterCollapse] = useState(false);
+   // const [displayType, setDisplayType] = useState<'grid' | 'list'>('list');
+   // const [filterCollapse, setFilterCollapse] = useState(false);
 
    // Api
    const [
@@ -127,79 +133,102 @@ export const WithoutMapContainer = () => {
 
    return (
       <div className="w-full">
-         <Tabs defaultValue="list" className="w-full overflow-hidden">
-            {/* TOGGLE NAVIGATION */}
-            <div className="flex justify-between items-center md:items-start gap-3 mb-6">
-               <div className="block md:hidden">
-                  <FilterDrawer placeData={placeData} searchGlobal={globalSearchState} />
-               </div>
-
-               {displayType == 'grid' && (
-                  <div className="hidden md:flex items-center gap-4 w-full">
-                     <FilterCollapseTrigger isOpen={filterCollapse} setIsOpen={setFilterCollapse} />
-                     <FilterMap placeData={placeData} searchGlobal={globalSearchState} />
+         <div className="w-full grid grid-cols-12 gap-3">
+            <div className="col-span-12 md:col-span-3">
+               <div className="block w-full md:hidden">
+                  <div className="mx-auto">
+                     <FilterDrawer placeData={placeData} searchGlobal={globalSearchState} />
                   </div>
-               )}
-
-               <div className="hidden md:block" />
-
-               <div className="flex items-center justify-end gap-3 md:mt-5">
-                  {/* <div className="text-neutral-600 text-base text-nowrap">
-                     1 - 10 of 18 hotel found
-                  </div> */}
-                  <TabsList>
-                     <TabsTrigger
-                        value="list"
-                        className="bg-neutral-300 text-black rounded-none rounded-l-lg data-[state=active]:bg-black data-[state=active]:text-white py-2"
-                        onClick={() => {
-                           setDisplayType('list');
-                           setFilterCollapse(false);
-                        }}
-                     >
-                        <List className="w-5 h-5" />
-                     </TabsTrigger>
-                     <TabsTrigger
-                        value="grid"
-                        className="bg-neutral-300 text-black  rounded-none rounded-r-lg data-[state=active]:bg-black data-[state=active]:text-white py-2"
-                        onClick={() => setDisplayType('grid')}
-                     >
-                        <LayoutGrid className="w-5 h-5" />
-                     </TabsTrigger>
-                  </TabsList>
+               </div>
+               <div className="hidden md:block md:col-span-4 lg:col-span-3">
+                  <div className="border border-neutral-200 rounded-2xl py-3">
+                     <ListFilter placeData={placeData} searchGlobal={globalSearchState} />
+                  </div>
                </div>
             </div>
+            <div className="w-full col-span-12 md:col-span-9">
+               <Tabs defaultValue="list" className="w-full overflow-hidden">
+                  <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-3 mb-6">
+                     <div className="w-full flex flex-col md:flex-row justify-between items-center">
+                        <div className="flex items-center justify-start gap-3">
+                           <TabsList className="bg-transparent">
+                              <TabsTrigger
+                                 value="list"
+                                 className="rounded-none rounded-l-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
+                              >
+                                 <LayoutList className="w-5 h-5" />
+                              </TabsTrigger>
+                              <TabsTrigger
+                                 value="grid"
+                                 className=" rounded-none rounded-r-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
+                              >
+                                 <LayoutGrid className="w-5 h-5" />
+                              </TabsTrigger>
+                           </TabsList>
+                           1 - 10 of {hotelsWithMapData?.length || 0} hotels found
+                        </div>
 
-            {/* DISPLAY CONTENT */}
-            <FilterCollapseContent isOpen={filterCollapse} />
-
-            <TabsContent value="list" className="w-full">
-               <div className="grid grid-cols-12 gap-6 w-full">
-                  <div className="hidden md:block md:col-span-4 lg:col-span-3">
-                     <div className="shadow-lg rounded-md py-3">
-                        <ListFilter placeData={placeData} searchGlobal={globalSearchState} />
+                        <div className="flex items-center gap-1">
+                           <div className="flex gap-2 items-center mr-2 cursor-pointer hover:underline">
+                              Clear Filters
+                           </div>
+                           <Select>
+                              <div className="flex items-center border border-neutral-200 rounded-md px-1">
+                                 <div className="text-sm text-neutral-500">Show</div>
+                                 <SelectTrigger className="border-none outline-none shadow-none w-fit">
+                                    <SelectValue placeholder="10" defaultValue={'10'} />
+                                 </SelectTrigger>
+                              </div>
+                              <SelectContent>
+                                 <SelectItem value="10">10</SelectItem>
+                                 <SelectItem value="15">15</SelectItem>
+                                 <SelectItem value="20">20</SelectItem>
+                              </SelectContent>
+                           </Select>
+                           <Select>
+                              <div className="flex items-center border border-neutral-200 rounded-md px-1">
+                                 <div className="text-sm text-neutral-500">Sort by:</div>
+                                 <SelectTrigger className="border-none outline-none shadow-none w-fit">
+                                    <SelectValue placeholder="Name" defaultValue={'name'} />
+                                 </SelectTrigger>
+                              </div>
+                              <SelectContent>
+                                 <SelectItem value="name">Name</SelectItem>
+                                 <SelectItem value="price">Price</SelectItem>
+                                 <SelectItem value="rating">Rating</SelectItem>
+                              </SelectContent>
+                           </Select>
+                        </div>
                      </div>
                   </div>
-                  <div className="col-span-12 md:col-span-8 lg:col-span-9">
-                     <ListHotelWithoutMap
-                        type="list"
-                        hotelsWithMapData={hotelsWithMapData}
-                        searchHotelGeoFetching={searchHotelGeoFetching}
-                        searchHotelGeoLoading={searchHotelGeoLoading}
-                     />
-                  </div>
-               </div>
-            </TabsContent>
-            <TabsContent value="grid" className="w-full">
-               <div className="w-full">
-                  <ListHotelWithoutMap
-                     type="grid"
-                     hotelsWithMapData={hotelsWithMapData}
-                     searchHotelGeoFetching={searchHotelGeoFetching}
-                     searchHotelGeoLoading={searchHotelGeoLoading}
-                  />
-               </div>
-            </TabsContent>
-         </Tabs>
+
+                  <Separator className="w-full bg-neutral-200 mb-4" />
+
+                  <TabsContent value="list" className="w-full">
+                     <div className="grid grid-cols-12 gap-6 w-full">
+                        <div className="col-span-12">
+                           <ListHotelWithoutMap
+                              type="list"
+                              hotelsWithMapData={hotelsWithMapData}
+                              searchHotelGeoFetching={searchHotelGeoFetching}
+                              searchHotelGeoLoading={searchHotelGeoLoading}
+                           />
+                        </div>
+                     </div>
+                  </TabsContent>
+                  <TabsContent value="grid" className="w-full">
+                     <div className="w-full">
+                        <ListHotelWithoutMap
+                           type="grid"
+                           hotelsWithMapData={hotelsWithMapData}
+                           searchHotelGeoFetching={searchHotelGeoFetching}
+                           searchHotelGeoLoading={searchHotelGeoLoading}
+                        />
+                     </div>
+                  </TabsContent>
+               </Tabs>
+            </div>
+         </div>
       </div>
    );
 };

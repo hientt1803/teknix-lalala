@@ -50,7 +50,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
                {/* Search Group */}
                <Bounded>
-                  <SearchGroup className="-mt-20 md:mt-0" />
+                  <SearchGroup className="-mt-20 md:mt-0" showBorder showTabs />
                </Bounded>
             </div>
          )}

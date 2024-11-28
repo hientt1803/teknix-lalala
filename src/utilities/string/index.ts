@@ -25,6 +25,17 @@ export const convertKebabToTitleCase = (str: string): string => {
       .join(' '); // Join the words with a space
 };
 
+/* The `convertSnakeToTitleCase` function takes a string in snake_case
+format (words separated by underscores) and converts it to title case 
+(each word capitalized with spaces between words). */
+export const convertSnakeToTitleCase = (str: string): string => {
+   if (!str) return '';
+   return str
+      .split('_') // Split the string by underscores
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
+      .join(' '); // Join the words with a space
+};
+
 /**
  * The function `convertToTitleCase` takes a string with words separated by underscores and converts it
  * to title case.

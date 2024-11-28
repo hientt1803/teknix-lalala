@@ -28,7 +28,7 @@ const AvailiableSection = ({ id }: Props) => {
    });
 
    return (
-      <div className="border border-slate-200 dark:border-slate-700 p-4 rounded-2xl space-y-8">
+      <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-lg space-y-8">
          <div>
             <h2 className="text-2xl font-semibold">Availability</h2>
             <span className="block mt-2 text-slate-500 ">

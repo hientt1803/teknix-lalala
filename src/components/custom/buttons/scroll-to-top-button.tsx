@@ -3,6 +3,7 @@
 import { cn } from '@/lib/utils';
 import { ArrowUp } from 'lucide-react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { motion } from 'framer-motion';
 
 const ScrollToTopButton = () => {
    const [rightPosition, setRightPosition] = useState(0);
@@ -79,7 +80,7 @@ const ScrollToTopButton = () => {
          {scrollProgress > 5 && (
             <div
                className={cn(
-                  'fixed right-0 bottom-14 w-10 h-10 bg-[#fff] cursor-pointer group rounded-full transition-all z-40 flex items-center justify-center',
+                  'fixed right-0 bottom-14 w-10 h-10 bg-white bg-opacity-70 cursor-pointer group rounded-full transition-all z-40 flex items-center justify-center',
                )}
                style={{ right: `${rightPosition}px` }}
                onClick={handleScrollTop}
@@ -119,9 +120,19 @@ const ScrollToTopButton = () => {
                      {scrollProgress.toFixed(0)}
                   </span>
                ) : (
-                  <div className="transform transition-transform duration-600 ease-in-out translate-y-[-10px] opacity-100">
-                     <ArrowUp className="relative w-5 h-5 text-[#212121] cursor-pointer group-hover:animate-pulse" />
-                  </div>
+                  <motion.div
+                     initial={{ opacity: 0, y: 20 }} // Start state for animation
+                     animate={{ opacity: 1, y: 0 }} // End state
+                     exit={{ opacity: 0, y: 20 }} // State when exiting (optional)
+                     transition={{
+                        duration: 0.6, // Duration in seconds
+                        ease: 'easeInOut', // Easing function
+                     }}
+                  >
+                     <div>
+                        <ArrowUp className="transition-all relative w-5 h-5 text-[#212121] cursor-pointer hover:animate-pulse" />
+                     </div>
+                  </motion.div>
                )}
             </div>
          )}

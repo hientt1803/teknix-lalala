@@ -3,17 +3,18 @@
 import { IReserveForm, Rate, RoomGroup } from '@/stores/features/stay/type';
 import { useMemo, useState } from 'react';
 
+import Image from '@/components/common/images/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@/components/ui/carousel';
-import { useAppSelector } from '@/stores/hook';
 import { setReserveForm } from '@/stores/features/stay';
+import { useAppSelector } from '@/stores/hook';
+import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 import { countTotalDaysInRange, formatDateMMM } from '@/utilities/datetime';
 import { format } from 'date-fns';
+import { MoveRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
-import Image from '@/components/common/images/image';
 
 type Props = {
    data?: { roomGroup: RoomGroup; rates: Rate[] };
@@ -221,7 +222,7 @@ const RoomCard = ({ data, active, id }: Props) => {
                                        </div>
                                     </div>
                                     <div className="flex flex-col xl:flex-row xl:p-3 justify-between">
-                                       <span className="flex flex-col text-lg font-semibold text-orange-500 text-center xl:text-left">
+                                       <span className="flex flex-col text-lg font-semibold text-yellow-700 text-center xl:text-left">
                                           <span className="text-xs text-slate-500 font-light px-1 line-through">
                                              {formatCurrencyWithCodeAsSuffix(
                                                 rate.payment_options.payment_types[0]?.show_amount,
@@ -239,10 +240,11 @@ const RoomCard = ({ data, active, id }: Props) => {
                                           </span>
                                        </span>
                                        <Button
-                                          className="bg-orange-400 py-6 dark:text-white uppercase"
+                                          className="bg-yellow-400 text-black hover:bg-slate-200 hover:text-slate-800 rounded-full py-6 dark:text-white uppercase"
                                           onClick={() => handleReservation(rate)}
                                        >
                                           Book Now
+                                          <MoveRight className="w-5 h-5 ml-1" />
                                        </Button>
                                     </div>
                                  </div>

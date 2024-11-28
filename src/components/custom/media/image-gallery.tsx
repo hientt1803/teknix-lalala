@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { LayoutGridIcon } from 'lucide-react';
+import { LayoutGridIcon, Play } from 'lucide-react';
 import { useState } from 'react';
 import ModalShowAllGalley from './image-modal';
 import Image from '@/components/common/images/image';
@@ -23,12 +23,12 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
    };
 
    return (
-      <div className='no-scrollbar'>
+      <div className="no-scrollbar">
          <div className="rounded-md sm:rounded-xl w-full">
             {type === 'default' && (
                <div
                   onClick={handleOpen}
-                  className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2"
+                  className="relative grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-2"
                >
                   <div className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer">
                      <Image
@@ -88,13 +88,24 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                         />
                      </div>
                   </div>
-                  <Button
-                     onClick={handleOpen}
-                     className="absolute hidden md:flex md:items-center md:justify-center left-3 bottom-3 text-sm px-4 py-2 rounded-xl bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-800 z-10"
-                  >
-                     <LayoutGridIcon className="w-5 h-5 mr-1" />
-                     Show all photos
-                  </Button>
+                  <div className="absolute hidden md:flex items-center gap-2 left-6 bottom-3">
+                     <Button
+                        onClick={handleOpen}
+                        className="md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-yellow-400 text-black hover:bg-slate-200 hover:text-slate-800 z-10"
+                     >
+                        <LayoutGridIcon className="w-5 h-5 mr-1" />
+                        See all photos
+                     </Button>
+                     <Button
+                        onClick={handleOpen}
+                        className=" md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-neutral-100 text-black hover:bg-slate-200 hover:text-slate-800 z-10"
+                     >
+                        <div className="border border-neutral-800 rounded-full p-1 flex justify-center items-center">
+                           <Play className="w-5 h-5" />
+                        </div>
+                        Video Clips
+                     </Button>
+                  </div>
 
                   <ModalShowAllGalley opened={open} setOpen={setOpen} images={images} />
                   {/* <CredenzaImages open={open} setOpen={setOpen} /> */}

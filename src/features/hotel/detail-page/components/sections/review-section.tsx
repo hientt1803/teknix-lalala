@@ -18,7 +18,7 @@ const ReviewSection = ({ id }: { id: string }) => {
    });
 
    return (
-      <div className="border border-slate-200 dark:border-slate-700 p-4 rounded-2xl space-y-8">
+      <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-lg space-y-8">
          <h2 className="text-2xl font-semibold">Reviews</h2>
          <div className="text-md font-semibold text-neutral-600">
             ({data?.reviews && data?.reviews?.length > 0 ? data?.reviews?.length : 'No'} reviews)

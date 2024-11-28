@@ -368,7 +368,7 @@ const ReserveSection = ({
    if (isLoading) return <ReserveCardSkeleton />;
 
    return (
-      <div className="border border-slate-100 dark:border-slate-700 rounded-2xl shadow-xl p-4">
+      <div className="border border-neutral-200 dark:border-slate-700 rounded-lg shadow-xl p-6">
          <div className="flex justify-between">
             {data?.hotels[0]?.rates[0]?.payment_options.payment_types[0]?.show_amount ? (
                <span className="text-3xl font-semibold">

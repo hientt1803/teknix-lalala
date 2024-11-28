@@ -12,7 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { setTriggerSearch } from '@/stores/features/stay';
 import { useAppSelector } from '@/stores/hook';
-import { convertStringToDate, formatDateToYearMonthDay } from '@/utilities/datetime';
+import { convertStringToDate, formatDateToYearMonthDay, formatDateUTC } from '@/utilities/datetime';
 import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -45,13 +45,19 @@ const InputSearchGuest = dynamic(
 interface SearchGroupType {
    typeProp?: 'hotel' | 'flight';
    className?: string;
+   tabWrapperClassname?: string;
    isFromHotelDetail?: boolean;
+   showTabs?: boolean;
+   showBorder?: boolean;
 }
 
 export const SearchGroup = ({
    typeProp = 'hotel',
    className,
+   tabWrapperClassname,
    isFromHotelDetail = false,
+   showTabs = false,
+   showBorder = false,
 }: SearchGroupType) => {
    // Next api
    const router = useRouter();
@@ -139,7 +145,7 @@ export const SearchGroup = ({
                setCookie('locationSearch', globalState.location.name);
                setCookie(
                   'dateRange',
-                  `${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.startDate))} - ${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.endDate))}`,
+                  `${formatDateUTC(convertStringToDate(globalState.dateRange.startDate))} - ${formatDateUTC(convertStringToDate(globalState.dateRange.endDate))}`,
                );
 
                // direct to new route
@@ -155,7 +161,7 @@ export const SearchGroup = ({
                setCookie('locationSearch', globalState.location.name);
                setCookie(
                   'dateRange',
-                  `${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.startDate))} - ${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.endDate))}`,
+                  `${formatDateUTC(convertStringToDate(globalState.dateRange.startDate))} - ${formatDateUTC(convertStringToDate(globalState.dateRange.endDate))}`,
                );
 
                // direct to new route
@@ -166,7 +172,11 @@ export const SearchGroup = ({
    };
 
    const TabContent = ({ type = typeProp }: { type: 'hotel' | 'flight' }) => (
-      <div className="border border-slate-200 dark:border-slate-700 p-4 rounded-xl">
+      <div
+         className={cn(
+            showBorder ? 'border border-slate-200 dark:border-slate-700 p-4 rounded-xl' : '',
+         )}
+      >
          {/* Hotels */}
          {type == 'hotel' && (
             <div className="w-full flex justify-between items-center gap-x-3 gap-y-5 flex-wrap">
@@ -192,7 +202,7 @@ export const SearchGroup = ({
                {/* Button */}
                <Button
                   variant="default"
-                  className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] rounded-3xl bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-lg hover:bg-slate-800 hover:text-white font-normal"
+                  className="flex-1 min-w-[9.375rem] w-fit xl:max-w-[9.375rem] py-7 px-7 rounded-full bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-lg hover:bg-slate-800 hover:text-white font-normal"
                   onClick={() => handleSearchDirection()}
                   disabled={hotelSearchLoadingState && pathname == '/'}
                >
@@ -200,7 +210,7 @@ export const SearchGroup = ({
                      <span className="h-4 w-4 animate-spin rounded-full border-4 border-gray-200 border-t-slate-800" />
                   ) : (
                      <>
-                        <Search className="w-4 h-4 text-slate-200 dark:text-slate-800" />
+                        <Search className="w-5 h-5 text-slate-200 dark:text-slate-800" />
                         Search
                      </>
                   )}
@@ -329,35 +339,43 @@ export const SearchGroup = ({
 
    return (
       <div className={cn('w-full relative z-30', className)}>
-         <div className="w-full bg-white dark:bg-slate-800 shadow-md rounded-xl p-7">
+         <div
+            className={cn(
+               'w-full bg-white dark:bg-slate-800 shadow-md rounded-xl p-7',
+               tabWrapperClassname,
+            )}
+         >
             <Tabs value={typeProp} className="w-full">
-               <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
-                  <div className="w-full">
-                     <TabsTrigger
-                        value="hotel"
-                        className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                     >
-                        Hotels
-                     </TabsTrigger>
-                     <TabsTrigger
-                        value="tour"
-                        className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                     >
-                        Tour
-                     </TabsTrigger>
-                     <TabsTrigger
-                        value="flight"
-                        className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
-                     >
-                        Flight
-                     </TabsTrigger>
-                  </div>
+               {showTabs && (
+                  <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
+                     <div className="w-full">
+                        <TabsTrigger
+                           value="hotel"
+                           className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                        >
+                           Hotels
+                        </TabsTrigger>
+                        <TabsTrigger
+                           value="tour"
+                           className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                        >
+                           Tour
+                        </TabsTrigger>
+                        <TabsTrigger
+                           value="flight"
+                           className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                        >
+                           Flight
+                        </TabsTrigger>
+                     </div>
 
-                  <div className="font-normal text-slate-500 dark:text-slate-300 flex items-center gap-1 flex-nowrap mt-3 md:mt-0">
-                     <User className="w-4 h-4" />
-                     <span className="text-md text-nowrap">Need some help?</span>
-                  </div>
-               </TabsList>
+                     <div className="font-normal text-slate-500 dark:text-slate-300 flex items-center gap-1 flex-nowrap mt-3 md:mt-0">
+                        <User className="w-4 h-4" />
+                        <span className="text-md text-nowrap">Need some help?</span>
+                     </div>
+                  </TabsList>
+               )}
+
                <TabsContent value="hotel" className="w-full">
                   <TabContent type="hotel" />
                </TabsContent>

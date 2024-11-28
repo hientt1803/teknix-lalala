@@ -1,14 +1,11 @@
 import Bounded from '@/components/common/containers/bounded';
 import { HotelBannerSkeleton } from '@/features/hotel/banner';
+import { DestinationCaroucel } from '@/features/hotel/destination-caroucel';
+import { WithoutMapContainer } from '@/features/hotel/without-map/without-map-container';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 import dynamic from 'next/dynamic';
 
-export const WithoutMapContainer = dynamic(() =>
-   import('@/features/hotel/without-map/without-map-container').then(
-      (mod) => mod.WithoutMapContainer,
-   ),
-);
 export const HotelBanner = dynamic(
    () => import('@/features/hotel/banner').then((mod) => mod.HotelBanner),
    {
@@ -37,6 +34,11 @@ const HotelListing = ({ slice }: HotelListingProps): JSX.Element => {
       >
          {/* BANNER */}
          <HotelBanner />
+
+         {/* Carousel */}
+         <Bounded className="w-full">
+            <DestinationCaroucel />
+         </Bounded>
 
          {/* WITH MAP */}
          {/* {slice.primary.with_map && <ListHotel type="list" visibleItem={10} />} */}

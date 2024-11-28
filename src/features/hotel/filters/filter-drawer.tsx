@@ -15,7 +15,7 @@ export const FilterDrawer = ({
 }) => {
    return (
       <Sheet>
-         <SheetTrigger asChild>
+         <SheetTrigger asChild className='w-full'>
             <Button variant={'default'} className="rounded-md">
                Show Filter
             </Button>

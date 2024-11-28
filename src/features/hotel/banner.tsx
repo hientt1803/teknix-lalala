@@ -9,24 +9,25 @@ const SearchGroup = dynamic(() =>
 export const HotelBanner = () => {
    return (
       <div
-         className="block w-full h-full relative bg-cover bg-center bg-black/50 rounded-lg overflow-hidden mt-2 mb-6 object-cover"
-         style={{ backgroundImage: "url('/assets/images/hotel/banner.jpg')" }}
+         className="block w-full h-full relative bg-cover bg-center overflow-hidden mt-2 mb-6 object-cover"
+         style={{ backgroundImage: "url('/assets/images/hotel/banner-2.png')" }}
       >
          <Bounded>
-            <div className="w-full h-full flex justify-center items-center">
+            <div className="w-full h-full flex justify-center items-center z-20">
                <div className="flex flex-col justify-center items-center gap-10 min-w-[90%] w-full max-w-[90%]">
-                  <h1 className="text-center font-bold text-white text-4xl mt-24">
+                  <div className="text-center font-bold text-black text-5xl mt-24">
                      Journey with Travila - Begin Your Story!
-                  </h1>
-                  <h5 className="text-center font-bold text-white text-xl">
+                  </div>
+                  <h5 className="text-center font-medium text-black text-2xl -mt-5">
                      Easily search for top tours offered by our professional network
                   </h5>
-                  <div className="mb-28">
-                     <SearchGroup className="!block !static w-full" />
-                  </div>
                </div>
             </div>
+            <div className="w-full my-20">
+               <SearchGroup className="!block !static w-full" tabWrapperClassname='p-5' />
+            </div>
          </Bounded>
+         <div className="absolute inset-0 bg-black/50 -z-[1]" />
       </div>
    );
 };

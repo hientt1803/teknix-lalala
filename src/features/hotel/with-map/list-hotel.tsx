@@ -28,7 +28,6 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useDispatch } from 'react-redux';
 import HotelCard, { HotelCardSkeleton } from '../cards/hotel-card';
-import { FilterCollapse } from '../filters/filter-collapse';
 import { ListHotelWioutMapType } from '../without-map/list-hotel';
 import { PlaceValues } from '@/lib/Places';
 import { Category } from '@/lib/MarkerCategories';
@@ -176,11 +175,11 @@ export const ListHotel = ({ type = 'list', visibleItem = 10 }: ListHotelWioutMap
                            <span className="mx-2">·</span>2 Guests
                         </span>
                      </div>
-                     <FilterCollapse />
+                     {/* <FilterCollapse /> */}
                   </div>
 
                   {/* LIST HOTEL */}
-                  <InfiniteScroll
+                  {/* <InfiniteScroll
                      pageStart={0}
                      loadMore={loadMore}
                      hasMore={hasMore}
@@ -209,7 +208,7 @@ export const ListHotel = ({ type = 'list', visibleItem = 10 }: ListHotelWioutMap
                               />
                            ))}
                      </div>
-                  </InfiniteScroll>
+                  </InfiniteScroll> */}
 
                   <Pagination className="py-16">
                      <PaginationContent>

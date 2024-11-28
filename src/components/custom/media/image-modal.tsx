@@ -142,7 +142,7 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
                            <Image
                               src={replaceSize(img)}
                               className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 focus:outline-none"
-                              loading="lazy"
+                              loading="eager"
                               alt=""
                            />
                         </div>
