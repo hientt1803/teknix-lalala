@@ -26,14 +26,14 @@ export const NewHeaderSection = ({ data, id, scrollIntoReviewSection }: Props) =
             </span> */}
             <div
                className={cn(
-                  'shadow-2xl border border-neutral-200 text-sm font-medium text-neutral-900 rounded-full py-2 px-3 mb-10',
+                  'shadow-2xl border border-neutral-200 text-sm font-medium text-neutral-900 rounded-full py-2 px-3 mb-5',
                )}
             >
                ⭐ {data?.star_rating.toFixed(1) || 0}{' '}
                <span className="text-neutral-500">({review?.reviews?.length || 0} reviews)</span>
             </div>
          </div>
-         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold mb-7">
+         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold">
             {data?.name ? data.name : <Skeleton className="w-full h-10" />}
          </h2>
          <div className="flex justify-between items-center flex-wrap">

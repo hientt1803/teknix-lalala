@@ -43,7 +43,7 @@ const Payment = ({ isConfirm, hotel }: Props) => {
          if (res) {
             console.log(res);
 
-            // window.location.href = res.payment_link.payment_link.href;
+            window.location.href = res.payment_link.payment_link.href;
          }
       } catch (error) {
          console.log(error);

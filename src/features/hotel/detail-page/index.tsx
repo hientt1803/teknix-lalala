@@ -63,7 +63,7 @@ const HotelDetailFeature = async ({ id }: HotelDetailFeatureProps) => {
             </TooltipProvider>
          </div>
 
-         <div className="mt-5 mb-10">
+         <div className="mt-20 mb-10">
             <Breadcrumb>
                <BreadcrumbList>
                   <BreadcrumbItem>
