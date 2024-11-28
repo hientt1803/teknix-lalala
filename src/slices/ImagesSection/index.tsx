@@ -25,7 +25,7 @@ const ImagesSection = ({ slice }: ImagesSectionProps): JSX.Element => {
       <section
          data-slice-type={slice.slice_type}
          data-slice-variation={slice.variation}
-         className="w-full bg-black py-16"
+         className="w-full bg-slate-950 dark:bg-slate-800 py-16"
       >
          <ImageSection slice={slice} />
       </section>

@@ -10,7 +10,10 @@ import { JSXMapSerializer, PrismicRichText, SliceComponentProps } from '@prismic
  * Props for `SubcribleSection`.
  */
 export type SubcribleSectionProps = SliceComponentProps<Content.SubcribleSectionSlice>;
-
+const components: JSXMapSerializer = {
+   heading2: ({ children }) => <Heading>{children}</Heading>,
+   paragraph: ({ children }) => <Paragraph size="sm" className='max-w-xl text-center'>{children}</Paragraph>,
+};
 /**
  * Component for "SubcribleSection" Slices.
  */
@@ -33,27 +36,18 @@ const SubcribleSection = ({ slice }: SubcribleSectionProps): JSX.Element => {
                      ),
                   }}
                />
-               <PrismicRichText
-                  field={slice.primary.body}
-                  components={{
-                     paragraph: ({ children }) => (
-                        <Paragraph className="w-full md:max-w-[37.5rem] mx-auto text-neutral-600 dark:text-neutral-700 text-sm md:!text-base text-center">
-                           {children}
-                        </Paragraph>
-                     ),
-                  }}
-               />
+               <PrismicRichText field={slice.primary.body} components={components} />
 
-               <div className="bg-white rounded-lg p-2 md:p-3 shadow-sm w-full md:w-[37.5rem] h-fit">
+               <div className="bg-white rounded-lg p-0 md:p-2 shadow-sm w-full md:w-[37.5rem] h-fit">
                   <div className="flex justify-between items-center gap-2">
                      <Input
                         type="email"
                         placeholder="Enter your email"
                         required
-                        className="border-none outline-none shadow-none focus:ring-0 placeholder:text-neutral-400 placeholder:text-lg"
+                        className="border-none outline-none shadow-none focus:ring-0 placeholder:text-slate-400 placeholder:text-lg"
                      />
 
-                     <Button className="rounded-lg font-medium text-lg py-5 px-5 dark:bg-neutral-900 dark:text-neutral-200">
+                     <Button className="rounded-lg font-medium text-lg py-6 px-5 dark:bg-neutral-900 dark:text-neutral-200">
                         Subscribe!
                      </Button>
                   </div>

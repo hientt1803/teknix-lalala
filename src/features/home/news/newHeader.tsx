@@ -1,4 +1,5 @@
 import { MainButton } from '@/components/common/button/mainButton';
+import { Button } from '@/components/ui/button';
 import { newComponent } from '@/slices/NewsSection';
 import { Content } from '@prismicio/client';
 import { PrismicRichText } from '@prismicio/react';
@@ -12,12 +13,9 @@ export const NewHeader = ({ slice }: { slice: Content.NewsSectionSlice }) => {
             <PrismicRichText field={slice.primary.heading} components={newComponent} />
             <PrismicRichText field={slice.primary.body} components={newComponent} />
          </div>
-         <MainButton
-            rightIcon={<ArrowRight className="w-5 h-5" />}
-            className="bg-black text-white hover:bg-neutral-800 hover:text-neutral-100"
-         >
-            View more
-         </MainButton>
+         <Button className='py-5 px-5 rounded-full'>
+            View more <ArrowRight className="w-5 h-5" />
+         </Button>
       </div>
    );
 };

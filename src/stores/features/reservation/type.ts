@@ -55,6 +55,7 @@ export interface RateMetaData {
    match_hash: string;
    daily_prices: string[];
    meal: string;
+   meal_data: any;
    payment_options: PaymentOptions;
    rg_ext: RgExt;
    room_name: string;
@@ -206,7 +207,7 @@ export interface Record {
    num_guests: number;
    meta_data: MetaData;
    special_request: any;
-   status: string;
+   status: 'pending' | 'completed' | 'canceled';
    coupon_code: string;
    match_hash: string;
    payment_method?: string;

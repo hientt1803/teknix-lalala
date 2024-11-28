@@ -52,7 +52,7 @@ const TourCard = ({
       </CarouselItem>
    ));
    return (
-      <div className="nc-PropertyCardH group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow h-full">
+      <div className="group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow h-full">
          <div className="h-full w-full flex flex-col sm:flex-row sm:items-center">
             <div className="flex-shrink-0 p-3 w-full sm:w-64 ">
                <div className="relative">
@@ -87,10 +87,10 @@ const TourCard = ({
                      </h2>
                   </div>
                   <p className="flex items-center gap-2">
-                     <MapPin className="w-4 h-4 text-slate-700" />
-                     <span className="text-sm text-slate-700">{location}</span>
+                     <MapPin className="w-4 h-4 text-slate-700 dark:text-slate-400" />
+                     <span className="text-sm text-slate-700 dark:text-slate-400">{location}</span>
                   </p>
-                  <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
+                  <div className="w-14 border-b border-slate-100 dark:border-slate-800 "></div>
                   <div className="flex w-full justify-between items-end">
                      <div className="nc-StartRating flex items-center space-x-1 text-sm  ">
                         <div className="pb-[2px]">
@@ -110,14 +110,14 @@ const TourCard = ({
                            </svg>
                         </div>
                         <span className="font-medium ">{rating.score}</span>
-                        <span className="text-neutral-500 dark:text-neutral-400">
+                        <span className="text-slate-500 dark:text-slate-400">
                            ({rating.reviews})
                         </span>
                      </div>
                      <Button variant="ghost">
                         <span className="text-xl font-bold">
                            ${pricePerPerson}
-                           <span className="text-sm font-light text-slate-500"> / person</span>
+                           <span className="text-sm font-light text-slate-500 dark:text-slate-400"> / person</span>
                         </span>
                      </Button>
                   </div>
@@ -126,7 +126,7 @@ const TourCard = ({
          </div>
          <div
             className={cn(
-               'w-8 h-8 flex items-center justify-center rounded-full cursor-pointer    bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 hover:bg-opacity-70 text-neutral-600 dark:text-neutral-400 absolute right-5 top-5 sm:right-3 sm:top-3',
+               'w-8 h-8 flex items-center justify-center rounded-full cursor-pointer    bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 hover:bg-opacity-70 text-slate-600 dark:text-slate-400 absolute right-5 top-5 sm:right-3 sm:top-3',
                {
                   'text-red-600': isFavorite,
                },

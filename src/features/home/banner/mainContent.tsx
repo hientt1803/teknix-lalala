@@ -9,13 +9,13 @@ import Image from 'next/image';
 
 export const MainContent = ({ slice }: { slice: Content.HeroSlice }) => {
    return (
-      <Bounded className="w-full h-full flex flex-col justify-center items-center">
+      <Bounded className="w-full flex flex-col justify-center items-center">
          <div className="w-full flex flex-col justify-start items-start gap-3 z-10">
-            <div className="mb-5">
+            <div className="mb-3">
                <PrismicRichText field={slice.primary.sub_heading} components={heroComponents} />
             </div>
 
-            <div className="mb-3">
+            <div className="mb-2">
                <PrismicRichText field={slice.primary.heading} components={heroComponents} />
             </div>
 
@@ -30,24 +30,24 @@ export const MainContent = ({ slice }: { slice: Content.HeroSlice }) => {
                         loading="lazy"
                      />
 
-                     <div className="text-sm font-medium text-neutral-50">{benefit.name}</div>
+                     <div className="text-sm text-neutral-50 1920:text-base">{benefit.name}</div>
                   </div>
                ))}
             </div>
 
             {/* button section */}
-            <div className="mt-20 flex justify-start items-center gap-4">
+            <div className="mt-6 xl:mt-8 flex justify-start items-center gap-4">
                <PrismicNextLink field={slice?.primary?.button_link}>
                   <MainButton
                      text={slice.primary.button_text || ''}
-                     rightIcon={<ArrowRight className="w-6 h-6 ml-3" />}
-                     className="text-black text-lg"
+                     rightIcon={<ArrowRight className="w-5 h-5 ml-1" />}
+                     className="text-black text-base"
                   />
                </PrismicNextLink>
                <MainButton
                   text={slice.primary.video_text || ''}
                   variant="ghost"
-                  className="bg-transparent text-white hover:bg-transparent hover:text-white text-lg"
+                  className="bg-transparent text-white hover:bg-transparent hover:text-white text-base"
                   leftIcon={
                      <span className="bg-white rounded-full flex justify-center items-center p-4">
                         <Play className="w-5 h-5 text-black" />

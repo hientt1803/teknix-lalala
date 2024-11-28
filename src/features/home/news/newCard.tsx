@@ -4,45 +4,55 @@ import Image from '@/components/common/images/image';
 import { CalendarDays, Clock3, HeartIcon, MessageCircleMore } from 'lucide-react';
 import { MainButton } from '@/components/common/button/mainButton';
 import Badge from '@/components/custom/badges/badge';
+import { Card } from '@/components/ui/card';
 
 export const NewCard = ({ newProps }: { newProps: newsType }) => {
    return (
-      <div className="col-span-4 w-fit h-fit border border-neutral-200 dark:border-neutral-700 rounded-[1.875rem] overflow-hidden transition-all duration-200 ease-in-out hover:shadow-xl hover:translate-y-[-0.5rem]">
-         <div className="relative w-full h-[21.875rem] z-[-1]">
+      <Card className="p-0 border-0 flex-1 flex-col rounded-3xl relative overflow-hidden w-full hover:shadow-xl mb-8">
+         <div className="relative aspect-square">
             <Image
                src={
                   'https://images.unsplash.com/photo-1731437519637-747bb78a0217?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNHx8fGVufDB8fHx8fA%3D%3D'
                }
                alt={newProps.title}
-               className="w-full h-full rounded-none z-[1]"
+               className="w-full h-full rounded-none"
             />
 
-            <div className="absolute top-3 left-3 right-3 z-20">
+            <div className="absolute top-3 left-3 right-3">
                <div className="w-full flex justify-between items-center">
-                  <Badge color="white" className="dark:bg-neutral-600 dark:text-neutral-200 px-6 py-3">
+                  <Badge
+                     color="white"
+                     className="dark:bg-slate-800 dark:text-slate-200 px-6 py-3"
+                  >
                      {newProps.category}
                   </Badge>
 
-                  <div className="bg-white dark:bg-neutral-600 rounded-full p-2 hover:bg-red-100 hover:text-red-600 cursor-pointer">
+                  <div className="bg-white dark:bg-slate-800 rounded-full p-2 hover:bg-red-100 hover:text-red-600 cursor-pointer">
                      <HeartIcon className="w-4 h-4" />
                   </div>
                </div>
             </div>
          </div>
 
-         <div className="w-full h-fit bg-white dark:bg-neutral-800 rounded-t-[1.875rem] p-6 z-20 mt-[-30px] overflow-hidden">
-            <div className="flex justify-start items-center flex-wrap gap-x-6 gap-y-1 mb-5 z-20">
+         <div className="relative w-full bg-white dark:bg-slate-900 -mt-20 rounded-t-[1.875rem] p-6 overflow-hidden">
+            <div className="flex justify-start items-center flex-wrap gap-x-6 gap-y-1 mb-5">
                <div className="flex items-center gap-1">
                   <CalendarDays className="w-3 h-3" />
-                  <div className="text-sm text-neutral-800 dark:text-neutral-200">{newProps.date}</div>
+                  <div className="text-sm text-slate-800 dark:text-slate-200">
+                     {newProps.date}
+                  </div>
                </div>
                <div className="flex items-center gap-1">
                   <Clock3 className="w-3 h-3" />
-                  <div className="text-sm text-neutral-800 dark:text-neutral-200">{newProps.duration}</div>
+                  <div className="text-sm text-slate-800 dark:text-slate-200">
+                     {newProps.duration}
+                  </div>
                </div>
                <div className="flex items-center gap-1">
                   <MessageCircleMore className="w-3 h-3" />
-                  <div className="text-sm text-neutral-800 dark:text-neutral-200">{newProps.comments_count} comments</div>
+                  <div className="text-sm text-slate-800 dark:text-slate-200">
+                     {newProps.comments_count} comments
+                  </div>
                </div>
             </div>
 
@@ -59,11 +69,11 @@ export const NewCard = ({ newProps }: { newProps: newsType }) => {
                   />
                   <div className="text-sm font-medium">{newProps.author}</div>
                </div>
-               <MainButton className="bg-gray-100 text-neutral-800 hover:bg-black hover:text-white py-2 px-4 text-sm border border-gray-200">
+               <MainButton className="bg-gray-100 text-slate-800 hover:bg-black hover:text-white py-2 px-4 text-sm border border-gray-200">
                   Keep Reading
                </MainButton>
             </div>
          </div>
-      </div>
+      </Card>
    );
 };

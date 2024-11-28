@@ -65,12 +65,18 @@ export const ListNews = () => {
       >
          <CarouselContent>
             {news?.map((news, index) => (
-               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 py-2 pointer-events-none">
+               <CarouselItem
+                  key={index}
+                  className="md:basis-1/2 lg:basis-1/3 py-2 pointer-events-none"
+               >
                   <NewCard newProps={news} />
                </CarouselItem>
             ))}
             {news?.map((news, index) => (
-               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 py-2 pointer-events-none">
+               <CarouselItem
+                  key={index}
+                  className="md:basis-1/2 lg:basis-1/3 py-2 pointer-events-none"
+               >
                   <NewCard newProps={news} />
                </CarouselItem>
             ))}

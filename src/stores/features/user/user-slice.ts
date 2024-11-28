@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { endpoints } from './user-api';
 import { User } from './type';
-// import { setCookie } from 'cookies-next';
-// import { TLocalStore } from "@/utils";
+import { setCookie } from 'cookies-next';
 
 interface IUserSlice {
    currentUser: User | undefined;
@@ -32,10 +31,10 @@ export const UserSlice = createSlice({
          state.access_token = data.access_token;
          state.refresh_token = data.refresh_token;
 
-        //  // set Cookies
-        //  setCookie('access_token', data.access_token, {
-        //     maxAge: 24 * 60 * 60,
-        //  });
+         // set Cookies
+         setCookie('access_token', data.access_token, {
+            maxAge: 24 * 60 * 60,
+         });
       });
       builder.addMatcher(endpoints.getCurrentUser.matchFulfilled, (state, action) => {
          state.currentUser = action.payload;

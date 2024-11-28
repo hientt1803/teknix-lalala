@@ -1,4 +1,14 @@
-import { parse, differenceInDays, format, addHours, isSameDay, addDays, toDate } from 'date-fns';
+import {
+   parse,
+   differenceInDays,
+   format,
+   addHours,
+   isSameDay,
+   addDays,
+   toDate,
+   parseISO,
+   isBefore,
+} from 'date-fns';
 
 /**
  * The function `countTotalDaysInRange` calculates the total number of days between a start date and an
@@ -120,16 +130,41 @@ export function generateTimeSlotsFromNow(
 export const getValidatedDate = (
    date?: string | Date,
    fallbackDate: Date = addDays(new Date(), 2),
-   currentDate: Date = new Date()
+   currentDate: Date = new Date(),
 ): Date => {
    const parsedDate = date ? toDate(date) : fallbackDate;
    return parsedDate < currentDate ? fallbackDate : parsedDate;
 };
 
 export const formatDateMMM = (date: Date | string): string => {
-   return format(date, "MMM d");
+   return format(date, 'MMM d');
 };
 
 export const formatDated = (date: Date | string): string => {
-   return format(date, "d");
+   return format(date, 'd');
 };
+
+/**
+ * Tính số nights và days từ checkin và checkout date
+ * @param checkinDate - Ngày check-in (chuỗi ISO)
+ * @param checkoutDate - Ngày check-out (chuỗi ISO)
+ * @returns { nights: number; days: number } - Số đêm (nights) và số ngày (days)
+ * @throws Error nếu checkout date không hợp lệ
+ */
+export function calculateNightsAndDays(
+   checkinDate: string,
+   checkoutDate: string,
+): { nights: number; days: number } {
+   const checkin = parseISO(checkinDate); // Chuyển chuỗi ISO thành Date
+   const checkout = parseISO(checkoutDate);
+
+   // Kiểm tra nếu ngày checkout trước hoặc bằng ngày checkin
+   if (isBefore(checkout, checkin) || checkin.getTime() === checkout.getTime()) {
+      throw new Error('Checkout date must be after checkin date');
+   }
+
+   const nights = differenceInDays(checkout, checkin); // Tính số đêm
+   const days = nights + 1; // Tính số ngày (nights + 1)
+
+   return { nights, days };
+}

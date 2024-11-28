@@ -31,7 +31,7 @@ interface SearchGroupType {
 
 export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) => {
    const TabContent = ({ type = typeProp }: { type: 'hotel' | 'flight' }) => (
-      <div className="border border-neutral-200 p-4 rounded-xl">
+      <div className="border border-slate-200 p-4 rounded-xl">
          {/* Hotels */}
          {type == 'hotel' && (
             <div className="flex justify-between items-center gap-x-3 gap-y-5 flex-wrap">
@@ -40,14 +40,14 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                   <InputSearchLocation />
                </div>
 
-               <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
+               <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-slate-200 mx-0 md:mx-5" />
 
                {/* Daterange */}
                <div className="flex-1">
                   <InputSearchDateRange />
                </div>
 
-               <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
+               <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-slate-200 mx-0 md:mx-5" />
 
                {/* Guest */}
                <div className="flex-1 mr-6">
@@ -57,9 +57,9 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                {/* Button */}
                <Button
                   variant="default"
-                  className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                  className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-xl hover:bg-slate-800 hover:text-white font-normal"
                >
-                  <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
+                  <Search className="w-6 h-6 text-slate-200 dark:text-slate-800 mr-2" />
                   Search
                </Button>
             </div>
@@ -84,7 +84,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                         One-way
                      </Button>
 
-                     <div className="w-[1px] h-12 bg-neutral-200 mx-6 " />
+                     <div className="w-[1px] h-12 bg-slate-200 mx-6 " />
 
                      <Select>
                         <SelectTrigger className="w-fit rounded-2xl">
@@ -115,7 +115,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                            <div className="flex justify-between items-center gap-3 mb-4">
                               <div className="flex flex-col items-start justify-start gap-0">
                                  <span className="font-medium text-md">Adults</span>
-                                 <span className="font-medium text-sm text-neutral-500">
+                                 <span className="font-medium text-sm text-slate-500">
                                     Ages 13 or above
                                  </span>
                               </div>
@@ -125,7 +125,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                            <div className="flex justify-between items-center gap-3 mb-4">
                               <div className="flex flex-col items-start justify-start gap-0">
                                  <span className="font-medium text-md">Children</span>
-                                 <span className="font-medium text-sm text-neutral-500">
+                                 <span className="font-medium text-sm text-slate-500">
                                     Ages 2 - 12
                                  </span>
                               </div>
@@ -135,7 +135,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                            <div className="flex justify-between items-center gap-3">
                               <div className="flex flex-col items-start justify-start gap-0">
                                  <span className="font-medium text-md">Infants</span>
-                                 <span className="font-medium text-sm text-neutral-500">
+                                 <span className="font-medium text-sm text-slate-500">
                                     Ages 0-2
                                  </span>
                               </div>
@@ -146,7 +146,7 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                      </Select>
                   </div>
 
-                  <div className="w-full h-[1px] bg-neutral-200 mt-2" />
+                  <div className="w-full h-[1px] bg-slate-200 mt-2" />
                </div>
 
                {/* MAIN CONTENT */}
@@ -156,14 +156,14 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                      <InputSearchLocation title="Flying from" />
                   </div>
 
-                  <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
+                  <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-slate-200 mx-0 md:mx-5" />
 
                   {/* Location */}
                   <div className="flex-[2]">
                      <InputSearchLocation title="Flying to" />
                   </div>
 
-                  <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-neutral-200 mx-0 md:mx-5" />
+                  <div className="w-full h-[1px] md:w-[1px] md:h-12 bg-slate-200 mx-0 md:mx-5" />
 
                   {/* Daterange */}
                   <div className="flex-grow flex-[2]">
@@ -173,9 +173,9 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
                   {/* Button */}
                   <Button
                      variant="default"
-                     className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-neutral-100 text-white dark:text-neutral-800 text-xl hover:bg-neutral-800 hover:text-white font-normal"
+                     className="flex-1 min-w-[12.5rem] w-full bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-xl hover:bg-slate-800 hover:text-white font-normal"
                   >
-                     <Search className="w-6 h-6 text-neutral-200 dark:text-neutral-800 mr-2" />
+                     <Search className="w-6 h-6 text-slate-200 dark:text-slate-800 mr-2" />
                      Search
                   </Button>
                </div>
@@ -186,31 +186,31 @@ export const SearchGroup = ({ typeProp = 'hotel', className }: SearchGroupType) 
 
    return (
       <div className={cn('relative  z-30 w-full', className)}>
-         <div className="bg-white dark:bg-neutral-900 shadow-md rounded-xl p-7">
+         <div className="bg-white dark:bg-slate-950 shadow-md rounded-xl p-7">
             <Tabs value={typeProp} className="w-full">
                <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
                   <div className="w-full">
                      <TabsTrigger
                         value="hotel"
-                        className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                        className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
                      >
                         Hotels
                      </TabsTrigger>
                      <TabsTrigger
                         value="tour"
-                        className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                        className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
                      >
                         Tour
                      </TabsTrigger>
                      <TabsTrigger
                         value="flight"
-                        className="bg-white dark:bg-neutral-900 dark:text-neutral-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-neutral-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
+                        className="bg-white dark:bg-slate-900 dark:text-slate-100 text-black px-5 py-2 text-md font-normal rounded-[1.875rem] data-[state=active]:bg-black dark:data-[state=active]:bg-slate-100 data-[state=active]:text-white dark:data-[state=active]:text-black data-[state=active]:shadow-md"
                      >
                         Flight
                      </TabsTrigger>
                   </div>
 
-                  <div className="font-normal text-neutral-500 flex items-center gap-1 flex-nowrap mt-3 md:mt-0">
+                  <div className="font-normal text-slate-500 flex items-center gap-1 flex-nowrap mt-3 md:mt-0">
                      <User className="w-4 h-4" />
                      <span className="text-md text-nowrap">Need some help?</span>
                   </div>

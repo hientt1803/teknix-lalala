@@ -16,6 +16,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { ArrowRight } from 'lucide-react';
 import React from 'react';
 import { Simplify } from '../../../../../prismicio-types';
+import { Card } from '@/components/ui/card';
 
 export const FacilitiCaroucel = ({
    destinations,
@@ -25,7 +26,7 @@ export const FacilitiCaroucel = ({
    const plugin = React.useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
    return (
-      <div className="bg-[#eff0f1] p-5 rounded-lg overflow-hidden">
+      <Card className="p-5 rounded-lg overflow-hidden">
          <Carousel
             className="w-fit"
             opts={{
@@ -39,20 +40,20 @@ export const FacilitiCaroucel = ({
             <CarouselContent className="w-fit">
                {destinations.map((des, index) => (
                   <CarouselItem key={index} className="w-full">
-                     <div className="flex justify-between items-center gap-4">
-                        <div className="flex-1 aspect-auto md:aspect-[2/3] lg:aspect-[3/4] w-full h-full rounded-lg overflow-hidden">
+                     <div className="grid grid-cols-7 items-center gap-4">
+                        <div className="col-span-3 aspect-auto md:aspect-[4/6] rounded-lg overflow-hidden">
                            <PrismicNextImage
                               field={des.image}
                               alt=""
                               className="w-full h-full object-cover"
                            />
                         </div>
-                        <div className="flex-1">
+                        <div className="col-span-4">
                            <PrismicRichText
                               field={des.type}
                               components={{
                                  paragraph: ({ children }) => (
-                                    <Paragraph className="font-[500] !text-sm text-neutral-800 mb-2 pointer-events-none">
+                                    <Paragraph className="font-[500] !text-sm text-slate-800 mb-2 pointer-events-none">
                                        {children}
                                     </Paragraph>
                                  ),
@@ -81,9 +82,9 @@ export const FacilitiCaroucel = ({
                   </CarouselItem>
                ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-3 w-10 h-10 bg-neutral-800 hover:bg-neutral-900 border-neutral-400 bg-opacity-40 text-white hover:text-neutral-100" />
-            <CarouselNext className="-right-0 w-10 h-10 bg-neutral-800 hover:bg-neutral-900 border-neutral-400 bg-opacity-40 text-white hover:text-neutral-100" />
+            <CarouselPrevious className="-left-3 w-10 h-10 bg-slate-800 hover:bg-slate-900 border-0 bg-opacity-20 text-white hover:text-slate-100" />
+            <CarouselNext className="-right-0 w-10 h-10 bg-slate-800 hover:bg-slate-900 border-0 bg-opacity-20 text-white hover:text-slate-100" />
          </Carousel>
-      </div>
+      </Card>
    );
 };

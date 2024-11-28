@@ -6,7 +6,7 @@ export const BackgroundImage = ({ image }: { image: ImageFieldImage }) => {
       <PrismicNextImage
          field={image}
          alt=""
-         className="absolute w-full h-[60.625rem] object-cover z-[2]fixed"
+         className="absolute w-full h-full object-cover z-0 bg-fixed"
          loading="lazy"
       />
    );

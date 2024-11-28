@@ -1,10 +1,10 @@
+import Heading from '@/components/common/typography/heading';
 import Paragraph from '@/components/common/typography/paragraph';
 import { Button } from '@/components/ui/button';
-import { facilityComponents } from '@/slices/FacilitiesSection';
 import { generateIcon } from '@/utilities/generate';
 import { Content } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
-import { PrismicRichText } from '@prismicio/react';
+import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import dynamic from 'next/dynamic';
 
 export const FacilitiCaroucel = dynamic(
@@ -13,26 +13,21 @@ export const FacilitiCaroucel = dynamic(
       ssr: false,
    },
 );
+const facilityComponents: JSXMapSerializer = {
+   heading2: ({ children }) => <Heading>{children}</Heading>,
+   paragraph: ({ children }) => <Paragraph>{children}</Paragraph>,
+};
 
 export const FacilitiesContainer = ({ slice }: { slice: Content.FacilitiesSectionSlice }) => {
    return (
       <div className="grid grid-cols-12 gap-6">
-         <div className="col-span-12 md:col-span-12 lg:col-span-7">
+         <div className="col-span-12 md:col-span-12 lg:col-span-6">
             <PrismicRichText field={slice.primary.heading} components={facilityComponents} />
-            <PrismicRichText
-               field={slice.primary.body}
-               components={{
-                  paragraph: ({ children }) => (
-                     <Paragraph className="!text-base text-neutral-600 dark:text-neutral-400">
-                        {children}
-                     </Paragraph>
-                  ),
-               }}
-            />
+            <PrismicRichText field={slice.primary.body} components={facilityComponents} />
 
-            <div className="mt-2 mb-5">
+            <div className="mt-3 mb-5">
                <PrismicNextLink field={slice.primary.button_link}>
-                  <Button className="font-medium">{slice.primary.button_text}</Button>
+                  <Button className="font-medium px-6 py-5">{slice.primary.button_text}</Button>
                </PrismicNextLink>
             </div>
 
@@ -45,12 +40,12 @@ export const FacilitiesContainer = ({ slice }: { slice: Content.FacilitiesSectio
                            className: 'text-yellow-600',
                         })}
                      </span>
-                     <span className="font-medium">{facility.name}</span>
+                     <span className="text-slate-600 dark:text-slate-400">{facility.name}</span>
                   </div>
                ))}
             </div>
          </div>
-         <div className="col-span-12 md:col-span-12 lg:col-span-5">
+         <div className="col-span-12 md:col-span-12 lg:col-span-6">
             <FacilitiCaroucel destinations={slice.primary.destinations} />
          </div>
       </div>

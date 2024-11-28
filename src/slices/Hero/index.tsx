@@ -26,7 +26,7 @@ export const SearchGroup = dynamic(() =>
 export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 export const heroComponents: JSXMapSerializer = {
    heading1: ({ children }) => (
-      <Heading as="h1" className="text-3xl md:text-7xl font-medium text-white">
+      <Heading as="h1" className="text-3xl md:text-6xl 1920:text-7xl font-medium text-white">
          {children}
       </Heading>
    ),
@@ -48,16 +48,16 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
          className="w-full"
       >
          {slice.variation == 'default' && (
-            <div className="relative block w-full h-[60.625rem]">
+            <div className="relative w-full h-[calc(100vh+50px)] flex flex-col gap-6 xl:gap-10 justify-center items-center">
                {/* Background */}
                <BackgroundImage image={slice.primary.background} />
+               <div className="absolute inset-0 bg-black/60"></div>
 
                {/* Content */}
                <MainContent slice={slice} />
-
                {/* Search Group */}
-               <Bounded className="relative">
-                  <SearchGroup className='-top-60 md:-top-40 lg:-top-48'/>
+               <Bounded>
+                  <SearchGroup />
                </Bounded>
             </div>
          )}
