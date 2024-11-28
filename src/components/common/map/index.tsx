@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import dynamic from 'next/dynamic';
 
@@ -131,7 +131,7 @@ const LeafletMapInner = ({ data, center }: LeafletMapDataProps) => {
                   ) : (
                      // we have to spawn at least one element to keep it happy
                      // eslint-disable-next-line react/jsx-no-useless-fragment
-                     <></>
+                     <div className="absolute inset-0 bg-black/80" />
                   )}
                </LeafletMapContainer>
             )}

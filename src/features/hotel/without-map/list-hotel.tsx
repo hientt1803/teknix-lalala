@@ -9,7 +9,9 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { HotelCardSkeleton } from '../cards/hotel-card';
 import dynamic from 'next/dynamic';
 
-const HotelCard = dynamic(() => import('../cards/hotel-card').then((mod) => mod.default));
+const HotelCard = dynamic(() => import('../cards/hotel-card').then((mod) => mod.default), {
+   loading: () => <HotelCardSkeleton displayType={'list'} />,
+});
 
 export type ListHotelWioutMapType = {
    type: 'list' | 'grid';

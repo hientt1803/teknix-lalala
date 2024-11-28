@@ -1,38 +1,38 @@
-'use client';
-
 import Bounded from '@/components/common/containers/bounded';
-import MainContent from './components/main-content';
-import { setTriggerSearch, useGetStaylDataByIdQuery } from '@/stores/features/stay';
-import { useRouter } from 'next/navigation';
-import { useDispatch } from 'react-redux';
-import { Tooltip, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
+import ImageGalleryComp from '@/components/custom/media/image-gallery';
 import { buttonVariants } from '@/components/ui/button';
+import { Tooltip, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
 import { ArrowLeftIcon } from 'lucide-react';
-import ImageGalleryComp from '@/components/custom/media/image-gallery';
+import Link from 'next/link';
+import MainContent from './components/main-content';
+import { getHotelDetail } from '@/services/hotel';
 
 interface HotelDetailFeatureProps {
    id: string;
 }
 
-const HotelDetailFeature = ({ id }: HotelDetailFeatureProps) => {
+const HotelDetailFeature = async ({ id }: HotelDetailFeatureProps) => {
    // next api
-   const router = useRouter();
+   // const router = useRouter();
 
    // redux
-   const { data } = useGetStaylDataByIdQuery(
-      { id: id },
-      {
-         skip: !id,
-      },
-   );
-   const dispatch = useDispatch();
+   // const { data } = useGetStaylDataByIdQuery(
+   //    { id: id },
+   //    {
+   //       skip: !id,
+   //    },
+   // );
+   // const dispatch = useDispatch();
 
    // handle logic
-   const backList = () => {
-      dispatch(setTriggerSearch(true));
-      router.back();
-   };
+   // const backList = () => {
+   //    dispatch(setTriggerSearch(true));
+   //    router.back();
+   // };
+   const data = await getHotelDetail(id);
+
+   console.log(data);
 
    return (
       <Bounded className="relative">
@@ -40,15 +40,16 @@ const HotelDetailFeature = ({ id }: HotelDetailFeatureProps) => {
             <TooltipProvider>
                <Tooltip>
                   <TooltipTrigger>
-                     <div
-                        onClick={backList}
-                        className={buttonVariants({
-                           variant: 'ghost',
-                        })}
-                     >
-                        <ArrowLeftIcon className="w-5 h-5 mr-2" />
-                        Back
-                     </div>
+                     <Link href={'/hotel'}>
+                        <div
+                           className={buttonVariants({
+                              variant: 'ghost',
+                           })}
+                        >
+                           <ArrowLeftIcon className="w-5 h-5 mr-2" />
+                           Back
+                        </div>
+                     </Link>
                   </TooltipTrigger>
                   <TooltipContent>Back</TooltipContent>
                </Tooltip>

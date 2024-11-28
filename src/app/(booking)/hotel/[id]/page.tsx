@@ -1,7 +1,6 @@
-import { API_URL } from '@/configs';
 import HotelDetailFeature from '@/features/hotel/detail-page';
+import { getHotelDetail, preloadHotelDetail } from '@/services/hotel';
 import { Metadata, ResolvingMetadata } from 'next';
-import React from 'react';
 
 type Props = {
    params: Promise<{ id: string }>;
@@ -16,72 +15,66 @@ export async function generateMetadata(
    const { id } = await params;
 
    // fetch data
-   const res = await fetch(`${API_URL}/api/search/hotels/${id}`, {
-      method: 'GET',
-      headers: {
-         'Content-Type': 'application/json',
-      },
-   });
-   const { data: reservationData } = await res.json();
+   const hotelData = await getHotelDetail(id);
 
    // optionally access and extend (rather than replace) parent metadata
    const { title, description, openGraph } = await parent;
 
    return {
       title:
-         `${reservationData?.name} - ${reservationData?.star_rating || 0} star hotel at ${
-            reservationData?.region.name
+         `${hotelData?.name} - ${hotelData?.star_rating || 0} star hotel at ${
+            hotelData?.region.name
          } Book Today with Unmatched Comfort & Service | Luxury & Convenience with Top Amenities & Best Prices  | Best Rates & Service` ||
          title,
-      description: `${reservationData?.star_rating || 0} star hotel` || description,
+      description: `${hotelData?.star_rating || 0} star hotel` || description,
       openGraph: {
          images:
-            reservationData?.images[0]?.replace('{size}', '640x400') || '/assets/favicon/lalala.svg'
+            hotelData?.images[0]?.replace('{size}', '640x400') || '/assets/favicon/lalala.svg'
                ? [
                     {
                        url:
-                          reservationData?.images[0]?.replace('{size}', '640x400') ||
+                          hotelData?.images[0]?.replace('{size}', '640x400') ||
                           '/assets/favicon/lalala.svg',
                        width: 1024,
                        height: 576,
-                       alt: reservationData?.title,
+                       alt: hotelData?.title,
                     },
                  ]
                : [...(openGraph?.images || [])],
          title:
-            `${reservationData?.name} at ${
-               reservationData?.star_rating || 0
-            } star hotel - ${reservationData?.region.name}` ||
+            `${hotelData?.name} at ${
+               hotelData?.star_rating || 0
+            } star hotel - ${hotelData?.region.name}` ||
             title ||
             '',
-         description: `${reservationData?.star_rating || 0} star hotel` || description || '',
-         url: `/reservationDatas/${id}`,
+         description: `${hotelData?.star_rating || 0} star hotel` || description || '',
+         url: `/hotel/${id}`,
          locale: 'en-US',
-         siteName: `${reservationData?.name} - ${
-            reservationData?.star_rating || 0
-         } star - ${reservationData?.region.name}`,
+         siteName: `${hotelData?.name} - ${
+            hotelData?.star_rating || 0
+         } star - ${hotelData?.region.name}`,
          type: 'website',
       },
       alternates: {
-         canonical: `/reservationDatas/${id}`,
+         canonical: `/hotelDatas/${id}`,
       },
       twitter: {
-         title: `${reservationData?.name} - ${
-            reservationData?.star_rating || 0
-         } star hotel at ${reservationData?.region.name}`,
-         description: `${reservationData?.star_rating || 0} star hotel`,
+         title: `${hotelData?.name} - ${
+            hotelData?.star_rating || 0
+         } star hotel at ${hotelData?.region.name}`,
+         description: `${hotelData?.star_rating || 0} star hotel`,
          images:
-            reservationData?.images[0]?.replace('{size}', '640x400') || '/assets/favicon/lalala.svg'
+            hotelData?.images[0]?.replace('{size}', '640x400') || '/assets/favicon/lalala.svg'
                ? [
                     {
                        url:
-                          reservationData?.images[0]?.replace('{size}', '640x400') ||
+                          hotelData?.images[0]?.replace('{size}', '640x400') ||
                           '/assets/favicon/lalala.svg',
                        width: 1024,
                        height: 576,
-                       alt: `${reservationData?.name} - ${
-                          reservationData?.star_rating || 0
-                       } star at ${reservationData?.region.name}`,
+                       alt: `${hotelData?.name} - ${
+                          hotelData?.star_rating || 0
+                       } star at ${hotelData?.region.name}`,
                     },
                  ]
                : [...(openGraph?.images || [])],
@@ -91,6 +84,8 @@ export async function generateMetadata(
 }
 
 const HotelDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+   preloadHotelDetail((await params).id);
+
    return <HotelDetailFeature id={(await params).id} />;
 };
 

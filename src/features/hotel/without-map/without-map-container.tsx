@@ -3,7 +3,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Category } from '@/lib/MarkerCategories';
 import { PlaceValues } from '@/lib/Places';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import {
    setTriggerSearch,
    useLazyGetListHotelByGeoSearchEngineQuery,
@@ -52,8 +52,7 @@ export const WithoutMapContainer = () => {
       const searchParams = {
          checkin: formatDateToYearMonthDay(new Date(globalSearchState.dateRange.startDate)),
          checkout: formatDateToYearMonthDay(new Date(globalSearchState.dateRange.endDate)),
-         // language: globalSearchState?.country?.cca2 || 'US',
-         language: 'US',
+         language: globalSearchState?.lang?.cca2 || 'US',
          guests: globalSearchState.people,
          currency: globalSearchState?.currency?.code || 'VND',
          latitude: globalSearchState?.location?.lat || 10.0364634,
