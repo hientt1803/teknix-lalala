@@ -102,5 +102,6 @@ export enum HTTPStatus {
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const OPENSTREETMAP_API_URL = process.env.NEXT_PUBLIC_OPENSTREETMAP_API_URL;
 export const NOTIFICATION_NOVU_APP_ID = process.env.NEXT_PUBLIC_NOTIFICATION_NOVU_APP_ID;
+export const HOST_URL = process.env.NEXT_PUBLIC_HOST_URL;
 
 export const childYears = Array.from({ length: 17 }, (_, i) => i + 1);

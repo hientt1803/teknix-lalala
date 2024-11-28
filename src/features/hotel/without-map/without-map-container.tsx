@@ -132,7 +132,7 @@ export const WithoutMapContainer = () => {
             {/* TOGGLE NAVIGATION */}
             <div className="flex justify-between items-center md:items-start gap-3 mb-6">
                <div className="block md:hidden">
-                  <FilterDrawer />
+                  <FilterDrawer placeData={placeData} searchGlobal={globalSearchState} />
                </div>
 
                {displayType == 'grid' && (

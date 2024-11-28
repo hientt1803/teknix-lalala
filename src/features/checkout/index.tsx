@@ -1,9 +1,8 @@
 "use client";
 import Bounded from "@/components/common/containers/bounded";
 import {useScrollIntoView} from "@/hooks/use-scroll";
-import {useAppSelector} from "@/stores";
-import {useGetStaylDataByIdQuery} from "@/stores/features/stay";
-import {formatCurrency} from "@/utilities/currency";
+import {useAppSelector} from "@/stores/hook";
+import {useGetStaylDataByIdQuery} from "@/stores/features/stay/stay-api";
 import {countTotalDaysInRange} from "@/utilities/time";
 import {StarFilledIcon} from "@radix-ui/react-icons";
 import {format} from "date-fns";
@@ -18,6 +17,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { formatCurrencyWithCodeAsSuffix } from "@/utilities/currency";
 
 const CheckoutFeatures = () => {
     const searchParams = useSearchParams();
@@ -88,6 +88,7 @@ const CheckoutFeatures = () => {
                                                     "{size}",
                                                     "640x400"
                                                 )}
+                                                loading="lazy"
                                             />
                                         </div>
                                     </div>
@@ -123,13 +124,13 @@ const CheckoutFeatures = () => {
                                     </h3>
                                     <div className="flex justify-between text-slate-600 dark:text-slate-50">
                                         <span>
-                                            {formatCurrency(
+                                            {formatCurrencyWithCodeAsSuffix(
                                                 hotel.rate?.daily_prices[0] || 0
                                             )}
                                             x {totalDay} day
                                         </span>
                                         <span>
-                                            {formatCurrency(
+                                            {formatCurrencyWithCodeAsSuffix(
                                                 Number.parseFloat(
                                                     hotel.rate?.daily_prices[0] || "0"
                                                 ) * totalDay
@@ -144,7 +145,7 @@ const CheckoutFeatures = () => {
                                     <div className="flex justify-between font-semibold">
                                         <span>Total</span>
                                         <span>
-                                            {formatCurrency(
+                                            {formatCurrencyWithCodeAsSuffix(
                                                 Number.parseFloat(
                                                     hotel.rate?.daily_prices[0] || "0"
                                                 ) * totalDay
@@ -181,6 +182,7 @@ const CheckoutFeatures = () => {
                                     alt=""
                                     className="absolute inset-0 h-full object-cover"
                                     src={data?.images[0]?.replace("{size}", "640x400")}
+                                    loading="lazy"
                                 />
                             </div>
                         </div>
@@ -249,11 +251,11 @@ const CheckoutFeatures = () => {
                         <h3 className="text-2xl font-semibold">Price detail</h3>
                         <div className="flex justify-between text-slate-600 dark:text-slate-50">
                             <span>
-                                {formatCurrency(hotel.rate?.daily_prices[0] || 0)} x{" "}
+                                {formatCurrencyWithCodeAsSuffix(hotel.rate?.daily_prices[0] || 0)} x{" "}
                                 {totalDay} day
                             </span>
                             <span>
-                                {formatCurrency(
+                                {formatCurrencyWithCodeAsSuffix(
                                     Number.parseFloat(
                                         hotel.rate?.daily_prices[0] || "0"
                                     ) * totalDay
@@ -262,13 +264,13 @@ const CheckoutFeatures = () => {
                         </div>
                         <div className="flex justify-between text-slate-600  dark:text-slate-50">
                             <span>Service charge</span>
-                            <span>{formatCurrency(0)}</span>
+                            <span>{formatCurrencyWithCodeAsSuffix(0)}</span>
                         </div>
                         <div className="border-b border-slate-200 dark:border-slate-700"></div>
                         <div className="flex justify-between font-semibold">
                             <span>Total</span>
                             <span>
-                                {formatCurrency(
+                                {formatCurrencyWithCodeAsSuffix(
                                     Number.parseFloat(
                                         hotel.rate?.daily_prices[0] || "0"
                                     ) * totalDay
@@ -314,7 +316,7 @@ const CheckoutFeatures = () => {
                                     {tax.name.replaceAll("_", " ")}
                                 </span>
                                 <span>
-                                    {formatCurrency(Number.parseFloat(tax.amount))}
+                                    {formatCurrencyWithCodeAsSuffix(Number.parseFloat(tax.amount))}
                                 </span>
                             </div>
                         ))}
@@ -331,7 +333,7 @@ const CheckoutFeatures = () => {
                                     {tax.name.replaceAll("_", " ")}
                                 </span>
                                 <span>
-                                    {formatCurrency(Number.parseFloat(tax.amount))}
+                                    {formatCurrencyWithCodeAsSuffix(Number.parseFloat(tax.amount))}
                                 </span>
                             </div>
                         ))}

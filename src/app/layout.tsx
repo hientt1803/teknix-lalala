@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import './globals.css';
 import AppProvider from '@/providers';
 import { cn } from '@/lib/utils';
+import { HOST_URL } from '@/configs';
 
 const popins = Poppins({
    subsets: ['latin'],
@@ -17,6 +18,7 @@ export const meta = {
 };
 
 export const metadata: Metadata = {
+   metadataBase: new URL(HOST_URL || "https://sb.lalala.travel"),
    title: {
       template: '%s',
       default: meta.title,

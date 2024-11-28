@@ -1,13 +1,14 @@
-import {Button} from "@/components/ui/button";
-import {MapHotel, Record} from "@/stores/features/reservation";
-import {setReserveForm} from "@/stores/features/stay";
-import {IReserveForm} from "@/stores/features/stay/type";
-import { formatCurrency } from "@/utilities/currency";
-import {StarFilledIcon} from "@radix-ui/react-icons";
-import {format} from "date-fns";
-import Link from "next/link";
-import {useRouter} from "next/navigation";
-import {useDispatch} from "react-redux";
+"use client"
+
+import { Button } from "@/components/ui/button";
+import { MapHotel, Record } from "@/stores/features/reservation";
+import { setReserveForm } from "@/stores/features/stay";
+import { IReserveForm } from "@/stores/features/stay/type";
+import { formatCurrencyWithCodeAsSuffix } from "@/utilities/currency";
+import { StarFilledIcon } from "@radix-ui/react-icons";
+import { format } from "date-fns";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 type Props = {
     data: {
@@ -62,6 +63,7 @@ const CardHistory = ({data}: Props) => {
                         src={hotel.images[0].replace("{size}", "640x400")}
                         className="object-cover w-full h-full"
                         alt="nc-imgs"
+                        loading="lazy"
                     />
                 </div>
             </div>
@@ -116,7 +118,7 @@ const CardHistory = ({data}: Props) => {
                                     <div className="flex items-center space-x-2 text-slate-500">
                                         <span className="text-sm">Total:</span>
                                         <span className="font-semibold text-slate-900">
-                                            {formatCurrency(record.total_price)}
+                                            {formatCurrencyWithCodeAsSuffix(record.total_price)}
                                         </span>
                                     </div>
                                 </div>

@@ -7,11 +7,11 @@ import { useLazyGetStaylDataByIdQuery } from '@/stores/features/stay';
 import { countTotalDaysInRange } from '@/utilities/time';
 import { StarFilledIcon } from '@radix-ui/react-icons';
 import { CalendarIcon, UserIcon } from 'lucide-react';
-import { formatCurrency } from '@/utilities/currency';
 import { Button, buttonVariants } from '@/components/ui/button';
 import Bounded from '@/components/common/containers/bounded';
 import { useSearchParams } from 'next/navigation';
 import Loading from '@/components/custom/loaders/app-loading';
+import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 
 const CheckoutResultFeature = () => {
    const searchParam = useSearchParams();
@@ -72,6 +72,7 @@ const CheckoutResultFeature = () => {
                                           alt=""
                                           className="absolute inset-0 h-full object-cover"
                                           src={dataHotel?.images[0].replace('{size}', '640x400')}
+                                          loading="lazy"
                                        />
                                     </div>
                                  </div>
@@ -158,7 +159,7 @@ const CheckoutResultFeature = () => {
                                  <div className="flex text-slate-600 dark:text-slate-400">
                                     <span className="flex-1">Total</span>
                                     <span className="flex-1 font-medium text-slate-900 dark:text-slate-50">
-                                       {formatCurrency(data?.total_price || 0)}
+                                       {formatCurrencyWithCodeAsSuffix(data?.total_price || 0)}
                                     </span>
                                  </div>
                                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
@@ -174,7 +175,7 @@ const CheckoutResultFeature = () => {
                      ) : (
                         <div className="w-full mx-auto lg:max-w-md relative">
                            <div className="flex flex-col gap-5">
-                              <img src={'/error_style1.svg'} />
+                              <img src={'/error_style1.svg'} loading="lazy" />
                               <h3 className="text-center text-slate-400">
                                  Some thing went wrong! <br /> Please contact to admin or try again
                               </h3>

@@ -1,5 +1,3 @@
-"use client";
-
 import CardReview from "./card-reviews";
 import HistoryListing from "./history-listing";
 

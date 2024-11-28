@@ -31,7 +31,7 @@ const useMarkerData = ({
     const [allMarkersBoundCenter, setAllMarkersBoundCenter] =
         useState<allMarkerPosValues>({
             minZoom: AppConfig.minZoom - 5,
-            centerPos: center || [searchGlobal.location.lat, searchGlobal.location.lon],
+            centerPos: center || [searchGlobal.location.lat || 0, searchGlobal.location.lon || 0],
         });
     const {leafletLib} = useMapContext();
 

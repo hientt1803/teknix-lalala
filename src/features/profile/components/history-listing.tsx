@@ -1,3 +1,5 @@
+"use client"
+
 import {useGetReservationHistoryQuery, MapHotel} from "@/stores/features/reservation";
 import React, {useMemo} from "react";
 import CardHistory from "./card-history";
