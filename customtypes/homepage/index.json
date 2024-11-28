@@ -11,6 +11,9 @@
             "fieldset": "Slice Zone",
             "config": {
                "choices": {
+                  "benefit": {
+                     "type": "SharedSlice"
+                  },
                   "hotel_listing": {
                      "type": "SharedSlice"
                   },

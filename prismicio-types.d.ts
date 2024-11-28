@@ -5,6 +5,7 @@ import type * as prismic from '@prismicio/client';
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 type HomepageDocumentDataSlicesSlice =
+   | BenefitSlice
    | HotelListingSlice
    | SubcribleSectionSlice
    | SpecialOfferSlice
@@ -554,6 +555,48 @@ export type AskAndQuestionsSlice = prismic.SharedSlice<
    'ask_and_questions',
    AskAndQuestionsSliceVariation
 >;
+
+/**
+ * Primary content in *Benefit → Default → Primary*
+ */
+export interface BenefitSliceDefaultPrimary {
+   /**
+    * Main Image field in *Benefit → Default → Primary*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: benefit.default.primary.main_image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   main_image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Benefit Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BenefitSliceDefault = prismic.SharedSliceVariation<
+   'default',
+   Simplify<BenefitSliceDefaultPrimary>,
+   never
+>;
+
+/**
+ * Slice variation for *Benefit*
+ */
+type BenefitSliceVariation = BenefitSliceDefault;
+
+/**
+ * Benefit Shared Slice
+ *
+ * - **API ID**: `benefit`
+ * - **Description**: Benefit
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BenefitSlice = prismic.SharedSlice<'benefit', BenefitSliceVariation>;
 
 /**
  * Primary content in *ExploreStay → Default → Primary*
@@ -1456,6 +1499,21 @@ export interface ImagesSectionSliceDefaultPrimaryImagesItem {
 }
 
 /**
+ * Item in *ImagesSection → Center → Primary → Images*
+ */
+export interface ImagesSectionSliceCenterPrimaryImagesItem {
+   /**
+    * Image field in *ImagesSection → Center → Primary → Images*
+    *
+    * - **Field Type**: Image
+    * - **Placeholder**: *None*
+    * - **API ID Path**: images_section.center.primary.images[].image
+    * - **Documentation**: https://prismic.io/docs/field#image
+    */
+   image: prismic.ImageField<never>;
+}
+
+/**
  * Primary content in *ImagesSection → Default → Primary*
  */
 export interface ImagesSectionSliceDefaultPrimary {
@@ -1514,9 +1572,57 @@ export type ImagesSectionSliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ImagesSection → Center → Primary*
+ */
+export interface ImagesSectionSliceCenterPrimary {
+   /**
+    * Heading field in *ImagesSection → Center → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: images_section.center.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Tag field in *ImagesSection → Center → Primary*
+    *
+    * - **Field Type**: Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: images_section.center.primary.tag
+    * - **Documentation**: https://prismic.io/docs/field#key-text
+    */
+   tag: prismic.KeyTextField;
+
+   /**
+    * Images field in *ImagesSection → Center → Primary*
+    *
+    * - **Field Type**: Group
+    * - **Placeholder**: *None*
+    * - **API ID Path**: images_section.center.primary.images[]
+    * - **Documentation**: https://prismic.io/docs/field#group
+    */
+   images: prismic.GroupField<Simplify<ImagesSectionSliceCenterPrimaryImagesItem>>;
+}
+
+/**
+ * Center variation for ImagesSection Slice
+ *
+ * - **API ID**: `center`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ImagesSectionSliceCenter = prismic.SharedSliceVariation<
+   'center',
+   Simplify<ImagesSectionSliceCenterPrimary>,
+   never
+>;
+
+/**
  * Slice variation for *ImagesSection*
  */
-type ImagesSectionSliceVariation = ImagesSectionSliceDefault;
+type ImagesSectionSliceVariation = ImagesSectionSliceDefault | ImagesSectionSliceCenter;
 
 /**
  * ImagesSection Shared Slice
@@ -2962,6 +3068,10 @@ declare module '@prismicio/client' {
          AskAndQuestionsSliceDefaultPrimary,
          AskAndQuestionsSliceVariation,
          AskAndQuestionsSliceDefault,
+         BenefitSlice,
+         BenefitSliceDefaultPrimary,
+         BenefitSliceVariation,
+         BenefitSliceDefault,
          ExploreStaySlice,
          ExploreStaySliceDefaultPrimary,
          ExploreStaySliceDestinationPrimary,
@@ -3007,8 +3117,11 @@ declare module '@prismicio/client' {
          ImagesSectionSlice,
          ImagesSectionSliceDefaultPrimaryImagesItem,
          ImagesSectionSliceDefaultPrimary,
+         ImagesSectionSliceCenterPrimaryImagesItem,
+         ImagesSectionSliceCenterPrimary,
          ImagesSectionSliceVariation,
          ImagesSectionSliceDefault,
+         ImagesSectionSliceCenter,
          LogosSectionSlice,
          LogosSectionSliceDefaultPrimaryLogosItem,
          LogosSectionSliceDefaultPrimary,

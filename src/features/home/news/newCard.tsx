@@ -11,19 +11,14 @@ export const NewCard = ({ newProps }: { newProps: newsType }) => {
       <Card className="p-0 border-0 flex-1 flex-col rounded-3xl relative overflow-hidden w-full hover:shadow-xl mb-8">
          <div className="relative aspect-square">
             <Image
-               src={
-                  'https://images.unsplash.com/photo-1731437519637-747bb78a0217?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNHx8fGVufDB8fHx8fA%3D%3D'
-               }
+               src={newProps.image}
                alt={newProps.title}
                className="w-full h-full rounded-none"
             />
 
             <div className="absolute top-3 left-3 right-3">
                <div className="w-full flex justify-between items-center">
-                  <Badge
-                     color="white"
-                     className="dark:bg-slate-800 dark:text-slate-200 px-6 py-3"
-                  >
+                  <Badge color="white" className="dark:bg-slate-800 dark:text-slate-200 px-6 py-3">
                      {newProps.category}
                   </Badge>
 
@@ -38,9 +33,7 @@ export const NewCard = ({ newProps }: { newProps: newsType }) => {
             <div className="flex justify-start items-center flex-wrap gap-x-6 gap-y-1 mb-5">
                <div className="flex items-center gap-1">
                   <CalendarDays className="w-3 h-3" />
-                  <div className="text-sm text-slate-800 dark:text-slate-200">
-                     {newProps.date}
-                  </div>
+                  <div className="text-sm text-slate-800 dark:text-slate-200">{newProps.date}</div>
                </div>
                <div className="flex items-center gap-1">
                   <Clock3 className="w-3 h-3" />

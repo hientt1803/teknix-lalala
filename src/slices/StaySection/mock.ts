@@ -21,13 +21,10 @@ export interface Property {
 export const propertyList: Property[] = [
     {
         id: 1,
-        name: "Best Western Cedars Hotel",
+        name: "California Sunset/Twilight Boat Cruise",
         location: "1 Anzinger Court",
         imageUrl: [
-            "https://images.pexels.com/photos/28161375/pexels-photo-28161375/free-photo-of-morning-coffee.jpeg?auto=compress&cs=tinysrgb&w=600",
-            "https://images.pexels.com/photos/7740160/pexels-photo-7740160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            "https://travila-nextjs.vercel.app/assets/imgs/page/homepage1/journey3.png",
         ], // Thay bằng URL hình ảnh thực tế
         beds: 10,
         pricePerNight: 26,
@@ -45,13 +42,30 @@ export const propertyList: Property[] = [
     },
     {
         id: 2,
-        name: "Bell By Greene King Inns",
+        name: "NYC: Food Tastings and Culture Tour",
         location: "32923 Judy Hill",
         imageUrl: [
-            "https://images.pexels.com/photos/7740160/pexels-photo-7740160.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "https://images.pexels.com/photos/28161375/pexels-photo-28161375/free-photo-of-morning-coffee.jpeg?auto=compress&cs=tinysrgb&w=600",
-            "https://images.pexels.com/photos/739407/pexels-photo-739407.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-            "https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+            "https://travila-nextjs.vercel.app/assets/imgs/page/homepage1/journey2.png",
+        ], // Thay bằng URL hình ảnh thực tế
+        beds: 6,
+        pricePerNight: 250,
+        rating: {
+            score: 4.4,
+            reviews: 198,
+        },
+        promotion: {
+            discount: 10,
+            label: "-10% today",
+        },
+        type: "Entire cabin",
+        isFavorite: false,
+    },
+    {
+        id: 6,
+        name: "Grand Canyon Horseshoe Bend 2 days",
+        location: "32923 Judy Hill",
+        imageUrl: [
+            "https://travila-nextjs.vercel.app/assets/imgs/page/homepage1/journey4.png",
         ], // Thay bằng URL hình ảnh thực tế
         beds: 6,
         pricePerNight: 250,

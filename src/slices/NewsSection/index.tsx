@@ -26,7 +26,7 @@ export const newComponent: JSXMapSerializer = {
  */
 const NewsSection = ({ slice }: NewsSectionProps): JSX.Element => {
    return (
-      <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <Bounded className='relative py-16' data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
          <NewHeader slice={slice} />
          <ListNews />
       </Bounded>

@@ -232,7 +232,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      )}${data?.check_out_time || '00:00'}`,
                   };
                   dispatch(setReserveForm(updateReservation));
-                  router.push(`/stay/${hotel.hotel_id}`);
+                  router.push(`/hotel/${hotel.hotel_id}`);
                }
             }
          } else {

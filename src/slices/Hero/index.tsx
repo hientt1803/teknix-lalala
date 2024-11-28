@@ -43,14 +43,14 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
             <div className="relative w-full h-screen py-8 md:py-0 flex flex-col gap-6 xl:gap-10 justify-center items-center">
                {/* Background */}
                <BackgroundImage image={slice.primary.background} />
-               <div className="absolute inset-0 bg-black/70"></div>
+               {/* <div className="absolute inset-0 bg-black/70"></div> */}
 
                {/* Content */}
                <MainContent slice={slice} />
 
                {/* Search Group */}
                <Bounded>
-                  <SearchGroup className="-mt-20 md:mt-0" showBorder showTabs />
+                  <SearchGroup className="-mb-56 md:mt-0" showBorder showTabs />
                </Bounded>
             </div>
          )}

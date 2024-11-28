@@ -23,7 +23,11 @@ export function ModeToggleText() {
                   'flex items-center justify-start gap-2 group cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg p-2',
                )}
             >
-               <Button variant="ghost" size="icon" className="border border-slate-200  dark:border-slate-700 dark:bg-slate-600 h-12 w-12">
+               <Button
+                  variant="ghost"
+                  size="icon"
+                  className="border border-slate-200 relative  dark:border-slate-700 dark:bg-slate-600 h-12 w-12"
+               >
                   {/* SUN ICON */}
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +62,9 @@ export function ModeToggleText() {
                </Button>
                <div className="flex flex-col items-start gap-1">
                   <h5 className="font-medium text-sm">Theme</h5>
-                  <p className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-2">Switch theme</p>
+                  <p className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-2">
+                     Switch theme
+                  </p>
                </div>
             </div>
          </DropdownMenuTrigger>

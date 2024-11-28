@@ -37,7 +37,7 @@ export async function generateMetadata(
                           '/assets/favicon/lalala.svg',
                        width: 1024,
                        height: 576,
-                       alt: hotelData?.title,
+                       alt: hotelData?.name,
                     },
                  ]
                : [...(openGraph?.images || [])],

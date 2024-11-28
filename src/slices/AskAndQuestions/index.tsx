@@ -21,7 +21,7 @@ const AskAndQuestions = ({ slice }: AskAndQuestionsProps): JSX.Element => {
          className="relative py-16 w-screen"
       >
          <Image src="/assets/images/home/bg-faq.png" className="absolute bottom-0 left-0" />
-         <Image src="/assets/images/home/bg-payment-plane.svg" className="absolute top-0 right-0" />
+         <Image src="/assets/images/home/bg-payment-plane.svg" className="hidden md:absolute top-0 right-0" />
          <Bounded>
             <QuestionAndAsked
                heading={slice.primary.heading}
