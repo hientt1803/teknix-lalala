@@ -125,6 +125,16 @@ export const GlobalSlice = createSlice({
       setIsCanSearchGlobal: (state, action: PayloadAction<boolean>) => {
          state.searchGlobal.isCanSearch = action.payload;
       },
+      setSearchGlobalLocationRadius: (
+         state,
+         action: {
+            payload: {
+               radius: number;
+            };
+         },
+      ) => {
+         state.searchGlobal.location.radius = action.payload.radius;
+      },
       // memorized
       setMemorizeData: (
          state,
@@ -155,6 +165,7 @@ export const {
    setSearchGlobalHotelSortBy,
    setIsCanSearchGlobal,
    setMemorizeData,
+   setSearchGlobalLocationRadius,
 } = GlobalSlice.actions;
 
 export default GlobalSlice.reducer;

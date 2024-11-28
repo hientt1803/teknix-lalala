@@ -36,7 +36,7 @@ const HotelListing = ({ slice }: HotelListingProps): JSX.Element => {
          </Bounded>
 
          {/* WITH MAP */}
-         {slice.primary.with_map && <ListHotel type="list" visibleItem={10} />}
+         {/* {slice.primary.with_map && <ListHotel type="list" visibleItem={10} />} */}
 
          {/* WITHOUT MAP */}
          <Bounded className="block">{!slice.primary.with_map && <WithoutMapContainer />}</Bounded>

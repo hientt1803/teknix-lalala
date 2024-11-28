@@ -3,6 +3,7 @@ import { Poppins } from 'next/font/google';
 import './globals.css';
 import AppProvider from '@/providers';
 import { cn } from '@/lib/utils';
+import { HOST_URL } from '@/configs';
 
 const popins = Poppins({
    subsets: ['latin'],
@@ -10,13 +11,14 @@ const popins = Poppins({
    weight: ['400', '500', '600', '700'],
 });
 
-export const meta = {
+const meta = {
    title: 'LaLaLa - Premium Hotels Booking Platform',
    description: 'Affordable Travel Bookings | Lalala - Your Trusted Online Travel Agency  ',
    image: `/assets/favicon/lalala.svg`,
 };
 
 export const metadata: Metadata = {
+   metadataBase: new URL(HOST_URL || 'https://sb.lalala.travel'),
    title: {
       template: '%s',
       default: meta.title,
@@ -116,7 +118,7 @@ export const metadata: Metadata = {
    category: 'Booking platform',
 };
 
-export const viewport: Viewport = {
+const viewport: Viewport = {
    width: 'device-width',
    initialScale: 1,
    maximumScale: 1,

@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -204,16 +205,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                      searchLocationData?.hotels.map((hotel) => (
                         <DestinationItem
                            key={hotel.id}
-                           icon={
-                              <Image
-                                 src="https://st.worldota.net/master/b4c583f-ff08648/react_build/node_modules/components/Icon/Destination/img/hotel.svg"
-                                 alt="Hotel image"
-                                 width={20}
-                                 height={20}
-                                 loading="lazy"
-                                 className="inline-block"
-                              />
-                           }
+                           icon={<Building2 className="w-5 h-5" />}
                            name={hotel.name}
                            onClick={() => {
                               setInputSearch(hotel.name);
@@ -283,14 +275,16 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                      }}
                      onChange={(e) => setInputSearch(e.currentTarget.value)}
                   />
-                  {inputSearch !== '' && (
-                     <XIcon
-                        className="text-slate-800 cursor-pointer w-5 h-5"
-                        onClick={() => {
-                           setInputSearch('');
-                           inputRef.current?.focus();
-                        }}
-                     />
+                  {inputSearch && (
+                     <Button variant="ghost" size="icon">
+                        <XIcon
+                           className="text-slate-800 cursor-pointer w-5 h-5"
+                           onClick={() => {
+                              setInputSearch('');
+                              inputRef.current?.focus();
+                           }}
+                        />
+                     </Button>
                   )}
                </div>
             </PopoverTrigger>

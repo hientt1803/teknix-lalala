@@ -8,11 +8,11 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@/components/ui/carousel';
 import { useAppSelector } from '@/stores';
 import { setReserveForm } from '@/stores/features/stay';
-import { formatCurrency } from '@/utilities/currency';
 import { countTotalDaysInRange, formatDateMMM } from '@/utilities/datetime';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
+import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 
 type Props = {
    data?: { roomGroup: RoomGroup; rates: Rate[] };
@@ -217,10 +217,18 @@ const RoomCard = ({ data, active, id }: Props) => {
                                     <div className="flex flex-col xl:flex-row xl:p-3 justify-between">
                                        <span className="flex flex-col text-lg font-semibold text-orange-500 text-center xl:text-left">
                                           <span className="text-xs text-slate-500 font-light px-1 line-through">
-                                             {formatCurrency(rate.daily_prices[0])}
+                                             {formatCurrencyWithCodeAsSuffix(
+                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]
+                                                   ?.show_currency_code,
+                                             )}
                                           </span>
                                           <span className="flex items-center justify-center gap-1">
-                                             {formatCurrency(rate.daily_prices[0])}
+                                             {formatCurrencyWithCodeAsSuffix(
+                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]
+                                                   ?.show_currency_code,
+                                             )}
                                              <span className="text-xs font-light">for 1 night</span>
                                           </span>
                                        </span>
@@ -345,10 +353,18 @@ const RoomCard = ({ data, active, id }: Props) => {
                                     <div className="flex flex-col xl:flex-row xl:p-3 justify-between">
                                        <span className="flex flex-col text-lg font-semibold text-orange-500 text-center xl:text-left">
                                           <span className="text-xs text-slate-500 font-light px-1 line-through">
-                                             {formatCurrency(rate.daily_prices[0])}
+                                             {formatCurrencyWithCodeAsSuffix(
+                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]
+                                                   ?.show_currency_code,
+                                             )}
                                           </span>
                                           <span className="flex items-center justify-center gap-1">
-                                             {formatCurrency(rate.daily_prices[0])}
+                                             {formatCurrencyWithCodeAsSuffix(
+                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]
+                                                   ?.show_currency_code,
+                                             )}
                                              <span className="text-xs font-light">for 1 night</span>
                                           </span>
                                        </span>

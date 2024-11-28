@@ -20,14 +20,13 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { childYears } from '@/configs';
 import { useProgressStore } from '@/hooks/use-progress';
 import { cn } from '@/lib/utils';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import {
    setSearchGlobalDateRange,
    setSearchGlobalPeople,
 } from '@/stores/features/global/global-slice';
-import { useGetRoomActiveByHotelIdQuery } from '@/stores/features/stay';
+import { useGetRoomActiveByHotelIdQuery } from '@/stores/features/stay/stay-api';
 import { isEqualObjects } from '@/utilities/comparator';
-import { formatCurrency } from '@/utilities/currency';
 import { countTotalDaysInRange } from '@/utilities/datetime';
 import { addDays, formatDate, isEqual, toDate } from 'date-fns';
 import {
@@ -42,6 +41,7 @@ import {
 } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 import { useDispatch } from 'react-redux';
+import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 
 const ReserveSection = ({
    id,
@@ -367,7 +367,7 @@ const ReserveSection = ({
       <div className="border border-slate-100 dark:border-slate-700 rounded-2xl shadow-xl p-4">
          <div className="flex justify-between">
             <span className="text-3xl font-semibold">
-               {formatCurrency(data?.hotels[0]?.rates[0]?.daily_prices[0] || 0)}
+               {formatCurrencyWithCodeAsSuffix(data?.hotels[0]?.rates[0]?.daily_prices[0] || 0)}
                <span className="ml-1 text-base font-normal text-slate-500 dark:text-slate-400">
                   /night
                </span>
@@ -513,25 +513,25 @@ const ReserveSection = ({
                <div className="flex flex-col space-y-4">
                   <div className="flex justify-between text-slate-600 dark:text-slate-50">
                      <span>
-                        {formatCurrency(data?.hotels[0]?.rates[0].daily_prices[0] || 0)}
+                        {formatCurrencyWithCodeAsSuffix(data?.hotels[0]?.rates[0].daily_prices[0] || 0)}
                         <span className="mx-2">x</span>
                         {totalDay} night
                      </span>
                      <span>
-                        {formatCurrency(
+                        {formatCurrencyWithCodeAsSuffix(
                            (Number(data?.hotels[0]?.rates[0].daily_prices[0]) || 1) * totalDay,
                         )}
                      </span>
                   </div>
                   <div className="flex justify-between text-slate-600 dark:text-slate-50">
                      <span>Service charge</span>
-                     <span>{formatCurrency(0)}</span>
+                     <span>{formatCurrencyWithCodeAsSuffix(0)}</span>
                   </div>
                   <div className="border-b border-slate-200 dark:border-slate-700"></div>
                   <div className="flex justify-between font-semibold">
                      <span>Total</span>
                      <span>
-                        {formatCurrency(
+                        {formatCurrencyWithCodeAsSuffix(
                            (Number(data?.hotels[0]?.rates[0].daily_prices[0]) || 0) * totalDay,
                         )}
                      </span>

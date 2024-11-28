@@ -33,7 +33,7 @@ export const formatCurrency = (
  */
 export const formatCurrencyWithCodeAsSuffix = (
    amount: number | string,
-   currencyCode: string | 'VND',
+   currencyCode?: string | 'VND',
 ): string => {
    const parsedAmount = typeof amount === 'string' ? parseFloat(amount) : amount;
 
@@ -47,5 +47,5 @@ export const formatCurrencyWithCodeAsSuffix = (
       maximumFractionDigits: 0,
    }).format(parsedAmount);
 
-   return `${formattedAmount} ${currencyCode}`;
+   return `${formattedAmount} ${currencyCode == '' ? 'VND' : currencyCode}`;
 };

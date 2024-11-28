@@ -2,17 +2,22 @@
 
 import { API_URL } from '@/configs';
 
-export const getHotelDataById = async (id: string) => {
-   const response = await fetch(`${API_URL}/api/search/hotels/${id}`, {
+export const preloadHotelDetail = (id: string) => {
+   void getHotelDetail(id);
+};
+
+export const getHotelDetail = async (id: string) => {
+   const res = await fetch(`${API_URL}/api/search/hotels/${id}`, {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',
       },
    });
-   if (!response.ok) {
-      throw new Error('Failed to fetch hotel data');
+
+   if (!res.ok) {
+      return null;
    }
 
-   const data = await response.json();
-   return data.data;
+   const { data: hotelData } = await res.json();
+   return hotelData;
 };

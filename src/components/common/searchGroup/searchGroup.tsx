@@ -12,11 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
 import { setTriggerSearch } from '@/stores/features/stay';
 import { useAppSelector } from '@/stores/hook';
-import {
-   convertStringToDate,
-   daysBetweenDateRange,
-   formatDateToYearMonthDay,
-} from '@/utilities/datetime';
+import { convertStringToDate, formatDateToYearMonthDay } from '@/utilities/datetime';
 import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -30,6 +26,7 @@ const InputSearchLocation = dynamic(
    () => import('../input/location/inputSearchLocation').then((mod) => mod.InputSearchLocation),
    {
       loading: () => <InputSearchLocationSkeleton />,
+      ssr: false,
    },
 );
 const InputSearchDateRange = dynamic(
@@ -103,10 +100,10 @@ export const SearchGroup = ({
       params.append('longtitude', String(globalState?.location?.lon) || '105.7875821');
       params.append('region', String(globalState?.location.name) || '');
 
-      const nightCount = daysBetweenDateRange(
-         convertStringToDate(globalState.dateRange.startDate),
-         convertStringToDate(globalState.dateRange.endDate),
-      );
+      // const nightCount = daysBetweenDateRange(
+      //    convertStringToDate(globalState.dateRange.startDate),
+      //    convertStringToDate(globalState.dateRange.endDate),
+      // );
 
       // dispatch(
       //    setMemorizeLocation({
@@ -142,7 +139,7 @@ export const SearchGroup = ({
                setCookie('locationSearch', globalState.location.name);
                setCookie(
                   'dateRange',
-                  `${globalState.dateRange.startDate} - ${globalState.dateRange.endDate}`,
+                  `${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.startDate))} - ${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.endDate))}`,
                );
 
                // direct to new route
@@ -158,7 +155,7 @@ export const SearchGroup = ({
                setCookie('locationSearch', globalState.location.name);
                setCookie(
                   'dateRange',
-                  `${globalState.dateRange.startDate} - ${globalState.dateRange.endDate}`,
+                  `${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.startDate))} - ${formatDateToYearMonthDay(convertStringToDate(globalState.dateRange.endDate))}`,
                );
 
                // direct to new route
