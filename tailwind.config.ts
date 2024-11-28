@@ -103,6 +103,7 @@ const config: Config = {
             padding: {
                DEFAULT: '1rem',
                '2xl': '8rem',
+               1920: '8rem',
             },
          },
          screens: {

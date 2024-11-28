@@ -40,17 +40,17 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
          className="w-full min-h-[50rem] mb-40 md:mb-0"
       >
          {slice.variation == 'default' && (
-            <div className="relative w-full h-[calc(100vh+50px)] flex flex-col gap-6 xl:gap-10 justify-center items-center">
+            <div className="relative w-full h-screen py-8 md:py-0 flex flex-col gap-6 xl:gap-10 justify-center items-center">
                {/* Background */}
                <BackgroundImage image={slice.primary.background} />
-               <div className="absolute inset-0 bg-black/60"></div>
+               <div className="absolute inset-0 bg-black/70"></div>
 
                {/* Content */}
                <MainContent slice={slice} />
 
                {/* Search Group */}
                <Bounded>
-                  <SearchGroup />
+                  <SearchGroup className="-mt-20 md:mt-0" />
                </Bounded>
             </div>
          )}

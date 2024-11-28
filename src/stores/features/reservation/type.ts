@@ -28,7 +28,7 @@ export interface IReservation {
    is_expired: any;
    payment_id: any;
    payment_link: any;
-   meal_data: any
+   meal_data?: any
 }
 
 export interface MetaData {

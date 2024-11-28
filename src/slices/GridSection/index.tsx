@@ -18,7 +18,7 @@ const GridSection = ({ slice }: GridSectionProps): JSX.Element => {
       <Bounded
          data-slice-type={slice.slice_type}
          data-slice-variation={slice.variation}
-         className="relative py-16"
+         className="relative py-8 md:py-16"
       >
          <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12 sm:col-span-6 lg:col-span-4 flex">
