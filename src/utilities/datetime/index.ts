@@ -6,7 +6,11 @@ import {
    isSameDay,
    addDays,
    toDate,
+   startOfDay,
+   isAfter,
    parseISO,
+   isValid,
+   add,
    isBefore,
 } from 'date-fns';
 
@@ -136,12 +140,149 @@ export const getValidatedDate = (
    return parsedDate < currentDate ? fallbackDate : parsedDate;
 };
 
+/**
+ * The function `formatDateMMM` takes a Date object or string as input and returns the date in the
+ * format "MMM d".
+ * @param {Date | string} date - The `date` parameter in the `formatDateMMM` function can be either a
+ * `Date` object or a string representing a date.
+ * @returns The function `formatDateMMM` is returning a formatted date string in the format "MMM d".
+ */
 export const formatDateMMM = (date: Date | string): string => {
    return format(date, 'MMM d');
 };
 
+/**
+ * The `formatDated` function takes a Date object or string and returns a formatted date string using
+ * the "d" format specifier.
+ * @param {Date | string} date - The `date` parameter in the `formatDated` function can be either a
+ * `Date` object or a string representing a date.
+ * @returns The function `formatDated` is returning the formatted date in the "d" format.
+ */
 export const formatDated = (date: Date | string): string => {
    return format(date, 'd');
+};
+
+/**
+ * The function `checkIfDateIsGreaterThanToday` compares a given date with today's date and returns
+ * the greater of the two dates.
+ * @param {Date} date - The `date` parameter is a Date object representing a specific date and time.
+ * @returns The function `checkIfDateIsGreaterThanToday` returns either the input date if it is
+ * after today or the same as today, or it returns today's date if the input date is before today.
+ */
+export const checkIfDateIsGreaterThanToday = (date: Date) => {
+   const today = startOfDay(new Date());
+   const inputDate = startOfDay(date);
+
+   return isAfter(inputDate, today) || isSameDay(inputDate, today) ? inputDate : today;
+};
+
+/**
+ * The function `getAdjustedEndDate` takes two date strings, adjusts them if necessary, and returns
+ * the end date ensuring it is after the start date.
+ * @param {string | undefined} startDateStr - The `startDateStr` parameter is a string representing
+ * the start date in the format of "YYYY-MM-DD". It can be undefined if no start date is provided.
+ * @param {string | undefined} endDateStr - The `endDateStr` parameter in the `getAdjustedEndDate`
+ * function is a string representing the end date. It is an optional parameter, meaning it can be
+ * either a valid date string or `undefined`. If provided, the function will use this end date for
+ * calculations. If not provided (`undefined`
+ * @returns The `getAdjustedEndDate` function returns the adjusted end date based on the provided
+ * start date and end date strings. If the start date is after today's date, it is used as is. If the
+ * end date is after today's date, it is used as is. If the end date is before the start date or the
+ * same as the start date, the end date is adjusted to be one
+ */
+export const getAdjustedEndDate = (
+   startDateStr: string | undefined,
+   endDateStr: string | undefined,
+) => {
+   const startDate = startDateStr
+      ? checkIfDateIsGreaterThanToday(parseISO(startDateStr))
+      : new Date();
+   const endDate = endDateStr
+      ? checkIfDateIsGreaterThanToday(parseISO(endDateStr))
+      : addDays(startDate, 1);
+
+   return isAfter(startDate, endDate) || isSameDay(startDate, endDate)
+      ? addDays(startDate, 1)
+      : endDate;
+};
+
+/**
+ * The function `convertStringToDate` takes a string representing a date and returns a Date object.
+ * @param {string} dateString - A string representing a date that you want to convert to a JavaScript
+ * Date object.
+ */
+export const convertStringToDate = (dateString: string) => new Date(dateString);
+
+/**
+ * The function `convertDateToString` takes a Date object as input and returns a string representation
+ * of the date using the `toDateString` method.
+ * @param {Date} date - The `date` parameter is of type `Date`, which represents a specific point in
+ * time.
+ */
+export const convertDateToString = (date: Date) => date.toDateString();
+
+/**
+ * The function `formatDateToYearMonthDay` takes a Date object as input and returns a string in the
+ * format "YYYY-MM-DD".
+ * @param {Date} date - The `formatDateToYearMonthDay` function takes a `Date` object as a parameter.
+ * This function formats the given date into a string in the format "YYYY-MM-DD" (year-month-day). If
+ * the input date is not valid or not provided, it defaults to the current date.
+ * @returns The function `formatDateToYearMonthDay` returns a string in the format "YYYY-MM-DD"
+ * representing the year, month, and day of the input date.
+ */
+export const formatDateToYearMonthDay = (date: Date): string => {
+   if (!date || !isValid(date)) {
+      date = new Date(); // Use current date if input is invalid
+   }
+
+   const year = date.getFullYear();
+   const month = String(date.getMonth() + 1).padStart(2, '0');
+   const day = String(date.getDate()).padStart(2, '0');
+
+   return `${year}-${month}-${day}`;
+};
+
+/**
+ * The function calculates the number of days between two dates in UTC format.
+ * @param {Date} startDate - The starting date in UTC.
+ * @param {Date} endDate - The ending date in UTC.
+ * @returns The number of days between `startDate` and `endDate` in UTC time.
+ */
+export const daysBetweenDateRange = (startDate: Date, endDate: Date): number => {
+   // Validate and default to current date if invalid
+   if (!isValid(startDate)) {
+      startDate = new Date();
+   }
+   if (!isValid(endDate)) {
+      endDate = new Date();
+   }
+
+   // Calculate the difference in days using date-fns
+   const daysDifference = differenceInDays(
+      new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())),
+      new Date(Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate())),
+   );
+
+   return Math.abs(daysDifference); // Return the absolute value to avoid negative differences
+};
+
+/**
+ * The function `formatDateUTC` takes a Date object, checks if it is valid using moment.js, and returns
+ * the date in the format "MMM D, YYYY".
+ * @param {Date} date - The `formatDateUTC` function takes a `Date` object as a parameter.
+ * @returns The function `formatDateUTC` is returning a formatted date string in the format "MMM D,
+ * YYYY".
+ */
+export const formatDateUTC = (date: Date | null | undefined): string => {
+   if (!date || !isValid(date)) {
+      date = new Date(); // Use the current date if invalid or null
+   }
+
+   // Add 1 day (86400 seconds)
+   const newDate = add(date, { seconds: 86400 });
+
+   // Format the date as "MMM D, YYYY"
+   return format(newDate, 'MMM d, yyyy');
 };
 
 /**

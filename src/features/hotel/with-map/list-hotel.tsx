@@ -1,6 +1,8 @@
 'use client';
-import { mockTours } from '@/slices/TourSection/mock';
-import HotelCard from '../cards/hotel-card';
+
+import Map from '@/components/common/map';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import {
    Pagination,
    PaginationContent,
@@ -9,22 +11,161 @@ import {
    PaginationNext,
    PaginationPrevious,
 } from '@/components/ui/pagination';
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { XIcon } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
-import Map from '@/components/common/map';
-import { Places } from '@/lib/Places';
 import { AppConfig } from '@/lib/AppConfig';
+// import { Places } from '@/lib/Places';
+import { cn } from '@/lib/utils';
+import { useAppSelector } from '@/stores';
+import {
+   setTriggerSearch,
+   useLazyGetListHotelByGeoSearchEngineQuery,
+} from '@/stores/features/stay';
+import { IHotelDataMapHotels, IHotelSearchGeoEngineRequest } from '@/stores/features/stay/type';
+import { formatDateToYearMonthDay } from '@/utilities/datetime';
+import { getDistance } from 'geolib';
+import { XIcon } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
+import { useDispatch } from 'react-redux';
+import HotelCard, { HotelCardSkeleton } from '../cards/hotel-card';
 import { FilterCollapse } from '../filters/filter-collapse';
+import { ListHotelWioutMapType } from '../without-map/list-hotel';
+import { PlaceValues } from '@/lib/Places';
+import { Category } from '@/lib/MarkerCategories';
 
-export const ListHotel = () => {
+export const ListHotel = ({ type = 'list', visibleItem = 10 }: ListHotelWioutMapType) => {
+   // redux
+   const globalSearchState = useAppSelector((state) => state.globalSlice.searchGlobal);
+   const isSearchGlobal = useAppSelector((state) => state.staySlice.isTriggerGlobal);
+   const dispatch = useDispatch();
+
+   // state
+   const [hasMore, setHasMore] = useState(true);
+   const [visibleItems, setVisibleItems] = useState(visibleItem);
+
+   // Api
+   const [
+      fetchHotelByGeo,
+      {
+         data: searchHotelGeo,
+         isLoading: searchHotelGeoLoading,
+         isFetching: searchHotelGeoFetching,
+      },
+   ] = useLazyGetListHotelByGeoSearchEngineQuery();
+
+   // Logic
+   const fetchDataFromApi = () => {
+      const searchParams = {
+         checkin: formatDateToYearMonthDay(new Date(globalSearchState.dateRange.startDate)),
+         checkout: formatDateToYearMonthDay(new Date(globalSearchState.dateRange.endDate)),
+         // language: globalSearchState?.country?.cca2 || 'US',
+         language: 'US',
+         guests: globalSearchState.people,
+         currency: globalSearchState?.currency?.code || 'VND',
+         latitude: globalSearchState?.location?.lat || 10.0364634,
+         longitude: globalSearchState?.location?.lon || 105.7875821,
+         radius: globalSearchState?.location?.radius || 30000,
+         place_id: globalSearchState?.location?.placeId || 238946329,
+      };
+
+      fetchHotelByGeo(searchParams as IHotelSearchGeoEngineRequest);
+   };
+
+   useEffect(() => {
+      if (isSearchGlobal) {
+         fetchDataFromApi();
+      }
+   }, [isSearchGlobal]);
+
+   useEffect(() => {
+      dispatch(setTriggerSearch(true));
+   }, []);
+
+   const kilometDistanceFromOrigin = useCallback((selectedMap: IHotelDataMapHotels) => {
+      const latitude = globalSearchState.location?.lat || 30;
+      const longtitude = globalSearchState.location?.lon || 20;
+
+      const result = getDistance(
+         {
+            latitude: latitude,
+            longitude: longtitude,
+         },
+         {
+            latitude: selectedMap?.latitude || 0,
+            longitude: selectedMap?.longitude || 0,
+         },
+      );
+
+      return result;
+   }, []);
+
+   const hotelsWithMapData = useMemo(() => {
+      const hotels = searchHotelGeo?.hotels?.map((hotel) => {
+         const selectedMap = searchHotelGeo?.map_hotels?.find((item) => item.id === hotel.hotel_id);
+
+         let distance = 0;
+         if (selectedMap) {
+            distance = kilometDistanceFromOrigin(selectedMap);
+         }
+
+         return { hotel, selectedMap, distance };
+      });
+
+      return hotels?.sort((a, b) => a.distance - b.distance);
+   }, [searchHotelGeo, kilometDistanceFromOrigin]);
+
+   const placeData = useMemo(() => {
+      return (
+         hotelsWithMapData?.map((hotel) => {
+            const place: PlaceValues = {
+               id: hotel.hotel.hotel_id,
+               address: hotel.selectedMap?.address || '',
+               image:
+                  hotel.selectedMap?.images.map((img) => img.replace('{size}', '640x400')) || [],
+               category: Category.HOTEL,
+               position: [hotel.selectedMap?.latitude || 0, hotel.selectedMap?.longitude || 0],
+               title: hotel.selectedMap?.name || '',
+               price: Number.parseFloat(hotel?.hotel?.rates[0]?.daily_prices[0] || '0'),
+               star: hotel.selectedMap?.star_rating || 0,
+            };
+            return place; // Return place for each mapped hotel
+         }) || []
+      ); // Ensure an empty array if hotelsWithMapData is undefined
+   }, [hotelsWithMapData]);
+
+   const loadMore = useCallback(() => {
+      if (hotelsWithMapData) {
+         if (visibleItems >= hotelsWithMapData?.length) {
+            setHasMore(false);
+         } else {
+            setVisibleItems((prevItems) => prevItems + visibleItem);
+         }
+      }
+   }, [hotelsWithMapData, visibleItem, visibleItems]);
+
+   if (searchHotelGeoLoading || searchHotelGeoFetching) {
+      return (
+         <div
+            className={cn(
+               'w-full grid gap-3',
+               type == 'grid' ? 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3' : 'grid-cols-1',
+            )}
+         >
+            {Array(3)
+               .fill(1)
+               .map((_, index) => (
+                  <HotelCardSkeleton displayType={type} key={index} />
+               ))}
+         </div>
+      );
+   }
+
    return (
       <div className="container mx-auto pb-24 lg:pb-28 2xl:pl-10 xl:pr-0 xl:max-w-none mt-28">
          <div>
             <div className="relative flex min-h-screen">
                <div className="min-h-screen w-full xl:w-[780px] 2xl:w-[880px] flex-shrink-0 xl:px-8 ">
-                  <div className="flex items-center justify-between w-full mb-12 lg:mb-16 ">
+                  <div className="flex flex-col items-start justify-start w-full mb-12 lg:mb-16 ">
                      <div className="">
                         <h2 className="text-4xl font-semibold leading-snug line-clamp-1">
                            Stays in New York
@@ -39,11 +180,37 @@ export const ListHotel = () => {
                      <FilterCollapse />
                   </div>
 
-                  <div className="grid grid-cols-1 gap-8">
-                     {mockTours?.map((property, index) => (
-                        <HotelCard {...property} displayType={'list'} key={index} />
-                     ))}
-                  </div>
+                  {/* LIST HOTEL */}
+                  <InfiniteScroll
+                     pageStart={0}
+                     loadMore={loadMore}
+                     hasMore={hasMore}
+                     loader={
+                        <>
+                           {Array(2)
+                              .fill(1)
+                              .map((_, index) => (
+                                 <HotelCardSkeleton displayType={type} key={index} />
+                              ))}
+                        </>
+                     }
+                     useWindow={true}
+                     className="w-full h-full"
+                  >
+                     <div className="grid grid-cols-1 gap-8">
+                        {hotelsWithMapData
+                           ?.slice(0, visibleItems)
+                           ?.map((hotel, index) => (
+                              <HotelCard
+                                 key={index}
+                                 selectedMap={hotel.selectedMap}
+                                 hotel={hotel.hotel}
+                                 distance={hotel.distance}
+                                 displayType={type}
+                              />
+                           ))}
+                     </div>
+                  </InfiniteScroll>
 
                   <Pagination className="py-16">
                      <PaginationContent>
@@ -126,7 +293,13 @@ export const ListHotel = () => {
                      {false ? (
                         <Skeleton className="w-full h-full" />
                      ) : (
-                        <Map data={Places} center={AppConfig.baseCenter} />
+                        <Map
+                           data={placeData}
+                           center={[
+                              globalSearchState?.location?.lat || 0,
+                              globalSearchState?.location?.lon || 0,
+                           ]}
+                        />
                      )}
                   </div>
                </div>

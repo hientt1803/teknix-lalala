@@ -1,91 +1,367 @@
-import React from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+'use client';
+
 import { Input } from '@/components/ui/input';
-import { Building2, ChevronDown, MapPin } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Skeleton } from '@/components/ui/skeleton';
+import useDebouncedValue from '@/hooks/use-debounced';
+import { cn } from '@/lib/utils';
+import { useAppSelector } from '@/stores';
+import { setSearchGlobalLocation } from '@/stores/features/global/global-slice';
+import { useLazyGetListLocaltionByOpenStreetMapAPIQuery } from '@/stores/features/openstreetmap';
+import { useLazyGetListHoteStayByLocationKeyWordQuery } from '@/stores/features/stay';
+import {
+   Building2,
+   MapPin,
+   PlaneIcon,
+   TrainFrontIcon,
+   TrainTrack,
+   University,
+   XIcon,
+} from 'lucide-react';
+import Image from 'next/image';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) => {
+   // redux
+   const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal);
+   const dispatch = useDispatch();
+
+   // state
+   const [open, setOpen] = useState(false);
+
+   const [inputSearch, setInputSearch] = useState(searchGlobal?.location?.name || '');
+   const inputRef = useRef<HTMLInputElement>(null);
+
+   // hooks
+   const [debouncedSearchValue] = useDebouncedValue(inputSearch, 500);
+
+   // Api
+   const [
+      fetchGeo,
+      { isLoading: searchGeoLoading, data: searchGeoData, isFetching: searchGeoFetching },
+   ] = useLazyGetListLocaltionByOpenStreetMapAPIQuery();
+   const [
+      fetchLocation,
+      {
+         isLoading: searchLocationLoading,
+         data: searchLocationData,
+         isFetching: searchLocationFetching,
+      },
+   ] = useLazyGetListHoteStayByLocationKeyWordQuery();
+
+   // logic
+   useEffect(() => {
+      fetchGeo({
+         query: debouncedSearchValue.replaceAll(' ', '+') || 'Can Tho',
+      });
+
+      fetchLocation({
+         query: debouncedSearchValue || 'Can Tho',
+         language: 'en',
+      });
+   }, [debouncedSearchValue, fetchGeo, fetchLocation]);
+
+   const handleOpenSearch = () => {
+      inputRef?.current?.focus();
+      setOpen(true);
+   };
+
+   const handleChooseLocation = useCallback(
+      ({
+         name,
+         type,
+         hotelId = '',
+         regionId = 0,
+         lat,
+         lon,
+         placeId,
+      }: {
+         name: string;
+         type: string;
+         hotelId?: string;
+         regionId?: number;
+         lat?: number;
+         lon?: number;
+         placeId?: number;
+      }) => {
+         dispatch(
+            setSearchGlobalLocation({
+               name: name || inputSearch,
+               searchType: type == 'hotel' ? 'hotel' : 'region',
+               hotelId: hotelId,
+               regionId: regionId,
+               lat: lat || 0,
+               lon: lon || 0,
+               placeId: placeId || 0,
+            }),
+         );
+         setOpen(false);
+
+         if (searchGlobal.location.radius) {
+            // dispatch(
+            //    setSearchGlobalLocationRadius({
+            //       radius: searchGlobal.location.radius || 30000,
+            //    }),
+            // );
+         }
+      },
+      [dispatch, inputSearch, searchGlobal.location.radius],
+   );
+
+   // Render logic
+   const regionTypeDisplay: (type: string) => React.JSX.Element = useCallback((type: string) => {
+      switch (type) {
+         case 'City':
+            return <Building2 strokeWidth={1} className="w-4 h-4" />;
+         case 'Airport':
+            return <PlaneIcon strokeWidth={1} className="w-4 h-4" />;
+         case 'Subway (Entrace)':
+            return <TrainFrontIcon strokeWidth={1} className="w-4 h-4" />;
+         case 'Railway Station':
+            return <TrainTrack strokeWidth={1} className="w-4 h-4" />;
+         case 'school':
+            return <University strokeWidth={1} className="w-4 h-4" />;
+         case 'administrative':
+            return <Building2 strokeWidth={1} className="w-4 h-4" />;
+         default:
+            return <Building2 strokeWidth={1} className="w-4 h-4" />;
+      }
+   }, []);
+
+   const SearchRegionByGeo = () => {
+      return (
+         <React.Fragment>
+            {/* Regions */}
+            <div className="mt-2">
+               <p
+                  className={cn(
+                     'text-sm text-slate-900 dark:text-slate-300 font-normal mt-2 mb-1 mx-3',
+                     searchGeoData?.length === 0 && 'hidden',
+                  )}
+               >
+                  Regions
+               </p>
+            </div>
+
+            {searchGeoLoading || searchGeoFetching ? (
+               <div className="min-w-full w-full">
+                  <SkeletonLoading />
+               </div>
+            ) : (
+               <React.Fragment>
+                  {searchGeoData?.length === 0 ? (
+                     <></>
+                  ) : (
+                     searchGeoData?.map((region) => (
+                        <DestinationItem
+                           key={region.place_id}
+                           icon={regionTypeDisplay(region.type)}
+                           name={`${region.name}, ${region.address.country}`}
+                           address={region.display_name}
+                           onClick={() => {
+                              setInputSearch(region.name);
+                              handleChooseLocation({
+                                 name: region.name,
+                                 type: 'region',
+                                 regionId: region.place_id,
+                                 lat: Number(region.lat),
+                                 lon: Number(region.lon),
+                                 placeId: Number(region.place_id),
+                              });
+                           }}
+                        />
+                     ))
+                  )}
+               </React.Fragment>
+            )}
+         </React.Fragment>
+      );
+   };
+
+   const ListSearchByAutoComplete = () => {
+      return (
+         <React.Fragment>
+            {/* Hotels */}
+            <div className="mt-2">
+               <p
+                  className={cn(
+                     'text-xs text-slate-900 font-normal mt-2 mb-1 mx-3',
+                     searchLocationData?.hotels?.length === 0 && 'hidden',
+                  )}
+               >
+                  Hotels
+               </p>
+            </div>
+
+            {searchLocationLoading || searchLocationFetching ? (
+               <SkeletonLoading />
+            ) : (
+               <React.Fragment>
+                  {searchLocationData?.hotels?.length === 0 ? (
+                     <></>
+                  ) : (
+                     searchLocationData?.hotels.map((hotel) => (
+                        <DestinationItem
+                           key={hotel.id}
+                           icon={
+                              <Image
+                                 src="https://st.worldota.net/master/b4c583f-ff08648/react_build/node_modules/components/Icon/Destination/img/hotel.svg"
+                                 alt="Hotel image"
+                                 width={20}
+                                 height={20}
+                                 loading="lazy"
+                                 className="inline-block"
+                              />
+                           }
+                           name={hotel.name}
+                           onClick={() => {
+                              setInputSearch(hotel.name);
+                              handleChooseLocation({
+                                 name: hotel.name,
+                                 type: 'hotel',
+                                 hotelId: hotel.id,
+                              });
+                           }}
+                        />
+                     ))
+                  )}
+               </React.Fragment>
+            )}
+         </React.Fragment>
+      );
+   };
+
    const NoResult = () => {
       return (
-         <div className="w-full max-w-lg mx-auto my-10">
-            <div className="flex flex-col gap-5">
-               <p className="text-sm font-medium text-center text-neutral-500">
+         <div className="w-full my-4 mx-auto">
+            <div className="flex flex-col gap-2">
+               <p className="text-sm font-medium text-slate-500 text-center">
                   Sorry, we cannot find this place {`:(`}
                </p>
-               <p className="text-sm font-bold text-black cursor-pointer mx-auto">Reset</p>
+               <p
+                  className="text-sm font-medium text-blue-900 cursor-pointer mx-auto"
+                  onClick={() => {
+                     inputRef?.current?.focus();
+                     setInputSearch('');
+                  }}
+               >
+                  Reset
+               </p>
             </div>
          </div>
       );
    };
 
-   const SearchResult = () => {
-      return (
-         <>
-            {/* Regions */}
-            <div className="">
-               <p className="text-sm font-normal text-neutral-500 mx-6 mt-3 mb-2">Regions</p>
-
-               {Array(3)
-                  .fill(1)
-                  .map((_, index) => (
-                     <DestinationItem key={index} />
-                  ))}
-            </div>
-
-            {/* Hotel */}
-            <div className="mt-5">
-               <p className="text-sm font-normal text-neutral-500 mx-6 mt-3 mb-2">Hotels</p>
-
-               {Array(3)
-                  .fill(1)
-                  .map((_, index) => (
-                     <DestinationItem key={index} />
-                  ))}
-            </div>
-         </>
-      );
-   };
-
    return (
       <div className="flex flex-col justify-start items-start gap-2">
-         <div className="text-neutral-600 dark:text-neutral-300 text-sm font-medium">{title}</div>
+         <div className="text-slate-600 dark:text-slate-300 text-sm font-medium">{title}</div>
 
-         <Popover>
-            <PopoverTrigger>
-               <div className="flex justify-start items-center gap-1">
-                  <MapPin className="text-neutral-400 w-5 h-5" />
+         <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger
+               onClick={(e) => {
+                  if (open) {
+                     e.preventDefault();
+                  }
+                  handleOpenSearch();
+               }}
+               asChild
+            >
+               <div className="w-full flex justify-start items-center gap-1">
+                  <MapPin className="text-slate-400 w-5 h-5" />
                   <Input
                      type="text"
                      placeholder="New York, USA"
-                     className="placeholder:text-neutral-800 dark:placeholder:dark:text-neutral-50 placeholder:font-medium min-w-[7.5rem] w-full shadow-none border-none outline-none focus:border-none focus:outline-none"
+                     className="placeholder:text-slate-800 dark:placeholder:dark:text-slate-50 placeholder:font-medium 
+                        w-full md:min-w-[7.5rem] shadow-none border-none outline-none focus-visible:outline-none focus-visible:ring-0 
+                        p-0 focus:placeholder-slate-400 focus:border-none focus:outline-none"
+                     ref={inputRef}
+                     value={inputSearch}
+                     onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenSearch();
+                     }}
+                     onChange={(e) => setInputSearch(e.currentTarget.value)}
                   />
-                  {/* <ChevronDown className="text-black w-5 h-5" /> */}
+                  {inputSearch !== '' && (
+                     <XIcon
+                        className="text-slate-800 cursor-pointer w-5 h-5"
+                        onClick={() => {
+                           setInputSearch('');
+                           inputRef.current?.focus();
+                        }}
+                     />
+                  )}
                </div>
             </PopoverTrigger>
-            <PopoverContent className="p-0 min-w-[17.5rem] w-fit">
-               <SearchResult />
+            <PopoverContent
+               onOpenAutoFocus={(e) => {
+                  e.preventDefault();
+               }}
+               align="start"
+               className="p-4 w-[25rem] -ml-4 my-1 rounded-lg shadow-lg"
+            >
+               {searchLocationData?.hotels?.length == 0 &&
+               searchLocationData?.regions.length == 0 &&
+               searchGeoData?.length == 0 ? (
+                  <div className="w-full my-2">{NoResult()}</div>
+               ) : (
+                  <>
+                     <div className="w-full">{SearchRegionByGeo()}</div>
+                     <div className="w-full mt-2">{ListSearchByAutoComplete()}</div>
+                  </>
+               )}
             </PopoverContent>
          </Popover>
       </div>
    );
 };
 
-const DestinationItem = () => {
+export const DestinationItem = React.memo(function DestinationItemComponent({
+   icon,
+   name,
+   address,
+   onClick,
+}: {
+   icon?: React.ReactNode;
+   name?: string;
+   address?: string;
+   onClick: () => void;
+}) {
    return (
-      <div className="transition hover:bg-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-70 hover:text-black dark:hover:text-neutral-800 py-1.5 cursor-pointer">
-         <div className="flex flex-col gap-1.5 px-6">
-            <div className="w-full max-w-lg mx-auto">
+      <div
+         className="transition hover:bg-slate-200 dark:hover:bg-slate-700 rounded w-full py-1 px-3 cursor-pointer"
+         onClick={onClick}
+      >
+         <div className="flex flex-col gap-1.5 mx-3 w-full">
+            <div className="w-full">
                <div className="flex items-center gap-1.5">
-                  <div>
-                     <Building2 className="w-5 h-5 text-neutral-400" />
-                  </div>
+                  <div>{icon}</div>
                   <div className="flex flex-col gap-0.5">
-                     <p className="text-sm font-normal line-clamp-2">California, USA</p>
-                     <p className="text-xs font-normal text-gray-500 line-clamp-1">
-                        21, street, californias, USA
-                     </p>
+                     <p className="text-sm font-normal line-clamp-2">{name}</p>
+                     <p className="text-xs font-normal text-slate-500 line-clamp-1">{address}</p>
                   </div>
                </div>
             </div>
+         </div>
+      </div>
+   );
+});
+
+export const SkeletonLoading = () => {
+   return (
+      <div className="px-3 w-full">
+         <div className="w-full mb-2 flex justify-between items-center gap-2">
+            <Skeleton className="w-10 h-9" />
+            <Skeleton className="w-full h-9" />
+         </div>
+         <div className="w-full mb-2 flex justify-between items-center gap-2">
+            <Skeleton className="w-10 h-9" />
+            <Skeleton className="w-full h-9" />
+         </div>
+         <div className="w-full mb-2 flex justify-between items-center gap-2">
+            <Skeleton className="w-10 h-9" />
+            <Skeleton className="w-full h-9" />
          </div>
       </div>
    );

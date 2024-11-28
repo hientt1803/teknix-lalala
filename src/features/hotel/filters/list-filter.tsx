@@ -1,10 +1,17 @@
+'use client';
+
 import { MainButton } from '@/components/common/button/mainButton';
 import Badge from '@/components/custom/badges/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
+import { PlacesType } from '@/lib/Places';
 import { cn } from '@/lib/utils';
 import { FILTER_MOCK } from '@/slices/HotelListing/mock';
+import { ISearchGlobal } from '@/stores/features/global/type';
+import dynamic from 'next/dynamic';
 import React from 'react';
+
+const FilterMap = dynamic(() => import('../filters/filter-map').then((mod) => mod.FilterMap));
 
 export type FilterType = {
    sectionName: string;
@@ -14,10 +21,21 @@ export type FilterType = {
    }[];
 };
 
-export const ListFilter = () => {
+type ListFilterType = {
+   placeData: PlacesType;
+   searchGlobal: ISearchGlobal;
+};
+
+export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
    return (
-      <>
-         <div className="">
+      <React.Fragment>
+         <div>
+            <div className="group mb-10 mx-6">
+               <div className="text-lg font-[600] mb-2">Show on map</div>
+               <div className="flex items-center space-x-2">
+                  <FilterMap placeData={placeData} searchGlobal={searchGlobal} buttonClassName='min-w-full' />
+               </div>
+            </div>
             {FILTER_MOCK?.map((filter: FilterType, index) => (
                <React.Fragment key={index}>
                   <div className="group mb-10 mx-6">
@@ -79,6 +97,6 @@ export const ListFilter = () => {
                Filter Result
             </MainButton>
          </div>
-      </>
+      </React.Fragment>
    );
 };

@@ -1,10 +1,8 @@
 /**
- * Định dạng tiền tệ toàn cầu với khả năng thay thế ký hiệu tùy chỉnh cho một số loại tiền tệ.
+ * Định dạng tiền tệ với mã tiền tệ làm đuôi hiển thị đơn vị.
  * @param amount - Số tiền cần định dạng (có thể là số hoặc chuỗi).
  * @param currencyCode - Mã tiền tệ theo tiêu chuẩn ISO 4217 (ví dụ: "USD", "EUR", "VND").
- * @param locale - Định dạng theo ngôn ngữ/lãnh thổ, mặc định là 'vi-VN'.
- * @param customSymbolMap - Đối tượng ánh xạ mã tiền tệ với ký hiệu tùy chỉnh (nếu có).
- * @returns Chuỗi số tiền đã được định dạng.
+ * @returns Chuỗi số tiền đã được định dạng với mã tiền tệ làm đuôi.
  */
 export const formatCurrency = (
    amount: number | string,

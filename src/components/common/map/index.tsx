@@ -1,3 +1,5 @@
+"use client"
+
 import dynamic from 'next/dynamic';
 
 import 'leaflet/dist/leaflet.css';
@@ -8,14 +10,13 @@ import { useResizeDetector } from 'react-resize-detector';
 
 import { AppConfig } from '@/lib/AppConfig';
 import MarkerCategories, { Category } from '@/lib/MarkerCategories';
-import { Places, PlaceValues } from '@/lib/Places';
+import { PlaceValues } from '@/lib/Places';
 
+import useFullscreen from '@/hooks/use-fullscreen';
+import { LatLngExpression } from 'leaflet';
 import LeafleftMapContextProvider from './LeafletMapContextProvider';
 import useMapContext from './useMapContext';
 import useMarkerData from './useMarkerData';
-import { LatLngExpression } from 'leaflet';
-import useFullscreen from '@/hooks/use-fullscreen';
-import LeafletgeoSearch from './search';
 
 const LeafletCluster = dynamic(async () => (await import('./LeafletCluster')).LeafletCluster(), {
    ssr: false,

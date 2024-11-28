@@ -1,34 +1,66 @@
 'use client';
 
-import * as React from 'react';
-import { addDays, format } from 'date-fns';
+import { format } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
+import * as React from 'react';
 import { DateRange } from 'react-day-picker';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { useAppSelector } from '@/stores';
+import { setSearchGlobalDateRange } from '@/stores/features/global/global-slice';
+import {
+   checkIfDateIsGreaterThanToday,
+   convertStringToDate,
+   getAdjustedEndDate,
+} from '@/utilities/datetime';
+import { useDispatch } from 'react-redux';
 
 export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivElement>) {
+   // Redux
+   const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal.dateRange);
+   const dispatch = useDispatch();
+
+   // State
    const [date, setDate] = React.useState<DateRange | undefined>({
-      from: new Date(2022, 0, 20),
-      to: addDays(new Date(2022, 0, 20), 20),
+      from: searchGlobal?.startDate
+         ? checkIfDateIsGreaterThanToday(convertStringToDate(searchGlobal.startDate))
+         : new Date(),
+      to: getAdjustedEndDate(searchGlobal.startDate, searchGlobal.endDate),
    });
+
+   // Hooks
+
+   // Api
+
+   // Logic
 
    return (
       <div className={cn('grid gap-2', className)}>
-         <Popover>
+         <Popover
+            onOpenChange={(open) => {
+               if (open == false) {
+                  dispatch(
+                     setSearchGlobalDateRange({
+                        startDate: format(date?.from || new Date(), 'yyyy-MM-dd'),
+                        endDate: format(date?.to || new Date(), 'yyyy-MM-dd'),
+                     }),
+                  );
+               }
+            }}
+         >
             <PopoverTrigger asChild>
                <Button
                   id="date"
                   variant={'outline'}
                   className={cn(
-                     'w-fit hover:bg-transparent justify-start items-center text-left font-normal bg-transparent text-neutral-800 dark:text-neutral-50 shadow-none border-none outline-none p-0 ml-0 pl-0',
+                     'w-fit hover:bg-transparent justify-start items-center text-left font-normal bg-transparent text-slate-800 dark:text-slate-50 shadow-none border-none outline-none p-0 ml-0 pl-0',
                      !date && 'text-muted-foreground',
                   )}
                >
-                  <CalendarIcon className="text-neutral-400 w-5 h-5" />
+                  <CalendarIcon className="text-slate-400 w-5 h-5" />
                   {date?.from ? (
                      date.to ? (
                         <>
@@ -42,10 +74,15 @@ export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivE
                   )}
                </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
+            <PopoverContent
+               onOpenAutoFocus={(e) => e.preventDefault()}
+               className="w-auto p-0"
+               align="start"
+            >
                <Calendar
                   initialFocus
                   mode="range"
+                  fromDate={new Date()}
                   defaultMonth={date?.from}
                   selected={date}
                   onSelect={setDate}

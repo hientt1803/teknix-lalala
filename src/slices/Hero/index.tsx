@@ -45,7 +45,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
       <section
          data-slice-type={slice.slice_type}
          data-slice-variation={slice.variation}
-         className="w-full"
+         className="w-full mb-40 md:mb-0"
       >
          {slice.variation == 'default' && (
             <div className="relative w-full h-[calc(100vh+50px)] flex flex-col gap-6 xl:gap-10 justify-center items-center">

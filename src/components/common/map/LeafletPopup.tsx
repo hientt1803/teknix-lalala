@@ -6,9 +6,10 @@ import {AppConfig} from "@/lib/AppConfig";
 import {MarkerCategoriesValues} from "@/lib/MarkerCategories";
 import {PlaceValues} from "@/lib/Places";
 
-import {formatCurrency} from "@/utilities/currency";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { formatCurrencyWithCodeAsSuffix } from "@/utilities/currency";
+import Link from "next/link";
 
 const MarkerIconWrapper = dynamic(
     () => import("@/components/common/map/LeafletMarker/MarkerIconWrapper")
@@ -50,6 +51,7 @@ const LeafletPopup = ({
                                 item?.image && item.image.length > 0 ? item.image[0] : ""
                             }
                             className="w-full h-full object-cover"
+                            loading="lazy"
                         />
                         <br />
                     </div>
@@ -77,7 +79,7 @@ const LeafletPopup = ({
                                 (28)
                             </span>
                         </span>
-                        <span>{formatCurrency(price)}</span>
+                        <span>{formatCurrencyWithCodeAsSuffix(price, "VND")}</span>
                     </p>
                 </div>
                 {/* todo: new component for button group */}
@@ -91,10 +93,14 @@ const LeafletPopup = ({
                             <ChevronLeft size={AppConfig.ui.menuIconSize} />
                             Close
                         </Button>
-                        <Button className="gap-2" onClick={() => handleOpenLocation(id)}>
-                            Open
-                            <ChevronRight size={AppConfig.ui.menuIconSize} />
-                        </Button>
+                        <Link href={`/hotel/${id}`}>
+                            <Button className="gap-2" 
+                            // onClick={() => handleOpenLocation(id)}
+                            >
+                                Open
+                                <ChevronRight size={AppConfig.ui.menuIconSize} />
+                            </Button>
+                        </Link>
                     </div>
                 )}
             </Card>

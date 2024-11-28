@@ -15,6 +15,7 @@ export const OpenStreetMapAPI = createApi({
          IOpenStreetMapSearchResponse[],
          {
             query?: string;
+            language?: string;
          }
       >({
          query: (payload) => {
