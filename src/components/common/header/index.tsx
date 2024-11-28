@@ -42,19 +42,19 @@ const Header = async () => {
    return (
       <div
          className={cn(
-            'sticky top-0 w-full left-0 right-0 z-40 dark:bg-transparent bg-opacity-60 backdrop-blur-2xl py-1',
+            'fixed top-0 w-full left-0 right-0 z-40 dark:bg-transparent bg-opacity-60 backdrop-blur-2xl',
          )}
       >
          <Bounded as="header" className="p-0">
             <div className="relative">
-               <div className="px-4 h-16 sm:h-20 lg:container flex justify-between items-center">
+               <div className="px-4 h-16 sm:h-18 lg:container flex justify-between items-center">
                   {/* LOGO AND NAVIGATION */}
                   <div className="justify-start items-center flex flex-1 space-x-3 sm:space-x-6 lg:space-x-8">
                      <Link href="/">
                         <PrismicImage
                            field={settings.data.logo}
                            alt=""
-                           className="w-12 md:w-16 h-auto object-contain"
+                           className="w-9 md:w-12 h-auto object-contain"
                         />
                      </Link>
                      <div className="hidden lg:block self-center h-10 border-l border-neutral-300 dark:border-neutral-300" />

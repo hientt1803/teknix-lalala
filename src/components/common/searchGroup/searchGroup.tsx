@@ -192,7 +192,7 @@ export const SearchGroup = ({
                {/* Button */}
                <Button
                   variant="default"
-                  className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] rounded-3xl bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-lg hover:bg-slate-800 hover:text-white font-normal"
+                  className="flex-1 min-w-[11.25rem] py-6 w-fit xl:max-w-[11.25rem] rounded-3xl bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-base hover:bg-slate-800 hover:text-white font-normal"
                   onClick={() => handleSearchDirection()}
                   disabled={hotelSearchLoadingState && pathname == '/'}
                >

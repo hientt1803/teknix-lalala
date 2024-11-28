@@ -9,7 +9,7 @@ export default async function Page() {
    const page = await client.getSingle('homepage');
 
    return (
-      <div className="flex flex-col gap-8 lg:gap-16 justify-center items-center overflow-hidden">
+      <div className="flex flex-col gap-4 lg:gap-8 justify-center items-center overflow-hidden">
          <SliceZone slices={page.data.slices} components={components} />
       </div>
    );

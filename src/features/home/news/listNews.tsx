@@ -27,7 +27,7 @@ const news: newsType[] = [
       title: 'Top 10 Travel Hacks for Budget-Conscious Adventurers',
       author: 'Jimmy Dave',
       category: 'Discovery',
-      image: 'image',
+      image: 'https://travila-nextjs.vercel.app/assets/imgs/page/homepage1/news.png',
    },
    {
       date: '18 Sep 2024',
@@ -36,7 +36,7 @@ const news: newsType[] = [
       title: 'Discovering Hidden Gems: 10 Off-the-Beaten-Path Travel Tips',
       author: 'Jimmy Dave',
       category: 'Cultural',
-      image: 'image',
+      image: 'https://travila-nextjs.vercel.app/assets/imgs/page/homepage1/news2.png',
    },
    {
       date: '18 Sep 2024',
@@ -45,7 +45,7 @@ const news: newsType[] = [
       title: 'Ultimate Travel Planning Guide: 10 Tips for a Seamless Journey',
       author: 'Jimmy Dave',
       category: 'Travel',
-      image: 'image',
+      image: 'https://travila-nextjs.vercel.app/assets/imgs/page/homepage1/news3.png',
    },
 ];
 
