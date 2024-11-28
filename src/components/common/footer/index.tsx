@@ -11,7 +11,7 @@ const Footer = async () => {
       <div className="mt-8 border-t border-t-slate-200 dark:border-t-slate-700">
          <Bounded as="footer" className="divide-y divide-slate-200 dark:divide-slate-700">
             <div className="flex flex-col md:flex-row justify-between items-center md:items-end space-y-3 py-8">
-               <PrismicImage field={settings.data.logo} className="w-24" />
+               <PrismicImage field={settings.data.logo} className="w-20" />
                <div className="flex  items-center justify-end space-x-2">
                   <Link className="text-md-medium need-help" href="/tel:1-800-222-8888">
                      Need help? Call us
@@ -79,7 +79,7 @@ text-slate-500 dark:text-slate-400 "
                            <PrismicNextLink
                               field={social.link}
                               key={index}
-                              className="rounded-full p-2 border border-slate-700 hover:text-yellow-400 hover:-translate-y-1 transition-transform duration-200"
+                              className="rounded-full p-2 border border-slate-700 hover:border-yellow-400 hover:text-yellow-400 hover:-translate-y-1 transition-transform duration-200"
                            >
                               {social.icon === 'facebook' ? (
                                  <svg

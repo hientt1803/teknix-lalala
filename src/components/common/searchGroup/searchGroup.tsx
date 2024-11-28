@@ -329,7 +329,7 @@ export const SearchGroup = ({
 
    return (
       <div className={cn('w-full relative z-30', className)}>
-         <div className="w-full bg-white dark:bg-slate-950/90 shadow-md rounded-xl p-7">
+         <div className="w-full bg-white dark:bg-slate-800 shadow-md rounded-xl p-7">
             <Tabs value={typeProp} className="w-full">
                <TabsList className="w-full h-full flex justify-between items-center flex-wrap md:flex-nowrap bg-transparent">
                   <div className="w-full">

@@ -23,6 +23,9 @@ type Props = {
       description: RichTextField;
    }[];
 };
+type RightSideHeaderProps = {
+    className?: string
+}
 const RightSiderHeader = () => {
    const router = useRouter();
    const user = useAppSelector((state) => state.userSlice.access_token);

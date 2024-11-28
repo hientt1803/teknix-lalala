@@ -20,10 +20,10 @@ const components: JSXMapSerializer = {
 const TopAuthor = ({ heading, body }: TopAuthorProps) => {
    return (
       <>
-         <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 2xl:max-w-screen-2xl left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 dark:bg-slate-900 bg-slate-100"></div>
+         <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 dark:bg-slate-900 bg-slate-100"></div>
          <div className="relative">
             <div className="relative mb-10 text-slate-900">
-               <div className="text-center w-full max-w-2xl mx-auto mb-4">
+               <div className="text-center w-full max-w-screen-1920 mx-auto mb-4">
                   <PrismicRichText field={heading} components={components} />
                   <PrismicRichText field={body} components={components} />
                </div>

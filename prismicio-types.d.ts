@@ -594,9 +594,47 @@ export type ExploreStaySliceDefault = prismic.SharedSliceVariation<
 >;
 
 /**
+ * Primary content in *ExploreStay → Destination → Primary*
+ */
+export interface ExploreStaySliceDestinationPrimary {
+   /**
+    * Heading field in *ExploreStay → Destination → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: explore_stay.destination.primary.heading
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   heading: prismic.RichTextField;
+
+   /**
+    * Body field in *ExploreStay → Destination → Primary*
+    *
+    * - **Field Type**: Rich Text
+    * - **Placeholder**: *None*
+    * - **API ID Path**: explore_stay.destination.primary.body
+    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+    */
+   body: prismic.RichTextField;
+}
+
+/**
+ * Destination variation for ExploreStay Slice
+ *
+ * - **API ID**: `destination`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type ExploreStaySliceDestination = prismic.SharedSliceVariation<
+   'destination',
+   Simplify<ExploreStaySliceDestinationPrimary>,
+   never
+>;
+
+/**
  * Slice variation for *ExploreStay*
  */
-type ExploreStaySliceVariation = ExploreStaySliceDefault;
+type ExploreStaySliceVariation = ExploreStaySliceDefault | ExploreStaySliceDestination;
 
 /**
  * ExploreStay Shared Slice
@@ -2926,8 +2964,10 @@ declare module '@prismicio/client' {
          AskAndQuestionsSliceDefault,
          ExploreStaySlice,
          ExploreStaySliceDefaultPrimary,
+         ExploreStaySliceDestinationPrimary,
          ExploreStaySliceVariation,
          ExploreStaySliceDefault,
+         ExploreStaySliceDestination,
          FacilitiesSectionSlice,
          FacilitiesSectionSliceDefaultPrimaryFacilitiesItem,
          FacilitiesSectionSliceDefaultPrimaryDestinationsItem,
