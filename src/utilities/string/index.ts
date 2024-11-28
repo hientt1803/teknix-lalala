@@ -24,3 +24,23 @@ export const convertKebabToTitleCase = (str: string): string => {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
       .join(' '); // Join the words with a space
 };
+
+/**
+ * The function `convertToTitleCase` takes a string with words separated by underscores and converts it
+ * to title case.
+ * @param {string} input - The `convertToTitleCase` function takes a string input in snake_case format
+ * and converts it to title case format.
+ * @returns The `convertToTitleCase` function takes a string input and converts it to title case, where
+ * the first letter of each word is capitalized and the rest are in lowercase. The function splits the
+ * input string by underscores, capitalizes the first letter of the first word, and converts the rest
+ * of the words to lowercase. Finally, it joins the words back together with spaces and returns the
+ * resulting title case
+ */
+export function convertToTitleCase(input: string): string {
+   return input
+      .split('_')
+      .map((word, index) =>
+         index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.toLowerCase(),
+      )
+      .join(' ');
+}

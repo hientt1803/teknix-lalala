@@ -14,7 +14,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { IHotelDataHotels, IHotelDataMapHotels } from '@/stores/features/stay/type';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
-import { convertKebabToTitleCase, replaceSize } from '@/utilities/string';
+import { calculateKilometerDistance } from '@/utilities/geo';
+import { convertKebabToTitleCase, convertToTitleCase, replaceSize } from '@/utilities/string';
 import { ArrowRight, MapPin, MapPinnedIcon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
@@ -24,10 +25,11 @@ type HotelCArdType = {
    selectedMap?: IHotelDataMapHotels;
    distance: number;
    displayType: 'list' | 'grid';
+   directLink: string;
 };
 
 const HotelCard = (props: HotelCArdType) => {
-   const { selectedMap, hotel, distance, displayType } = props;
+   const { selectedMap, hotel, distance, displayType, directLink } = props;
 
    const items = selectedMap?.images?.slice(0, 5).map((item, index) => (
       <CarouselItem
@@ -39,7 +41,7 @@ const HotelCard = (props: HotelCArdType) => {
          )}
       >
          <Image
-            src={replaceSize(item)}
+            src={replaceSize(item) || '/assets/images/place-holder-image.svg'}
             className="w-full h-full object-cover rounded-md"
             alt={selectedMap?.name}
             loading="lazy"
@@ -100,7 +102,7 @@ const HotelCard = (props: HotelCArdType) => {
                            variant={'default'}
                            className="text-white bg-neutral-900 text-sm py-1 px-2"
                         >
-                           ⭐ {selectedMap?.star_rating.toFixed(2) || 0}
+                           ⭐ {selectedMap?.star_rating.toFixed(1) || 0}
                         </Button>
                      )}
 
@@ -124,16 +126,20 @@ const HotelCard = (props: HotelCArdType) => {
 
                   {/* NAME & LOCATION */}
                   <div className="mb-4">
-                     <h3 className="text-2xl font-bold capitalize line-clamp-2 mb-1 hover:text-yellow-700 cursor-pointer">
-                        {selectedMap?.name}
-                     </h3>
+                     <Link href={directLink}>
+                        <h3 className="text-2xl font-bold capitalize line-clamp-2 mb-1 hover:text-yellow-700 cursor-pointer">
+                           {selectedMap?.name || convertToTitleCase(hotel?.hotel_id || '')}
+                        </h3>
+                     </Link>
                      <p className="flex items-center gap-2">
                         <MapPin className="w-4 h-4 text-slate-500" />
                         <span className="text-sm text-slate-500">{selectedMap?.address}</span>
                      </p>
                      <p className="flex items-center gap-2">
                         <MapPinnedIcon className="w-4 h-4 text-slate-500" />
-                        <span className="text-sm text-slate-500">{distance} from a center</span>
+                        <span className="text-sm text-slate-500">
+                           {calculateKilometerDistance(distance)} from a center
+                        </span>
                      </p>
                   </div>
 
@@ -237,13 +243,13 @@ const HotelCard = (props: HotelCArdType) => {
                      </span> */}
                   </span>
                   {displayType == 'list' ? (
-                     <Link href={`/hotel/${hotel?.hotel_id}`}>
+                     <Link href={directLink}>
                         <Button variant="default" className="text-sm">
                            Select Room
                         </Button>
                      </Link>
                   ) : (
-                     <Link href={`/hotel/${hotel?.hotel_id}`}>
+                     <Link href={directLink}>
                         <Button
                            variant="default"
                            className="text-sm font-medium bg-neutral-100 text-black hover:bg-neutral-800 hover:text-neutral-200"

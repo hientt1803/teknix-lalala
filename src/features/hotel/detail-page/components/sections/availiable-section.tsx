@@ -13,12 +13,10 @@ const AvailiableSection = ({ id }: Props) => {
 
    const { data, isLoading, isFetching } = useGetRoomActiveByHotelIdQuery({
       checkin: searchGlobal?.dateRange?.startDate || formatDate(new Date(), 'yyyy-MM-dd'),
-      checkout: formatDate(addDays(new Date(), 2), 'yyyy-MM-dd'),
-      // checkout:
-      //    searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 2), 'yyyy-MM-dd'),
-      // checkout: '2024-11-29',
-      currency: 'VND',
-      language: 'en',
+      checkout:
+         searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 1), 'yyyy-MM-dd'),
+      currency: searchGlobal?.currency?.code || 'USD',
+      language: searchGlobal?.lang?.cca2 || 'en',
       guests: searchGlobal.people || [
          {
             adults: 1,
@@ -26,7 +24,7 @@ const AvailiableSection = ({ id }: Props) => {
          },
       ],
       id: id,
-      residency: 'VN',
+      residency: searchGlobal?.lang?.cca2 || 'en',
    });
 
    return (

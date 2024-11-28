@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useGetReservationByIdQuery } from '@/stores/features/reservation';
@@ -12,6 +13,7 @@ import Bounded from '@/components/common/containers/bounded';
 import { useSearchParams } from 'next/navigation';
 import Loading from '@/components/custom/loaders/app-loading';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
+import { replaceSize } from '@/utilities/string';
 
 const CheckoutResultFeature = () => {
    const searchParam = useSearchParams();
@@ -19,10 +21,10 @@ const CheckoutResultFeature = () => {
    const [orderId, setOrderId] = useState('');
 
    useEffect(() => {
-      const payDone = searchParam.get('paydone');
+      const payDone = searchParam.get('status');
       const orderId = searchParam.get('order');
 
-      setIsSuccess(payDone === 'true');
+      setIsSuccess(payDone === 'completed');
       if (orderId) {
          setOrderId(orderId);
       }
@@ -71,7 +73,7 @@ const CheckoutResultFeature = () => {
                                        <img
                                           alt=""
                                           className="absolute inset-0 h-full object-cover"
-                                          src={dataHotel?.images[0].replace('{size}', '640x400')}
+                                          src={replaceSize(dataHotel?.images[0] || '')}
                                           loading="lazy"
                                        />
                                     </div>
@@ -159,7 +161,11 @@ const CheckoutResultFeature = () => {
                                  <div className="flex text-slate-600 dark:text-slate-400">
                                     <span className="flex-1">Total</span>
                                     <span className="flex-1 font-medium text-slate-900 dark:text-slate-50">
-                                       {formatCurrencyWithCodeAsSuffix(data?.total_price || 0)}
+                                       {formatCurrencyWithCodeAsSuffix(
+                                          data?.total_price || 0,
+                                          data?.rate_meta_data?.payment_options?.payment_types[0]
+                                             ?.show_currency_code,
+                                       )}
                                     </span>
                                  </div>
                                  <div className="flex justify-between text-slate-600 dark:text-slate-400">
@@ -175,7 +181,7 @@ const CheckoutResultFeature = () => {
                      ) : (
                         <div className="w-full mx-auto lg:max-w-md relative">
                            <div className="flex flex-col gap-5">
-                              <img src={'/error_style1.svg'} loading="lazy" />
+                              <img src={'/icons/error_style1.svg'} loading="lazy" />
                               <h3 className="text-center text-slate-400">
                                  Some thing went wrong! <br /> Please contact to admin or try again
                               </h3>
@@ -207,7 +213,7 @@ const CheckoutResultFeature = () => {
                               </Link>
                            </div>
                         ) : (
-                           <div className="flex items-center justify-start gap-5">
+                           <div className="w-fit mx-auto flex items-center justify-start gap-5">
                               <Link
                                  href={`/profile`}
                                  className={buttonVariants({

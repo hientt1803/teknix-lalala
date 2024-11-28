@@ -6,13 +6,14 @@ import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselDots, CarouselItem } from '@/components/ui/carousel';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { setReserveForm } from '@/stores/features/stay';
 import { countTotalDaysInRange, formatDateMMM } from '@/utilities/datetime';
 import { format } from 'date-fns';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
+import Image from '@/components/common/images/image';
 
 type Props = {
    data?: { roomGroup: RoomGroup; rates: Rate[] };
@@ -80,9 +81,11 @@ const RoomCard = ({ data, active, id }: Props) => {
          <div>
             <Card className="shadow-none border p-0">
                <CardContent className="flex aspect-video items-center justify-center p-0">
-                  <img
+                  <Image
                      alt={item}
-                     src={item.replace('{size}', '640x400')}
+                     src={
+                        item.replace('{size}', '640x400') || '/assets/images/place-holder-image.svg'
+                     }
                      className="w-full h-full object-cover rounded"
                      loading="lazy"
                   />
@@ -123,14 +126,17 @@ const RoomCard = ({ data, active, id }: Props) => {
                         <CarouselDots className="absolute bottom-5 inset-x-0" />
                      </Carousel>
                   ) : (
-                     <img
+                     <Image
                         alt={'placeholder images'}
-                        src={'/placeholder-card.png'}
-                        className="w-full h-48 object-cover rounded"
+                        src={'/assets/images/hotel/placeholder-card.png'}
+                        className="w-fit h-48 object-cover rounded"
                         loading="lazy"
                      />
                   )}
-                  <h3 className="text-xl font-semibold">{data?.roomGroup?.name}</h3>
+                  <h3 className="text-xl font-semibold">
+                     {searchGlobal?.people?.length > 1 ? `${searchGlobal?.people?.length}x` : ''}{' '}
+                     {data?.roomGroup?.name}
+                  </h3>
                   <div className="w-14 border-b-4 border-orange-500 dark:border-orange-700" />
                   <div className="grid grid-cols-1 space-y-2 divide-y">
                      {data.rates && data.rates.length > 0 && (
@@ -218,14 +224,14 @@ const RoomCard = ({ data, active, id }: Props) => {
                                        <span className="flex flex-col text-lg font-semibold text-orange-500 text-center xl:text-left">
                                           <span className="text-xs text-slate-500 font-light px-1 line-through">
                                              {formatCurrencyWithCodeAsSuffix(
-                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]?.show_amount,
                                                 rate.payment_options.payment_types[0]
                                                    ?.show_currency_code,
                                              )}
                                           </span>
                                           <span className="flex items-center justify-center gap-1">
                                              {formatCurrencyWithCodeAsSuffix(
-                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]?.show_amount,
                                                 rate.payment_options.payment_types[0]
                                                    ?.show_currency_code,
                                              )}
@@ -354,14 +360,14 @@ const RoomCard = ({ data, active, id }: Props) => {
                                        <span className="flex flex-col text-lg font-semibold text-orange-500 text-center xl:text-left">
                                           <span className="text-xs text-slate-500 font-light px-1 line-through">
                                              {formatCurrencyWithCodeAsSuffix(
-                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]?.show_amount,
                                                 rate.payment_options.payment_types[0]
                                                    ?.show_currency_code,
                                              )}
                                           </span>
                                           <span className="flex items-center justify-center gap-1">
                                              {formatCurrencyWithCodeAsSuffix(
-                                                rate.daily_prices[0],
+                                                rate.payment_options.payment_types[0]?.show_amount,
                                                 rate.payment_options.payment_types[0]
                                                    ?.show_currency_code,
                                              )}

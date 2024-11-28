@@ -4,7 +4,8 @@ const nextConfig = {
         optimizePackageImports: [
           "@reduxjs/toolkit",
           "date-fns",
-          "leaflet"
+          "leaflet",
+          "framer-motion"
         ],
       },
 };

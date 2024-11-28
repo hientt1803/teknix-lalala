@@ -17,11 +17,12 @@ const LoadingGlobal = (props: ILoading) => {
             <div className="fixed top-0 left-0 right-0 bottom-0 min-w-[100vw] z min-h-screen flex justify-center items-center bg-[#f1f1f1] opacity-95 z-50">
                <div className="flex flex-col gap-2 justify-center items-center float-area">
                   <Image
-                     src="/assets/favicon/lalala.svg"
+                     src="/lalala.svg"
                      width={80}
                      height={80}
                      alt="Lalala Logo"
                      className="floating-img mb-2"
+                     loading="lazy"
                   />
 
                   <div className="flex items-center justify-center">

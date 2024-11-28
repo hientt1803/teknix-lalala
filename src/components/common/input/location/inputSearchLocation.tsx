@@ -6,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Skeleton } from '@/components/ui/skeleton';
 import useDebouncedValue from '@/hooks/use-debounced';
 import { cn } from '@/lib/utils';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { setSearchGlobalLocation } from '@/stores/features/global/global-slice';
 import { useLazyGetListLocaltionByOpenStreetMapAPIQuery } from '@/stores/features/openstreetmap';
 import { useLazyGetListHoteStayByLocationKeyWordQuery } from '@/stores/features/stay';
@@ -19,7 +19,6 @@ import {
    University,
    XIcon,
 } from 'lucide-react';
-import Image from 'next/image';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -276,14 +275,15 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                      onChange={(e) => setInputSearch(e.currentTarget.value)}
                   />
                   {inputSearch && (
-                     <Button variant="ghost" size="icon">
-                        <XIcon
-                           className="text-slate-800 cursor-pointer w-5 h-5"
-                           onClick={() => {
-                              setInputSearch('');
-                              inputRef.current?.focus();
-                           }}
-                        />
+                     <Button
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => {
+                           setInputSearch('');
+                           inputRef.current?.focus();
+                        }}
+                     >
+                        <XIcon className="text-slate-800 cursor-pointer w-5 h-5" />
                      </Button>
                   )}
                </div>

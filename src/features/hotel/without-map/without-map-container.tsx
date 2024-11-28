@@ -15,6 +15,7 @@ import { LayoutGrid, List } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { FilterCollapseContent, FilterCollapseTrigger } from '../filters/filter-collapse';
 
 const ListHotelWithoutMap = dynamic(() =>
    import('./list-hotel').then((mod) => mod.ListHotelWithoutMap),
@@ -23,9 +24,6 @@ const FilterDrawer = dynamic(() =>
    import('../filters/filter-drawer').then((mod) => mod.FilterDrawer),
 );
 const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter));
-const FilterCollapse = dynamic(() =>
-   import('../filters/filter-collapse').then((mod) => mod.FilterCollapse),
-);
 const FilterMap = dynamic(() => import('../filters/filter-map').then((mod) => mod.FilterMap));
 
 export const WithoutMapContainer = () => {
@@ -36,6 +34,7 @@ export const WithoutMapContainer = () => {
 
    // state
    const [displayType, setDisplayType] = useState<'grid' | 'list'>('list');
+   const [filterCollapse, setFilterCollapse] = useState(false);
 
    // Api
    const [
@@ -137,7 +136,7 @@ export const WithoutMapContainer = () => {
 
                {displayType == 'grid' && (
                   <div className="hidden md:flex items-center gap-4 w-full">
-                     <FilterCollapse />
+                     <FilterCollapseTrigger isOpen={filterCollapse} setIsOpen={setFilterCollapse} />
                      <FilterMap placeData={placeData} searchGlobal={globalSearchState} />
                   </div>
                )}
@@ -152,7 +151,10 @@ export const WithoutMapContainer = () => {
                      <TabsTrigger
                         value="list"
                         className="bg-neutral-300 text-black rounded-none rounded-l-lg data-[state=active]:bg-black data-[state=active]:text-white py-2"
-                        onClick={() => setDisplayType('list')}
+                        onClick={() => {
+                           setDisplayType('list');
+                           setFilterCollapse(false);
+                        }}
                      >
                         <List className="w-5 h-5" />
                      </TabsTrigger>
@@ -168,6 +170,8 @@ export const WithoutMapContainer = () => {
             </div>
 
             {/* DISPLAY CONTENT */}
+            <FilterCollapseContent isOpen={filterCollapse} />
+
             <TabsContent value="list" className="w-full">
                <div className="grid grid-cols-12 gap-6 w-full">
                   <div className="hidden md:block md:col-span-4 lg:col-span-3">

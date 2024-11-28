@@ -42,6 +42,7 @@ import {
 import { DateRange } from 'react-day-picker';
 import { useDispatch } from 'react-redux';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
+import { useGetReviewByStayIdQuery } from '@/stores/features/review';
 
 const ReserveSection = ({
    id,
@@ -56,11 +57,10 @@ const ReserveSection = ({
    const { done, start } = useProgressStore();
    const { data, isLoading, isFetching } = useGetRoomActiveByHotelIdQuery({
       checkin: searchGlobal?.dateRange?.startDate || formatDate(new Date(), 'yyyy-MM-dd'),
-      // checkout:
-      //    searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 2), 'yyyy-MM-dd'),
-      checkout: formatDate(addDays(new Date(), 2), 'yyyy-MM-dd'),
-      currency: 'VND',
-      language: 'en',
+      checkout:
+         searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 1), 'yyyy-MM-dd'),
+      currency: searchGlobal?.currency?.code || 'USD',
+      language: searchGlobal?.lang?.cca2 || 'en',
       guests: searchGlobal.people || [
          {
             adults: 1,
@@ -68,7 +68,10 @@ const ReserveSection = ({
          },
       ],
       id: id,
-      residency: 'VN',
+      residency: searchGlobal?.lang?.cca2 || 'en',
+   });
+   const { data: reviewData } = useGetReviewByStayIdQuery({
+      id: id,
    });
 
    const [openDate, setOpenDate] = useState(false);
@@ -363,21 +366,36 @@ const ReserveSection = ({
    );
 
    if (isLoading) return <ReserveCardSkeleton />;
+
    return (
       <div className="border border-slate-100 dark:border-slate-700 rounded-2xl shadow-xl p-4">
          <div className="flex justify-between">
-            <span className="text-3xl font-semibold">
-               {formatCurrencyWithCodeAsSuffix(data?.hotels[0]?.rates[0]?.daily_prices[0] || 0)}
-               <span className="ml-1 text-base font-normal text-slate-500 dark:text-slate-400">
-                  /night
+            {data?.hotels[0]?.rates[0]?.payment_options.payment_types[0]?.show_amount ? (
+               <span className="text-3xl font-semibold">
+                  {formatCurrencyWithCodeAsSuffix(
+                     data?.hotels[0]?.rates[0]?.payment_options.payment_types[0]?.show_amount || 0,
+                     data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                        .show_currency_code || 'VND',
+                  )}
+                  <span className="ml-1 text-base font-normal text-slate-500 dark:text-slate-400">
+                     /night
+                  </span>
                </span>
-            </span>
+            ) : (
+               <span className="text-3xl font-semibold">
+                  <span className="ml-1 text-base font-normal text-slate-500 dark:text-slate-400">
+                     No Room availiable
+                  </span>
+               </span>
+            )}
             <div className="flex items-center space-x-1 text-sm">
                <div className="pb-[2px]">
                   <StarOff className="w-5 h-5 text-yellow-500" />
                </div>
                <span className="font-medium">{data?.map_hotels[0]?.star_rating || 0}</span>
-               <span className="text-slate-500 dark:text-slate-400">(112)</span>
+               <span className="text-slate-500 dark:text-slate-400">
+                  ({reviewData?.reviews?.length || 0})
+               </span>
             </div>
          </div>
          <form className="flex flex-col border border-slate-100 dark:border-slate-700 rounded-3xl my-5">
@@ -490,12 +508,14 @@ const ReserveSection = ({
 
                <PopoverContent className="w-full  overflow-hidden rounded-3xl shadow-lg ring-1 ring-neutral-100 ring-opacity-5 bg-white p-8 hidden lg:block">
                   <div className="space-y-8">
-                     {fields}
-                     <div className="">
-                        <Button variant="ghost" onClick={handleAddRoom}>
-                           <PlusIcon className="mr-2 w-5 h-5" /> Add a room
-                        </Button>
-                     </div>
+                     <ScrollArea className="md:h-64 2xl:h-80">
+                        {fields}
+                        <div className="">
+                           <Button variant="ghost" onClick={handleAddRoom}>
+                              <PlusIcon className="mr-2 w-5 h-5" /> Add a room
+                           </Button>
+                        </div>
+                     </ScrollArea>
                   </div>
                </PopoverContent>
             </Popover>
@@ -513,26 +533,47 @@ const ReserveSection = ({
                <div className="flex flex-col space-y-4">
                   <div className="flex justify-between text-slate-600 dark:text-slate-50">
                      <span>
-                        {formatCurrencyWithCodeAsSuffix(data?.hotels[0]?.rates[0].daily_prices[0] || 0)}
+                        {formatCurrencyWithCodeAsSuffix(
+                           data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                              ?.show_amount || 0,
+                           data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                              .show_currency_code,
+                        )}
                         <span className="mx-2">x</span>
                         {totalDay} night
                      </span>
                      <span>
                         {formatCurrencyWithCodeAsSuffix(
-                           (Number(data?.hotels[0]?.rates[0].daily_prices[0]) || 1) * totalDay,
+                           (Number(
+                              data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                                 ?.show_amount,
+                           ) || 1) * totalDay,
+                           data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                              .show_currency_code,
                         )}
                      </span>
                   </div>
                   <div className="flex justify-between text-slate-600 dark:text-slate-50">
                      <span>Service charge</span>
-                     <span>{formatCurrencyWithCodeAsSuffix(0)}</span>
+                     <span>
+                        {formatCurrencyWithCodeAsSuffix(
+                           0,
+                           data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                              .show_currency_code,
+                        )}
+                     </span>
                   </div>
                   <div className="border-b border-slate-200 dark:border-slate-700"></div>
                   <div className="flex justify-between font-semibold">
                      <span>Total</span>
                      <span>
                         {formatCurrencyWithCodeAsSuffix(
-                           (Number(data?.hotels[0]?.rates[0].daily_prices[0]) || 0) * totalDay,
+                           (Number(
+                              data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                                 ?.show_amount,
+                           ) || 0) * totalDay,
+                           data?.hotels[0]?.rates[0].payment_options.payment_types[0]
+                              .show_currency_code,
                         )}
                      </span>
                   </div>

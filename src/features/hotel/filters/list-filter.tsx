@@ -33,13 +33,16 @@ type ListFilterType = {
 };
 
 export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
+   // Redux
    const mapRadiusSearch = useAppSelector(
-      (state) => state.globalSlice.searchGlobal.location.radius,
+      (state) => state?.globalSlice?.searchGlobal?.location?.radius,
    );
    const dispatch = useDispatch();
 
+   // State
    const [locationGeoRange, setLocationGeoRange] = useState(mapRadiusSearch || 30000);
 
+   // Logic
    let triggerSearchTimeout: NodeJS.Timeout;
 
    const handleChangeLocationGeoRangeByInput = (e: React.ChangeEvent<HTMLInputElement>) => {

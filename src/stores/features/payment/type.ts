@@ -17,6 +17,7 @@ export interface MiniumAmount {
 export interface IPaymentRequest {
    reservation_id: string;
    payment_method: string;
+   currency: string;
 }
 
 export interface IPaymentResponse {

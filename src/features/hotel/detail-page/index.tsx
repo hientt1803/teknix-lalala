@@ -2,11 +2,11 @@ import Bounded from '@/components/common/containers/bounded';
 import ImageGalleryComp from '@/components/custom/media/image-gallery';
 import { buttonVariants } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';
+import { getHotelDetail } from '@/services/hotel';
 import { TooltipTrigger } from '@radix-ui/react-tooltip';
 import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 import MainContent from './components/main-content';
-import { getHotelDetail } from '@/services/hotel';
 
 interface HotelDetailFeatureProps {
    id: string;
@@ -31,8 +31,6 @@ const HotelDetailFeature = async ({ id }: HotelDetailFeatureProps) => {
    //    router.back();
    // };
    const data = await getHotelDetail(id);
-
-   console.log(data);
 
    return (
       <Bounded className="relative">

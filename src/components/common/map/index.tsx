@@ -17,6 +17,7 @@ import { LatLngExpression } from 'leaflet';
 import LeafleftMapContextProvider from './LeafletMapContextProvider';
 import useMapContext from './useMapContext';
 import useMarkerData from './useMarkerData';
+import { cn } from '@/lib/utils';
 
 const LeafletCluster = dynamic(async () => (await import('./LeafletCluster')).LeafletCluster(), {
    ssr: false,
@@ -49,8 +50,9 @@ const Search = dynamic(async () => (await import('./search')).default, {
 interface LeafletMapDataProps {
    data?: PlaceValues[];
    center?: LatLngExpression;
+   wrapperClassname?: string;
 }
-const LeafletMapInner = ({ data, center }: LeafletMapDataProps) => {
+const LeafletMapInner = ({ data, center, wrapperClassname }: LeafletMapDataProps) => {
    const { map } = useMapContext();
    const {
       width: viewportWidth,
@@ -88,7 +90,10 @@ const LeafletMapInner = ({ data, center }: LeafletMapDataProps) => {
    }, [allMarkersBoundCenter, map]);
 
    return (
-      <div className="absolute h-full w-full overflow-hidden" ref={viewportRef}>
+      <div
+         className={cn('absolute h-full w-full overflow-hidden', wrapperClassname)}
+         ref={viewportRef}
+      >
          <div
             ref={ref}
             className={`absolute left-0 w-full transition-opacity ${isLoading ? 'opacity-0' : 'opacity-1 '}`}
@@ -140,9 +145,9 @@ const LeafletMapInner = ({ data, center }: LeafletMapDataProps) => {
    );
 };
 
-const Map = ({ data, center }: LeafletMapDataProps) => (
+const Map = ({ data, center, wrapperClassname }: LeafletMapDataProps) => (
    <LeafleftMapContextProvider>
-      <LeafletMapInner data={data} center={center} />
+      <LeafletMapInner data={data} center={center} wrapperClassname={wrapperClassname} />
    </LeafleftMapContextProvider>
 );
 

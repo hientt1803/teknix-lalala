@@ -1,11 +1,25 @@
 import { MainButton } from '@/components/common/button/mainButton';
 import Bounded from '@/components/common/containers/bounded';
-import { heroComponents } from '@/slices/Hero';
+import Heading from '@/components/common/typography/heading';
+import Paragraph from '@/components/common/typography/paragraph';
 import { Content } from '@prismicio/client';
 import { PrismicNextLink } from '@prismicio/next';
-import { PrismicRichText } from '@prismicio/react';
+import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { ArrowRight, Play } from 'lucide-react';
 import Image from 'next/image';
+
+const heroComponents: JSXMapSerializer = {
+   heading1: ({ children }) => (
+      <Heading as="h1" className="text-3xl md:text-6xl 1920:text-7xl font-medium text-white">
+         {children}
+      </Heading>
+   ),
+   paragraph: ({ children }) => (
+      <Paragraph as="p" className="text-white dark:text-white text-sm">
+         {children}
+      </Paragraph>
+   ),
+};
 
 export const MainContent = ({ slice }: { slice: Content.HeroSlice }) => {
    return (

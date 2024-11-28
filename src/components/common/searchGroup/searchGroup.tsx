@@ -192,15 +192,15 @@ export const SearchGroup = ({
                {/* Button */}
                <Button
                   variant="default"
-                  className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-xl hover:bg-slate-800 hover:text-white font-normal"
+                  className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] rounded-3xl bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-lg hover:bg-slate-800 hover:text-white font-normal"
                   onClick={() => handleSearchDirection()}
                   disabled={hotelSearchLoadingState && pathname == '/'}
                >
                   {hotelSearchLoadingState && pathname == '/' ? (
-                     <span className="h-5 w-5 animate-spin rounded-full border-4 border-gray-200 border-t-slate-800" />
+                     <span className="h-4 w-4 animate-spin rounded-full border-4 border-gray-200 border-t-slate-800" />
                   ) : (
                      <>
-                        <Search className="w-5 h-5 text-slate-200 dark:text-slate-800" />
+                        <Search className="w-4 h-4 text-slate-200 dark:text-slate-800" />
                         Search
                      </>
                   )}
@@ -316,7 +316,7 @@ export const SearchGroup = ({
                   {/* Button */}
                   <Button
                      variant="default"
-                     className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-xl hover:bg-slate-800 hover:text-white font-normal"
+                     className="flex-1 min-w-[11.25rem] w-fit xl:max-w-[11.25rem] rounded-lg bg-black dark:bg-slate-100 text-white dark:text-slate-800 text-xl hover:bg-slate-800 hover:text-white font-normal"
                   >
                      <Search className="w-5 h-5 text-slate-200 dark:text-slate-800" />
                      Search

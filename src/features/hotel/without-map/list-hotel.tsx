@@ -6,12 +6,8 @@ import { useAppSelector } from '@/stores/hook';
 import { convertStringToDate, formatDateUTC } from '@/utilities/datetime';
 import { useCallback, useMemo, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import { HotelCardSkeleton } from '../cards/hotel-card';
-import dynamic from 'next/dynamic';
-
-const HotelCard = dynamic(() => import('../cards/hotel-card').then((mod) => mod.default), {
-   loading: () => <HotelCardSkeleton displayType={'list'} />,
-});
+import HotelCard, { HotelCardSkeleton } from '../cards/hotel-card';
+import { useSearchParams } from 'next/navigation';
 
 export type ListHotelWioutMapType = {
    type: 'list' | 'grid';
@@ -35,6 +31,9 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
       searchHotelGeoFetching,
       searchHotelGeoLoading,
    } = props;
+
+   // next api
+   const searchParams = useSearchParams();
 
    // redux
    const globalSearchState = useAppSelector((state) => state.globalSlice.searchGlobal);
@@ -106,13 +105,16 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
             pageStart={0}
             loadMore={loadMore}
             hasMore={hasMore}
+            threshold={300}
             loader={
                <>
-                  {Array(2)
-                     .fill(1)
-                     .map((_, index) => (
-                        <HotelCardSkeleton displayType={type} key={index} />
-                     ))}
+                  <div className="grid grid-cols-1 gap-3">
+                     {Array(2)
+                        .fill(1)
+                        .map((_, index) => (
+                           <HotelCardSkeleton displayType={type} key={index} />
+                        ))}
+                  </div>
                </>
             }
             useWindow={true}
@@ -126,17 +128,20 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
                      : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5',
                )}
             >
-               {hotelsWithMapData
-                  ?.slice(0, visibleItems)
-                  ?.map((hotel, index) => (
+               {hotelsWithMapData?.slice(0, visibleItems)?.map((hotel, index) => {
+                  const directLink = `/hotel/${hotel.hotel.hotel_id}?${searchParams.toString()}`;
+
+                  return (
                      <HotelCard
                         key={index}
                         selectedMap={hotel.selectedMap}
                         hotel={hotel.hotel}
                         distance={hotel.distance}
                         displayType={type}
+                        directLink={directLink}
                      />
-                  ))}
+                  );
+               })}
             </div>
          </InfiniteScroll>
 

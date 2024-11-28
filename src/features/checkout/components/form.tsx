@@ -1,5 +1,15 @@
+'use client';
+
 import ButtonLoading from '@/components/custom/buttons/button-loading';
 import InputLabel from '@/components/custom/input/input-label';
+import {
+   Command,
+   CommandEmpty,
+   CommandGroup,
+   CommandInput,
+   CommandItem,
+   CommandList,
+} from '@/components/ui/command';
 import {
    Form,
    FormControl,
@@ -9,20 +19,8 @@ import {
    FormLabel,
    FormMessage,
 } from '@/components/ui/form';
-import { HTTPStatus } from '@/configs';
-import { toast } from '@/hooks/use-toast';
-import { useAppSelector } from '@/stores';
-import { useCreateReservationMutation } from '@/stores/features/reservation';
-import { setReserveForm } from '@/stores/features/stay';
-import { IHotelReservation, IReserveForm } from '@/stores/features/stay/type';
-import { ErrorType } from '@/types/error';
-import { generateTimeSlotsFromNow, timeFormatString } from '@/utilities/time';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import * as z from 'zod';
+import { Input } from '@/components/ui/input';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import {
    Select,
    SelectContent,
@@ -31,8 +29,24 @@ import {
    SelectValue,
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { PhoneInput } from './phone-input';
+import { HTTPStatus } from '@/configs';
+import { toast } from '@/hooks/use-toast';
+import countriesList from '@/lib/countries.json';
+import { useAppSelector } from '@/stores';
+import { useCreateReservationMutation } from '@/stores/features/reservation';
+import { setReserveForm } from '@/stores/features/stay';
+import { IHotelReservation, IReserveForm } from '@/stores/features/stay/type';
+import { ErrorType } from '@/types/error';
+import { generateTimeSlotsFromNow, timeFormatString } from '@/utilities/time';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Country, isValidPhoneNumber } from 'react-phone-number-input';
+import { useDispatch } from 'react-redux';
+import * as z from 'zod';
+import { PhoneInput } from './phone-input';
+
 const formSchema = z.object({
    email: z.string().email({ message: "Oops, that email won't work, please enter a valid one." }),
    lastName: z.string().min(2, { message: 'Last name must be at least 2 characters' }),
@@ -41,6 +55,7 @@ const formSchema = z.object({
    citizenship: z.string(),
    message: z.string(),
    arrive: z.string().min(1, { message: 'Arrival time is required' }),
+   specialRequest: z.string(),
 });
 
 type FormInfoProps = {
@@ -49,32 +64,68 @@ type FormInfoProps = {
    setIsConfirm: (value: boolean) => void;
    scrollIntoView: () => void;
 };
+
+type CountryType = {
+   label: string;
+   value: string;
+};
+
 const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormInfoProps) => {
-   const dispatch = useDispatch();
+   //   next api
    const router = useRouter();
-   const [createReservation, { isLoading: isLoadingCreate, error }] =
-      useCreateReservationMutation();
+
+   // redux
    const hotel = useAppSelector((state) => state.staySlice.reserveForm);
+   const dispatch = useDispatch();
+
+   // state
+   const [countries, setCountries] = useState<CountryType[]>([]);
+   const [selectedCountry, setSelectedCountry] = useState<CountryType>();
+   const [countryInputOpened, setCountryInputOpened] = useState(false);
+
    const form = useForm<z.infer<typeof formSchema>>({
       defaultValues: {
          email: hotel.meta_data?.booking_details?.email || '',
          lastName: hotel.meta_data?.booking_details?.last_name || '',
          firstName: hotel.meta_data?.booking_details?.first_name || '',
-         phoneNumber:
-            hotel.meta_data?.booking_details?.phone?.slice(
-               1,
-               hotel.meta_data.booking_details.phone.length,
-            ) || '84',
-         citizenship: hotel.meta_data?.booking_details?.country || '',
+         phoneNumber: '',
+         // phoneNumber:
+         //    hotel.meta_data?.booking_details?.phone?.slice(
+         //       1,
+         //       hotel.meta_data.booking_details.phone.length,
+         //    ) || '84',
+         // citizenship: hotel.meta_data?.booking_details?.country || '',
+         citizenship: '',
          message: '',
          arrive: '',
+         specialRequest: '',
       },
       resolver: zodResolver(formSchema),
    });
    const [isErrorPhone, setIsErrorPhone] = useState(false);
-   const dateStr = `${hotel.checkin_date}`;
-   console.log(dateStr);
 
+   // api
+   const [createReservation, { isLoading: isLoadingCreate, error }] =
+      useCreateReservationMutation();
+
+   useEffect(() => {
+      const fetchData = async () => {
+         const data = countriesList;
+
+         const formattedCountries = data.map(
+            (country: { name: { common: string }; cca2: string }) => ({
+               label: country.name.common,
+               value: country.cca2,
+            }),
+         );
+         setCountries(formattedCountries);
+      };
+
+      fetchData();
+   }, []);
+
+   // logic
+   const dateStr = `${hotel.checkin_date}`;
    const timeSlots = generateTimeSlotsFromNow(dateStr);
 
    const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -94,14 +145,16 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                         first_name: values.firstName,
                         last_name: values.lastName,
                         email: values.email,
-                        country: values.citizenship.substring(
-                           values.citizenship.length - 3,
-                           values.citizenship.length - 1,
-                        ),
+                        // country: values.citizenship.substring(
+                        //    values.citizenship.length - 3,
+                        //    values.citizenship.length - 1,
+                        // ),
+                        country: selectedCountry?.value,
                         phone: values.phoneNumber,
                      },
                      additional: {
                         is_renting_car: false,
+                        special_request: values.specialRequest || '',
                      },
                      is_trip_booking: false,
                      arrival_time: '',
@@ -192,6 +245,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
          console.log(error);
       }
    };
+
    return (
       <Form {...form}>
          <form className="mt-7" onSubmit={form.handleSubmit(onSubmit)}>
@@ -306,9 +360,13 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      control={form.control}
                      name="citizenship"
                      render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="flex flex-col justify-start items-start gap-1">
+                           <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">
+                              Country <span className="text-red-500">*</span>
+                           </FormLabel>
+
                            <FormControl>
-                              <InputLabel
+                              {/* <InputLabel
                                  sizes="small"
                                  required
                                  type="text"
@@ -317,7 +375,79 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  placeholder="Ex: Viet Nam"
                                  id="city"
                                  {...field}
-                              />
+                              /> */}
+                              {/* <Select
+                                 onValueChange={field.onChange}
+                                 defaultValue={field.value}
+                                 disabled={isConfirm}
+                              >
+                                 <FormControl>
+                                    <SelectTrigger className="w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1">
+                                       <SelectValue
+                                          placeholder="Select your country"
+                                          defaultValue={field.value}
+                                       />
+                                    </SelectTrigger>
+                                 </FormControl>
+                                 <SelectContent>
+                                    {countries.map((country, index) => (
+                                       <SelectItem key={index} value={country.value}>
+                                          {country.label}
+                                       </SelectItem>
+                                    ))}
+                                 </SelectContent>
+                              </Select> */}
+                              <Popover
+                                 open={countryInputOpened}
+                                 onOpenChange={(open) => {
+                                    if (open == false) {
+                                       setCountryInputOpened(false);
+                                    }
+                                 }}
+                              >
+                                 <PopoverTrigger asChild>
+                                    <Input
+                                       value={
+                                          selectedCountry
+                                             ? countries?.find(
+                                                  (country) =>
+                                                     country.value === selectedCountry.value,
+                                               )?.label
+                                             : 'Select your country...'
+                                       }
+                                       className="text-start rounded-3xl cursor-pointer min-h-12"
+                                       onClick={() => {
+                                          setCountryInputOpened(!countryInputOpened);
+                                       }}
+                                    />
+                                 </PopoverTrigger>
+                                 <PopoverContent className="w-fit p-0" align="start">
+                                    <Command className="w-fit">
+                                       <CommandInput placeholder="Find your country" />
+                                       <CommandList>
+                                          <CommandEmpty>No results found.</CommandEmpty>
+                                          <CommandGroup>
+                                             {countries.map((country, index) => (
+                                                <CommandItem
+                                                   key={index}
+                                                   value={country.label}
+                                                   onSelect={(currentValue) => {
+                                                      setSelectedCountry({
+                                                         label: country.label,
+                                                         value: country.value,
+                                                      });
+                                                      setCountryInputOpened(false);
+                                                   }}
+                                                   onChange={field.onChange}
+                                                >
+                                                   {country.label}
+                                                </CommandItem>
+                                             ))}
+                                          </CommandGroup>
+                                       </CommandList>
+                                    </Command>
+                                 </PopoverContent>
+                              </Popover>
                            </FormControl>
                            <FormMessage />
                         </FormItem>
@@ -370,7 +500,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                <div className="space-y-1">
                   <FormField
                      control={form.control}
-                     name="message"
+                     name="specialRequest"
                      render={({ field }) => (
                         <FormItem>
                            <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">

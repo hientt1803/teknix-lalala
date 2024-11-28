@@ -40,13 +40,13 @@ export interface IHotelSearchEngineRequest {
 export interface IGetHotelByHotelIdRequest {
    checkin: string;
    checkout: string;
-   language: 'en';
+   language: string;
    guests: {
       adults: number;
       children: number[] | any[];
    }[];
    id: string;
-   currency: 'VND';
+   currency: string;
    residency: string;
 }
 

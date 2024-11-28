@@ -1,9 +1,11 @@
 'use client';
+
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { LayoutGridIcon } from 'lucide-react';
 import { useState } from 'react';
 import ModalShowAllGalley from './image-modal';
-import { Button } from '@/components/ui/button';
+import Image from '@/components/common/images/image';
 
 // const CredenzaImages = dynamic(() => import("./credenza-images"), {
 //     ssr: false,
@@ -13,16 +15,15 @@ type ImageGalleryProps = {
    images: string[];
 };
 
-// const ButtonShowAll = () => <ModalShowAllGalley />;
-
 const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
    const [open, setOpen] = useState(false);
 
    const handleOpen = () => {
       setOpen(true);
    };
+
    return (
-      <div>
+      <div className='no-scrollbar'>
          <div className="rounded-md sm:rounded-xl w-full">
             {type === 'default' && (
                <div
@@ -30,7 +31,7 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                   className="relative grid grid-cols-3 sm:grid-cols-4 gap-1 sm:gap-2"
                >
                   <div className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer">
-                     <img
+                     <Image
                         src={images[0]?.replace('{size}', '640x400') || '/location.png'}
                         className={cn(
                            'absolute inset-0 object-cover object-center rounded-md w-full h-full sm:rounded-xl bg-gray-200',
@@ -41,7 +42,7 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                   </div>
                   <div className="relative rounded-md sm:rounded-xl overflow-hidden bg-gray-200">
                      <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <img
+                        <Image
                            src={images[1]?.replace('{size}', '640x400') || '/location.png'}
                            className={cn(
                               'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
@@ -53,7 +54,7 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                   </div>
                   <div className="relative rounded-md sm:rounded-xl overflow-hidden bg-gray-200">
                      <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <img
+                        <Image
                            src={images[2]?.replace('{size}', '640x400') || '/location.png'}
                            className={cn(
                               'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
@@ -65,7 +66,7 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                   </div>
                   <div className="relative rounded-md sm:rounded-xl overflow-hidden bg-gray-200">
                      <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <img
+                        <Image
                            src={images[3]?.replace('{size}', '640x400') || '/location.png'}
                            className={cn(
                               'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
@@ -77,7 +78,7 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                   </div>
                   <div className="relative rounded-md sm:rounded-xl overflow-hidden hidden sm:block bg-gray-200">
                      <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <img
+                        <Image
                            src={images[4]?.replace('{size}', '640x400') || '/location.png'}
                            className={cn(
                               'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
@@ -94,7 +95,8 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                      <LayoutGridIcon className="w-5 h-5 mr-1" />
                      Show all photos
                   </Button>
-                  <ModalShowAllGalley opened={open} setOpen={setOpen} />
+
+                  <ModalShowAllGalley opened={open} setOpen={setOpen} images={images} />
                   {/* <CredenzaImages open={open} setOpen={setOpen} /> */}
                   {/* <Modal open={open} setOpen={setOpen} /> */}
                </div>

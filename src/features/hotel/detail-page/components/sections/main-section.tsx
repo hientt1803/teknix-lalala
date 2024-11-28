@@ -1,7 +1,9 @@
 'use client';
+
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/stores';
+import { IStayReivew } from '@/stores/features/review/type';
 import { useGetRoomActiveByHotelIdQuery } from '@/stores/features/stay';
 import { IHotelReservation, RgExt } from '@/stores/features/stay/type';
 import { StarFilledIcon } from '@radix-ui/react-icons';
@@ -13,8 +15,8 @@ import {
    CircleCheckIcon,
    EyeIcon,
    HeartIcon,
-   MapPin,
    MapPinIcon,
+   MessageCircle,
    SparkleIcon,
    StarIcon,
    UploadIcon,
@@ -22,27 +24,24 @@ import {
    UsersIcon,
 } from 'lucide-react';
 
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 type Props = {
    data?: IHotelReservation;
    id: string;
+   hotelReview?: IStayReivew;
+   scrollIntoReviewSection: () => void;
 };
 
-const MainSection = ({ data, id }: Props) => {
+const MainSection = ({ data, id, hotelReview, scrollIntoReviewSection }: Props) => {
    const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal);
 
-   const {
-      data: dataInfo,
-      isLoading,
-      isFetching,
-   } = useGetRoomActiveByHotelIdQuery({
+   const { data: dataInfo } = useGetRoomActiveByHotelIdQuery({
       checkin: searchGlobal?.dateRange?.startDate || formatDate(new Date(), 'yyyy-MM-dd'),
-      // checkout:
-      //    searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 2), 'yyyy-MM-dd'),
-      checkout: '2024-11-29',
-      currency: 'VND',
-      language: 'en',
+      checkout:
+         searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 1), 'yyyy-MM-dd'),
+      currency: searchGlobal?.currency?.code || 'USD',
+      language: searchGlobal?.lang?.cca2 || 'en',
       guests: searchGlobal.people || [
          {
             adults: 1,
@@ -50,7 +49,7 @@ const MainSection = ({ data, id }: Props) => {
          },
       ],
       id: id,
-      residency: 'VN',
+      residency: searchGlobal?.lang?.cca2 || 'en',
    });
 
    const totalExp = useMemo(() => {
@@ -150,6 +149,14 @@ const MainSection = ({ data, id }: Props) => {
             </span>
             <div className="flow-root">
                <div className="flex text-slate-700 dark:text-slate-50 text-sm -mx-3 -my-1.5">
+                  <Button
+                     variant="ghost"
+                     className="py-1.5 px-3 flex rounded-lg cursor-pointer"
+                     onClick={scrollIntoReviewSection}
+                  >
+                     <MessageCircle className="w-5 h-5" strokeWidth={1.5} />
+                     <span className="hidden sm:block ml-2.5">Read Review</span>
+                  </Button>
                   <Button variant="ghost" className="py-1.5 px-3 flex rounded-lg cursor-pointer">
                      <UploadIcon className="w-5 h-5" strokeWidth={1.5} />
                      <span className="hidden sm:block ml-2.5">Share</span>
@@ -170,7 +177,9 @@ const MainSection = ({ data, id }: Props) => {
                   <StarFilledIcon className="w-5 h-5 text-orange-500" strokeWidth={1.5} />
                </div>
                <span className="font-medium">{data?.star_rating ? data.star_rating : 0}</span>
-               <span className="text-slate-500 dark:text-slate-300">(112)</span>
+               <span className="text-slate-500 dark:text-slate-300">
+                  ({hotelReview?.reviews?.length || 0})
+               </span>
             </div>
             <span>·</span>
             <span className="flex items-center">
@@ -181,7 +190,7 @@ const MainSection = ({ data, id }: Props) => {
          <div className="flex items-center">
             <div className="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-10 w-10 ring-1 ring-white ">
                <Avatar>
-                  <AvatarImage src={'/testimonials/client6.png'} />
+                  <AvatarImage src={'/assets/images/testimonials/client6.png'} />
                </Avatar>
                <span className="rounded-full bg-green-600 text-xs flex items-center justify-center absolute  w-4 h-4 -top-0.5 -right-0.5">
                   <CircleCheckIcon

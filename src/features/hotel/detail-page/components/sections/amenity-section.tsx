@@ -1,3 +1,5 @@
+"use client"
+
 import {Button} from "@/components/ui/button";
 import {AmenityGroup} from "@/stores/features/stay/type";
 import {useState} from "react";

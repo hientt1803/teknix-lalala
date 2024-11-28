@@ -1,5 +1,5 @@
 import HotelDetailFeature from '@/features/hotel/detail-page';
-import { getHotelDetail, preloadHotelDetail } from '@/services/hotel';
+import { getHotelDetail, preloadHotelDetail, preloadHotelDetailReview } from '@/services/hotel';
 import { Metadata, ResolvingMetadata } from 'next';
 
 type Props = {
@@ -85,6 +85,7 @@ export async function generateMetadata(
 
 const HotelDetailPage = async ({ params }: { params: Promise<{ id: string }> }) => {
    preloadHotelDetail((await params).id);
+   preloadHotelDetailReview((await params).id);
 
    return <HotelDetailFeature id={(await params).id} />;
 };
