@@ -64,11 +64,11 @@ const Header = async () => {
                   </div>
 
                   {/* USER BUTTON & NOTIFICATION & MENU HUMBUGER */}
-                  <div className="flex flex-shrink-0 items-center justify-end flex-1 space-x-1 lg:flex-none text-slate-700">
+                  <div className="flex flex-shrink-0 items-center justify-end flex-1 space-x-2 lg:flex-none text-slate-700">
                      <div className="hidden md:block">
                         <RightSiderHeaderLazy />
                      </div>
-                     <div className="block lg:hidden">
+                     <div className="block">
                         <MobileMenuLazy />
                      </div>
                   </div>

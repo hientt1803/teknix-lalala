@@ -26,7 +26,7 @@ import {
 import Image from '../images/image';
 import { useAppSelector } from '@/stores';
 import { useEffect, useState } from 'react';
-import { logOutUser, useLazyGetCurrentUserQuery } from '@/stores/features/user';
+import { logOutUser, useLazyGetCurrentUserQuery, User } from '@/stores/features/user';
 import { useDispatch } from 'react-redux';
 import { usePathname, useRouter } from 'next/navigation';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -34,15 +34,16 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { ModeToggleText } from '../themes/mode-text';
+import { onClose, onOpen } from '@/stores/features/dialog';
 
 const links = [
-   {
-      label: 'Notifications',
-      description: 'New messages',
-      href: '/',
-      isTrigger: true,
-      icon: <Bell className="w-5 h-5" strokeWidth={1.5} />,
-   },
+   //    {
+   //       label: 'Notifications',
+   //       description: 'New messages',
+   //       href: '/',
+   //       isTrigger: true,
+   //       icon: <Bell className="w-5 h-5" strokeWidth={1.5} />,
+   //    },
    {
       label: 'Bookmark',
       description: '7 tours, 2 moons',
@@ -87,21 +88,37 @@ const MobileMenu = () => {
    const router = useRouter();
    const pathname = usePathname();
    const user = useAppSelector((state) => state.userSlice.currentUser);
-   const [getData, { data, isLoading, isFetching }] = useLazyGetCurrentUserQuery();
-   const [open, setOpen] = useState(false);
+   const isOpen = useAppSelector((state) => state.dialogSlice.isOpen);
+
+   const [getData, { data: fetchedUser, isLoading }] = useLazyGetCurrentUserQuery();
+   const [userData, setUserData] = useState<User | null>(null);
 
    useEffect(() => {
-      if (!user) {
+      if (!user && !userData) {
          getData({});
       }
-   }, [user]);
+   }, [user, getData]);
+
+   useEffect(() => {
+      if (fetchedUser) {
+         setUserData(fetchedUser); // Save fetched user data to the state
+      }
+   }, [fetchedUser]);
 
    const handleLogout = () => {
       dispatch(logOutUser({}));
-      router.push('/auth');
+      setUserData(null); // Clear user info
+      router.push('/');
    };
 
-   const userData = user || data;
+   const handleLogin = () => {
+      if (isOpen) {
+         dispatch(onClose());
+      } else {
+         dispatch(onOpen());
+      }
+   };
+
    return (
       <Sheet>
          <SheetTrigger asChild>
@@ -113,7 +130,7 @@ const MobileMenu = () => {
                <Grip className="w-6 h-6" />
             </Button>
          </SheetTrigger>
-         <SheetContent className="w-full">
+         <SheetContent className="w-full md:min-w-[32rem]">
             <SheetHeader>
                <SheetClose asChild>
                   <Link href="/">
@@ -125,7 +142,7 @@ const MobileMenu = () => {
                <SheetDescription></SheetDescription>
             </SheetHeader>
             <ScrollArea className="h-[calc(100%-50px)]">
-               <div className="p-5 space-y-8">
+               <div className="p-5 md:p-0 space-y-8">
                   <div className="p-3 py-4 dark:bg-slate-800 border rounded-xl flex items-center justify-between">
                      <div className="flex items-center gap-2">
                         <Avatar className="w-12 h-12">
@@ -157,11 +174,11 @@ const MobileMenu = () => {
                            </Button>
                         </SheetClose>
                      ) : (
-                        <SheetClose asChild>
-                           <Button className="rounded-full" asChild>
-                              <Link href="/auth?screen=signIn&redirect=/">Login</Link>
-                           </Button>
-                        </SheetClose>
+                        // <SheetClose asChild>
+                        <Button className="rounded-full" onClick={handleLogin}>
+                           Login
+                        </Button>
+                        // </SheetClose>
                      )}
                   </div>
                   {/* LINKS */}

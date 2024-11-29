@@ -15,6 +15,7 @@ import Notification from './nofitication';
 import { ModeToggle } from '@/components/common/themes/mode-toggle';
 import { useAppSelector } from '@/stores';
 import { ModeToggleMenu } from '../themes/mode-menu';
+import LoginButton from './login-button';
 
 type Props = {
    navigation: {
@@ -24,15 +25,15 @@ type Props = {
    }[];
 };
 type RightSideHeaderProps = {
-    className?: string
-}
+   className?: string;
+};
 const RightSiderHeader = () => {
    const router = useRouter();
    const user = useAppSelector((state) => state.userSlice.access_token);
 
    const renderAuthButtons = () => (
       <>
-         <Button
+         {/* <Button
             className="rounded-full hidden lg:flex"
             variant="secondary"
             onClick={() => router.push('/auth?screen=signUp&redirect=/')}
@@ -44,7 +45,8 @@ const RightSiderHeader = () => {
             onClick={() => router.push('/auth?screen=signIn&redirect=/')}
          >
             Sign in
-         </Button>
+         </Button> */}
+         <LoginButton />
       </>
    );
 

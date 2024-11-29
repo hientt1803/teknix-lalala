@@ -11,7 +11,7 @@ const Paragraph = ({
    as: Component = 'p',
    className,
    children,
-   size = 'md',
+   size = 'sm',
    ...restProps
 }: ParagraphProps) => {
    return (

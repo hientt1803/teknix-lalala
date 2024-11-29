@@ -55,7 +55,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
                   className="absolute bottom-0 object-cover w-full h-full z-0"
                   alt=""
                />
-               <div className="flex flex-col justify-center items-center gap-4 max-w-md text-center">
+               <div className="flex flex-col justify-center items-center gap-4 max-w-[50rem] text-center">
                   <Badge color="white" className="px-5 bg-yellow-300  py-3 text-lg cursor-pointer">
                      {slice.primary.tag || ''}
                   </Badge>

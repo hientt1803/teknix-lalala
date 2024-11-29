@@ -15,6 +15,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { GlobalSlice } from './features/global/global-slice';
 import { UserApi, UserSlice } from './features/user';
 import { StayAPI, StaySlice } from './features/stay';
+import { DialogSlice } from './features/dialog';
 import { ReviewAPI } from './features/review';
 import { ReservationAPI, ReservationSlice } from './features/reservation';
 import { PaymentAPI, PaymentSlice } from './features/payment';
@@ -33,6 +34,7 @@ const persistConfig = {
       'paymentSlice',
       'reservationSlice',
       'regionSlice',
+      'dialogSlice',
    ],
 };
 
@@ -51,6 +53,7 @@ const rootReducer = combineReducers({
    paymentSlice: PaymentSlice.reducer,
    reservationSlice: ReservationSlice.reducer,
    regionSlice: RegionSlice.reducer,
+   dialogSlice: DialogSlice.reducer,
 });
 
 // Middleware

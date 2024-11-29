@@ -2,6 +2,7 @@ import { Label } from '@radix-ui/react-label';
 import { Input, InputProps } from '@/components/ui/input';
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
+import { Mail } from 'lucide-react';
 
 interface InputLabelProps extends InputProps {
    label?: string;
@@ -36,11 +37,13 @@ const InputLabel = ({
                {rightLabel}
             </span>
          )}
-         <Input
-            id={inputId}
-            className="block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1"
-            {...props}
-         />
+
+            <Input
+               id={inputId}
+               className="block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1"
+               {...props}
+            />
+         
       </div>
    );
 };

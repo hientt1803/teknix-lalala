@@ -23,7 +23,7 @@ const UserButton = () => {
 
    const handleLogout = () => {
       dispatch(logOutUser({}));
-      router.push('/auth');
+      router.push('/');
    };
 
    const userData = user || data;
