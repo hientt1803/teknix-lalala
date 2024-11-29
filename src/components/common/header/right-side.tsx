@@ -1,20 +1,18 @@
 'use client';
+
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
 // import {NavigationMenuComp} from "./navigation";
 import { Button } from '@/components/ui/button';
 import UserButton from './user-button';
 
 // import {useAppSelector} from "@/stores";
-import { KeyTextField, RichTextField } from '@prismicio/client';
-import { LinkField } from '@prismicio/client';
-import LanguageButton from './languages';
-import Link from 'next/link';
-import CurrencyButton from './currency';
-import Notification from './nofitication';
-import { ModeToggle } from '@/components/common/themes/mode-toggle';
 import { useAppSelector } from '@/stores';
+import { KeyTextField, LinkField, RichTextField } from '@prismicio/client';
 import { ModeToggleMenu } from '../themes/mode-menu';
+import CurrencyButton from './currency';
+import LanguageButton from './languages';
+import Notification from './nofitication';
+import NovuNotificationV2 from './novu-v2';
 import LoginButton from './login-button';
 
 type Props = {
@@ -29,7 +27,10 @@ type RightSideHeaderProps = {
 };
 const RightSiderHeader = () => {
    const router = useRouter();
-   const user = useAppSelector((state) => state.userSlice.access_token);
+   const user = useAppSelector((state) => state.userSlice);
+
+   console.log(user);
+   
 
    const renderAuthButtons = () => (
       <>
@@ -61,7 +62,9 @@ const RightSiderHeader = () => {
          >
             <Link href="#">List your property</Link>
          </Button> */}
-         <Notification />
+         {/* <Notification /> */}
+         {user?.currentUser?.id && <NovuNotificationV2 userId={user?.currentUser?.id || ''} />}
+         
          {/* <ModeToggle /> */}
          <ModeToggleMenu />
          <UserButton />
@@ -73,7 +76,7 @@ const RightSiderHeader = () => {
          {/* DESKTOP HEADER */}
          <div className="hidden lg:flex items-center space-x-2">
             {/* <NavigationMenuComp navigations={navigation} /> */}
-            {user ? (
+            {user.access_token ? (
                renderUserActions()
             ) : (
                <div className="space-x-2 flex items-center">
@@ -88,7 +91,7 @@ const RightSiderHeader = () => {
 
          {/* MOBILE HEADER */}
          <div className="flex items-center space-x-2 lg:hidden">
-            {user ? (
+            {user.access_token ? (
                <>
                   {/* <ModeToggle /> */}
                   <ModeToggleMenu />
