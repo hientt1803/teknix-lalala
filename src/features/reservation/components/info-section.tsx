@@ -1,4 +1,5 @@
 import Image from '@/components/common/images/image';
+import Badge from '@/components/custom/badges/badge';
 import { Rating } from '@/components/custom/rating/rating';
 import { RateMetaData } from '@/stores/features/reservation';
 import { calculateNightsAndDays } from '@/utilities/datetime';
@@ -19,6 +20,7 @@ interface InfoSectionProps {
    checkout_date: string;
    checkin_date: string;
    num_guests: number;
+   status: string;
 }
 const InfoSection = async ({
    hotel_data,
@@ -26,6 +28,7 @@ const InfoSection = async ({
    checkin_date,
    checkout_date,
    num_guests,
+   status,
 }: InfoSectionProps) => {
    const { images, name, address, star_rating } = hotel_data;
    const { nights, days } = calculateNightsAndDays(checkin_date, checkout_date);
@@ -35,8 +38,15 @@ const InfoSection = async ({
          <h1 className="text-3xl font-bold p-5">🏢 Hotel infomation</h1>
          <div className="border-b border-b-neutral-200 w-full" />
          <div className="grid grid-cols-4 gap-5 p-5 items-center">
-            <Image src={replaceSize(images[0])} className="aspect-[4/3] rounded-2xl col-span-1" />
+            <Image
+               src={replaceSize(images[0])}
+               className="aspect-[4/3] rounded-2xl col-span-1"
+               alt=""
+            />
             <div className="col-span-3 space-y-2">
+               <Badge color="orange" className="font-medium capitalize">
+                  {status}
+               </Badge>
                <h2 className="text-2xl font-bold">{name || 'Loading...'}</h2>
                <p className="flex items-center text-slate-400 gap-2">
                   <MapPin className="w-4 h-4" />

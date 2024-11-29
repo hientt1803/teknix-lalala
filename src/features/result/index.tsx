@@ -14,6 +14,7 @@ import { useSearchParams } from 'next/navigation';
 import Loading from '@/components/custom/loaders/app-loading';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 import { replaceSize } from '@/utilities/string';
+import Image from '@/components/common/images/image';
 
 const CheckoutResultFeature = () => {
    const searchParam = useSearchParams();
@@ -70,7 +71,7 @@ const CheckoutResultFeature = () => {
                               <div className="flex flex-col sm:flex-row sm:items-center">
                                  <div className="flex-shrink-0 w-full sm:w-40">
                                     <div className="aspect-square relative rounded-2xl overflow-hidden">
-                                       <img
+                                       <Image
                                           alt=""
                                           className="absolute inset-0 h-full object-cover"
                                           src={replaceSize(dataHotel?.images[0] || '')}
@@ -181,7 +182,7 @@ const CheckoutResultFeature = () => {
                      ) : (
                         <div className="w-full mx-auto lg:max-w-md relative">
                            <div className="flex flex-col gap-5">
-                              <img src={'/icons/error_style1.svg'} loading="lazy" />
+                              <Image src={'/icons/error_style1.svg'} alt="" />
                               <h3 className="text-center text-slate-400">
                                  Some thing went wrong! <br /> Please contact to admin or try again
                               </h3>
@@ -192,7 +193,7 @@ const CheckoutResultFeature = () => {
                         {isSuccess ? (
                            <div className="flex items-center justify-start gap-5">
                               <Link
-                                 href={`/profile`}
+                                 href={`/reservation/${orderId}`}
                                  className={buttonVariants({
                                     variant: 'outline',
                                     className:

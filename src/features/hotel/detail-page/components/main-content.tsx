@@ -4,21 +4,24 @@ import { IHotelReservation } from '@/stores/features/stay/type';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
-import { Button } from '@/components/ui/button';
 import { useScrollIntoView } from '@/hooks/use-scroll';
 import { BannerSection } from './sections/banner-section';
 
 // Dynamically import sections
 // const MainSection = dynamic(() => import('./sections/main-section'));
-const StaySection = dynamic(() => import('./sections/stay-section'));
+// const StaySection = dynamic(() => import('./sections/stay-section'));
 const AmenitiesSection = dynamic(() => import('./sections/amenity-section'));
 // const RoomRateSection = dynamic(() => import('./sections/room-rate-section'));
-const AvailiableSection = dynamic(() => import('./sections/availiable-section'));
+// const AvailiableSection = dynamic(() => import('./sections/availiable-section'));
 // const HostInfoSection = dynamic(() => import('./sections/host-info-section'));
 const ReviewSection = dynamic(() => import('./sections/review-section'));
 const LocationSection = dynamic(() => import('./sections/location-section'));
 const ThingToKnowSection = dynamic(() => import('./sections/thing-to-know-section'));
 // const ReserveSection = dynamic(() => import('./sections/reserve-section'));
+const FaciliiesSection = dynamic(() => import('./sections/facilities-section'));
+const HotelInfoSection = dynamic(() => import('./sections/hotel-info-section'));
+const HowItWorkSection = dynamic(() => import('./sections/how-it-work-section'));
+const VideoSection = dynamic(() => import('./sections/video-section'));
 const ListRoomSections = dynamic(
    () => import('./sections/list-room-sections').then((mob) => mob.ListRoomSections),
    { ssr: false },
@@ -108,9 +111,16 @@ const MainContent = ({ data, id }: Props) => {
                /> */}
                {/* Banner section */}
                <BannerSection data={data} />
+               {/* FACILITES */}
+               <FaciliiesSection facilities={data?.serp_filters || []} />
+               {/* HOTEL INFO */}
+               <HotelInfoSection data={data} scrollIntoReviewSection={scrollIntoReviewSection} />
 
                {/* LIST ROOM SECTION */}
-               <ListRoomSections id={id} />
+               <div ref={reviewRefSection}>
+                  <ListRoomSections id={id} />
+               </div>
+
                {/* STAY INFO */}
                {/* <StaySection desc={data?.description_struct} /> */}
                {/* ROOM RATE */}
@@ -118,7 +128,11 @@ const MainContent = ({ data, id }: Props) => {
                {/* AVAILABLE */}
                {/* <div ref={targetRef}>
                   <AvailiableSection id={id} />
-               </div> */}
+               </div>
+               {/* HOW IT WORKS */}
+               <HowItWorkSection />
+               {/* VIDEOS */}
+               <VideoSection />
                {/* HOST INFORMATION */}
                {/* <HostInfoSection /> */}
                {/* LOCATION */}
@@ -134,9 +148,7 @@ const MainContent = ({ data, id }: Props) => {
                   check_out_time={data?.check_out_time}
                />
                {/* REVIEWS */}
-               <div ref={reviewRefSection}>
-                  <ReviewSection id={id} />
-               </div>
+               <ReviewSection id={id} />
             </div>
             {/* RESERVE */}
             {/* <div className="hidden lg:block flex-grow mt-14 lg:mt-0">

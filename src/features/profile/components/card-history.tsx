@@ -1,3 +1,4 @@
+import Image from '@/components/common/images/image';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { MapHotel, Record } from '@/stores/features/reservation';
@@ -40,6 +41,9 @@ const CardHistory = ({ data }: Props) => {
       dispatch(setReserveForm(dataReserve));
       router.push(`/checkout?reservation=${record.id}`);
    };
+
+   console.log(data);
+
    return (
       <Card className="grid grid-cols-1 lg:flex lg:flex-row rounded-3xl overflow-hidden  relative  hover:shadow-xl cursor-pointer">
          <div className="absolute right-4 top-4 z-10">
@@ -60,8 +64,8 @@ const CardHistory = ({ data }: Props) => {
          </div>
          <div className="relative flex-shrink-0 w-full lg:w-72 ">
             <div className="block aspect-square">
-               <img
-                  src={hotel.images[0].replace('{size}', '640x400')}
+               <Image
+                  src={hotel?.images[0]?.replace('{size}', '640x400')}
                   className="object-cover w-full h-full"
                   alt="nc-imgs"
                />
@@ -70,11 +74,11 @@ const CardHistory = ({ data }: Props) => {
          <div className="flex-grow p-3 sm:p-5 flex flex-col">
             <div className="space-y-2">
                <div className="text-sm text-slate-500 truncate max-w-80">
-                  <span>{record.rate_meta_data.room_name}</span>
+                  <span>{record?.rate_meta_data?.room_name}</span>
                </div>
                <div className="flex items-center space-x-2">
                   <h2 className="text-lg font-medium capitalize">
-                     <span className="line-clamp-1">{hotel.name}</span>
+                     <span className="line-clamp-1">{hotel?.name}</span>
                   </h2>
                </div>
                <div className="text-sm text-slate-500">
@@ -88,13 +92,13 @@ const CardHistory = ({ data }: Props) => {
                         <div className="ml-4 space-y-5 text-sm">
                            <div className="flex flex-col space-y-1">
                               <span className=" text-slate-500">
-                                 {format(record.checkin_date, 'EEEE, MMMM d · HH:mm')}
+                                 {format(record?.checkin_date, 'EEEE, MMMM d · HH:mm')}
                               </span>
                               <span className="font-semibold">Check in</span>
                            </div>
                            <div className="flex flex-col space-y-1">
                               <span className="text-slate-500">
-                                 {format(record.checkout_date, 'EEEE, MMMM d · HH:mm')}
+                                 {format(record?.checkout_date, 'EEEE, MMMM d · HH:mm')}
                               </span>
                               <span className="font-semibold">Check out</span>
                            </div>
@@ -105,12 +109,12 @@ const CardHistory = ({ data }: Props) => {
                         <div className="flex flex-col item-end space-y-2">
                            <div className="flex items-center space-x-3 text-slate-500">
                               <i className="las la-user text-xl"></i>
-                              <span className="text-sm">{record.num_guests} guests</span>
+                              <span className="text-sm">{record?.num_guests} guests</span>
                            </div>
                            <div className="flex items-center space-x-2 text-slate-500">
                               <span className="text-sm">Total:</span>
                               <span className="font-semibold text-slate-900">
-                                 {formatCurrency(record.total_price)}
+                                 {formatCurrency(record?.total_price)}
                               </span>
                            </div>
                         </div>
@@ -129,15 +133,14 @@ const CardHistory = ({ data }: Props) => {
                   <span className="font-medium ">4.8</span>
                   <span className="text-slate-500 ">(28)</span>
                </div>
-               {data.record.status === 'pending' && (
+               {record?.status == 'pending' && (
                   <Button onClick={() => handleContinunePay(record, hotel)}>Continue pay</Button>
                )}
-               {data.record.status === 'canceled' ||
-                  (data.record.status === 'completed' && (
-                     <Button variant={'outline'} asChild>
-                        <Link href={`/reservation/${data.record.id}`}>Details Booking</Link>
-                     </Button>
-                  ))}
+               {record?.status != 'pending' && (
+                  <Button variant={'outline'} asChild>
+                     <Link href={`/reservation/${record?.id}`}>Details Booking</Link>
+                  </Button>
+               )}
             </div>
          </div>
       </Card>
