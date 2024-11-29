@@ -4,11 +4,9 @@ import { IHotelReservation } from '@/stores/features/stay/type';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
-import ImageGalleryComp from '@/components/custom/media/image-gallery';
 import { Button } from '@/components/ui/button';
 import { useScrollIntoView } from '@/hooks/use-scroll';
-import { MostFacilities } from './sections/most-facilities';
-import { NewHeaderSection } from './sections/new-header-section';
+import { BannerSection } from './sections/banner-section';
 
 // Dynamically import sections
 // const MainSection = dynamic(() => import('./sections/main-section'));
@@ -20,7 +18,11 @@ const AvailiableSection = dynamic(() => import('./sections/availiable-section'))
 const ReviewSection = dynamic(() => import('./sections/review-section'));
 const LocationSection = dynamic(() => import('./sections/location-section'));
 const ThingToKnowSection = dynamic(() => import('./sections/thing-to-know-section'));
-const ReserveSection = dynamic(() => import('./sections/reserve-section'));
+// const ReserveSection = dynamic(() => import('./sections/reserve-section'));
+const ListRoomSections = dynamic(
+   () => import('./sections/list-room-sections').then((mob) => mob.ListRoomSections),
+   { ssr: false },
+);
 
 type Props = {
    id: string;
@@ -104,14 +106,19 @@ const MainContent = ({ data, id }: Props) => {
                   hotelReview={hotelReview}
                   scrollIntoReviewSection={scrollIntoReviewSection}
                /> */}
+               {/* Banner section */}
+               <BannerSection data={data} />
+
+               {/* LIST ROOM SECTION */}
+               <ListRoomSections id={id} />
                {/* STAY INFO */}
-               <StaySection desc={data?.description_struct} />
+               {/* <StaySection desc={data?.description_struct} /> */}
                {/* ROOM RATE */}
                {/* <RoomRateSection /> */}
                {/* AVAILABLE */}
-               <div ref={targetRef}>
+               {/* <div ref={targetRef}>
                   <AvailiableSection id={id} />
-               </div>
+               </div> */}
                {/* HOST INFORMATION */}
                {/* <HostInfoSection /> */}
                {/* LOCATION */}
@@ -138,7 +145,7 @@ const MainContent = ({ data, id }: Props) => {
                </div>
             </div> */}
             {/* RESERVE MOBILE */}
-            {!isTargetInView && (
+            {/* {!isTargetInView && (
                <Button
                   onClick={() => {
                      scrollIntoView();
@@ -148,7 +155,7 @@ const MainContent = ({ data, id }: Props) => {
                   <i className="text-lg las la-map-signs"></i>
                   <span>View all room</span>
                </Button>
-            )}
+            )} */}
          </div>
       </div>
    );

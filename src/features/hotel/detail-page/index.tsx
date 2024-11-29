@@ -78,7 +78,7 @@ const HotelDetailFeature = async ({ id }: HotelDetailFeatureProps) => {
                   </BreadcrumbItem>
                   <BreadcrumbSeparator />
                   <BreadcrumbItem>
-                     <BreadcrumbPage className="text-lg font-medium">
+                     <BreadcrumbPage className="text-base font-medium">
                         {data?.name || convertToTitleCase(data?.id)}
                      </BreadcrumbPage>
                   </BreadcrumbItem>

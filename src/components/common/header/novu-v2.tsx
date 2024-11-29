@@ -16,10 +16,10 @@ const CustomBell = ({ unseenCount }: { unseenCount: number }) => {
                <div className="absolute -top-1 -right-1 flex items-center justify-center h-4 w-4 bg-red-500 text-white text-xs rounded-full">
                   {unseenCount}
                </div>
-               <BellIcon className="w-6 h-6 text-neutral-100 cursor-pointer group-hover:text-slate-600" />
+               <BellIcon className="w-6 h-6 text-slate-800 dark:text-slate-300 cursor-pointer group-hover:text-slate-600" />
             </div>
          ) : (
-            <BellIcon className="w-6 h-6 text-neutral-100 cursor-pointer group-hover:text-slate-600" />
+            <BellIcon className="w-6 h-6 text-slate-800 dark:text-slate-300 cursor-pointer group-hover:text-slate-600" />
          )}
       </div>
    );
