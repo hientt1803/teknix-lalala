@@ -8,7 +8,7 @@ import {
    CarouselPrevious,
 } from '@/components/ui/carousel';
 import Badge from '../badges/badge';
-import { MapPin } from 'lucide-react';
+import { Clock1, MapPin, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -46,79 +46,78 @@ const TourCard = ({
    rating,
    type,
 }: Tour) => {
-   const items = imageUrl.map((item, index) => (
-      <CarouselItem key={index} className="aspect-square md:aspect-[6/5] m-0 p-0">
-         <Image src={item} className="w-full h-full object-cover rounded-xl" />
-      </CarouselItem>
-   ));
    return (
-      <div className="nc-PropertyCardH group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-3xl overflow-hidden hover:shadow-xl transition-shadow h-full">
-         <div className="h-full w-full flex flex-col sm:flex-row sm:items-center">
-            <div className="flex-shrink-0 p-3 w-full sm:w-64 ">
+      <div className="group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2rem] overflow-hidden hover:shadow transition-shadow h-full">
+         <div className="h-full w-full flex flex-col sm:items-center">
+            <div className="flex-shrink-0 w-full">
                <div className="relative">
-                  <Carousel
-                     opts={{
-                        loop: true,
-                     }}
-                  >
-                     <CarouselContent className="m-0 p-0">{items}</CarouselContent>
-                     <CarouselPrevious className="left-2 invisible group-hover:visible transition-all ease-in" />
-                     <CarouselNext className="right-2 invisible group-hover:visible transition-all ease-in" />
-                     <CarouselDots className="absolute inset-x-0 bottom-3" />
-                  </Carousel>
+                  <Image src={imageUrl[0]} className="aspect-square rounded-2xl" />
                </div>
                {promotion && (
-                  <div className="flex items-center justify-center text-xs py-0.5 px-3  text-red-50 rounded-full absolute left-5 top-5 !bg-orange-500">
-                     -10% today
+                  <div className="flex items-center justify-center text-sm py-2 px-3 rounded-full absolute left-5 top-5 !bg-white font-medium text-orange-600">
+                     Top Rated
                   </div>
                )}
             </div>
-            <div className="flex-grow p-3 sm:pr-6 flex flex-col items-start">
-               <div className="space-y-4 w-full">
-                  <div className="inline-flex flex-wrap gap-3">
-                     {amenities.map((amenity, index) => (
-                        <Badge key={index} color="blue">{amenity.label}</Badge>
-                     ))}
+            <div className="flex-grow relative rounded-[2rem] -mt-20 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 w-full p-7  flex flex-col items-start">
+               <div className=" absolute -top-5 right-8 bg-white dark:bg-slate-700 px-5 py-2 rounded-full shadow flex items-center space-x-1 text-sm">
+                  <div className="pb-[2px]">
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        aria-hidden="true"
+                        data-slot="icon"
+                        className="w-[18px] h-[18px] text-orange-500"
+                     >
+                        <path
+                           fillRule="evenodd"
+                           d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                           clipRule="evenodd"
+                        ></path>
+                     </svg>
                   </div>
+                  <span className="font-medium">4.8</span>
+                  <span className="text-slate-500 dark:text-slate-400">(28 reviews)</span>
+               </div>
+               <div className="space-y-4 w-full">
                   <div className="flex items-center space-x-2">
-                     {isAds && <Badge color="green">ADS</Badge>}
-                     <h2 className="text-lg font-medium capitalize">
+                     <h2 className="text-2xl font-semibold capitalize">
                         <span className="line-clamp-2">{name}</span>
                      </h2>
                   </div>
-                  <p className="flex items-center gap-2">
-                     <MapPin className="w-4 h-4 text-slate-700" />
-                     <span className="text-sm text-slate-700">{location}</span>
-                  </p>
-                  <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
-                  <div className="flex w-full justify-between items-end">
-                     <div className="nc-StartRating flex items-center space-x-1 text-sm  ">
-                        <div className="pb-[2px]">
-                           <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              fill="currentColor"
-                              aria-hidden="true"
-                              data-slot="icon"
-                              className="w-[18px] h-[18px] text-orange-500"
-                           >
-                              <path
-                                 fillRule="evenodd"
-                                 d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
-                                 clipRule="evenodd"
-                              ></path>
-                           </svg>
-                        </div>
-                        <span className="font-medium ">{rating.score}</span>
-                        <span className="text-neutral-500 dark:text-neutral-400">
-                           ({rating.reviews})
-                        </span>
+                  <div className="space-y-2">
+                     {/* <p className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4 text-slate-700 dark:text-slate-400" />
+                        <span className="text-slate-700 dark:text-slate-400">{location}</span>
+                     </p> */}
+                     <div className="flex items-center gap-3">
+                        <p className="flex items-center gap-2">
+                           <Clock1 className="w-4 h-4 text-slate-700 dark:text-slate-400" />
+                           <span className="text-slate-700 dark:text-slate-400">
+                              2 days 3 nights
+                           </span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                           <Users className="w-4 h-4 text-slate-700 dark:text-slate-400" />
+                           <span className="text-slate-700 dark:text-slate-400">4-5 guests</span>
+                        </p>
                      </div>
+                  </div>
+
+                  <div className="w-14 border-b border-slate-100 dark:border-slate-800 "></div>
+                  <div className="flex w-full justify-between items-end">
                      <Button variant="ghost">
-                        <span className="text-xl font-bold">
+                        <span className="text-2xl font-semibold">
                            ${pricePerPerson}
-                           <span className="text-sm font-light text-slate-500"> / person</span>
+                           <span className="text-base font-light text-slate-500 dark:text-slate-400">
+                              {' '}
+                              / person
+                           </span>
                         </span>
+                     </Button>
+                     <Button variant="outline" className="px-6 py-5 rounded-full">
+                        Book Now
                      </Button>
                   </div>
                </div>
@@ -126,7 +125,7 @@ const TourCard = ({
          </div>
          <div
             className={cn(
-               'w-8 h-8 flex items-center justify-center rounded-full cursor-pointer    bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 hover:bg-opacity-70 text-neutral-600 dark:text-neutral-400 absolute right-5 top-5 sm:right-3 sm:top-3',
+               'w-8 h-8 flex items-center justify-center rounded-full cursor-pointer    bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 hover:bg-opacity-70 text-slate-600 dark:text-slate-400 absolute right-5 top-5 sm:right-3 sm:top-3',
                {
                   'text-red-600': isFavorite,
                },

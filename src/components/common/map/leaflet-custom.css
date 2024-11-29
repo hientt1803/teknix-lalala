@@ -1,0 +1,62 @@
+/*
+ custom styles for leaflet
+*/
+
+.leaflet-marker-icon.leaflet-div-icon {
+    background: none;
+    border: none !important;
+}
+
+.leaflet-cluster-anim .leaflet-marker-icon,
+.leaflet-cluster-anim .leaflet-marker-shadow {
+    transition:
+        transform 0.25s ease-out,
+        opacity 0.25s ease-in;
+}
+
+.leaflet-popup-content {
+    width: 1px !important;
+    height: 1px !important;
+}
+
+.leaflet-popup-content p,
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip-container,
+.leaflet-popup-tip,
+.leaflet-popup-content {
+    background: initial;
+    color: initial;
+    box-shadow: initial;
+    position: initial;
+    left: initial;
+    margin-top: initial;
+    margin-left: initial;
+    overflow: initial;
+    pointer-events: initial;
+    margin: initial;
+    line-height: initial;
+    font-size: initial;
+    font-size: initial;
+    min-height: initial;
+}
+
+/* GEO SEARCH CONTROL */
+.leaflet-touch .leaflet-geosearch-bar {
+    @apply relative;
+}
+.leaflet-touch .leaflet-geosearch-bar form {
+    @apply rounded-2xl h-12 w-full flex justify-between items-center gap-2 bg-white;
+}
+
+.leaflet-control-geosearch form input {
+    @apply block h-full !w-[calc(100%-32px)] !min-w-[calc(100%-32px)] flex-grow   rounded-2xl !text-base font-normal;
+}
+.leaflet-control-geosearch form button {
+    @apply !w-8 !h-8 !relative;
+}
+.leaflet-control-geosearch form .results {
+    @apply absolute w-full top-[calc(100%+2px)] left-0 rounded-b-2xl !border-0 p-0;
+}
+.leaflet-control-geosearch form .results div {
+    @apply px-3 py-3 text-sm border-0 hover:bg-slate-50 text-black;
+}

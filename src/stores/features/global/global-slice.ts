@@ -11,6 +11,7 @@ const initialState: IGlobalSlice = {
          lat: 0,
          lon: 0,
          radius: 15000,
+         placeId: 1,
       },
       currency: {
          code: 'VND',
@@ -76,15 +77,24 @@ export const GlobalSlice = createSlice({
                searchType: 'hotel' | 'region';
                hotelId?: string;
                regionId?: number;
-               lat: number;
-               lon: number;
-               radius: number;
+               lat?: number;
+               lon?: number;
+               radius?: number;
+               placeId?: number;
             };
          },
       ) => {
          state.searchGlobal.location = action.payload;
       },
-      setSearchGlobalDateRange: (state, action) => {
+      setSearchGlobalDateRange: (
+         state,
+         action: {
+            payload: {
+               startDate: string;
+               endDate: string;
+            };
+         },
+      ) => {
          const { startDate, endDate } = action.payload;
          state.searchGlobal.dateRange = {
             startDate: startDate,
@@ -114,6 +124,16 @@ export const GlobalSlice = createSlice({
       },
       setIsCanSearchGlobal: (state, action: PayloadAction<boolean>) => {
          state.searchGlobal.isCanSearch = action.payload;
+      },
+      setSearchGlobalLocationRadius: (
+         state,
+         action: {
+            payload: {
+               radius: number;
+            };
+         },
+      ) => {
+         state.searchGlobal.location.radius = action.payload.radius;
       },
       // memorized
       setMemorizeData: (
@@ -145,6 +165,7 @@ export const {
    setSearchGlobalHotelSortBy,
    setIsCanSearchGlobal,
    setMemorizeData,
+   setSearchGlobalLocationRadius,
 } = GlobalSlice.actions;
 
 export default GlobalSlice.reducer;

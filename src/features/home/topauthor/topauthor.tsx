@@ -20,10 +20,10 @@ const components: JSXMapSerializer = {
 const TopAuthor = ({ heading, body }: TopAuthorProps) => {
    return (
       <>
-         <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 2xl:max-w-screen-2xl left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 bg-neutral-100"></div>
+         <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 dark:bg-slate-900 bg-slate-100"></div>
          <div className="relative">
-            <div className="relative mb-10 text-neutral-900">
-               <div className="text-center w-full max-w-2xl mx-auto mb-4">
+            <div className="relative mb-10 text-slate-900">
+               <div className="text-center w-full max-w-screen-1920 mx-auto mb-4">
                   <PrismicRichText field={heading} components={components} />
                   <PrismicRichText field={body} components={components} />
                </div>
@@ -32,7 +32,7 @@ const TopAuthor = ({ heading, body }: TopAuthorProps) => {
                {cards.map((author, index) => (
                   <Link
                      key={index}
-                     className="flex flex-col overflow-hidden bg-white rounded-3xl hover:shadow-xl transition-shadow"
+                     className="flex flex-col overflow-hidden bg-white dark:bg-slate-950 rounded-3xl hover:shadow-xl transition-shadow"
                      href="#"
                   >
                      <div className="relative flex-shrink-0 ">
@@ -45,7 +45,7 @@ const TopAuthor = ({ heading, body }: TopAuthorProps) => {
                            /> */}
                         </div>
                         <div className="absolute top-3 inset-x-3 flex">
-                           <div className="py-1 px-4 bg-neutral-100  rounded-full flex items-center justify-center leading-none text-xs font-medium">
+                           <div className="py-1 px-4 bg-slate-100 dark:bg-slate-700  rounded-full flex items-center justify-center leading-none text-xs font-medium">
                               {author.id}
                               <svg
                                  xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +66,7 @@ const TopAuthor = ({ heading, body }: TopAuthorProps) => {
                      </div>
                      <div className="pt-[1px] px-6 text-center flex flex-col items-center relative -translate-y-7">
                         <svg
-                           className="h-12 text-white"
+                           className="h-12 text-white dark:text-slate-700"
                            viewBox="0 0 135 54"
                            fill="none"
                            xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ const TopAuthor = ({ heading, body }: TopAuthorProps) => {
                            <h2 className="text-base font-medium">
                               <span className="line-clamp-1">{author.author}</span>
                            </h2>
-                           <span className="block mt-1 text-sm text-neutral-500 dark:text-neutral-400">
+                           <span className="block mt-1 text-sm text-slate-500 dark:text-slate-400">
                               @{author.job}
                            </span>
                         </div>

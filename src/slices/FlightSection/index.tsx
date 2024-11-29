@@ -23,7 +23,7 @@ const components: JSXMapSerializer = {
 const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
     return (
         <Bounded className='relative py-16' data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-            <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 2xl:max-w-screen-2xl left-1/2 transform -translate-x-1/2 xl:rounded-[40px] -z-10 bg-slate-50 dark:bg-black dark:bg-opacity-20 " />
+            <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] -z-10 bg-slate-50 dark:bg-black dark:bg-opacity-20 " />
             <div className="relative">
                 <div className="flex flex-col mb-8 relative">
                     {/* HEADING */}
@@ -96,7 +96,7 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                         <img src={data.imageUrl} className="w-10" />
                                     </div>
                                     {/* MOBILE DISPLAY */}
-                                    <div className="block lg:hidden space-y-1">
+                                    <div className="block lg:hidden w-full space-y-1">
                                         <div className="flex font-semibold">
                                             <div>
                                                 <span>{data.departureTime}</span>

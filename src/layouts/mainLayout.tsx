@@ -7,6 +7,12 @@ export const Header = dynamic(() =>
 export const Footer = dynamic(() =>
    import('@/components/common/footer').then((mod) => mod.default),
 );
+export const ScrollToTopButton = dynamic(
+   () => import('@/components/custom/buttons/scroll-to-top-button').then((mod) => mod.default),
+   {
+      ssr: false,
+   },
+);
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
    return (
@@ -14,7 +20,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
          <Header />
          {children}
          <Footer />
-         {/* <ScrollToTopButton /> */}
+         <ScrollToTopButton />
       </>
    );
 };

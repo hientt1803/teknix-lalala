@@ -11,7 +11,7 @@ const Heading = ({
    as: Component = 'h2',
    className,
    children,
-   size = 'md',
+   size = 'lg',
    ...restProps
 }: HeadingProps) => {
    return (

@@ -23,7 +23,7 @@ const UserButton = () => {
 
    const handleLogout = () => {
       dispatch(logOutUser({}));
-      router.push('/auth');
+      router.push('/');
    };
 
    const userData = user || data;
@@ -36,7 +36,7 @@ const UserButton = () => {
             <div className="relative w-12 h-12 flex items-center justify-center">
                <Button
                   variant="ghost"
-                  className="w-10 h-10 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
+                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
                   size={'icon'}
                >
                   <Avatar>
@@ -55,7 +55,7 @@ const UserButton = () => {
             align="end"
             className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5"
          >
-            <div className="relative grid gap-6 p-7">
+            <div className="relative grid gap-6 p-5">
                <Link
                   className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                   href="/profile"
@@ -166,7 +166,7 @@ const UserButton = () => {
                </Link>
             </div>
             <hr className="h-[1px] border-t border-neutral-300 dark:border-neutral-700" />
-            <div className="relative grid gap-6 p-7">
+            <div className="relative grid gap-6 p-5">
                <Link
                   href="#"
                   onClick={handleClosePopover}
@@ -217,7 +217,7 @@ const UserButton = () => {
                         ></path>
                      </svg>
                   </div>
-                  <div className="ml-4">
+                  <div className="ml-2">
                      <p className="text-sm font-medium ">Logout</p>
                   </div>
                </Button>

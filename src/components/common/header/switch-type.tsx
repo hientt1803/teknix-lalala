@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { KeyTextField, LinkField, SelectField } from '@prismicio/client';
 import { title } from 'process';
+import { PrismicNextLink } from '@prismicio/next';
 const categoriesList = [
    {
       link: '/category/car',
@@ -41,7 +42,7 @@ const categoriesList = [
 interface NavigationType {
    navigation: {
       title: KeyTextField;
-      href: LinkField;
+      link: LinkField;
       description: KeyTextField;
       icon: SelectField<'flight' | 'hotel' | 'tour' | 'car'>;
    }[];
@@ -56,14 +57,14 @@ const SwitchType = ({ navigation }: NavigationType) => {
          <PopoverTrigger className="text-opacity-90 group self-center py-2 h-10 sm:h-12 rounded-md text-sm sm:text-base font-medium hover:text-opacity-100 focus:outline-none">
             <span className="inline-flex space-x-2 items-center">
                Travel
-               <ChevronDownIcon className="w-5 h-5 text-slate-500" />
+               <ChevronDownIcon className="w-5 h-5 mix-blend-difference" />
             </span>
          </PopoverTrigger>
-         <PopoverContent className="w-[320px] px-4 sm:px-0 overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
+         <PopoverContent className="w-[320px] py-0 px-4 sm:px-0 overflow-hidden rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5">
             <nav>
-               <ul className="relative grid grid-cols-1 gap-7 p-7">
-                  {navigation?.map(({ title, href, description, icon }) => (
-                     <Link key={title} href={'#'} onClick={handleClose}>
+               <ul className="relative grid grid-cols-1 gap-7 p-6">
+                  {navigation?.map(({ title, link, description, icon }) => (
+                     <PrismicNextLink key={title} field={link} onClick={handleClose}>
                         <li className="flex items-center p-2 -m-3 text-slate-800 transition duration-150 ease-in-out rounded-lg hover:bg-slate-100 hover:text-neutral-900 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  dark:hover:bg-slate-800 dark:text-neutral-100 dark:hover:text-neutral-200">
                            <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md dark:text-slate-100 sm:h-12 sm:w-12 bg-slate-100 dark:bg-slate-700">
                               {icon === 'car' && <CarFrontIcon className="w-7 h-7" />}
@@ -73,10 +74,10 @@ const SwitchType = ({ navigation }: NavigationType) => {
                            </div>
                            <div className="ml-4 space-y-0.5">
                               <p className="text-sm font-medium">{title}</p>
-                              <p className="text-xs ">{description}</p>
+                              <p className="text-xs">{description}</p>
                            </div>
                         </li>
-                     </Link>
+                     </PrismicNextLink>
                   ))}
                </ul>
             </nav>

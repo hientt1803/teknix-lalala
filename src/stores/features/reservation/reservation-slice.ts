@@ -14,6 +14,7 @@ const initialState: IReservationSlice = {
       checkin_date: '',
       checkout_date: '',
       num_guests: 0,
+
       meta_data: {
          additional: {
             is_renting_car: false,
@@ -36,6 +37,11 @@ const initialState: IReservationSlice = {
       total_price: 0,
       base_price: 0,
       total_discount: 0,
+      meal_data: '',
+      book_hash: '',
+      is_expired: {},
+      payment_id: {},
+      payment_link: {},
       rate_meta_data: {
          allotment: 0,
          amenities_data: [],
@@ -45,6 +51,7 @@ const initialState: IReservationSlice = {
          deposit: {},
          match_hash: '',
          meal: '',
+         meal_data: null,
          no_show: {
             amount: '',
             currency_code: '',
@@ -79,10 +86,6 @@ const initialState: IReservationSlice = {
          sell_price_limits: {},
          serp_filters: [],
       },
-      book_hash: '',
-      is_expired: {},
-      payment_id: {},
-      payment_link: {},
    },
 };
 

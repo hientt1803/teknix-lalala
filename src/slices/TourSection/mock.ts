@@ -1,9 +1,74 @@
 import { Tour } from '@/components/custom/cards/tour-card';
+export const filterDatas = [
+   {
+      name: 'Categories',
+      items: [
+         {
+            name: 'All',
+            value: 'all',
+         },
+         {
+            name: 'Attractives',
+            value: 'attractives',
+         },
+         {
+            name: 'Active',
+            value: 'active',
+         },
+         {
+            name: 'Nature',
+            value: 'nature',
+         },
+      ],
+   },
 
+   {
+      name: 'Review/Rating',
+      items: [
+         {
+            name: 'All',
+            value: 'all',
+         },
+         {
+            name: '4-5',
+            value: '4-5',
+         },
+         {
+            name: '5+',
+            value: '5',
+         },
+      ],
+   },
+   {
+      name: 'Price Range',
+      items: [
+         {
+            name: 'Any',
+            value: 'any',
+         },
+         {
+            name: '$0 - $50',
+            value: '0-50',
+         },
+         {
+            name: '$51 - $100',
+            value: '51-100',
+         },
+         {
+            name: '$101 - $150',
+            value: '101-150',
+         },
+         {
+            name: '$151+',
+            value: '151+',
+         },
+      ],
+   },
+];
 export const mockTours: Tour[] = [
    {
       id: 1,
-      name: 'Beautiful Bali Adventure',
+      name: 'California Sunset/Twilight Boat Cruise',
       location: 'Bali, Indonesia',
       imageUrl: [
          'https://images.pexels.com/photos/1371360/pexels-photo-1371360.jpeg?auto=compress&cs=tinysrgb&w=400',
@@ -27,7 +92,7 @@ export const mockTours: Tour[] = [
    },
    {
       id: 2,
-      name: 'Paris City Lights Tour',
+      name: 'NYC: Food Tastings and Culture Tour',
       location: 'Paris, France',
       imageUrl: [
          'https://images.pexels.com/photos/27221292/pexels-photo-27221292/free-photo-of-motorboat-in-town-on-lake-como-in-italy.jpeg?auto=compress&cs=tinysrgb&w=400',
@@ -50,7 +115,7 @@ export const mockTours: Tour[] = [
    },
    {
       id: 3,
-      name: 'Safari Adventure',
+      name: 'Grand Canyon Horseshoe Bend 2 days',
       location: 'Maasai Mara, Kenya',
       imageUrl: [
          'https://images.pexels.com/photos/2611686/pexels-photo-2611686.jpeg?auto=compress&cs=tinysrgb&w=400',
@@ -92,7 +157,7 @@ export const mockTours: Tour[] = [
    },
    {
       id: 5,
-      name: 'Alps Ski Adventure',
+      name: 'NYC: Food Tastings and Culture Tour',
       location: 'Swiss Alps, Switzerland',
       imageUrl: [
          'https://images.pexels.com/photos/2082103/pexels-photo-2082103.jpeg?auto=compress&cs=tinysrgb&w=400',
@@ -110,46 +175,10 @@ export const mockTours: Tour[] = [
    },
    {
       id: 6,
-      name: 'Alps Ski Adventure',
+      name: 'Grand Canyon Horseshoe Bend 2 days',
       location: 'Swiss Alps, Switzerland',
       imageUrl: [
          'https://images.pexels.com/photos/2108813/pexels-photo-2108813.jpeg?auto=compress&cs=tinysrgb&w=400',
-         'https://images.pexels.com/photos/290316/pexels-photo-290316.jpeg?auto=compress&cs=tinysrgb&w=400',
-         'https://images.pexels.com/photos/21369699/pexels-photo-21369699/free-photo-of-newspaper-on-a-table-in-a-ferry.jpeg?auto=compress&cs=tinysrgb&w=400',
-      ],
-      pricePerPerson: 600,
-      rating: {
-         score: 4.6,
-         reviews: 198,
-      },
-      type: 'Adventure',
-      amenities: [{ label: 'Ski Equipment' }, { label: 'Lift Pass' }],
-      isFavorite: false,
-   },
-   {
-      id: 7,
-      name: 'Alps Ski Adventure',
-      location: 'Swiss Alps, Switzerland',
-      imageUrl: [
-         'https://images.pexels.com/photos/1020016/pexels-photo-1020016.jpeg?auto=compress&cs=tinysrgb&w=400',
-         'https://images.pexels.com/photos/290316/pexels-photo-290316.jpeg?auto=compress&cs=tinysrgb&w=400',
-         'https://images.pexels.com/photos/21369699/pexels-photo-21369699/free-photo-of-newspaper-on-a-table-in-a-ferry.jpeg?auto=compress&cs=tinysrgb&w=400',
-      ],
-      pricePerPerson: 600,
-      rating: {
-         score: 4.6,
-         reviews: 198,
-      },
-      type: 'Adventure',
-      amenities: [{ label: 'Ski Equipment' }, { label: 'Lift Pass' }],
-      isFavorite: false,
-   },
-   {
-      id: 8,
-      name: 'Alps Ski Adventure',
-      location: 'Swiss Alps, Switzerland',
-      imageUrl: [
-         'https://images.pexels.com/photos/2533092/pexels-photo-2533092.jpeg?auto=compress&cs=tinysrgb&w=400',
          'https://images.pexels.com/photos/290316/pexels-photo-290316.jpeg?auto=compress&cs=tinysrgb&w=400',
          'https://images.pexels.com/photos/21369699/pexels-photo-21369699/free-photo-of-newspaper-on-a-table-in-a-ferry.jpeg?auto=compress&cs=tinysrgb&w=400',
       ],

@@ -1,42 +1,51 @@
 'use client';
 import { cn } from '@/lib/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
    fallback?: React.ReactNode;
    className?: string; // Class dành cho thẻ div
+   classNameImage?: string; // Class dành cho thẻ div
 }
 
 const Image: React.FC<ImageProps> = ({
    src,
    alt,
-   fallback = null,
+   fallback,
    className, // className dành cho div
+   classNameImage,
    ...rest
 }) => {
-   const [hasError, setHasError] = useState(false);
+   const [hasError, setHasError] = useState(true);
+
+   useEffect(() => {
+      // Reset trạng thái khi src thay đổi
+      setHasError(false);
+   }, [src]);
 
    const handleError = () => {
-      setHasError(true);
+      setHasError(true); // Đánh dấu trạng thái lỗi khi load ảnh
    };
 
    return (
       <div className={cn('relative overflow-hidden', className)}>
+         {/* Hiển thị ảnh nếu không lỗi */}
          {!hasError ? (
             <img
                src={src}
                alt={alt}
                {...rest}
-               onError={handleError}
-               className="object-cover w-full h-full"
+               onError={handleError} // Xử lý lỗi
+               className={cn('w-full h-full object-cover ', classNameImage)}
                loading="lazy"
             />
          ) : (
-            <div className="flex items-center justify-center w-full overflow-hidden h-full border border-slate-100 rounded-2xl">
+            // Hiển thị fallback khi xảy ra lỗi
+            <div className="flex items-center justify-center w-full h-full border border-slate-100 rounded-2xl">
                {fallback ? (
                   fallback
                ) : (
-                  <div className="h-full w-full flex  flex-1 justify-center items-center bg-slate-100">
+                  <div className="h-full w-full flex flex-1 justify-center items-center bg-slate-100">
                      <svg
                         className="w-32 h-32 text-white"
                         xmlns="http://www.w3.org/2000/svg"

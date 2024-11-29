@@ -7,9 +7,10 @@ export interface ISearchGlobal {
       searchType: 'hotel' | 'region';
       hotelId?: string;
       regionId?: number;
-      lat: number;
-      lon: number;
+      lat?: number;
+      lon?: number;
       radius?: number;
+      placeId?: number;
    };
    lang: CountryType;
    currency: CurrencyType;

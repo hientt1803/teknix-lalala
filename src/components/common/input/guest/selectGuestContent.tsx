@@ -1,13 +1,10 @@
-"use client"
-
-import React from 'react';
-import { Plus, X } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Separator } from '@/components/ui/separator';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { AmountAction } from '@/components/custom/input/amount-action';
 import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
+import { Plus, X } from 'lucide-react';
 
 const MOCK_AGE_DATA = [
    { label: '1 year', value: '1' },
@@ -50,7 +47,7 @@ export const GroupInputSelectDrawerContent = ({
    addNewRoom,
    deleteRoom,
 }: IDrawerContent) => {
-   
+
    return (
       <div className="p-1">
          <div className="space-y-4">
@@ -73,12 +70,23 @@ export const GroupInputSelectDrawerContent = ({
                      {/* Adults */}
                      <div className="space-y-2 w-full md:w-auto">
                         <Label htmlFor={`adults-${roomIndex}`}>Adults</Label>
-                        <Input
+                        {/* <Input
                            id={`adults-${roomIndex}`}
                            type="number"
                            className="w-full"
                            value={room.adults}
                            onChange={(e) => handleOnChangeAdults(Number(e.target.value), roomIndex)}
+                        /> */}
+                        <AmountAction
+                           value={room.adults}
+                           onChange={(value) => {
+                              handleOnChangeAdults(Number(value), roomIndex);
+                           }}
+                           min={0}
+                           decrClassName="text-sm"
+                           incrClassName="text-sm"
+                           inputClassName="text-lg font-[550]"
+                           wrapperClassName="bg-transparent"
                         />
                      </div>
 
@@ -89,7 +97,7 @@ export const GroupInputSelectDrawerContent = ({
                            {room.children.map((childAge, index) => (
                               <div
                                  key={index}
-                                 className="inline-flex items-center space-x-2 px-2 py-1 border border-gray-300 rounded-md text-sm"
+                                 className="inline-flex items-center space-x-2 px-2 py-2 border border-gray-300 rounded-md text-sm"
                               >
                                  <span>
                                     {childAge} {childAge !== 1 ? 'years' : 'year'}
@@ -105,13 +113,13 @@ export const GroupInputSelectDrawerContent = ({
                                  <PopoverTrigger asChild>
                                     <Button
                                        variant="outline"
-                                       className="text-gray-500 border-gray-300"
+                                       className="text-gray-500 py-5 border-gray-300"
                                     >
-                                       <Plus className="w-4 h-4" />
+                                       <Plus className="w-5 h-5" />
                                     </Button>
                                  </PopoverTrigger>
-                                 <PopoverContent className="w-fit">
-                                    <ScrollArea className="max-h-40 w-fit">
+                                 <PopoverContent className="w-fit p-1 px-2">
+                                    <ScrollArea className="h-64 w-fit">
                                        <ul className="space-y-1 w-fit">
                                           {MOCK_AGE_DATA.map((item) => (
                                              <li key={item.value}>

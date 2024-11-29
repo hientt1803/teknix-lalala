@@ -1,9 +1,11 @@
 import Bounded from '@/components/common/containers/bounded';
+import Heading from '@/components/common/typography/heading';
+import Paragraph from '@/components/common/typography/paragraph';
 import Badge from '@/components/custom/badges/badge';
 import { cn } from '@/lib/utils';
 import { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
-import { PrismicRichText } from '@prismicio/react';
+import { JSXMapSerializer, PrismicRichText } from '@prismicio/react';
 import { CheckIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
@@ -13,7 +15,10 @@ export const PaymentCaroucel = dynamic(
       ssr: false,
    },
 );
-
+const components: JSXMapSerializer = {
+   heading2: ({ children }) => <Heading className='text-4xl'>{children}</Heading>,
+   paragraph: ({ children }) => <Paragraph>{children}</Paragraph>,
+};
 export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSlice }) => {
    return (
       <Bounded className="w-full h-full flex flex-col justify-center items-center">
@@ -22,7 +27,9 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
                {/* List image */}
                <div
                   className={cn(
-                     slice.variation == 'default' ? 'col-span-12 md:col-span-6 order-1' : 'col-span-12 md:col-span-4 order-2',
+                     slice.variation == 'default'
+                        ? 'col-span-12 md:col-span-5 order-1'
+                        : 'col-span-12 md:col-span-4 order-2',
                   )}
                >
                   {slice.variation == 'default' ? (
@@ -113,42 +120,24 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
                <div
                   className={cn(
                      slice.variation == 'default'
-                        ? 'mt-20 col-span-12 md:col-span-6 order-2'
+                        ? 'mt-20 col-span-12 md:col-span-7 order-2'
                         : 'col-span-12 md:col-span-6 md:col-start-2 order-1',
                   )}
                >
                   <Badge
-                     className="bg-[#f2f4f6] py-4 px-5 text-neutral-900 text-sm font-medium mb-5"
+                     className="bg-[#f2f4f6] py-4 px-5 text-slate-900 text-sm font-medium mb-5"
                      color="gray"
                   >
                      {slice.primary.tag || ''}
                   </Badge>
 
                   <div className="mb-5">
-                     <PrismicRichText
-                        field={slice?.primary?.heading}
-                        components={{
-                           heading2: ({ children }) => (
-                              <h2 className="text-4xl md:text-5xl font-semibold leading-tight tracking-tight text-slate-900 dark:text-slate-100">
-                                 {children}
-                              </h2>
-                           ),
-                        }}
-                     />
+                     <PrismicRichText field={slice?.primary?.heading} components={components} />
                   </div>
 
                   <div className="mb-5">
                      {slice.variation === 'default' && (
-                        <PrismicRichText
-                           field={slice?.primary?.title}
-                           components={{
-                              paragraph: ({ children }) => (
-                                 <p className="text-neutral-800 dark:text-neutral-300 text-base sm:text-xl">
-                                    {children}
-                                 </p>
-                              ),
-                           }}
-                        />
+                        <PrismicRichText field={slice?.primary?.title} components={components} />
                      )}
                   </div>
 
@@ -162,8 +151,8 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
                               key={index}
                            >
                               <div className="flex gap-2 items-center">
-                                 <CheckIcon className="w-6 h-6 text-green-600" />
-                                 <span className="text-md text-black dark:text-neutral-200">
+                                 <CheckIcon className="w-5 h-5 text-green-600" />
+                                 <span className="text-sm text-black dark:text-neutral-200">
                                     {bene.text}
                                  </span>
                               </div>
@@ -182,7 +171,7 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
                   )}
 
                   <div
-                     className={slice.variation == 'default' ? 'mt-4 w-full' : 'mt-8 max-w-[25rem]'}
+                     className={slice.variation == 'default' ? 'mt-4 max-w-lg' : 'mt-8 max-w-[25rem]'}
                   >
                      <PaymentCaroucel payments={slice.primary.payments} />
                   </div>
