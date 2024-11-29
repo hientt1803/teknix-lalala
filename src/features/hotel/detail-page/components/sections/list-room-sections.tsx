@@ -1,18 +1,17 @@
 'use client';
 
-import Bounded from '@/components/common/containers/bounded';
 import { Button } from '@/components/ui/button';
 import { HotelCardSkeleton } from '@/features/hotel/cards/hotel-card';
 import { cn } from '@/lib/utils';
 import { setReserveForm, useGetRoomActiveByHotelIdQuery } from '@/stores/features/stay';
+import { IReserveForm, Rate } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { addDays, format, formatDate } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import RoomCard from '../card-room-v2';
-import { IReserveForm, Rate } from '@/stores/features/stay/type';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import RoomCard from '../card-room-v2';
 
 export const ListRoomSections = ({ id }: { id: string }) => {
    // next api
@@ -103,7 +102,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
    };
 
    return (
-      <Bounded>
+      <div>
          {/* Heading Section */}
          <div className="mb-5">
             <h1 className="text-5xl font-semibold mb-3">Our Best Rooms</h1>
@@ -189,6 +188,6 @@ export const ListRoomSections = ({ id }: { id: string }) => {
                <p className="text-neutral-700 text-xl mb-10">No rooms available.</p>
             )}
          </div>
-      </Bounded>
+      </div>
    );
 };

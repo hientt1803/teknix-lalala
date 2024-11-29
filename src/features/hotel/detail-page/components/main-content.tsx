@@ -39,38 +39,38 @@ const MainContent = ({ data, id }: Props) => {
    // });
 
    // hooks
-   const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
-      offset: 60,
-   });
+   // const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
+   //    offset: 60,
+   // });
 
    // state
-   const [isTargetInView, setIsTargetInView] = useState(false);
+   // const [isTargetInView, setIsTargetInView] = useState(false);
    const reviewRefSection = useRef<HTMLDivElement>(null);
 
    // logic
-   useEffect(() => {
-      const observer = new IntersectionObserver(
-         (entries) => {
-            const entry = entries[0];
-            setIsTargetInView(entry.isIntersecting);
-         },
-         {
-            root: null, // uses the viewport
-            rootMargin: '0px',
-            threshold: 0.1, // Adjust as needed (0.1 means 10% of target is in view)
-         },
-      );
+   // useEffect(() => {
+   //    const observer = new IntersectionObserver(
+   //       (entries) => {
+   //          const entry = entries[0];
+   //          setIsTargetInView(entry.isIntersecting);
+   //       },
+   //       {
+   //          root: null, // uses the viewport
+   //          rootMargin: '0px',
+   //          threshold: 0.1, // Adjust as needed (0.1 means 10% of target is in view)
+   //       },
+   //    );
 
-      if (targetRef.current) {
-         observer.observe(targetRef.current);
-      }
+   //    if (targetRef.current) {
+   //       observer.observe(targetRef.current);
+   //    }
 
-      return () => {
-         if (targetRef.current) {
-            observer.unobserve(targetRef.current);
-         }
-      };
-   }, [targetRef]);
+   //    return () => {
+   //       if (targetRef.current) {
+   //          observer.unobserve(targetRef.current);
+   //       }
+   //    };
+   // }, [targetRef]);
 
    const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
       window.scrollTo({
