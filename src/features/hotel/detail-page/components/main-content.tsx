@@ -21,6 +21,10 @@ const ReviewSection = dynamic(() => import('./sections/review-section'));
 const LocationSection = dynamic(() => import('./sections/location-section'));
 const ThingToKnowSection = dynamic(() => import('./sections/thing-to-know-section'));
 const ReserveSection = dynamic(() => import('./sections/reserve-section'));
+const FaciliiesSection = dynamic(() => import('./sections/facilities-section'));
+const HotelInfoSection = dynamic(() => import('./sections/hotel-info-section'));
+const HowItWorkSection = dynamic(() => import('./sections/how-it-work-section'));
+const VideoSection = dynamic(() => import('./sections/video-section'));
 
 type Props = {
    id: string;
@@ -104,14 +108,22 @@ const MainContent = ({ data, id }: Props) => {
                   hotelReview={hotelReview}
                   scrollIntoReviewSection={scrollIntoReviewSection}
                /> */}
+               {/* FACILITES */}
+               <FaciliiesSection facilities={data?.serp_filters || []} />
+               {/* HOTEL INFO */}
+               <HotelInfoSection data={data} scrollIntoReviewSection={scrollIntoReviewSection} />
                {/* STAY INFO */}
-               <StaySection desc={data?.description_struct} />
+               {/* <StaySection desc={data?.description_struct} /> */}
                {/* ROOM RATE */}
                {/* <RoomRateSection /> */}
                {/* AVAILABLE */}
                <div ref={targetRef}>
                   <AvailiableSection id={id} />
                </div>
+               {/* HOW IT WORKS */}
+               <HowItWorkSection />
+               {/* VIDEOS */}
+               <VideoSection />
                {/* HOST INFORMATION */}
                {/* <HostInfoSection /> */}
                {/* LOCATION */}

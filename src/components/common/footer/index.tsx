@@ -3,13 +3,27 @@ import Bounded from '../containers/bounded';
 import { createClient } from '@/prismicio';
 import { PrismicNextLink } from '@prismicio/next';
 import { PrismicImage } from '@prismicio/react';
-
+import Image from '../images/image';
+const dataImnage = [
+   '/assets/images/home/media.png',
+   '/assets/images/home/media2.png',
+   '/assets/images/home/media3.png',
+   '/assets/images/home/media4.png',
+   '/assets/images/home/media5.png',
+   '/assets/images/home/media6.png',
+   '/assets/images/home/media7.png',
+];
 const Footer = async () => {
    const client = createClient();
    const settings = await client.getSingle('settins');
    return (
-      <div className="mt-8 border-t border-t-slate-200 dark:border-t-slate-700">
-         <Bounded as="footer" className="divide-y divide-slate-200 dark:divide-slate-700">
+      <div className="mt-8 bg-black text-neutral-100">
+         <div className="flex w-full flex-nowrap">
+            {dataImnage.map((img, index) => (
+               <Image key={index} src={img} className="aspect-square w-full" />
+            ))}
+         </div>
+         <Bounded as="footer" className="divide-y divide-neutral-800">
             <div className="flex flex-col md:flex-row justify-between items-center md:items-end space-y-3 py-8">
                <PrismicImage field={settings.data.logo} className="w-20" />
                <div className="flex  items-center justify-end space-x-2">
@@ -24,13 +38,13 @@ const Footer = async () => {
                   </Link>
                </div>
             </div>
-            <div className="grid grid-cols-1 space-y-16  md:space-y-0 md:grid-cols-12 py-8">
+            <div className="grid grid-cols-1 space-y-16  lg:space-y-0 lg:grid-cols-12 py-8">
                <div className="col-span-4">
                   <div className="flex flex-col space-y-5">
                      <h3 className="text-lg font-semibold">{settings.data.host[0]?.label}</h3>
                      <div
                         className="flex items-center justify-start space-x-2 
-text-slate-500 dark:text-slate-400 "
+text-neutral-400"
                      >
                         <svg
                            xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +59,7 @@ text-slate-500 dark:text-slate-400 "
                         </svg>
                         <p>{settings.data.host[0]?.address}</p>
                      </div>
-                     <div className="flex items-center justify-start space-x-2 text-slate-500 dark:text-slate-400">
+                     <div className="flex items-center justify-start space-x-2 text-neutral-400 ">
                         <svg
                            xmlns="http://www.w3.org/2000/svg"
                            width="1em"
@@ -59,7 +73,7 @@ text-slate-500 dark:text-slate-400 "
                         </svg>
                         <p>{settings.data.host[0]?.active_time}</p>
                      </div>
-                     <div className="flex items-center justify-start space-x-2 text-slate-500 dark:text-slate-400">
+                     <div className="flex items-center justify-start space-x-2 text-neutral-400 ">
                         <svg
                            xmlns="http://www.w3.org/2000/svg"
                            width="1em"
@@ -79,7 +93,7 @@ text-slate-500 dark:text-slate-400 "
                            <PrismicNextLink
                               field={social.link}
                               key={index}
-                              className="rounded-full p-2 border border-slate-700 hover:border-yellow-400 hover:text-yellow-400 hover:-translate-y-1 transition-transform duration-200"
+                              className="rounded-full p-2 border border-neutral-700 hover:border-yellow-400 hover:text-yellow-400 hover:-tranneutral-y-1 transition-transform duration-200"
                            >
                               {social.icon === 'facebook' ? (
                                  <svg
@@ -140,88 +154,88 @@ text-slate-500 dark:text-slate-400 "
                   </div>
                </div>
                <div className="col-span-8">
-                  <div className="grid grid-cols-1 space-y-16 md:space-y-0 md:grid-cols-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 space-y-16 md:space-y-0 lg:grid-cols-4">
                      <div className="flex flex-col space-y-5">
                         <h3 className="text-lg font-semibold">Support</h3>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400  hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Forum support
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Help center
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Live chat
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            How it works
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Security
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Privacy
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Changes logs
                         </p>
                      </div>
                      <div className="flex flex-col space-y-5">
                         <h3 className="text-lg font-semibold">Company</h3>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            About Us
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Community Blog
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Jobs and Careers
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Contact Us
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Our Awards
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Agencies
                         </p>
                      </div>
                      <div className="flex flex-col space-y-5">
                         <h3 className="text-lg font-semibold">Services</h3>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Tour Guide
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Tour Booking
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Hotel Booking
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Ticket Booking
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Rental Services
                         </p>
                      </div>
                      <div className="flex flex-col space-y-5">
                         <h3 className="text-lg font-semibold">Legal</h3>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Terms of Service
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Privacy Policy
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Cookies Policy
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Data Processing
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Data Policy
                         </p>
-                        <p className="text-slate-500 dark:text-slate-400 hover:text-slate-400 cursor-pointer transition-colors duration-150">
+                        <p className="text-neutral-400 hover:text-neutral-400 cursor-pointer transition-colors duration-150">
                            Refund Policy
                         </p>
                      </div>

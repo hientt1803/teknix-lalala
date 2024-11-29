@@ -103,12 +103,12 @@ const config: Config = {
             padding: {
                DEFAULT: '1rem',
                '2xl': '8rem',
-               1920: '8rem',
+            //    1920: '8rem',
             },
          },
-         screens: {
-            1920: '1920px',
-         },
+        //  screens: {
+        //     1920: '1920px',
+        //  },
          animation: {
             marquee: 'marquee var(--duration) linear infinite',
             'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',

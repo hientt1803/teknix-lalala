@@ -2,11 +2,12 @@ import { cn } from '@/lib/utils';
 
 type BadgeProps = {
    children: string | React.ReactNode;
-   color: 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'gray' | 'orange' | 'teal' | 'white';
+   color?: 'blue' | 'red' | 'green' | 'yellow' | 'purple' | 'gray' | 'orange' | 'teal' | 'white';
    className?: string;
+   onClick?: () => void;
 };
 
-const Badge: React.FC<BadgeProps> = ({ children, color, className }) => {
+const Badge: React.FC<BadgeProps> = ({ children, color = 'white', className, onClick }) => {
    const colorClasses: Record<string, { bg: string; text: string }> = {
       blue: { bg: 'bg-blue-100', text: 'text-blue-800' },
       red: { bg: 'bg-red-100', text: 'text-red-800' },
@@ -23,6 +24,7 @@ const Badge: React.FC<BadgeProps> = ({ children, color, className }) => {
 
    return (
       <span
+         onClick={onClick && onClick}
          className={cn(
             'inline-flex px-2.5 py-1 rounded-full font-medium text-xs truncate',
             selectedColor.bg,
