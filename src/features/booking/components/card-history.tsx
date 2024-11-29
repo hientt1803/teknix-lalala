@@ -41,9 +41,6 @@ const CardHistory = ({ data }: Props) => {
       dispatch(setReserveForm(dataReserve));
       router.push(`/checkout?reservation=${record.id}`);
    };
-
-   console.log(data);
-
    return (
       <Card className="grid grid-cols-1 lg:flex lg:flex-row rounded-3xl overflow-hidden  relative  hover:shadow-xl cursor-pointer">
          <div className="absolute right-4 top-4 z-10">
@@ -51,9 +48,9 @@ const CardHistory = ({ data }: Props) => {
                className={`
         px-3 py-1 rounded-md text-xs capitalize 
         ${
-           record.status === 'pending'
+           record?.status === 'pending'
               ? 'bg-red-100 text-red-900'
-              : record.status === 'completed'
+              : record?.status === 'completed'
                 ? 'bg-green-100 text-green-900'
                 : 'bg-slate-400 text-slate-900'
         }
@@ -133,12 +130,17 @@ const CardHistory = ({ data }: Props) => {
                   <span className="font-medium ">4.8</span>
                   <span className="text-slate-500 ">(28)</span>
                </div>
-               {record?.status == 'pending' && (
-                  <Button onClick={() => handleContinunePay(record, hotel)}>Continue pay</Button>
+               {data.record?.status === 'pending' && (
+                  <Button
+                     onClick={() => handleContinunePay(record, hotel)}
+                     className="px-6 py-5 rounded-full"
+                  >
+                     Continue pay
+                  </Button>
                )}
-               {record?.status != 'pending' && (
-                  <Button variant={'outline'} asChild>
-                     <Link href={`/reservation/${record?.id}`}>Details Booking</Link>
+               {data.record?.status !== 'pending' && (
+                  <Button variant={'outline'} asChild className="px-6 py-5 rounded-full">
+                     <Link href={`/reservation/${data?.record?.id}`}>Details Booking</Link>
                   </Button>
                )}
             </div>

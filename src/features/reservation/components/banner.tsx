@@ -24,7 +24,7 @@ const Banner = () => {
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>•</BreadcrumbSeparator>
                      <BreadcrumbItem>
-                        <BreadcrumbLink href="/profile">Booking</BreadcrumbLink>
+                        <BreadcrumbLink href="/booking">Booking</BreadcrumbLink>
                      </BreadcrumbItem>
                      <BreadcrumbSeparator>•</BreadcrumbSeparator>
                      <BreadcrumbItem>

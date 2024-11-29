@@ -20,8 +20,11 @@ export const BackgroundImage = dynamic(
 export const MainContent = dynamic(() =>
    import('@/features/home/banner/mainContent').then((mod) => mod.MainContent),
 );
-export const SearchGroup = dynamic(() =>
-   import('@/components/common/searchGroup/searchGroup').then((mod) => mod.SearchGroup),
+export const SearchGroup = dynamic(
+   () => import('@/components/common/searchGroup/searchGroup').then((mod) => mod.SearchGroup),
+   {
+      ssr: false,
+   },
 );
 
 /**
@@ -50,7 +53,7 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
 
                {/* Search Group */}
                <Bounded>
-                  <SearchGroup className="-mb-56 md:mt-0" showBorder showTabs />
+                  <SearchGroup className="-mb-64 md:mt-0" showBorder showTabs />
                </Bounded>
             </div>
          )}

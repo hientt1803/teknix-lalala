@@ -42,13 +42,13 @@ const HotelCard = (props: HotelCArdType) => {
    return (
       <Card className="group relative border-slate-200 overflow-hidden hover:shadow-xl rounded-[1.875rem] transition-shadow w-full h-full">
          <div className={cn('h-full w-full grid grid-cols-5 items-center')}>
-            <div className={cn(displayType == 'list' ? 'col-span-5 md:col-span-2' : 'col-span-5')}>
+            <div className={cn(displayType == 'list' ? 'col-span-5 lg:col-span-2' : 'col-span-5')}>
                <div className="relative h-full z-10">
                   <div
                      className={cn(
                         displayType == 'list'
-                           ? 'aspect-video md:aspect-[7/6] m-0 p-0'
-                           : 'aspect-video md:aspect-auto m-0 p-0',
+                           ? 'aspect-video lg:aspect-[7/6] m-0 p-0'
+                           : 'aspect-video lg:aspect-auto m-0 p-0',
                      )}
                   >
                      <Image
@@ -78,11 +78,11 @@ const HotelCard = (props: HotelCArdType) => {
                className={cn(
                   'w-full h-full flex flex-col items-start justify-between bg-white z-20 rounded-[1.875rem]',
                   displayType == 'list'
-                     ? ' p-5 md:pr-2 col-span-3 [width:calc(100%+24px)] -ml-6'
+                     ? 'p-5 lg:pr-2 col-span-5 lg:col-span-3 [height:calc(100%+24px)] lg:[width:calc(100%+24px)] -mt-6 lg:mt-0 ml-0 lg:-ml-6'
                      : 'col-span-5 relative [height:calc(100%+24px)] -mt-6 p-3 rounded-[1.875rem]',
                )}
             >
-               <div className="w-full px-3">
+               <div className="w-full p-5 lg:p-0 lg:px-3">
                   {/* HEAD */}
                   <div
                      className={cn(
@@ -181,7 +181,7 @@ const HotelCard = (props: HotelCArdType) => {
                   {/* SERVICE */}
                   {displayType == 'list' && (
                      <div className="group">
-                        <div className="columns-3 gap-3">
+                        <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
                            {hotel?.rates[0]?.payment_options?.payment_types[0]
                               ?.cancellation_penalties?.free_cancellation_before !== null ? (
                               <div className="flex items-center gap-1 text-green-600 text-xs mb-1">
@@ -291,7 +291,7 @@ const HotelCard = (props: HotelCArdType) => {
                </div>
 
                {/* PRICE */}
-               <div className="w-full flex justify-between items-center flex-wrap px-3">
+               <div className="w-full flex justify-between items-center flex-wrap p-5 lg:p-0 lg:px-3">
                   <span className="text-xl font-bold flex items-center gap-2">
                      {displayType == 'list' && (
                         <span className="text-base font-light text-slate-500">From</span>
@@ -323,7 +323,7 @@ const HotelCard = (props: HotelCArdType) => {
                      <Button
                         variant="default"
                         className={cn(
-                           'text-sm transition-all duration-300 ease-in-out rounded-full font-medium bg-neutral-100 text-black hover:bg-neutral-800 hover:text-neutral-200',
+                           'text-sm transition-all duration-300 ease-in-out rounded-full mt-2 sm:mt-0 font-medium bg-neutral-100 text-black hover:bg-neutral-800 hover:text-neutral-200',
                         )}
                      >
                         {displayType == 'list' ? 'See Availability' : 'Book now'}

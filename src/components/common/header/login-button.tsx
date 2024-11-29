@@ -30,9 +30,9 @@ const LoginButton = () => {
             </Button>
          </DialogTrigger>
          <DialogContent>
-            <ScrollArea className="h-[80vh]">
+            {/* <ScrollArea> */}
                <AuthDialogScreen />
-            </ScrollArea>
+            {/* </ScrollArea> */}
          </DialogContent>
       </Dialog>
    );

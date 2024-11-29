@@ -32,7 +32,7 @@ const TourSection = ({ slice }: TourSectionProps): JSX.Element => {
          data-slice-variation={slice.variation}
          className="py-16 relative"
       >
-         <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 bg-slate-100 dark:bg-slate-800 dark:bg-opacity-20 " />
+         {/* <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] z-0 bg-slate-100 dark:bg-slate-800 dark:bg-opacity-20 " /> */}
 
          <div className="relative">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-8 relative">

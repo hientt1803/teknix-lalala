@@ -28,12 +28,12 @@ const CardInfoUser = () => {
    return (
       <div className="block flex-grow mb-24 lg:mb-0">
          <div className="lg:sticky lg:top-24">
-            <Card className="w-full relative flex flex-col items-center text-center sm:rounded-2xl space-y-6 sm:space-y-7 px-0 sm:p-6 xl:p-8">
+            <Card className="w-full relative flex flex-col items-center text-center sm:rounded-3xl space-y-6 sm:space-y-7 px-0 sm:p-6 xl:p-8">
                <TooltipProvider>
                   <Tooltip>
                      <TooltipContent>Edit profile</TooltipContent>
                      <TooltipTrigger className="absolute right-2 top-2 bg-transparent hover:bg-slate-100 p-2 rounded-lg">
-                        <Link href="/profile/account">
+                        <Link href="/profile">
                            <EditIcon className="text-slate-500" />
                         </Link>
                      </TooltipTrigger>
