@@ -95,8 +95,8 @@ const MainContent = ({ data, id }: Props) => {
 
          {/* <MostFacilities facilities={data?.serp_filters} /> */}
          {/* MAIN INFO */}
-         <div className="relative z-10 mt-11 flex flex-col lg:flex-row">
-            <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pr-10">
+         <div className="relative z-10 mt-11 flex flex-col">
+            <div className="w-full">
                {/* MAIN */}
                {/* <MainSection
                   data={data}
@@ -132,11 +132,11 @@ const MainContent = ({ data, id }: Props) => {
                </div>
             </div>
             {/* RESERVE */}
-            <div className="hidden lg:block flex-grow mt-14 lg:mt-0">
+            {/* <div className="hidden lg:block flex-grow mt-14 lg:mt-0">
                <div className="sticky top-28">
                   <ReserveSection id={id} scrollIntoView={scrollIntoView} />
                </div>
-            </div>
+            </div> */}
             {/* RESERVE MOBILE */}
             {!isTargetInView && (
                <Button
