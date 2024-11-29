@@ -18,6 +18,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const FilterMap = dynamic(() => import('../filters/filter-map').then((mod) => mod.FilterMap));
 
@@ -173,12 +174,38 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                {/* )} */}
             </div>
 
+            <div>
+               <Collapsible defaultOpen className="group mx-6">
+                  <CollapsibleTrigger asChild>
+                     <div className="flex justify-between items-center cursor-pointer">
+                        <div className="text-lg font-[500] hover:underline">Map Filter</div>
+                        <ChevronDown className="w-5 h-5 text-neutral-600" />
+                     </div>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                     <div className={cn('mt-5')}>
+                        <FilterMap
+                           placeData={placeData}
+                           searchGlobal={searchGlobal}
+                           showMapPlaceHolder
+                        />
+                     </div>
+                  </CollapsibleContent>
+               </Collapsible>
+
+               {/* {index !== FILTER_MOCK.length - 1 && ( */}
+               <Separator orientation="horizontal" className="my-10 bg-neutral-200" />
+               {/* )} */}
+            </div>
+
             {FILTER_MOCK?.map((filter: FilterType, index) => (
                <React.Fragment key={index}>
                   <Collapsible defaultOpen className="group mx-6">
                      <CollapsibleTrigger asChild>
                         <div className="flex justify-between items-center cursor-pointer">
-                           <div className="text-lg font-[500] hover:underline">{filter?.sectionName}</div>
+                           <div className="text-lg font-[500] hover:underline">
+                              {filter?.sectionName}
+                           </div>
                            <ChevronDown className="w-5 h-5 text-neutral-600" />
                         </div>
                      </CollapsibleTrigger>

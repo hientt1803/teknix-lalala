@@ -81,19 +81,19 @@ const MainContent = ({ data, id }: Props) => {
    return (
       <div>
          {/* NEW HEADER */}
-         <NewHeaderSection data={data} id={id} scrollIntoReviewSection={scrollIntoReviewSection} />
+         {/* <NewHeaderSection data={data} id={id} scrollIntoReviewSection={scrollIntoReviewSection} /> */}
 
          {/* IMAGE GALLERY */}
-         <div className="mt-8 mb-5">
+         {/* <div className="mt-8 mb-5">
             {data?.images.length ? (
                // <ImagesGalleryLazy images={data?.images ?? []} type="default" />
                <ImageGalleryComp images={data?.images ?? []} type="default" />
             ) : (
                <p>No images available</p>
             )}
-         </div>
+         </div> */}
 
-         <MostFacilities facilities={data?.serp_filters} />
+         {/* <MostFacilities facilities={data?.serp_filters} /> */}
          {/* MAIN INFO */}
          <div className="relative z-10 mt-11 flex flex-col lg:flex-row">
             <div className="w-full lg:w-3/5 xl:w-2/3 space-y-8 lg:space-y-10 lg:pr-10">

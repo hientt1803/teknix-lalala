@@ -2,10 +2,9 @@ import Bounded from '@/components/common/containers/bounded';
 import {
    Breadcrumb,
    BreadcrumbItem,
-   BreadcrumbLink,
    BreadcrumbList,
    BreadcrumbPage,
-   BreadcrumbSeparator,
+   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 import { buttonVariants } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipProvider } from '@/components/ui/tooltip';

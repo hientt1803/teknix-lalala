@@ -1,21 +1,20 @@
 import Bounded from '@/components/common/containers/bounded';
-import { HotelBannerSkeleton } from '@/features/hotel/banner';
+import { HotelBanner } from '@/features/hotel/banner';
 import { DestinationCaroucel } from '@/features/hotel/destination-caroucel';
 import { WithoutMapContainer } from '@/features/hotel/without-map/without-map-container';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
-import dynamic from 'next/dynamic';
 
-export const HotelBanner = dynamic(
-   () => import('@/features/hotel/banner').then((mod) => mod.HotelBanner),
-   {
-      loading: () => (
-         <div className="w-full min-h-[32.5rem] h-full">
-            <HotelBannerSkeleton />
-         </div>
-      ),
-   },
-);
+// export const HotelBanner = dynamic(
+//    () => import('@/features/hotel/banner').then((mod) => mod.HotelBanner),
+//    {
+//       loading: () => (
+//          <div className="w-full min-h-[32.5rem] h-full">
+//             <HotelBannerSkeleton />
+//          </div>
+//       ),
+//    },
+// );
 
 /**
  * Props for `HotelListing`.

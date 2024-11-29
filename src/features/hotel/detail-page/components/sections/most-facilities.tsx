@@ -4,6 +4,8 @@ import {
    Accessibility,
    AirVent,
    Baby,
+   Bath,
+   BriefcaseBusiness,
    Cable,
    Car,
    Cigarette,
@@ -12,6 +14,7 @@ import {
    ParkingCircle,
    PawPrint,
    Utensils,
+   Videotape,
    Wifi,
 } from 'lucide-react';
 import React from 'react';
@@ -35,6 +38,9 @@ export const getAmenityIcon = (key: string, className?: string): React.ReactNode
       kitchen: <CookingPot className={cn('w-6 h-6 text-neutral-600', className)} />,
       has_pets: <PawPrint className={cn('w-6 h-6 text-neutral-600', className)} />,
       has_ecar_charger: <Cable className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_business: <BriefcaseBusiness className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_spa: <Videotape className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_jacuzzi: <Bath className={cn('w-6 h-6 text-neutral-600', className)} />,
    };
 
    return icons[key] || null; // Return null if the key doesn't match any icon

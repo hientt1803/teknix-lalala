@@ -5,7 +5,8 @@ const nextConfig = {
           "@reduxjs/toolkit",
           "date-fns",
           "leaflet",
-          "framer-motion"
+          "framer-motion",
+          "@novu/notification-center"
         ],
       },
 };

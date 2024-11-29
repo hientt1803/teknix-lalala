@@ -16,10 +16,10 @@ export const HotelBanner = () => {
             <div className="w-full h-full flex justify-center items-center z-20">
                <div className="flex flex-col justify-center items-center gap-10 min-w-[90%] w-full max-w-[90%]">
                   <div className="text-center font-bold text-black text-5xl mt-24">
-                     Journey with Travila - Begin Your Story!
+                     Journey with Lalala - Begin Your Story!
                   </div>
                   <h5 className="text-center font-medium text-black text-2xl -mt-5">
-                     Easily search for top tours offered by our professional network
+                     Easily search for top hotels offered by our professional network
                   </h5>
                </div>
             </div>
