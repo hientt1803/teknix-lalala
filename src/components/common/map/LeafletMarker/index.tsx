@@ -7,7 +7,7 @@ import {PlaceValues} from "@/lib/Places";
 import LeafletDivIcon from "../LeafletDivIcon";
 import useMapContext from "../useMapContext";
 import MarkerIconWrapper from "./MarkerIconWrapper";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 // import {useHoverStore} from "@/hooks/use-hover-card";
 import {Marker} from "leaflet";
 
@@ -21,6 +21,8 @@ export interface CustomMarkerProps {
 export const CustomMarker = ({place}: CustomMarkerProps) => {
     const {map} = useMapContext();
     const router = useRouter();
+    const searchParams = useSearchParams(); 
+
     const markerCategory = useMemo(
         () => MarkerCategories[place.category],
         [place.category]
@@ -106,6 +108,7 @@ export const CustomMarker = ({place}: CustomMarkerProps) => {
                 icon={markerCategory.icon}
                 handleOpenLocation={handleOpenLocation}
                 handlePopupClose={handlePopupClose}
+                searchParams={searchParams}
             />
             {place.id !== "user_location" && (
                 <LeafletTooltip

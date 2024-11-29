@@ -1,8 +1,7 @@
-import { useGetReservationByIdQuery } from '@/stores/features/reservation';
+import { getReservationHistoryData } from '@/services/reservation';
 import GuestSection from './guest-section';
 import InfoSection from './info-section';
 import PriceSection from './price-section';
-import { getReservationHistoryData } from '@/services/reservation';
 
 const MainContent = async ({ id }: { id: string }) => {
    const data = await getReservationHistoryData(id);
@@ -12,6 +11,7 @@ const MainContent = async ({ id }: { id: string }) => {
       checkout_date,
       num_guests,
       hotel_data,
+      status,
       meta_data,
       total_discount,
    } = data;
@@ -24,6 +24,7 @@ const MainContent = async ({ id }: { id: string }) => {
                checkin_date={checkin_date}
                checkout_date={checkout_date}
                num_guests={num_guests}
+               status={status}
             />
             <GuestSection meta_data={meta_data} />
             {/* <PaymentSection /> */}

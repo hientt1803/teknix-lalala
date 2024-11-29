@@ -9,7 +9,7 @@ type Props = {
 };
 
 const AmenitiesSecion = ({amenites}: Props) => {
-    const [showAll, setShowAll] = useState(false);
+    const [showAll, setShowAll] = useState(false); 
 
     return (
         <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-lg space-y-8">

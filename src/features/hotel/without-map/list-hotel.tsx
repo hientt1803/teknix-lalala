@@ -31,7 +31,7 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
    } = props;
 
    // next api
-   const searchParams = useSearchParams();
+   const searchParams = useSearchParams(); 
 
    // redux
    // const globalSearchState = useAppSelector((state) => state.globalSlice.searchGlobal);

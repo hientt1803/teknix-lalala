@@ -1,8 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 // import {NavigationMenuComp} from "./navigation";
-import { Button } from '@/components/ui/button';
 import UserButton from './user-button';
 
 // import {useAppSelector} from "@/stores";
@@ -11,9 +9,9 @@ import { KeyTextField, LinkField, RichTextField } from '@prismicio/client';
 import { ModeToggleMenu } from '../themes/mode-menu';
 import CurrencyButton from './currency';
 import LanguageButton from './languages';
+import LoginButton from './login-button';
 import Notification from './nofitication';
 import NovuNotificationV2 from './novu-v2';
-import LoginButton from './login-button';
 
 type Props = {
    navigation: {
@@ -26,11 +24,7 @@ type RightSideHeaderProps = {
    className?: string;
 };
 const RightSiderHeader = () => {
-   const router = useRouter();
-   const user = useAppSelector((state) => state.userSlice);
-
-   console.log(user);
-   
+   const user = useAppSelector((state) => state.userSlice);   
 
    const renderAuthButtons = () => (
       <>
@@ -95,7 +89,8 @@ const RightSiderHeader = () => {
                <>
                   {/* <ModeToggle /> */}
                   <ModeToggleMenu />
-                  <Notification />
+                  {/* <Notification /> */}
+                  {user?.currentUser?.id && <NovuNotificationV2 userId={user?.currentUser?.id || ''} />}
                   <UserButton />
                </>
             ) : (

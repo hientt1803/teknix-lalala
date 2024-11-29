@@ -28,7 +28,7 @@ export interface IReservation {
    is_expired: any;
    payment_id: any;
    payment_link: any;
-   meal_data?: any
+   meal_data?: any;
 }
 
 export interface MetaData {
@@ -208,7 +208,7 @@ export interface Record {
    num_guests: number;
    meta_data: MetaData;
    special_request: any;
-   status: 'pending' | 'completed' | 'canceled';
+   status: 'pending' | 'pending_payment' | 'completed' | 'failed' | 'expired';
    coupon_code: string;
    match_hash: string;
    payment_method?: string;
