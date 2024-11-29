@@ -1,6 +1,7 @@
-import ProfileFeatures from "@/features/profile";
-const ProfilePage = () => {
-    return <ProfileFeatures />;
+import AccountFeatures from '@/features/account';
+
+const AcountPage = () => {
+   return <AccountFeatures />;
 };
 
-export default ProfilePage;
+export default AcountPage;

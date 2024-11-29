@@ -8,7 +8,7 @@ import { IReserveForm, Rate } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { addDays, format, formatDate } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import RoomCard from '../card-room-v2';
@@ -16,6 +16,7 @@ import RoomCard from '../card-room-v2';
 export const ListRoomSections = ({ id }: { id: string }) => {
    // next api
    const router = useRouter();
+   const searchParams = useSearchParams();
 
    // Redux
    const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal);
@@ -97,7 +98,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
 
          router.push('/checkout');
       } else {
-         router.push(`/auth?redirect=/stay/${id}`);
+         router.push(`/auth?redirect=/hotel/${id}?${searchParams.toString()}`);
       }
    };
 
