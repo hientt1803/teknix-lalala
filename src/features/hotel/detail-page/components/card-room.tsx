@@ -240,7 +240,7 @@ const RoomCard = ({ data, active, id }: Props) => {
                                           </span>
                                        </span>
                                        <Button
-                                          className="bg-yellow-400 text-black hover:bg-slate-200 hover:text-slate-800 rounded-full py-6 dark:text-white uppercase"
+                                          className="transition-all duration-200 ease-in-out bg-yellow-400 text-black hover:bg-neutral-800 hover:text-neutral-200 rounded-full py-6 dark:text-white uppercase"
                                           onClick={() => handleReservation(rate)}
                                        >
                                           Book Now
@@ -377,10 +377,11 @@ const RoomCard = ({ data, active, id }: Props) => {
                                           </span>
                                        </span>
                                        <Button
-                                          className="bg-orange-400 py-6 dark:text-white uppercase"
+                                          className="transition-all duration-200 ease-in-out bg-yellow-400 text-black hover:bg-neutral-800 hover:text-neutral-200 rounded-full py-6 dark:text-white uppercase"
                                           onClick={() => handleReservation(rate)}
                                        >
                                           Book Now
+                                          <MoveRight className="w-5 h-5 ml-1" />
                                        </Button>
                                     </div>
                                  </div>

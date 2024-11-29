@@ -1,27 +1,46 @@
+import { cn } from '@/lib/utils';
 import { convertSnakeToTitleCase } from '@/utilities/string';
-import { Baby, Car, Cigarette, Dumbbell, ParkingCircle, Utensils, Wifi } from 'lucide-react';
+import {
+   Accessibility,
+   AirVent,
+   Baby,
+   Cable,
+   Car,
+   Cigarette,
+   CookingPot,
+   Dumbbell,
+   ParkingCircle,
+   PawPrint,
+   Utensils,
+   Wifi,
+} from 'lucide-react';
 import React from 'react';
 
 type Amenities = {
    [key: string]: React.ReactNode;
 };
 
-export const MostFacilities = ({ facilities }: { facilities?: string[] }) => {
-   const getAmenityIcon = (key: string): React.ReactNode => {
-      // Map each key to a specific Lucide icon
-      const icons: Amenities = {
-         has_internet: <Wifi className="w-6 h-6 text-gray-700" />,
-         has_airport_transfer: <Car className="w-6 h-6 text-gray-700" />,
-         has_parking: <ParkingCircle className="w-6 h-6 text-gray-700" />,
-         has_kids: <Baby className="w-6 h-6 text-gray-700" />,
-         has_fitness: <Dumbbell className="w-6 h-6 text-gray-700" />,
-         has_meal: <Utensils className="w-6 h-6 text-gray-700" />,
-         has_smoking: <Cigarette className="w-6 h-6 text-gray-700" />,
-      };
-
-      return icons[key] || null; // Return null if the key doesn't match any icon
+export const getAmenityIcon = (key: string, className?: string): React.ReactNode => {
+   // Map each key to a specific Lucide icon
+   const icons: Amenities = {
+      has_internet: <Wifi className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_airport_transfer: <Car className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_parking: <ParkingCircle className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_kids: <Baby className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_fitness: <Dumbbell className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_meal: <Utensils className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_smoking: <Cigarette className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_disabled_support: <Accessibility className={cn('w-6 h-6 text-neutral-600', className)} />,
+      air_conditioning: <AirVent className={cn('w-6 h-6 text-neutral-600', className)} />,
+      kitchen: <CookingPot className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_pets: <PawPrint className={cn('w-6 h-6 text-neutral-600', className)} />,
+      has_ecar_charger: <Cable className={cn('w-6 h-6 text-neutral-600', className)} />,
    };
 
+   return icons[key] || null; // Return null if the key doesn't match any icon
+};
+
+export const MostFacilities = ({ facilities }: { facilities?: string[] }) => {
    return (
       <div className="grid grid-cols-2 md:flex justify-center items-center gap-4 flex-wrap my-12">
          {facilities?.map((fac, index) => (

@@ -266,6 +266,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  readOnly={isConfirm}
                                  placeholder="example@gmail.com"
                                  {...field}
+                                 className="rounded-lg"
                               />
                            </FormControl>
                            <FormMessage />
@@ -288,7 +289,8 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                     label="Last name"
                                     type="text"
                                     readOnly={isConfirm}
-                                    placeholder="Ex: David Ngo"
+                                    placeholder="Ex: John Doe"
+                                    className="rounded-lg"
                                     {...field}
                                  />
                               </FormControl>
@@ -310,7 +312,8 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                     label="First name"
                                     type="text"
                                     readOnly={isConfirm}
-                                    placeholder="Ex: James"
+                                    placeholder="Ex: Doe"
+                                    className="rounded-lg"
                                     {...field}
                                  />
                               </FormControl>
@@ -345,7 +348,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  international
                                  readOnly={isConfirm}
                                  defaultCountry={(form.getValues().citizenship as Country) || 'VN'}
-                                 className="w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11"
+                                 className="w-full !rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11"
                                  {...field}
                                  onCountryChange={(c) => form.setValue('citizenship', c || '')}
                               />
@@ -415,7 +418,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                                )?.label
                                              : 'Select your country...'
                                        }
-                                       className="text-start rounded-3xl cursor-pointer min-h-12"
+                                       className="text-start rounded-lg cursor-pointer min-h-12"
                                        onClick={() => {
                                           setCountryInputOpened(!countryInputOpened);
                                        }}
@@ -469,7 +472,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                               disabled={isConfirm}
                            >
                               <FormControl>
-                                 <SelectTrigger className="w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1">
+                                 <SelectTrigger className="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1">
                                     <SelectValue
                                     // placeholder="Select a time"
                                     // defaultValue={field.value}
@@ -511,7 +514,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  placeholder="Message"
                                  rows={4}
                                  readOnly={isConfirm}
-                                 className="min-h-[150px] block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1"
+                                 className="min-h-[150px] rounded-lg block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1"
                                  {...field}
                               />
                            </FormControl>
@@ -532,7 +535,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                   loading={isLoadingCreate}
                   disabled={isConfirm}
                   type="submit"
-                  className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:focus:ring-offset-0 "
+                  className="relative h-auto inline-flex items-center justify-center rounded-lg transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 dark:focus:ring-offset-0 "
                >
                   Confirm your info
                </ButtonLoading>
