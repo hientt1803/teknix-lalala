@@ -132,7 +132,7 @@ const LanguageButton = () => {
                href="#"
                title={country?.name?.common}
                onClick={() => handleAddLanguage(country)}
-               className="flex items-center gap-2 p-4 -m-3 rounded-lg transition hover:bg-slate-100 dark:hover:bg-slate-700"
+               className="flex items-center gap-2 p-4 -m-3 rounded-lg transition hover:bg-neutral-100 dark:hover:bg-neutral-700"
             >
                <Avatar className="w-6 h-6">
                   <AvatarImage
@@ -150,8 +150,8 @@ const LanguageButton = () => {
 
    return (
       <Popover open={open} onOpenChange={setOpen} modal>
-         <PopoverTrigger className="w-8 h-8 lg:w-12 lg:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-center items-center cursor-pointer">
-            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center">
+         <PopoverTrigger className="w-8 h-8 lg:w-12 lg:h-12 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 flex justify-center items-center cursor-pointer">
+            <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none flex items-center justify-center">
                <Avatar className="w-5 h-5 lg:w-8 lg:h-8">
                   <AvatarImage src={language?.flags?.svg} className="w-full h-full object-cover" />
                   <AvatarFallback>{language?.cca2}</AvatarFallback>
@@ -172,15 +172,15 @@ const LanguageButton = () => {
                />
                {searchTerm ? (
                   <i
-                     className="las la-times-circle text-2xl cursor-pointer text-slate-500 absolute right-3 top-1/2 -translate-y-1/2"
+                     className="las la-times-circle text-2xl cursor-pointer text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2"
                      onClick={() => setSearchTerm('')}
                   ></i>
                ) : (
-                  <i className="las la-globe text-2xl text-slate-500 absolute right-3 top-1/2 -translate-y-1/2"></i>
+                  <i className="las la-globe text-2xl text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2"></i>
                )}
             </div>
 
-            <div className="border-b border-b-slate-100 dark:border-b-slate-800" />
+            <div className="border-b border-b-neutral-100 dark:border-b-neutral-800" />
 
             <ScrollArea className="h-[350px] lg:h-[512px]">
                {debounceSearch ? (
@@ -190,13 +190,13 @@ const LanguageButton = () => {
                ) : (
                   <>
                      <div className="px-7 py-3 space-y-5">
-                        <h3 className="text-sm  text-slate-500 dark:text-slate-400">
+                        <h3 className="text-sm  text-neutral-500 dark:text-neutral-400">
                            Popular language
                         </h3>
                         {renderCountryList(popularState)}
                      </div>
                      <div className="px-7 py-3 space-y-5">
-                        <h3 className="text-sm  text-slate-500 dark:text-slate-400">
+                        <h3 className="text-sm  text-neutral-500 dark:text-neutral-400">
                            All languages
                         </h3>
                         {renderCountryList(allCountries)}

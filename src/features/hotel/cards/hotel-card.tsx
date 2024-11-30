@@ -40,7 +40,7 @@ const HotelCard = (props: HotelCArdType) => {
    // ));
 
    return (
-      <Card className="group relative border-slate-200 overflow-hidden hover:shadow-xl rounded-[1.875rem] transition-shadow w-full h-full">
+      <Card className="group relative border-neutral-200 overflow-hidden hover:shadow-xl rounded-[1.875rem] transition-shadow w-full h-full">
          <div className={cn('h-full w-full grid grid-cols-5 items-center')}>
             <div className={cn(displayType == 'list' ? 'col-span-5 lg:col-span-2' : 'col-span-5')}>
                <div className="relative h-full z-10">
@@ -146,10 +146,10 @@ const HotelCard = (props: HotelCArdType) => {
                         </h3>
                      </Link>
                      <p className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-slate-300" />
+                        <MapPin className="w-4 h-4 text-neutral-300" />
                         <span
                            className={cn(
-                              'text-base text-slate-700',
+                              'text-base text-neutral-700',
                               displayType == 'list' ? '' : 'text-sm',
                            )}
                         >
@@ -157,8 +157,8 @@ const HotelCard = (props: HotelCArdType) => {
                         </span>
                      </p>
                      {/* <p className="flex items-center gap-2">
-                        <MapPinnedIcon className="w-4 h-4 text-slate-500" />
-                        <span className="text-sm text-slate-500">
+                        <MapPinnedIcon className="w-4 h-4 text-neutral-500" />
+                        <span className="text-sm text-neutral-500">
                            {calculateKilometerDistance(distance)} from a center
                         </span>
                      </p> */}
@@ -169,7 +169,7 @@ const HotelCard = (props: HotelCArdType) => {
                      <div className="flex justify-start items-center flex-wrap gap-2">
                         {hotel?.rates[0]?.amenities_data?.map((amentine, index) => (
                            <React.Fragment key={amentine}>
-                              <div className="text-slate-800 text-xs border cursor-pointer hover:shadow-md border-neutral-300 p-2 px-4 rounded-full">
+                              <div className="text-neutral-800 text-xs border cursor-pointer hover:shadow-md border-neutral-300 p-2 px-4 rounded-full">
                                  {convertKebabToTitleCase(amentine)}
                               </div>
                               {/* {index !== hotel?.rates[0]?.amenities_data?.length && <div>⋅</div>} */}
@@ -294,7 +294,7 @@ const HotelCard = (props: HotelCArdType) => {
                <div className="w-full flex justify-between items-center flex-wrap p-5 lg:p-0 lg:px-3">
                   <span className="text-xl font-bold flex items-center gap-2">
                      {displayType == 'list' && (
-                        <span className="text-base font-light text-slate-500">From</span>
+                        <span className="text-base font-light text-neutral-500">From</span>
                      )}
                      <span className={cn(displayType == 'list' ? '' : 'text-base')}>
                         {`${formatCurrencyWithCodeAsSuffix(
@@ -306,9 +306,9 @@ const HotelCard = (props: HotelCArdType) => {
                         )}`}
                      </span>
                      {displayType == 'list' && (
-                        <span className="text-base font-light text-slate-500"> / nights</span>
+                        <span className="text-base font-light text-neutral-500"> / nights</span>
                      )}
-                     {/* <span className="line-through text-slate-400 text-sm font-normal ml-2">
+                     {/* <span className="line-through text-neutral-400 text-sm font-normal ml-2">
                         $1000
                      </span> */}
                   </span>
@@ -352,7 +352,7 @@ export default HotelCard;
 
 export const HotelCardSkeleton = ({ displayType = 'grid' }: { displayType?: 'list' | 'grid' }) => {
    return (
-      <Card className="group relative border-slate-200 overflow-hidden hover:shadow-xl transition-shadow w-full h-full">
+      <Card className="group relative border-neutral-200 overflow-hidden hover:shadow-xl transition-shadow w-full h-full">
          <div className="h-full w-full grid grid-cols-5 items-center">
             <div className={`p-2 ${displayType === 'list' ? 'col-span-2' : 'col-span-5'}`}>
                <div

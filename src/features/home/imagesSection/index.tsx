@@ -72,7 +72,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
                         />
                         <div className="absolute inset-0 flex items-center justify-center z-10">
                            <div className="bg-white relative rounded-full shadow-inner w-16 h-16">
-                              <span className="absolute inset-0 flex items-center justify-center text-slate-900">
+                              <span className="absolute inset-0 flex items-center justify-center text-neutral-900">
                                  <svg
                                     className="w-8 h-8"
                                     width="24"
@@ -103,7 +103,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
                            />
                            <div className="absolute inset-0 flex items-center justify-center z-10">
                               <div className="bg-white relative rounded-full shadow-inner w-10 h-10">
-                                 <span className="absolute inset-0 flex items-center justify-center text-slate-900">
+                                 <span className="absolute inset-0 flex items-center justify-center text-neutral-900">
                                     <svg
                                        className="w-5 h-5"
                                        width="24"
@@ -131,7 +131,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
                            />
                            <div className="absolute inset-0 flex items-center justify-center z-10">
                               <div className="bg-white relative rounded-full shadow-inner w-10 h-10">
-                                 <span className="absolute inset-0 flex items-center justify-center text-slate-900">
+                                 <span className="absolute inset-0 flex items-center justify-center text-neutral-900">
                                     <svg
                                        className="w-5 h-5"
                                        width="24"
@@ -163,7 +163,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
                            />
                            <div className="absolute inset-0 flex items-center justify-center z-10">
                               <div className="bg-white relative rounded-full shadow-inner w-10 h-10">
-                                 <span className="absolute inset-0 flex items-center justify-center text-slate-900">
+                                 <span className="absolute inset-0 flex items-center justify-center text-neutral-900">
                                     <svg
                                        className="w-5 h-5"
                                        width="24"
@@ -191,7 +191,7 @@ export const ImageSection = ({ slice }: { slice: Content.ImagesSectionSlice }) =
                            />
                            <div className="absolute inset-0 flex items-center justify-center z-10">
                               <div className="bg-white relative rounded-full shadow-inner w-10 h-10">
-                                 <span className="absolute inset-0 flex items-center justify-center text-slate-900">
+                                 <span className="absolute inset-0 flex items-center justify-center text-neutral-900">
                                     <svg
                                        className="w-5 h-5"
                                        width="24"

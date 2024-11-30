@@ -74,7 +74,7 @@ const PaymentForm = () => {
                         {...field}
                         label="Card number"
                         placeholder="1111 2222 3333 4444"
-                        className="block w-full border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
+                        className="block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
                         onChange={(e) => field.onChange(formatCardNumber(e.target.value))}
                      />
                      <FormMessage />
@@ -91,7 +91,7 @@ const PaymentForm = () => {
                         {...field}
                         label="Card holder"
                         placeholder="JOHN DOE"
-                        className="block w-full border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
+                        className="block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
                      />
                      <FormMessage />
                   </FormItem>
@@ -108,7 +108,7 @@ const PaymentForm = () => {
                            {...field}
                            label="Expiration date"
                            placeholder="MM/YY"
-                           className="block w-full border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
+                           className="block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
                            onChange={(e) => field.onChange(formatExpirationDate(e.target.value))}
                         />
                         <FormMessage />
@@ -125,7 +125,7 @@ const PaymentForm = () => {
                            {...field}
                            label="CVC"
                            placeholder="123"
-                           className="block w-full border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
+                           className="block w-full border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3"
                            onChange={(e) => field.onChange(formatCVC(e.target.value))}
                         />
                         <FormMessage />
@@ -138,7 +138,7 @@ const PaymentForm = () => {
                name="message"
                render={({ field }) => (
                   <FormItem>
-                     <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">
+                     <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
                         Message
                      </FormLabel>
                      <FormControl>
@@ -146,11 +146,11 @@ const PaymentForm = () => {
                            {...field}
                            placeholder="Write a few sentences about yourself."
                            rows={4}
-                           className="min-h-[150px] block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal px-4 py-3 mt-1"
+                           className="min-h-[150px] block w-full border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal px-4 py-3 mt-1"
                         />
                      </FormControl>
                      <FormDescription>
-                        <span className="text-sm text-slate-500 block">
+                        <span className="text-sm text-neutral-500 block">
                            Write a few sentences about yourself.
                         </span>
                      </FormDescription>

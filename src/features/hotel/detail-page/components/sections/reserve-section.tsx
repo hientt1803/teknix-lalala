@@ -276,7 +276,7 @@ const ReserveSection = ({
                                  size={'icon'}
                                  disabled={updatePeople.length <= 1}
                                  onClick={() => handleDeleteRoom(index)}
-                                 className="bg-red-600 disabled:bg-slate-400"
+                                 className="bg-red-600 disabled:bg-neutral-400"
                               >
                                  <TrashIcon size="1rem" className="text-white" />
                               </Button>
@@ -290,7 +290,7 @@ const ReserveSection = ({
                   <div className="flex justify-between items-center w-full">
                      <div className="flex flex-col gap-2">
                         <span>Adults</span>
-                        <span className="text-sm text-slate-500 dark:text-slate-400">
+                        <span className="text-sm text-neutral-500 dark:text-neutral-400">
                            Ages 18 or above
                         </span>
                      </div>
@@ -304,14 +304,14 @@ const ReserveSection = ({
                   <div className="flex justify-between items-start">
                      <div className="flex flex-col gap-2">
                         <span>Children</span>
-                        <span className="text-sm text-slate-500 dark:text-slate-400">
+                        <span className="text-sm text-neutral-500 dark:text-neutral-400">
                            Ages 1 - 17
                         </span>
                      </div>
                      <div className={`grid grid-cols-1 gap-4 w-28`}>
                         {room.children.map((child, childrenIndex) => (
                            <div
-                              className="border border-slate-200 dark:border-slate-800 text-center p-2 rounded-lg flex items-center justify-between"
+                              className="border border-neutral-200 dark:border-neutral-800 text-center p-2 rounded-lg flex items-center justify-between"
                               key={childrenIndex}
                            >
                               <div className="w-4/5">{child} years</div>
@@ -358,7 +358,7 @@ const ReserveSection = ({
                         </DropdownMenu>
                      </div>
                   </div>
-                  <div className="w-full border-b border-slate-200 dark:border-slate-600" />
+                  <div className="w-full border-b border-neutral-200 dark:border-neutral-600" />
                </div>
             );
          })}
@@ -368,7 +368,7 @@ const ReserveSection = ({
    if (isLoading) return <ReserveCardSkeleton />;
 
    return (
-      <div className="border border-neutral-200 dark:border-slate-700 rounded-lg shadow-xl p-6">
+      <div className="border border-neutral-200 dark:border-neutral-700 rounded-lg shadow-xl p-6">
          <div className="flex justify-between">
             {data?.hotels[0]?.rates[0]?.payment_options.payment_types[0]?.show_amount ? (
                <span className="text-3xl font-semibold">
@@ -377,13 +377,13 @@ const ReserveSection = ({
                      data?.hotels[0]?.rates[0].payment_options.payment_types[0]
                         .show_currency_code || 'VND',
                   )}
-                  <span className="ml-1 text-base font-normal text-slate-500 dark:text-slate-400">
+                  <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
                      /night
                   </span>
                </span>
             ) : (
                <span className="text-3xl font-semibold">
-                  <span className="ml-1 text-base font-normal text-slate-500 dark:text-slate-400">
+                  <span className="ml-1 text-base font-normal text-neutral-500 dark:text-neutral-400">
                      No Room availiable
                   </span>
                </span>
@@ -393,12 +393,12 @@ const ReserveSection = ({
                   <StarOff className="w-5 h-5 text-yellow-500" />
                </div>
                <span className="font-medium">{data?.map_hotels[0]?.star_rating || 0}</span>
-               <span className="text-slate-500 dark:text-slate-400">
+               <span className="text-neutral-500 dark:text-neutral-400">
                   ({reviewData?.reviews?.length || 0})
                </span>
             </div>
          </div>
-         <form className="flex flex-col border border-slate-100 dark:border-slate-700 rounded-3xl my-5">
+         <form className="flex flex-col border border-neutral-100 dark:border-neutral-700 rounded-3xl my-5">
             <Popover
                open={openDate}
                onOpenChange={setOpenDate}
@@ -421,7 +421,7 @@ const ReserveSection = ({
                            },
                         )}
                      >
-                        <div className="text-slate-300 dark:text-slate-400">
+                        <div className="text-neutral-300 dark:text-neutral-400">
                            <CalendarIcon className="w-6 h-6" />
                         </div>
                         <div className="flex-grow text-left">
@@ -434,12 +434,12 @@ const ReserveSection = ({
                                  'MMM dd',
                               )}` || 'Check in - out'}
                            </span>
-                           <span className="block mt-1 text-sm text-slate-400 leading-none font-light">
+                           <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
                               Check in - Check out
                            </span>
                         </div>
                      </div>
-                     <div className="absolute top-4 right-4 text-slate-400">
+                     <div className="absolute top-4 right-4 text-neutral-400">
                         <EditIcon />
                      </div>
                      {/* {openDate && (
@@ -463,7 +463,7 @@ const ReserveSection = ({
                   </div>
                </PopoverContent>
             </Popover>
-            <div className="w-full border-b border-slate-200 dark:border-slate-700 " />
+            <div className="w-full border-b border-neutral-200 dark:border-neutral-700 " />
             <Popover open={openGuest} onOpenChange={setOpenGuest}>
                <PopoverTrigger>
                   <div
@@ -479,7 +479,7 @@ const ReserveSection = ({
                         })}
                      >
                         <div className="relative z-10 flex-1 flex text-left items-center p-4 xl:p-6 cursor-pointer space-x-3 focus:outline-none">
-                           <div className="text-slate-300 dark:text-slate-400">
+                           <div className="text-neutral-300 dark:text-neutral-400">
                               <UsersIcon className="w-6 h-6" />
                            </div>
                            <div className="flex-grow">
@@ -488,13 +488,13 @@ const ReserveSection = ({
                                     ? totalAdults + totalChildren + ' Guest'
                                     : 'Guest'}
                               </span>
-                              <span className="block mt-1 text-sm text-slate-400 leading-none font-light">
+                              <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
                                  {totalAdults + totalChildren > 0 ? 'Guests' : 'Add guest'}
                               </span>
                            </div>
                         </div>
                      </div>
-                     <div className="absolute top-4 right-4 text-slate-400">
+                     <div className="absolute top-4 right-4 text-neutral-400">
                         <EditIcon />
                      </div>
                      {/* {openGuest && (
@@ -524,14 +524,14 @@ const ReserveSection = ({
             <h3 className="text-lg text-center font-semibold text-red-900">
                No room availiable
                <br />
-               <span className="text-sm font-normal text-slate-500 dark:text-slate-50">
+               <span className="text-sm font-normal text-neutral-500 dark:text-neutral-50">
                   Switch your dates or guest count to continue with room availability.
                </span>
             </h3>
          ) : (
             <>
                <div className="flex flex-col space-y-4">
-                  <div className="flex justify-between text-slate-600 dark:text-slate-50">
+                  <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
                      <span>
                         {formatCurrencyWithCodeAsSuffix(
                            data?.hotels[0]?.rates[0].payment_options.payment_types[0]
@@ -553,7 +553,7 @@ const ReserveSection = ({
                         )}
                      </span>
                   </div>
-                  <div className="flex justify-between text-slate-600 dark:text-slate-50">
+                  <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
                      <span>Service charge</span>
                      <span>
                         {formatCurrencyWithCodeAsSuffix(
@@ -563,7 +563,7 @@ const ReserveSection = ({
                         )}
                      </span>
                   </div>
-                  <div className="border-b border-slate-200 dark:border-slate-700"></div>
+                  <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
                   <div className="flex justify-between font-semibold">
                      <span>Total</span>
                      <span>

@@ -13,7 +13,7 @@ const TabSaved = () => {
       <div className="pt-14 sm:pt-20 pb-24 lg:pb-32">
          <div className="space-y-6 sm:space-y-8">
             <h2 className="text-3xl font-semibold">Save lists</h2>
-            <div className="w-14 border-b border-slate-200" />
+            <div className="w-14 border-b border-neutral-200" />
             <div className="space-y-8">
                <div className="flex items-center space-x-4">
                   {data.map((tab) => (

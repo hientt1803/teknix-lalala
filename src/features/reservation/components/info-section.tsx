@@ -48,7 +48,7 @@ const InfoSection = async ({
                   {status}
                </Badge>
                <h2 className="text-2xl font-bold">{name || 'Loading...'}</h2>
-               <p className="flex items-center text-slate-400 gap-2">
+               <p className="flex items-center text-neutral-400 gap-2">
                   <MapPin className="w-4 h-4" />
                   <span className="text-sm">{address || 'Loading...'}</span>
                </p>
@@ -68,7 +68,7 @@ const InfoSection = async ({
             <div className="p-5 rounded-2xl bg-zinc-50 flex flex-col gap-1 justify-between">
                <span className="text-sm">Check-in</span>
                <h3 className="text-xl font-bold">{formatDate(checkin_date, 'dd MMM yyyy')}</h3>
-               <p className="flex items-center gap-1 text-sm text-slate-600">
+               <p className="flex items-center gap-1 text-sm text-neutral-600">
                   <Clock className="w-4 h-4" />
                   <span>{formatDate(checkin_date, 'p')}</span>
                </p>
@@ -77,7 +77,7 @@ const InfoSection = async ({
             <div className="p-5 rounded-2xl bg-zinc-50 flex flex-col gap-1 justify-between">
                <span className="text-sm">Check out</span>
                <h3 className="text-xl font-bold">{formatDate(checkout_date, 'dd MMM yyyy')}</h3>
-               <p className="flex items-center gap-1 text-sm text-slate-600">
+               <p className="flex items-center gap-1 text-sm text-neutral-600">
                   <Clock className="w-4 h-4" />
                   <span>{formatDate(checkout_date, 'p')}</span>
                </p>
@@ -85,7 +85,7 @@ const InfoSection = async ({
             <div className="p-5 rounded-2xl bg-zinc-50 flex flex-col gap-1 justify-between">
                <span className="text-sm">Rooms & Guests</span>
                <h3 className="text-xl font-bold">{num_guests} G - 1 R</h3>
-               <p className="flex items-center gap-1 text-sm text-slate-600">
+               <p className="flex items-center gap-1 text-sm text-neutral-600">
                   <Sun className="w-4 h-4" />
                   <span>
                      {nights} Nights - {days} Days
@@ -94,14 +94,14 @@ const InfoSection = async ({
             </div>
          </div>
          <div className="p-5">
-            <div className="rounded-2xl border border-slate-100 divide-y">
+            <div className="rounded-2xl border border-neutral-100 divide-y">
                <div className="flex items-center justify-between  p-5">
                   <h2 className="text-xl font-bold">Deluxe Pool View with Breakfast</h2>
                   <p className="text-sm text-blue-700">View Cancellation Policy</p>
                </div>
                <div className="flex flex-col gap-3 p-5">
                   <h5 className="font-bold">Price Included</h5>
-                  <ul className="flex flex-col gap-3 text-base text-slate-600">
+                  <ul className="flex flex-col gap-3 text-base text-neutral-600">
                      {rateMetaData?.meal_data?.has_breakfast && (
                         <li className="flex items-center gap-2">
                            <svg

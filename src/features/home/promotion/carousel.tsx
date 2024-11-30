@@ -99,7 +99,7 @@ const PromotionCarousel = ({ promotions }: PromotionCarouselProps) => {
                      </div>
                      <Button
                         className={cn('px-8 py-6 rounded-full', {
-                           'bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-white':
+                           'bg-yellow-400 text-neutral-900 hover:bg-neutral-900 hover:text-white':
                               promotion.withbackgroundtext,
                         })}
                      >

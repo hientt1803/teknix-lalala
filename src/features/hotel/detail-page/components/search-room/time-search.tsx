@@ -48,7 +48,7 @@ const TimeSearch = ({date, setDate}: Props) => {
                                 `shadow-md rounded-t-3xl rounded-b-none sm:shadow-md sm:rounded-l-3xl sm:rounded-r-none`
                         )}
                     >
-                        <div className="text-slate-300 dark:text-slate-400">
+                        <div className="text-neutral-300 dark:text-neutral-400">
                             <CalendarIcon className="w-5 h-5" />
                         </div>
                         <div className="flex-grow text-left">
@@ -61,7 +61,7 @@ const TimeSearch = ({date, setDate}: Props) => {
                                     "MMM dd"
                                 )}` || "Check in - out"}
                             </span>
-                            <span className="block mt-1 text-sm text-slate-400 leading-none font-light">
+                            <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
                                 Check in - Check out
                             </span>
                         </div>

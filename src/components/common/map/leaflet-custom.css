@@ -58,5 +58,5 @@
     @apply absolute w-full top-[calc(100%+2px)] left-0 rounded-b-2xl !border-0 p-0;
 }
 .leaflet-control-geosearch form .results div {
-    @apply px-3 py-3 text-sm border-0 hover:bg-slate-50 text-black;
+    @apply px-3 py-3 text-sm border-0 hover:bg-neutral-50 text-black;
 }

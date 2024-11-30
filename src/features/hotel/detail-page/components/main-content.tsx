@@ -162,7 +162,7 @@ const MainContent = ({ data, id }: Props) => {
                   onClick={() => {
                      scrollIntoView();
                   }}
-                  className="flex lg:hidden items-center justify-center fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-slate-900 text-white shadow-2xl rounded-full z-30 space-x-3 text-sm cursor-pointer"
+                  className="flex lg:hidden items-center justify-center fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-neutral-900 text-white shadow-2xl rounded-full z-30 space-x-3 text-sm cursor-pointer"
                >
                   <i className="text-lg las la-map-signs"></i>
                   <span>View all room</span>

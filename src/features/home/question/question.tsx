@@ -58,11 +58,11 @@ const QuestionAndAsked = ({ body, heading, questions, services }: QuestionAndAsk
          <div className="flex flex-wrap gap-4 justify-center items-center max-w-3xl mt-6">
             {services.map((service, index) => (
                <div
-                  className="flex items-center justify-center px-5 py-3 gap-2 border border-slate-200 dark:border-slate-700  rounded-[0.5rem] hover:shadow-lg hover:shadow-slate-100 dark:hover:shadow-slate-800 transition-shadow duration-200 cursor-pointer"
+                  className="flex items-center justify-center px-5 py-3 gap-2 border border-neutral-200 dark:border-neutral-700  rounded-[0.5rem] hover:shadow-lg hover:shadow-neutral-100 dark:hover:shadow-neutral-800 transition-shadow duration-200 cursor-pointer"
                   key={index}
                >
-                  <div className="text-slate-500 dark:text-slate-400">{renderIcon(service)}</div>
-                  <span className="text-slate-800 font-normal dark:text-slate-300">
+                  <div className="text-neutral-500 dark:text-neutral-400">{renderIcon(service)}</div>
+                  <span className="text-neutral-800 font-normal dark:text-neutral-300">
                      {service.name}
                   </span>
                </div>
@@ -91,7 +91,7 @@ const QuestionAndAsked = ({ body, heading, questions, services }: QuestionAndAsk
                               field={question.ask}
                               components={{
                                  paragraph: ({ children }) => (
-                                    <p className="text-lg text-slate-600">{children}</p>
+                                    <p className="text-lg text-neutral-600">{children}</p>
                                  ),
                               }}
                            />

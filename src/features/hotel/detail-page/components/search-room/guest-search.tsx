@@ -144,7 +144,7 @@ const GuestSearch = ({
                                             size={"icon"}
                                             disabled={updatePeople.length <= 1}
                                             onClick={() => handleDeleteRoom(index)}
-                                            className="bg-red-600 disabled:bg-slate-400"
+                                            className="bg-red-600 disabled:bg-neutral-400"
                                         >
                                             <TrashIcon
                                                 size="1rem"
@@ -161,7 +161,7 @@ const GuestSearch = ({
                         <div className="flex justify-between items-center w-full">
                             <div className="flex flex-col gap-2">
                                 <span>Adults</span>
-                                <span className="text-sm text-slate-500 dark:text-slate-400">
+                                <span className="text-sm text-neutral-500 dark:text-neutral-400">
                                     Ages 18 or above
                                 </span>
                             </div>
@@ -175,14 +175,14 @@ const GuestSearch = ({
                         <div className="flex justify-between items-start">
                             <div className="flex flex-col gap-2">
                                 <span>Children</span>
-                                <span className="text-sm text-slate-500 dark:text-slate-400">
+                                <span className="text-sm text-neutral-500 dark:text-neutral-400">
                                     Ages 1 - 17
                                 </span>
                             </div>
                             <div className={`grid grid-cols-1 gap-4 w-28`}>
                                 {room.children.map((child, childrenIndex) => (
                                     <div
-                                        className="border border-slate-200 dark:border-slate-800 text-center p-2 rounded-lg flex items-center justify-between"
+                                        className="border border-neutral-200 dark:border-neutral-800 text-center p-2 rounded-lg flex items-center justify-between"
                                         key={childrenIndex}
                                     >
                                         <div className="w-4/5">{child} years</div>
@@ -240,7 +240,7 @@ const GuestSearch = ({
                                 </DropdownMenu>
                             </div>
                         </div>
-                        <div className="w-full border-b border-slate-200 dark:border-slate-600" />
+                        <div className="w-full border-b border-neutral-200 dark:border-neutral-600" />
                     </div>
                 );
             })}
@@ -259,7 +259,7 @@ const GuestSearch = ({
                 >
                     <PopoverTrigger className="relative w-4/5">
                         <div className=" z-10 flex-1 flex text-left items-center p-4 xl:p-6 cursor-pointer space-x-3 focus:outline-none">
-                            <div className="text-slate-300 dark:text-slate-400">
+                            <div className="text-neutral-300 dark:text-neutral-400">
                                 <UserIcon className="w-6 h-6" />
                             </div>
                             <div className="flex-grow">
@@ -268,7 +268,7 @@ const GuestSearch = ({
                                         ? totalAdults + totalChildrens + " Guest"
                                         : "Guest"}
                                 </span>
-                                <span className="block mt-1 text-sm text-slate-400 leading-none font-light">
+                                <span className="block mt-1 text-sm text-neutral-400 leading-none font-light">
                                     {totalAdults + totalChildrens > 0
                                         ? "Guests"
                                         : "Add guest"}

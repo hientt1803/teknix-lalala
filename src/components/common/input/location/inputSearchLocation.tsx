@@ -136,7 +136,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
             <div className="mt-2">
                <p
                   className={cn(
-                     'text-sm text-slate-900 dark:text-slate-300 font-normal mt-2 mb-1 mx-3',
+                     'text-sm text-neutral-900 dark:text-neutral-300 font-normal mt-2 mb-1 mx-3',
                      searchGeoData?.length === 0 && 'hidden',
                   )}
                >
@@ -186,7 +186,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
             <div className="mt-2">
                <p
                   className={cn(
-                     'text-xs text-slate-900 font-normal mt-2 mb-1 mx-3',
+                     'text-xs text-neutral-900 font-normal mt-2 mb-1 mx-3',
                      searchLocationData?.hotels?.length === 0 && 'hidden',
                   )}
                >
@@ -227,7 +227,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
       return (
          <div className="w-full my-4 mx-auto">
             <div className="flex flex-col gap-2">
-               <p className="text-sm font-medium text-slate-500 text-center">
+               <p className="text-sm font-medium text-neutral-500 text-center">
                   Sorry, we cannot find this place {`:(`}
                </p>
                <p
@@ -246,7 +246,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
 
    return (
       <div className="flex flex-col justify-start items-start gap-2">
-         <div className="text-slate-600 dark:text-slate-300 text-sm font-medium">{title}</div>
+         <div className="text-neutral-600 dark:text-neutral-300 text-sm font-medium">{title}</div>
 
          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger
@@ -259,13 +259,13 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                asChild
             >
                <div className="w-full flex justify-start items-center gap-1">
-                  <MapPin className="text-slate-400 w-5 h-5" />
+                  <MapPin className="text-neutral-400 w-5 h-5" />
                   <Input
                      type="text"
                      placeholder="New York, USA"
-                     className="placeholder:text-slate-800 dark:placeholder:dark:text-slate-50 placeholder:font-medium 
+                     className="placeholder:text-neutral-800 dark:placeholder:dark:text-neutral-50 placeholder:font-medium 
                         w-full md:min-w-[7.5rem] shadow-none border-none outline-none focus-visible:outline-none focus-visible:ring-0 
-                        p-0 focus:placeholder-slate-400 focus:border-none focus:outline-none"
+                        p-0 focus:placeholder-neutral-400 focus:border-none focus:outline-none"
                      ref={inputRef}
                      value={inputSearch}
                      onClick={(e) => {
@@ -283,7 +283,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                            inputRef.current?.focus();
                         }}
                      >
-                        <XIcon className="text-slate-800 cursor-pointer w-5 h-5" />
+                        <XIcon className="text-neutral-800 cursor-pointer w-5 h-5" />
                      </Button>
                   )}
                </div>
@@ -324,7 +324,7 @@ export const DestinationItem = React.memo(function DestinationItemComponent({
 }) {
    return (
       <div
-         className="transition hover:bg-slate-200 dark:hover:bg-slate-700 rounded w-full py-1 px-3 cursor-pointer"
+         className="transition hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded w-full py-1 px-3 cursor-pointer"
          onClick={onClick}
       >
          <div className="flex flex-col gap-1.5 mx-3 w-full">
@@ -333,7 +333,7 @@ export const DestinationItem = React.memo(function DestinationItemComponent({
                   <div>{icon}</div>
                   <div className="flex flex-col gap-0.5">
                      <p className="text-sm font-normal line-clamp-2">{name}</p>
-                     <p className="text-xs font-normal text-slate-500 line-clamp-1">{address}</p>
+                     <p className="text-xs font-normal text-neutral-500 line-clamp-1">{address}</p>
                   </div>
                </div>
             </div>

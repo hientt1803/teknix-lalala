@@ -23,7 +23,7 @@ const components: JSXMapSerializer = {
 const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
     return (
         <Bounded className='relative py-16' data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-            <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] -z-10 bg-slate-50 dark:bg-black dark:bg-opacity-20 " />
+            <div className="absolute inset-y-0 w-screen xl:max-w-[1340px] 1920:max-w-screen-1920 left-1/2 transform -translate-x-1/2 xl:rounded-[40px] -z-10 bg-neutral-50 dark:bg-black dark:bg-opacity-20 " />
             <div className="relative">
                 <div className="flex flex-col mb-8 relative">
                     {/* HEADING */}
@@ -47,7 +47,7 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                         >
                             <ul className="flex  sm:space-x-2">
                                 <li className="nc-NavItem relative" data-nc-id="NavItem">
-                                    <Button className="font-medium whitespace-nowrap px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize rounded-full bg-teal-900 text-white hover:text-slate-100 focus:outline-none">
+                                    <Button className="font-medium whitespace-nowrap px-5 py-2.5 text-sm sm:text-base sm:px-6 sm:py-3 capitalize rounded-full bg-teal-900 text-white hover:text-neutral-100 focus:outline-none">
                                         New York
                                     </Button>
                                 </li>
@@ -78,7 +78,7 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                             </ul>
                         </nav>
                         <span className="hidden sm:block flex-shrink-0">
-                            <Button className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base  px-4 py-3 sm:px-6  ttnc-ButtonSecondary font-medium border bg-white border-slate-200 text-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 !leading-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 dark:focus:ring-offset-0">
+                            <Button className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base  px-4 py-3 sm:px-6  ttnc-ButtonSecondary font-medium border bg-white border-neutral-200 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-300 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 !leading-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 dark:focus:ring-offset-0">
                                 <span>View all</span>
                                 <ArrowRight className='w-5 h-5' />
                             </Button>
@@ -100,7 +100,7 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                         <div className="flex font-semibold">
                                             <div>
                                                 <span>{data.departureTime}</span>
-                                                <span className="flex items-center text-sm text-slate-500 font-normal mt-0.5">
+                                                <span className="flex items-center text-sm text-neutral-500 font-normal mt-0.5">
                                                     {data.route.substring(0, 3)}
                                                 </span>
                                             </div>
@@ -109,12 +109,12 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                             </span>
                                             <div>
                                                 <span>{data.arrivalTime}</span>
-                                                <span className="flex items-center text-sm text-slate-500 font-normal mt-0.5">
+                                                <span className="flex items-center text-sm text-neutral-500 font-normal mt-0.5">
                                                     {data.route.substring(5, data.route.length)}
                                                 </span>
                                             </div>
                                         </div>
-                                        <div className="text-sm text-slate-500 font-normal mt-0.5">
+                                        <div className="text-sm text-neutral-500 font-normal mt-0.5">
                                             <span className="VG3hNb">{data.stops}</span>
                                             <span className="mx-2">·</span>
                                             <span>{data.flightDuration}</span>
@@ -129,21 +129,21 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                             {data.departureTime} - {data.arrivalTime}
                                         </div>
                                         {/* Air line */}
-                                        <div className="text-sm text-slate-500 font-normal mt-0.5">
+                                        <div className="text-sm text-neutral-500 font-normal mt-0.5">
                                             {data.airline}
                                         </div>
                                     </div>
                                     <div className="hidden lg:block flex-[4] whitespace-nowrap">
                                         {/* Route EX: HND - SIN */}
                                         <div className="font-medium text-lg">{data.route}</div>
-                                        <div className="text-sm text-slate-500 font-normal mt-0.5">
+                                        <div className="text-sm text-neutral-500 font-normal mt-0.5">
                                             {data.flightDuration}
                                         </div>
                                     </div>
                                     {/* STOP */}
                                     <div className="hidden lg:block flex-[4] whitespace-nowrap">
                                         <div className="font-medium text-lg">{data.stops}</div>
-                                        <div className="text-sm text-slate-500 font-normal mt-0.5">
+                                        <div className="text-sm text-neutral-500 font-normal mt-0.5">
                                             {data.stops && data.stops !== "Nonstop"
                                                 ? "2 hours 15 minutes BKK"
                                                 : "Trip none stop"}
@@ -155,14 +155,14 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                                 ${data.price}
                                             </span>
                                         </div>
-                                        <div className="text-xs sm:text-sm text-slate-500 font-normal mt-0.5">
+                                        <div className="text-xs sm:text-sm text-neutral-500 font-normal mt-0.5">
                                             {data.flightType}
                                         </div>
                                     </div>
                                 </div>
                             </AccordionHeader>
                             <AccordionPanel>
-                                <div className="p-4 md:p-8 border border-slate-200 dark:border-slate-700 rounded-2xl ">
+                                <div className="p-4 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl ">
 
                                     {/* START */}
                                     <div>
@@ -172,31 +172,31 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                             </div>
                                             <div className="flex my-5 md:my-0">
                                                 <div className="flex-shrink-0 flex flex-col items-center py-2">
-                                                    <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
-                                                    <span className="block flex-grow border-l border-slate-400 border-dashed my-1"></span>
-                                                    <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
+                                                    <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
+                                                    <span className="block flex-grow border-l border-neutral-400 border-dashed my-1"></span>
+                                                    <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
                                                 </div>
                                                 <div className="ml-4 space-y-10 text-sm">
                                                     <div className="flex flex-col space-y-1">
-                                                        <span className=" text-slate-500">
+                                                        <span className=" text-neutral-500">
                                                             {data.details[0].departureDate}
                                                         </span>
-                                                        <span className=" font-semibold text-slate-400">
+                                                        <span className=" font-semibold text-neutral-400">
                                                             {data.details[0].departureAirport}
                                                         </span>
                                                     </div>
                                                     <div className="flex flex-col space-y-1">
-                                                        <span className=" text-slate-500">
+                                                        <span className=" text-neutral-500">
                                                             {data.details[0].arrivalDate}
                                                         </span>
-                                                        <span className=" font-semibold text-slate-400">
+                                                        <span className=" font-semibold text-neutral-400">
                                                             {data.details[0].arrivalAirport}
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="border-l border-slate-200 dark:border-slate-600 md:mx-6 lg:mx-10"></div>
-                                            <ul className="text-sm text-slate-500 space-y-1 md:space-y-2">
+                                            <div className="border-l border-neutral-200 dark:border-neutral-600 md:mx-6 lg:mx-10"></div>
+                                            <ul className="text-sm text-neutral-500 space-y-1 md:space-y-2">
                                                 <li>Trip time: {data.details[0].tripTime}</li>
                                                 <li>
                                                     {data.details[0].airline} ·{" "}
@@ -211,15 +211,15 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                     <div className="my-7 md:my-10 space-y-5 md:pl-24">
                                         {data.details[0].transit && (
                                             <>
-                                                <div className="border-t border-slate-200" />
-                                                <div className="text-slate-700 text-sm md:text-base">
+                                                <div className="border-t border-neutral-200" />
+                                                <div className="text-neutral-700 text-sm md:text-base">
                                                     Transit time:{" "}
                                                     {data.details[0].transit.stopDuration} -{" "}
                                                     {data.details[0].transit.stopPoint}
                                                 </div>
                                             </>
                                         )}
-                                        <div className="border-t border-slate-200" />
+                                        <div className="border-t border-neutral-200" />
                                     </div>
                                     {/* GO HOME */}
                                     {!data.details[1] ||
@@ -235,31 +235,31 @@ const FlightSection = ({ slice }: FlightSectionProps): JSX.Element => {
                                                     </div>
                                                     <div className="flex my-5 md:my-0">
                                                         <div className="flex-shrink-0 flex flex-col items-center py-2">
-                                                            <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
-                                                            <span className="block flex-grow border-l border-slate-400 border-dashed my-1"></span>
-                                                            <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
+                                                            <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
+                                                            <span className="block flex-grow border-l border-neutral-400 border-dashed my-1"></span>
+                                                            <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
                                                         </div>
                                                         <div className="ml-4 space-y-10 text-sm">
                                                             <div className="flex flex-col space-y-1">
-                                                                <span className=" text-slate-500">
+                                                                <span className=" text-neutral-500">
                                                                     {data.details[1].departureDate}
                                                                 </span>
-                                                                <span className=" font-semibold text-slate-400">
+                                                                <span className=" font-semibold text-neutral-400">
                                                                     {data.details[1].departureAirport}
                                                                 </span>
                                                             </div>
                                                             <div className="flex flex-col space-y-1">
-                                                                <span className=" text-slate-500">
+                                                                <span className=" text-neutral-500">
                                                                     {data.details[1].arrivalDate}
                                                                 </span>
-                                                                <span className=" font-semibold text-slate-400">
+                                                                <span className=" font-semibold text-neutral-400">
                                                                     {data.details[1].arrivalAirport}
                                                                 </span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div className="border-l border-slate-200 md:mx-6 lg:mx-10"></div>
-                                                    <ul className="text-sm text-slate-500 space-y-1 md:space-y-2">
+                                                    <div className="border-l border-neutral-200 md:mx-6 lg:mx-10"></div>
+                                                    <ul className="text-sm text-neutral-500 space-y-1 md:space-y-2">
                                                         <li>Trip time: {data.details[1].tripTime}</li>
                                                         <li>
                                                             {data.details[1].airline} ·{" "}

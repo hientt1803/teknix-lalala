@@ -143,7 +143,7 @@ const MobileMenu = () => {
             </SheetHeader>
             <ScrollArea className="h-[calc(100%-50px)]">
                <div className="p-5 md:p-0 space-y-8">
-                  <div className="p-3 py-4 dark:bg-slate-800 border rounded-xl flex items-center justify-between">
+                  <div className="p-3 py-4 dark:bg-neutral-800 border rounded-xl flex items-center justify-between">
                      <div className="flex items-center gap-2">
                         <Avatar className="w-12 h-12">
                            <AvatarImage
@@ -162,7 +162,7 @@ const MobileMenu = () => {
                                  : userData?.email?.slice(0, userData.email.lastIndexOf('@')) ||
                                    'Guest'}
                            </h4>
-                           <p className="text-xs text-slate-500 dark:text-slate-300">
+                           <p className="text-xs text-neutral-500 dark:text-neutral-300">
                               {userData?.location ? userData.location : 'Sign in now!'}
                            </p>
                         </div>
@@ -192,22 +192,22 @@ const MobileMenu = () => {
                                  <Link
                                     href={link.href}
                                     className={cn(
-                                       'flex items-center justify-start gap-2 group cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg p-2',
+                                       'flex items-center justify-start gap-2 group cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2',
                                        {
-                                          'bg-slate-100 dark:bg-slate-800': link.href === pathname,
+                                          'bg-neutral-100 dark:bg-neutral-800': link.href === pathname,
                                        },
                                     )}
                                  >
                                     <Button
                                        variant="ghost"
                                        size="icon"
-                                       className="border border-slate-200 dark:border-slate-700 dark:bg-slate-600 h-12 w-12"
+                                       className="border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-600 h-12 w-12"
                                     >
                                        {IconComponent}
                                     </Button>
                                     <div className="flex flex-col items-start gap-1">
                                        <h5 className="font-medium text-sm">{link.label}</h5>
-                                       <p className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-2">
+                                       <p className="text-xs text-neutral-600 dark:text-neutral-300 flex items-center gap-2">
                                           {link.isTrigger && (
                                              <div className="w-2 h-2 rounded-full animate-pulse bg-green-400" />
                                           )}
@@ -225,22 +225,22 @@ const MobileMenu = () => {
                   <div className="flex flex-col gap-5">
                      <h2 className="text-xl font-semibold">🏙️ Event Dates</h2>
                      <div className="grid grid-cols-1 gap-3 px-3">
-                        <div className="grid grid-cols-2 hover:shadow border border-slate-200 dark:border-slate-700 dark:bg-slate-900 rounded-xl overflow-hidden cursor-pointer items-center h-36">
+                        <div className="grid grid-cols-2 hover:shadow border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 rounded-xl overflow-hidden cursor-pointer items-center h-36">
                            <Image
                               className="h-full w-full"
                               src="https://images.pexels.com/photos/6675833/pexels-photo-6675833.jpeg?auto=compress&cs=tinysrgb&w=300"
                            />
                            <div className="flex flex-col gap-2 p-3">
                               <h4 className="text-lg font-bold">Book & Enjoy</h4>
-                              <p className="text-sm text-slate-600 dark:text-slate-300">
+                              <p className="text-sm text-neutral-600 dark:text-neutral-300">
                                  20% OFF on the best availiable room rate
                               </p>
                            </div>
                         </div>
-                        <div className="grid grid-cols-2 hover:shadow border border-slate-200 dark:border-slate-700 dark:bg-slate-900 rounded-xl overflow-hidden cursor-pointer items-center h-36">
+                        <div className="grid grid-cols-2 hover:shadow border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 rounded-xl overflow-hidden cursor-pointer items-center h-36">
                            <div className="flex flex-col gap-2 p-3">
                               <h4 className="text-lg font-bold">Hotel Summer Nights</h4>
-                              <p className="text-sm text-slate-600 dark:text-slate-300">
+                              <p className="text-sm text-neutral-600 dark:text-neutral-300">
                                  Up to 3 nights free
                               </p>
                            </div>
@@ -249,7 +249,7 @@ const MobileMenu = () => {
                               src="https://images.pexels.com/photos/2403569/pexels-photo-2403569.jpeg?auto=compress&cs=tinysrgb&w=300"
                            />
                         </div>
-                        <div className="grid grid-cols-2 hover:shadow border border-slate-200 dark:border-slate-700 dark:bg-slate-900 rounded-xl overflow-hidden cursor-pointer items-center h-36">
+                        <div className="grid grid-cols-2 hover:shadow border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 rounded-xl overflow-hidden cursor-pointer items-center h-36">
                            <Image
                               className="h-full w-full"
                               src="https://images.pexels.com/photos/29525883/pexels-photo-29525883/free-photo-of-modern-geometric-abstract-design-with-blue-patterns.jpeg?auto=compress&cs=tinysrgb&w=300"
@@ -258,7 +258,7 @@ const MobileMenu = () => {
                               <h4 className="text-lg font-bold">
                                  Daily 50 Lucky Winners get a Free Stay
                               </h4>
-                              <p className="text-sm text-slate-600 dark:text-slate-300">
+                              <p className="text-sm text-neutral-600 dark:text-neutral-300">
                                  Valid till: 15 Nov
                               </p>
                            </div>
@@ -269,7 +269,7 @@ const MobileMenu = () => {
                   <div className="flex flex-col gap-5">
                      <h2 className="text-xl font-semibold">✈️ Saved Places</h2>
                      <div className="grid grid-cols-1 gap-3">
-                        <div className="border border-slate-200 dark:border-slate-700 dark:bg-slate-900 rounded-lg p-2 grid grid-cols-3 gap-3 items-center hover:shadow cursor-pointer">
+                        <div className="border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 rounded-lg p-2 grid grid-cols-3 gap-3 items-center hover:shadow cursor-pointer">
                            <div className="col-span-1">
                               <Image
                                  className="aspect-square"
@@ -281,7 +281,7 @@ const MobileMenu = () => {
                               <div className="flex justify-between items-center py-5 pe-2 h-full">
                                  <div className="flex flex-col justify-between w-2/3 h-full items-start gap-2">
                                     <h4 className="font-semibold">Alibaba Trap</h4>
-                                    <p className="text-xs text-slate-600 dark:text-slate-300">
+                                    <p className="text-xs text-neutral-600 dark:text-neutral-300">
                                        Carved by the Colorado River in Arizona, United States
                                     </p>
                                  </div>
@@ -298,7 +298,7 @@ const MobileMenu = () => {
                               </div>
                            </div>
                         </div>
-                        <div className="border border-slate-200 dark:border-slate-700 dark:bg-slate-900 rounded-lg p-2 grid grid-cols-3 gap-3 items-center hover:shadow cursor-pointer">
+                        <div className="border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-900 rounded-lg p-2 grid grid-cols-3 gap-3 items-center hover:shadow cursor-pointer">
                            <div className="col-span-1">
                               <Image
                                  className="aspect-square"
@@ -310,7 +310,7 @@ const MobileMenu = () => {
                               <div className="flex justify-between items-center py-5 pe-2 h-full">
                                  <div className="flex flex-col justify-between w-2/3 h-full items-start gap-2">
                                     <h4 className="font-semibold">Alibaba Trap</h4>
-                                    <p className="text-xs text-slate-600 dark:text-slate-300">
+                                    <p className="text-xs text-neutral-600 dark:text-neutral-300">
                                        Carved by the Colorado River in Arizona, United States
                                     </p>
                                  </div>
@@ -333,7 +333,7 @@ const MobileMenu = () => {
                   <div className="flex flex-col gap-5">
                      <h2 className="text-xl font-semibold">📬 Contact Us</h2>
                      <div className="grid grid-cols-1 gap-3 px-3">
-                        <div className="flex items-center justify-start space-x-2 text-slate-500 dark:text-slate-300">
+                        <div className="flex items-center justify-start space-x-2 text-neutral-500 dark:text-neutral-300">
                            <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="1em"
@@ -349,7 +349,7 @@ const MobileMenu = () => {
                               4517 Washington Ave. Manchester, Kentucky 39495
                            </p>
                         </div>
-                        <div className="flex items-center justify-start space-x-2 text-slate-500 dark:text-slate-300">
+                        <div className="flex items-center justify-start space-x-2 text-neutral-500 dark:text-neutral-300">
                            <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="1em"
@@ -363,7 +363,7 @@ const MobileMenu = () => {
                            </svg>
                            <p className="text-sm">Hours: 8:00 - 17:00, Mon - Sat</p>
                         </div>
-                        <div className="flex items-center justify-start space-x-2 text-slate-500 dark:text-slate-300">
+                        <div className="flex items-center justify-start space-x-2 text-neutral-500 dark:text-neutral-300">
                            <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="1em"

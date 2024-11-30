@@ -10,16 +10,16 @@ import { BellIcon, CheckIcon, DotIcon } from 'lucide-react';
 
 const CustomBell = ({ unseenCount }: { unseenCount: number }) => {
    return (
-      <div className="relative flex justify-center items-center w-12 h-12 gap-2 p-2 transition rounded-full hover:bg-slate-100 dark:hover:bg-slate-700 group">
+      <div className="relative flex justify-center items-center w-12 h-12 gap-2 p-2 transition rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-700 group">
          {Number(unseenCount) > 0 ? (
             <div className="relative ">
                <div className="absolute -top-1 -right-1 flex items-center justify-center h-4 w-4 bg-red-500 text-white text-xs rounded-full">
                   {unseenCount}
                </div>
-               <BellIcon className="w-6 h-6 text-slate-800 dark:text-slate-300 cursor-pointer group-hover:text-slate-600" />
+               <BellIcon className="w-6 h-6 text-neutral-800 dark:text-neutral-300 cursor-pointer group-hover:text-neutral-600" />
             </div>
          ) : (
-            <BellIcon className="w-6 h-6 text-slate-800 dark:text-slate-300 cursor-pointer group-hover:text-slate-600" />
+            <BellIcon className="w-6 h-6 text-neutral-800 dark:text-neutral-300 cursor-pointer group-hover:text-neutral-600" />
          )}
       </div>
    );

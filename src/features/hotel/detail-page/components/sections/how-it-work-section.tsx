@@ -45,7 +45,7 @@ const HowItWorkSection = () => {
                         <div className="col-span-1">
                            <div
                               color="gray"
-                              className="flex flex-shrink bg-slate-200 group-hover:bg-slate-900 group-hover:text-white transition-colors duration-200 rounded-full text-2xl !w-12 !h-12 justify-center items-center"
+                              className="flex flex-shrink bg-neutral-200 group-hover:bg-neutral-900 group-hover:text-white transition-colors duration-200 rounded-full text-2xl !w-12 !h-12 justify-center items-center"
                            >
                               {word.id}
                            </div>
@@ -53,7 +53,7 @@ const HowItWorkSection = () => {
                         <div className="col-span-8">
                            <div className="flex flex-col gap-2">
                               <h4 className="font-semibold text-xl">{word.title}</h4>
-                              <p className="text-sm text-slate-700">{word.description}</p>
+                              <p className="text-sm text-neutral-700">{word.description}</p>
                            </div>
                         </div>
                      </div>

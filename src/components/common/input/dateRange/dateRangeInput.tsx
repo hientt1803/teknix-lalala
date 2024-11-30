@@ -80,11 +80,11 @@ export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivE
                   id="date"
                   variant={'outline'}
                   className={cn(
-                     'w-fit hover:bg-transparent justify-start items-center text-left font-normal bg-transparent text-slate-800 dark:text-slate-50 shadow-none border-none outline-none p-0 ml-0 pl-0',
+                     'w-fit hover:bg-transparent justify-start items-center text-left font-normal bg-transparent text-neutral-800 dark:text-neutral-50 shadow-none border-none outline-none p-0 ml-0 pl-0',
                      !date && 'text-muted-foreground',
                   )}
                >
-                  <CalendarIcon className="text-slate-400 w-5 h-5" />
+                  <CalendarIcon className="text-neutral-400 w-5 h-5" />
                   {date?.from ? (
                      date.to ? (
                         <>

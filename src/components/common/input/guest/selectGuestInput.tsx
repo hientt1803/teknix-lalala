@@ -154,8 +154,8 @@ export const GroupPeopleInput = React.memo(() => {
                asChild
             >
                <div className="flex justify-start items-center gap-2">
-                  <User className="text-slate-400 w-5 h-5" />
-                  <span className="min-w-[9.375rem] w-full text-sm text-slate-700 dark:text-slate-50 font-medium line-clamp-1">
+                  <User className="text-neutral-400 w-5 h-5" />
+                  <span className="min-w-[9.375rem] w-full text-sm text-neutral-700 dark:text-neutral-50 font-medium line-clamp-1">
                      {inputPlaceHolderValue}
                   </span>
                </div>

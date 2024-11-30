@@ -25,7 +25,7 @@ import Link from 'next/link';
 import Image from '@/components/common/images/image';
 import { convertStringToDate, daysBetweenDateRange, formatDateUTC } from '@/utilities/datetime';
 import { getAmenityIcon } from '../hotel/detail-page/components/sections/most-facilities';
-import { convertSnakeToTitleCase } from '@/utilities/string';
+import { convertSnakeToTitleCase, replaceSize } from '@/utilities/string';
 import { cn } from '@/lib/utils';
 import { useGetReviewByStayIdQuery } from '@/stores/features/review';
 
@@ -39,6 +39,7 @@ const CheckoutFeatures = () => {
    // hooks
    const { scrollIntoView, targetRef } = useScrollIntoView<HTMLDivElement>({
       alignment: 'start',
+      offset: 100,
    });
 
    // state
@@ -112,9 +113,9 @@ const CheckoutFeatures = () => {
 
             <div className="w-full h-full mt-5">
                <Image
-                  src="/assets/images/checkout/banner-hotel.png"
+                  src={replaceSize(data?.images[0]) || '/assets/images/checkout/banner-hotel.png'}
                   alt=""
-                  className="w-full h-[12.5rem] object-cover rounded-lg"
+                  className="w-full h-[12.5rem] object-center rounded-lg"
                />
             </div>
 
@@ -123,36 +124,38 @@ const CheckoutFeatures = () => {
             <div className="relative mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
                {/* MAIN SECTION */}
                <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10">
-                  <div className="w-full flex flex-col mb-3 rounded-lg border border-slate-200 dark:border-slate-700 space-y-8 p-5">
-                     <div className="grid grid-cols-12 gap-0">
-                        <div className="col-span-2 h-full">
+                  <div className="w-full flex flex-col mb-3 rounded-lg border border-neutral-200 dark:border-neutral-700 space-y-8 p-5">
+                     <div className="flex justify-between items-center gap-5">
+                        {/* LINE */}
+                        <div className="h-full flex-shrink">
                            <div className="h-full flex flex-col justify-between items-center py-5">
                               {/* Top circle */}
-                              <div className="w-3 h-3 rounded-full bg-neutral-900"></div>
+                              <div className="w-3 h-3 rounded-full bg-neutral-900 dark:bg-neutral-600"></div>
                               {/* Dotted line */}
-                              <div className="min-h-[18.75rem] h-full border-l border-dotted border-neutral-900"></div>
+                              <div className="min-h-[18.75rem] h-full border-l border-neutral-200 dark:border-neutral-700"></div>
                               {/* Bottom circle */}
-                              <div className="w-3 h-3 rounded-full bg-neutral-900"></div>
+                              <div className="w-3 h-3 rounded-full bg-neutral-900 dark:bg-neutral-600"></div>
                            </div>
                         </div>
-                        <div className="col-span-10">
+                        {/* INFO */}
+                        <div className="flex-grow">
                            {/* CheckIn */}
                            <div className="flex justify-start items-center gap-6">
                               <div className="flex flex-col items-center justify-center gap-1">
-                                 <div className="flex items-center gap-1">
-                                    <Clock10 className="w-4 h-4 text-neutral-400" />
+                                 <div className="flex items-center gap-1 dark:text-neutral-100">
+                                    <Clock10 className="w-4 h-4" />
                                     <span className="text-sm font-medium">
                                        {data?.check_in_time}
                                     </span>
                                  </div>
-                                 <span className="text-neutral-600 text-sm">
+                                 <span className="text-neutral-600 dark:text-neutral-400 text-sm">
                                     {formatDateUTC(convertStringToDate(hotel?.checkin_date || ''))}
                                  </span>
                               </div>
-                              <div className="flex flex-col items-start justify-start gap-3 -mt-2">
+                              <div className="flex flex-col items-start justify-start gap-2">
                                  <span className="text-xl font-medium">{data?.name}</span>
-                                 <div className="flex items-center gap-1">
-                                    <span className="text-sm font-medium text-neutral-600">
+                                 <div className="flex items-center">
+                                    <span className="text-sm text-neutral-600 dark:text-neutral-400">
                                        {data?.address}
                                     </span>
                                  </div>
@@ -160,24 +163,24 @@ const CheckoutFeatures = () => {
                            </div>
 
                            {/* Main content */}
-                           <div className="rounded-lg border border-neutral-300 p-5 my-4">
+                           <div className="rounded-lg border border-neutral-300 dark:border-neutral-600 p-5 my-4">
                               <div className="flex flex-col">
                                  <div
                                     className={cn(
-                                       'border w-fit cursor-pointer hover:shadow-lg border-neutral-200 text-sm font-medium text-neutral-900 rounded-full py-2 px-3 mb-3',
+                                       'border w-fit cursor-pointer hover:shadow-lg border-neutral-200 dark:border-neutral-600 text-sm font-medium rounded-lg py-2 px-3 mb-3',
                                     )}
                                  >
                                     ⭐ {data?.star_rating.toFixed(1) || 0}{' '}
-                                    <span className="text-neutral-500">
+                                    <span className="text-neutral-500 dark:text-neutral-400 font-normal text-sm">
                                        ({hotelReview?.reviews?.length || 0} reviews)
                                     </span>
                                  </div>
 
-                                 <span className="text-2xl font-medium text-neutral-900">
+                                 <span className="text-2xl font-medium">
                                     {hotel?.rate?.room_name}
                                  </span>
 
-                                 <span className="text-sm font-medium text-neutral-600">
+                                 <span className="text-sm mt-1 text-neutral-600 dark:text-neutral-400">
                                     Total length of stay:{' '}
                                     <strong>
                                        {daysBetweenDateRange(
@@ -192,13 +195,17 @@ const CheckoutFeatures = () => {
                               <div className="my-6">
                                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                     {data?.serp_filters?.map((item, index) => (
-                                       <div className="text-sm flex gap-2 items-center" key={index}>
-                                          <span className="text-neutral-600">
-                                             {getAmenityIcon(item, 'w-4 h-4')}
+                                       <div
+                                          className="text-sm text-neutral-700 dark:text-neutral-300 flex gap-2 items-center"
+                                          key={index}
+                                       >
+                                          <span>
+                                             {getAmenityIcon(
+                                                item,
+                                                'w-4 h-4 text-neutral-700 dark:text-neutral-300',
+                                             )}
                                           </span>
-                                          <span className="text-neutral-700 text-xs">
-                                             {convertSnakeToTitleCase(item)}
-                                          </span>
+                                          <span>{convertSnakeToTitleCase(item)}</span>
                                        </div>
                                     ))}
                                  </div>
@@ -208,20 +215,20 @@ const CheckoutFeatures = () => {
                            {/* Checkout */}
                            <div className="flex justify-start items-center gap-6">
                               <div className="flex flex-col items-center justify-center gap-1">
-                                 <div className="flex items-center gap-1">
-                                    <Clock10 className="w-4 h-4 text-neutral-400" />
+                                 <div className="flex items-center gap-1 dark:text-neutral-100">
+                                    <Clock10 className="w-4 h-4" />
                                     <span className="text-sm font-medium">
                                        {data?.check_out_time}
                                     </span>
                                  </div>
-                                 <span className="text-neutral-600 text-sm">
+                                 <span className="text-neutral-600 dark:text-neutral-400 text-sm">
                                     {formatDateUTC(convertStringToDate(hotel?.checkout_date || ''))}
                                  </span>
                               </div>
-                              <div className="flex flex-col items-start justify-start gap-3 -mt-2">
+                              <div className="flex flex-col items-start justify-start gap-2">
                                  <span className="text-xl font-medium">{data?.name}</span>
-                                 <div className="flex items-center gap-1">
-                                    <span className="text-sm font-medium text-neutral-600">
+                                 <div className="flex items-center">
+                                    <span className="text-sm text-neutral-600 dark:text-neutral-400">
                                        {data?.address}
                                     </span>
                                  </div>
@@ -231,17 +238,17 @@ const CheckoutFeatures = () => {
                      </div>
                   </div>
 
-                  <div className="w-full flex flex-col sm:rounded-lg sm:border border-slate-200 dark:border-slate-700 space-y-8 px-0 sm:p-5 xl:p-5">
+                  <div className="w-full flex flex-col sm:rounded-lg sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-5 xl:p-5 mb-3">
                      {/* <h2 className="text-3xl lg:text-4xl font-semibold">Confirm and payment</h2> */}
-                     {/* <div className="border-b border-slate-200 dark:border-slate-700" /> */}
+                     {/* <div className="border-b border-neutral-200 dark:border-neutral-700" /> */}
                      <div>
                         {/* DETAIL MOBILE */}
-                        <div className="block rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 space-y-6 sm:space-y-8 lg:hidden flex-grow">
-                           <div className="bg-slate-200 px-5 py-5">
+                        <div className="block rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 lg:hidden flex-grow">
+                           <div className="bg-neutral-200 px-5 py-5">
                               <h3 className="text-2xl font-semibold">Price & Fee</h3>
                            </div>
                            <div className="flex flex-col space-y-4 px-5 pb-5">
-                              <div className="flex justify-between text-slate-600 dark:text-slate-50">
+                              <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
                                  <span>
                                     {formatCurrencyWithCodeAsSuffix(
                                        hotel.rate?.payment_options.payment_types[0].show_amount ||
@@ -263,7 +270,7 @@ const CheckoutFeatures = () => {
                                     )}
                                  </span>
                               </div>
-                              <div className="flex justify-between text-slate-600  dark:text-slate-50">
+                              <div className="flex justify-between text-neutral-600  dark:text-neutral-50">
                                  <span>Service charge</span>
                                  <span>
                                     {formatCurrencyWithCodeAsSuffix(
@@ -273,7 +280,7 @@ const CheckoutFeatures = () => {
                                     )}
                                  </span>
                               </div>
-                              <div className="border-b border-slate-200 dark:border-slate-700"></div>
+                              <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
                               <div className="flex justify-between font-semibold text-xl">
                                  <span>Total</span>
                                  <span>
@@ -287,10 +294,10 @@ const CheckoutFeatures = () => {
                                     )}
                                  </span>
                               </div>
-                              <div className="border-b border-slate-200 dark:border-slate-700"></div>
+                              <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
 
                               <div className="flex justify-between items-start space-x-5">
-                                 <p className="text-sm text-slate-800  dark:text-slate-400">
+                                 <p className="text-sm text-neutral-800  dark:text-neutral-400">
                                     Approximate price in VND: the currency rate might change at the
                                     time of payment.
                                  </p>
@@ -319,7 +326,7 @@ const CheckoutFeatures = () => {
                               </div>
                               {taxes.includedTaxes.map((tax, index) => (
                                  <div
-                                    className="flex justify-between text-slate-600  dark:text-slate-50"
+                                    className="flex justify-between text-neutral-600  dark:text-neutral-50"
                                     key={index}
                                  >
                                     <span className="capitalize text-sm">
@@ -334,13 +341,13 @@ const CheckoutFeatures = () => {
                                     </span>
                                  </div>
                               ))}
-                              <div className="border-b border-slate-200 dark:border-slate-700"></div>
-                              <p className="text-base font-medium text-slate-800  dark:text-slate-400">
+                              <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                              <p className="text-base font-medium text-neutral-800  dark:text-neutral-400">
                                  To be paid upon arrival
                               </p>
                               {taxes.notIncludedTaxes.map((tax, index) => (
                                  <div
-                                    className="flex justify-between text-slate-600  dark:text-slate-50"
+                                    className="flex justify-between text-neutral-600  dark:text-neutral-50"
                                     key={index}
                                  >
                                     <span className="capitalize text-sm">
@@ -355,34 +362,41 @@ const CheckoutFeatures = () => {
                                     </span>
                                  </div>
                               ))}
-                              <div className="border-b border-slate-200"></div>
-                              <p className="text-sm text-slate-500  dark:text-slate-400">
+                              <div className="border-b border-neutral-200"></div>
+                              <p className="text-sm text-neutral-500  dark:text-neutral-400">
                                  Please note You&apos;ll have to pay taxes and fees in the local
                                  currency VND.
                               </p>
                            </div>
                         </div>
                      </div>
-                     <div className="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 space-y-6 sm:space-y-8 p-5">
-                        <div>
-                           <h3 className="text-xl font-semibold">Enter your Details</h3>
-                           <FormInfomation
-                              data={data}
-                              isConfirm={isConfirm}
-                              scrollIntoView={scrollIntoView}
-                              setIsConfirm={setIsConfirm}
-                           />
-                        </div>
+                     {/* <div className="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 p-5"> */}
+                     <div>
+                        <h3 className="text-xl font-semibold">Enter your Details</h3>
+                        <FormInfomation
+                           data={data}
+                           isConfirm={isConfirm}
+                           scrollIntoView={scrollIntoView}
+                           setIsConfirm={setIsConfirm}
+                        />
                      </div>
+                     {/* </div> */}
                      {/* Trigger scroll */}
-                     <div ref={targetRef} />
-                     <Payment isConfirm={isConfirm} hotel={hotel} />
                   </div>
+
+                  {isConfirm && (
+                     <div
+                        ref={targetRef}
+                        className="w-full flex flex-col sm:rounded-lg sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-5 xl:p-5"
+                     >
+                        <Payment isConfirm={isConfirm} hotel={hotel} />
+                     </div>
+                  )}
                </div>
 
                {/* DETAILS */}
                <div className="hidden lg:block flex-grow">
-                  <div className="sticky top-28 w-full flex flex-col rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 space-y-6 sm:space-y-8">
+                  <div className="sticky top-28 w-full flex flex-col rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8">
                      {/* <div className="flex flex-col sm:flex-row sm:items-center">
                         <div className="flex-shrink-0 w-full sm:w-40">
                            <div className="aspect-square relative rounded-2xl overflow-hidden">
@@ -396,32 +410,32 @@ const CheckoutFeatures = () => {
                         </div>
                         <div className="py-5 sm:px-5 space-y-3">
                            <div>
-                              <span className="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">
+                              <span className="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1">
                                  {data?.address}
                               </span>
                               <span className="text-base font-medium mt-1 block">{data?.name}</span>
                            </div>
-                           <span className="block  text-sm text-slate-500 dark:text-slate-400">
+                           <span className="block  text-sm text-neutral-500 dark:text-neutral-400">
                               {hotel.rate?.room_name}
                            </span>
-                           <div className="w-10 border-b border-slate-200 dark:border-slate-700" />
+                           <div className="w-10 border-b border-neutral-200 dark:border-neutral-700" />
                            <div className="flex items-start justify-start gap-1">
                               <StarFilledIcon className="text-orange-500 w-5 h-5" />
 
                               <span className="text-sm font-medium">{data?.star_rating}</span>
-                              <span className="text-sm text-slate-500 dark:text-slate-400">
+                              <span className="text-sm text-neutral-500 dark:text-neutral-400">
                                  (112)
                               </span>
                            </div>
                         </div>
                      </div> */}
-                     {/* <div className="border border-slate-200 dark:border-slate-700 rounded-3xl flex flex-col sm:flex-row divide-y divide-solid sm:divide-x sm:divide-y-0 divide-slate-200 dark:divide-slate-700  overflow-hidden z-10">
+                     {/* <div className="border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y divide-solid sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700  overflow-hidden z-10">
                         <div
-                           className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-slate-50 dark:hover:bg-slate-700"
+                           className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-700"
                            
                         >
                            <div className="flex flex-col">
-                              <span className="text-sm text-slate-400">Check in - check out</span>
+                              <span className="text-sm text-neutral-400">Check in - check out</span>
                               <span className="mt-1.5 text-lg font-semibold">
                                  {format(hotel.checkin_date, 'MMM dd')}
                                  {' - '}
@@ -431,21 +445,21 @@ const CheckoutFeatures = () => {
                         </div>
 
                         <div
-                           className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-slate-50 dark:hover:bg-slate-700"
+                           className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-700"
                             >
                            <div className="flex flex-col">
-                              <span className="text-sm text-slate-400">Guests</span>
+                              <span className="text-sm text-neutral-400">Guests</span>
                               <span className="mt-1.5 text-lg font-semibold">
                                  {hotel.num_guests} Guests
                               </span>
                            </div>
                          </div>
                      </div> */}
-                     <div className="bg-slate-200 px-5 py-5">
+                     <div className="bg-neutral-200 dark:bg-neutral-800 px-5 py-5">
                         <h3 className="text-2xl font-semibold">Price & Fee</h3>
                      </div>
                      <div className="flex flex-col space-y-4 px-5 pb-5">
-                        <div className="flex justify-between text-slate-600 dark:text-slate-50">
+                        <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
                            <span>
                               {formatCurrencyWithCodeAsSuffix(
                                  hotel.rate?.payment_options.payment_types[0].show_amount || 0,
@@ -463,7 +477,7 @@ const CheckoutFeatures = () => {
                               )}
                            </span>
                         </div>
-                        <div className="flex justify-between text-slate-600  dark:text-slate-50">
+                        <div className="flex justify-between text-neutral-600  dark:text-neutral-50">
                            <span>Service charge</span>
                            <span>
                               {formatCurrencyWithCodeAsSuffix(
@@ -472,7 +486,7 @@ const CheckoutFeatures = () => {
                               )}
                            </span>
                         </div>
-                        <div className="border-b border-slate-200 dark:border-slate-700"></div>
+                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
                         <div className="flex justify-between font-semibold text-xl">
                            <span>Total</span>
                            <span>
@@ -484,10 +498,10 @@ const CheckoutFeatures = () => {
                               )}
                            </span>
                         </div>
-                        <div className="border-b border-slate-200 dark:border-slate-700"></div>
+                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
 
                         <div className="flex justify-between items-start space-x-5">
-                           <p className="text-sm text-slate-800  dark:text-slate-400">
+                           <p className="text-sm text-neutral-800  dark:text-neutral-400">
                               Approximate price in VND: the currency rate might change at the time
                               of payment.
                            </p>
@@ -511,7 +525,7 @@ const CheckoutFeatures = () => {
                         </div>
                         {taxes.includedTaxes.map((tax, index) => (
                            <div
-                              className="flex justify-between text-slate-600  dark:text-slate-50"
+                              className="flex justify-between text-neutral-600  dark:text-neutral-50"
                               key={index}
                            >
                               <span className="capitalize text-sm">
@@ -520,19 +534,18 @@ const CheckoutFeatures = () => {
                               <span>
                                  {formatCurrencyWithCodeAsSuffix(
                                     Number.parseFloat(tax.amount),
-                                    hotel?.rate?.payment_options?.payment_types[0]
-                                       ?.show_currency_code,
+                                    tax.currency_code,
                                  )}
                               </span>
                            </div>
                         ))}
-                        <div className="border-b border-slate-200 dark:border-slate-700"></div>
-                        <p className="text-base font-medium text-slate-800  dark:text-slate-400">
+                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                        <p className="text-base font-medium text-neutral-800  dark:text-neutral-400">
                            To be paid upon arrival
                         </p>
                         {taxes.notIncludedTaxes.map((tax, index) => (
                            <div
-                              className="flex justify-between text-slate-600  dark:text-slate-50"
+                              className="flex justify-between text-neutral-600  dark:text-neutral-50"
                               key={index}
                            >
                               <span className="capitalize text-sm">
@@ -541,14 +554,14 @@ const CheckoutFeatures = () => {
                               <span>
                                  {formatCurrencyWithCodeAsSuffix(
                                     Number.parseFloat(tax.amount),
-                                    hotel?.rate?.payment_options?.payment_types[0]
-                                       ?.show_currency_code,
+                                    tax.currency_code,
                                  )}
                               </span>
                            </div>
                         ))}
-                        <div className="border-b border-slate-200"></div>
-                        <p className="text-sm text-slate-500  dark:text-slate-400">
+                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+
+                        <p className="text-sm text-neutral-500  dark:text-neutral-400">
                            Please note You&apos;ll have to pay taxes and fees in the local currency
                            VND.
                         </p>

@@ -65,8 +65,8 @@ const SwitchType = ({ navigation }: NavigationType) => {
                <ul className="relative grid grid-cols-1 gap-7 p-6">
                   {navigation?.map(({ title, link, description, icon }) => (
                      <PrismicNextLink key={title} field={link} onClick={handleClose}>
-                        <li className="flex items-center p-2 -m-3 text-slate-800 transition duration-150 ease-in-out rounded-lg hover:bg-slate-100 hover:text-neutral-900 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  dark:hover:bg-slate-800 dark:text-neutral-100 dark:hover:text-neutral-200">
-                           <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md dark:text-slate-100 sm:h-12 sm:w-12 bg-slate-100 dark:bg-slate-700">
+                        <li className="flex items-center p-2 -m-3 text-neutral-800 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 hover:text-neutral-900 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50  dark:hover:bg-neutral-800 dark:text-neutral-100 dark:hover:text-neutral-200">
+                           <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md dark:text-neutral-100 sm:h-12 sm:w-12 bg-neutral-100 dark:bg-neutral-700">
                               {icon === 'car' && <CarFrontIcon className="w-7 h-7" />}
                               {icon === 'flight' && <PlaneTakeoffIcon className="w-7 h-7" />}
                               {icon === 'hotel' && <HotelIcon className="w-7 h-7" />}
@@ -81,15 +81,15 @@ const SwitchType = ({ navigation }: NavigationType) => {
                   ))}
                </ul>
             </nav>
-            <div className="bg-slate-50 dark:bg-slate-700">
+            <div className="bg-neutral-50 dark:bg-neutral-700">
                <Link
                   href="#"
-                  className="flow-root py-5 px-7 text-slate-800 dark:text-slate-300 transition duration-150 ease-in-out rounded-md focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
+                  className="flow-root py-5 px-7 text-neutral-800 dark:text-neutral-300 transition duration-150 ease-in-out rounded-md focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
                >
                   <span className="flex items-center">
                      <span className="text-sm font-medium">Documentation</span>
                   </span>
-                  <span className="block text-sm text-gray-500 dark:text-slate-400">
+                  <span className="block text-sm text-gray-500 dark:text-neutral-400">
                      Start integrating products and tools
                   </span>
                </Link>

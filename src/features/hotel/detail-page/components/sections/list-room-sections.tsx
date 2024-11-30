@@ -156,7 +156,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
             {roomGroup.length > 10 && (
                <Button
                   onClick={() => setShowAll((prev) => !prev)}
-                  className="relative h-auto px-4 py-3 sm:px-6 border rounded-full bg-white text-sm sm:text-base font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+                  className="relative h-auto px-4 py-3 sm:px-6 border rounded-full bg-white text-sm sm:text-base font-medium text-neutral-700 hover:text-neutral-900 hover:bg-neutral-100"
                >
                   {showAll ? 'Hide' : 'View more'}
                   <ChevronDown />

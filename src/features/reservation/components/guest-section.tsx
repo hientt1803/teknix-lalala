@@ -62,7 +62,7 @@ const GuestSection = ({ meta_data }: GuestSectionProps) => {
                   <div className="block">
                      <Label
                         className={cn(
-                           'text-slate-900 mb-1 dark:text-slate-300 text-sm font-medium',
+                           'text-neutral-900 mb-1 dark:text-neutral-300 text-sm font-medium',
                         )}
                      >
                         Title
@@ -128,7 +128,7 @@ const GuestSection = ({ meta_data }: GuestSectionProps) => {
                <span className="font-bold">Subcrible</span> to prefill all details and get access to
                secret deals
             </div>
-            <div className="rounded-2xl border border-slate-100 divide-y">
+            <div className="rounded-2xl border border-neutral-100 divide-y">
                <div className="flex items-center justify-between  p-5">
                   <h2 className="text-xl font-bold">Special request</h2>
                   <p />

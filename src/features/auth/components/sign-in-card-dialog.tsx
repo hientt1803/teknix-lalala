@@ -78,16 +78,16 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
     <div className="flex gap-2 items-center flex-nowrap w-full">
        <Button
           variant={'outline'}
-          className="py-7 px-6 flex-grow border-slate-200 bg-slate-100 dark:bg-slate-800 dark:border-slate-700"
+          className="py-7 px-6 flex-grow border-neutral-200 bg-neutral-100 dark:bg-neutral-800 dark:border-neutral-700"
        >
           <img src="/icons/google-icon.svg" className="flex-shrink w-6 h-6" />
-          <h3 className="text-center text-sm font-medium text-slate-700 dark:text-slate-300 sm:text-sm">
+          <h3 className="text-center text-sm font-medium text-neutral-700 dark:text-neutral-300 sm:text-sm">
              Sign in with Google
           </h3>
        </Button>
        <Button
           variant={'outline'}
-          className="h-14 w-14 border-slate-200 bg-slate-100 dark:bg-slate-800 dark:border-slate-700"
+          className="h-14 w-14 border-neutral-200 bg-neutral-100 dark:bg-neutral-800 dark:border-neutral-700"
           size="icon"
        >
           <img src="/icons/facebook-icon.svg" className="flex-shrink w-6 h-6" />
@@ -95,7 +95,7 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
        <Button
           variant={'outline'}
           size="icon"
-          className="h-14 w-14 border-slate-200 bg-slate-100 dark:bg-slate-800 dark:border-slate-700"
+          className="h-14 w-14 border-neutral-200 bg-neutral-100 dark:bg-neutral-800 dark:border-neutral-700"
        >
           <img src="/icons/twitter-icon.svg" className="flex-shrink w-6 h-6" />
        </Button>
@@ -119,7 +119,7 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
                          type="email"
                          icon="email"
                          label="Email"
-                         className="bg-slate-100"
+                         className="bg-neutral-100"
                          placeholder="example@gmail.com"
                          {...field}
                       />
@@ -141,7 +141,7 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
                          label="Pasword"
                          placeholder="********"
                          rightLabel={
-                            <Link className="text-sm font-normal dark:text-slate-300" href="#">
+                            <Link className="text-sm font-normal dark:text-neutral-300" href="#">
                                Forgot password?
                             </Link>
                          }
@@ -151,7 +151,7 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
                          type="password"
                          icon="password"
                          label="Password"
-                         className="bg-slate-100"
+                         className="bg-neutral-100"
                          placeholder="********"
                          {...field}
                       />
@@ -161,7 +161,7 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
              )}
           />
           <div className="flex w-full justify-end items-end">
-             <span className="text-xs hover:underline cursor-pointer text-slate-600">
+             <span className="text-xs hover:underline cursor-pointer text-neutral-600">
                 Forgot password?
              </span>
           </div>
@@ -176,10 +176,10 @@ const SignInCardDialog = ({ setState }: SignInCardDialogProps) => {
           </ButtonLoading>
        </form>
     </Form>
-    <span className="block text-center text-slate-700 dark:text-slate-300 mt-8">
+    <span className="block text-center text-neutral-700 dark:text-neutral-300 mt-8">
        New user?{' '}
        <span
-          className="cursor-pointer hover:text-slate-400"
+          className="cursor-pointer hover:text-neutral-400"
              onClick={() => setState('signUp')}
        >
           Create an account

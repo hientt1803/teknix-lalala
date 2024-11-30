@@ -142,13 +142,13 @@ const MainSection = ({ data, id, hotelReview, scrollIntoReviewSection }: Props) 
    };
 
    return (
-      <div className="border border-slate-200 dark:border-slate-700 p-4 rounded-2xl space-y-8">
+      <div className="border border-neutral-200 dark:border-neutral-700 p-4 rounded-2xl space-y-8">
          <div className="flex justify-between items-center">
             <span className="inline-flex px-2.5 py-1 rounded-full font-medium text-xs  text-blue-800 bg-blue-100  relative">
                {data?.hotel_chain ? data.hotel_chain : 'Loading...'}
             </span>
             <div className="flow-root">
-               <div className="flex text-slate-700 dark:text-slate-50 text-sm -mx-3 -my-1.5">
+               <div className="flex text-neutral-700 dark:text-neutral-50 text-sm -mx-3 -my-1.5">
                   <Button
                      variant="ghost"
                      className="py-1.5 px-3 flex rounded-lg cursor-pointer"
@@ -177,7 +177,7 @@ const MainSection = ({ data, id, hotelReview, scrollIntoReviewSection }: Props) 
                   <StarFilledIcon className="w-5 h-5 text-orange-500" strokeWidth={1.5} />
                </div>
                <span className="font-medium">{data?.star_rating ? data.star_rating : 0}</span>
-               <span className="text-slate-500 dark:text-slate-300">
+               <span className="text-neutral-500 dark:text-neutral-300">
                   ({hotelReview?.reviews?.length || 0})
                </span>
             </div>
@@ -199,12 +199,12 @@ const MainSection = ({ data, id, hotelReview, scrollIntoReviewSection }: Props) 
                   />
                </span>
             </div>
-            <span className="ml-2.5 text-slate-500 dark:text-slate-400">
+            <span className="ml-2.5 text-neutral-500 dark:text-neutral-400">
                Hosted by{' '}
-               <span className="text-slate-900 dark:text-slate-200 font-medium">Kevin Francis</span>
+               <span className="text-neutral-900 dark:text-neutral-200 font-medium">Kevin Francis</span>
             </span>
          </div>
-         <div className="grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 text-sm text-slate-700 dark:text-slate-50">
+         <div className="grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 text-sm text-neutral-700 dark:text-neutral-50">
             {rg_ext_Rendering()}
             {/* <div className="flex items-center space-x-3 ">
                     <IconBrandAirtable

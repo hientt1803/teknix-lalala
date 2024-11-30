@@ -6,7 +6,7 @@ const TabChangePassword = () => {
         <div className="pt-14 sm:pt-20 pb-24 lg:pb-32">
             <div className="space-y-6 sm:space-y-8">
                 <h2 className="text-3xl font-semibold">Update your password</h2>
-                <div className="w-14 border-b border-slate-200" />
+                <div className="w-14 border-b border-neutral-200" />
                 <div className="flex flex-col md:flex-row">
                     <div className="flex-grow max-w-lg space-y-6">
                         <div>

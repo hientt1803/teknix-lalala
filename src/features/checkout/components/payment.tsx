@@ -56,8 +56,8 @@ const Payment = ({ isConfirm, hotel }: Props) => {
          })}
       >
          <h3 className="text-2xl font-semibold">Pay with</h3>
-         <span className="text-base text-slate-400 mt-3">Choose your payment gateway.</span>
-         <div className="w-14 border-b border-slate-200 my-5" />
+         <span className="text-base text-neutral-400 mt-3">Choose your payment gateway.</span>
+         <div className="w-14 border-b border-neutral-200 my-5" />
          <div className="mt-6">
             <RadioGroup
                value={paymentValue}
@@ -103,7 +103,7 @@ const Payment = ({ isConfirm, hotel }: Props) => {
             </RadioGroup>
             {paymentValue === 'credit' && (
                <>
-                  <div className="w-14 border-b border-slate-200 my-5" />
+                  <div className="w-14 border-b border-neutral-200 my-5" />
                   <PaymentForm />
                </>
             )}
@@ -113,7 +113,7 @@ const Payment = ({ isConfirm, hotel }: Props) => {
                   loading={isLoadingCreatePayment}
                   // disabled={true}
                   disabled={!paymentValue}
-                  className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6   disabled:bg-opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 dark:focus:ring-offset-0 "
+                  className="relative h-auto inline-flex items-center justify-center rounded-lg transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6   disabled:bg-opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 dark:focus:ring-offset-0 "
                >
                   Confirm and pay
                </ButtonLoading>

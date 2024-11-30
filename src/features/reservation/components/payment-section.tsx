@@ -115,7 +115,7 @@ const PaymentSection = () => {
                   <AccordionPanel>Payment Form</AccordionPanel>
                </AccordionItem>
             </Accordion>
-            <div className="text-sm text-slate-600 mt-5 ml-2">
+            <div className="text-sm text-neutral-600 mt-5 ml-2">
                By processing, You accept Booking{' '}
                <span className="text-indigo-700">Terms of Services</span> and{' '}
                <span className="text-indigo-700">Policy</span>

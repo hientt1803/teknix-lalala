@@ -107,8 +107,8 @@ export function AccordionItem({ children, value }: { children: ReactNode; value:
       <motion.div
          className={`rounded-xl overflow-hidden mb-2 ${
             isActive
-               ? 'active dark:border-slate-700 border border-neutral-100 hover:shadow-lg dark:bg-slate-900 bg-white'
-               : 'bg-transparent border border-slate-200  dark:border-slate-600'
+               ? 'active dark:border-neutral-700 border border-neutral-100 hover:shadow-lg dark:bg-neutral-900 bg-white'
+               : 'bg-transparent border border-neutral-200  dark:border-neutral-600'
          }`}
          variants={cardVariants}
          initial="collapsed"
@@ -130,8 +130,8 @@ export function AccordionHeader({ children, icon }: { children: ReactNode; icon?
 
    return (
       <motion.div
-         className={`p-4 cursor-pointer transition-all font-semibold dark:text-white text-black dark:hover:bg-slate-600  hover:text-black flex justify-between items-center gap-4 ${
-            isActive ? 'active dark:bg-slate-700 bg-white' : 'dark:bg-slate-800  bg-white'
+         className={`p-4 cursor-pointer transition-all font-semibold dark:text-white text-black dark:hover:bg-neutral-600  hover:text-black flex justify-between items-center gap-4 ${
+            isActive ? 'active dark:bg-neutral-700 bg-white' : 'dark:bg-neutral-800  bg-white'
          }`}
          onClick={() => onChangeIndex(value)}
       >
@@ -178,7 +178,7 @@ export function AccordionPanel({ children }: { children: ReactNode }) {
                exit="collapsed"
                variants={panelVariants}
                transition={{ type: 'spring', duration: 0.5, bounce: 0.1 }}
-               className="dark:bg-slate-900 bg-white"
+               className="dark:bg-neutral-900 bg-white"
             >
                <motion.article
                   initial={{ clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)' }}

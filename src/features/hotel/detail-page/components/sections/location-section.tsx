@@ -7,14 +7,14 @@ const Map = dynamic(() => import('@/components/common/map').then((mob) => mob.de
 
 const LocationSection = ({ hotelData }: { hotelData: IHotelReservation }) => {
    return (
-      <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-lg space-y-8">
+      <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8">
          <div>
             <h2 className="text-2xl font-semibold">Location</h2>
-            <span className="block mt-2 text-slate-500 dark:text-slate-300">
+            <span className="block mt-2 text-neutral-500 dark:text-neutral-300">
                {hotelData?.address}
             </span>
          </div>
-         <div className="w-14 border-b border-slate-200 dark:border-slate-700"></div>
+         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
          <div className="aspect-video w-full h-[37.5rem] ring-1 relative overflow-hidden rounded-xl z-0">
             {hotelData?.latitude && hotelData.longitude ? (
                <Map

@@ -30,7 +30,7 @@ const PriceSection = ({ paymentOptions, total_discount }: PriceSectionProps) => 
       <div className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] border border-neutral-50 rounded-2xl">
          <h1 className="text-xl font-bold p-5">Price Summary</h1>
          <div className="border-b border-b-neutral-200 w-full" />
-         <div className="p-5 grid grid-cols-1 gap-4 text-slate-600">
+         <div className="p-5 grid grid-cols-1 gap-4 text-neutral-600">
             <div className="flex justify-between items-center">
                <span className="text-sm">Room Charges</span>
                <span>{formatCurrencyWithCodeAsSuffix(show_amount, show_currency_code)}</span>
@@ -58,9 +58,9 @@ const PriceSection = ({ paymentOptions, total_discount }: PriceSectionProps) => 
             </div>
          </div>
          <div className="border-b border-b-neutral-200 w-full" />
-         <div className="p-5 grid grid-cols-1 gap-4 text-slate-600">
+         <div className="p-5 grid grid-cols-1 gap-4 text-neutral-600">
             <div className="flex justify-between items-start space-x-5">
-               <p className="text-sm text-slate-800  dark:text-slate-400">
+               <p className="text-sm text-neutral-800  dark:text-neutral-400">
                   Approximate price in VND: the currency rate might change at the time of payment.
                </p>
 
@@ -73,7 +73,7 @@ const PriceSection = ({ paymentOptions, total_discount }: PriceSectionProps) => 
                         </span>
                      </TooltipTrigger>
                      <TooltipContent side="top" align="center" className="max-w-xs">
-                        <p className="text-slate-500">
+                        <p className="text-neutral-500">
                            This is an estimate and the final amount might vary depending on the
                            currency exchange rate at the time of payment.
                         </p>
@@ -89,7 +89,7 @@ const PriceSection = ({ paymentOptions, total_discount }: PriceSectionProps) => 
             ))}
          </div>
          <div className="border-b border-b-neutral-200 w-full" />
-         <div className="p-5 grid grid-cols-1 gap-4 text-slate-600">
+         <div className="p-5 grid grid-cols-1 gap-4 text-neutral-600">
             {taxes.notIncludedTaxes.map((tax, index) => (
                <div key={index} className="flex justify-between items-center">
                   <span className="text-sm capitalize">{tax.name.replaceAll('_', ' ')}</span>

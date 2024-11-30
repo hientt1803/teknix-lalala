@@ -90,13 +90,13 @@ const ModalCustom: FC<Props> = ({
                         onClick={handleClose}
                         variant="ghost"
                         size="icon"
-                        className="text-slate-700 focus:outline-none focus:ring-0 w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-100"
+                        className="text-neutral-700 focus:outline-none focus:ring-0 w-10 h-10 rounded-full flex items-center justify-center hover:bg-neutral-100"
                     >
                         <ArrowLeftIcon className="w-10 h-w-10" strokeWidth={1.5} />
                     </Button>
 
                     <div className="flow-root">
-                        <div className="flex text-slate-700 text-sm -mx-3 -my-1.5">
+                        <div className="flex text-neutral-700 text-sm -mx-3 -my-1.5">
                             <span className="py-1.5 px-3 flex rounded-lg hover:bg-neutral-100 cursor-pointer">
                                 <UploadIcon className="w-5 h-5" strokeWidth={1.5} />
                                 <span className="hidden sm:block ml-2.5">Share</span>

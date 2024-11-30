@@ -74,7 +74,7 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
                                 />
                             </Button>
                             <div className="flow-root">
-                                <div className="flex text-slate-700 dark:text-slate-50 text-sm -mx-3 -my-1.5">
+                                <div className="flex text-neutral-700 dark:text-neutral-50 text-sm -mx-3 -my-1.5">
                                     <Button
                                         variant="ghost"
                                         className="py-1.5 px-3 flex rounded-lg cursor-pointer"

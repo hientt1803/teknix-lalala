@@ -6,11 +6,11 @@ const TabChangeBill = () => {
         <div className="pt-14 sm:pt-20 pb-24 lg:pb-32">
             <div className="space-y-6 sm:space-y-8">
                 <h2 className="text-3xl font-semibold">Payments & payouts</h2>
-                <div className="w-14 border-b border-slate-200" />
+                <div className="w-14 border-b border-neutral-200" />
                 <div className="max-w-2xl">
                     <span className="text-xl font-semibold block">Payout methods</span>
                     <br />
-                    <span className="text-slate-700 block">
+                    <span className="text-neutral-700 block">
                         When you receive a payment for a reservation, we call that payment
                         to you a &apos;payout.&apos; Our secure payment system supports several
                         payout methods, which can be set up below. Go to FAQ.

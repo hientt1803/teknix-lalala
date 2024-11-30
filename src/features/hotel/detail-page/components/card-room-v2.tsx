@@ -19,7 +19,7 @@ const RoomCard = (props: RoomCardType) => {
    const { roomData, selectedMap, displayType, handleReservation } = props;
 
    return (
-      <Card className="group relative border-slate-200 overflow-hidden hover:shadow-xl rounded-[1.875rem] transition-shadow w-full h-full">
+      <Card className="group relative border-neutral-200 overflow-hidden hover:shadow-xl rounded-[1.875rem] transition-shadow w-full h-full">
          <div className={cn('h-full w-full grid grid-cols-5 items-center')}>
             {/* Image */}
             <div
@@ -92,7 +92,7 @@ const RoomCard = (props: RoomCardType) => {
                         <div className="flex justify-start items-center flex-wrap gap-2">
                            {roomData?.amenities_data?.map((amentine, index) => (
                               <React.Fragment key={index}>
-                                 <div className="text-slate-800 text-xs border cursor-pointer hover:shadow-md border-neutral-300 p-2 px-4 rounded-full">
+                                 <div className="text-neutral-800 text-xs border cursor-pointer hover:shadow-md border-neutral-300 p-2 px-4 rounded-full">
                                     {convertKebabToTitleCase(amentine)}
                                  </div>
                               </React.Fragment>
@@ -255,7 +255,7 @@ const RoomCard = (props: RoomCardType) => {
                                     'VND',
                               )}`}
                            </span>
-                           <span className="text-base font-light text-slate-700">Per Nights</span>
+                           <span className="text-base font-light text-neutral-700">Per Nights</span>
                         </span>
                         <Button
                            variant="default"

@@ -43,20 +43,20 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
                   Welcome to {name}
                </Badge>
                <h1 className="font-semibold text-6xl leading-tight">A New Vision of Luxury</h1>
-               {/* <p className="text-slate-700 dark:text-slate-300  lg:text-lg leading-normal">
+               {/* <p className="text-neutral-700 dark:text-neutral-300  lg:text-lg leading-normal">
                   Le Meurice is an iconic luxury hotel situated in the heart of Paris, France,
                   renowned for its elegance, sophistication, and rich history. Nestled on the Rue de
                   Rivoli, overlooking the splendid Tuileries Garden and just steps away from the
                   Louvre Museum, this esteemed establishment has been a beacon of opulence and
                   hospitality since its inception in 1835.
                </p> */}
-               <p className="text-slate-700 dark:text-slate-300  lg:text-lg leading-normal">
+               <p className="text-neutral-700 dark:text-neutral-300  lg:text-lg leading-normal">
                   {description_struct?.slice(0, 1).map((de) => (
                      <div key={de.title}>
                         <div className="flex">
                            <h3 className="text-black dark:text-white font-semibold">{de.title}</h3>
                         </div>
-                        <p className="font-normal text-slate-600 dark:text-slate-400">
+                        <p className="font-normal text-neutral-600 dark:text-neutral-400">
                            {de.paragraphs.map((pa, index) => (
                               <span key={index}>
                                  <span>{pa}</span>
@@ -69,11 +69,11 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
                      </div>
                   ))}
                </p>
-               <div className="border-b border-b-slate-200 dark:border-b-slate-700 rounded-full"></div>
+               <div className="border-b border-b-neutral-200 dark:border-b-neutral-700 rounded-full"></div>
                <div className="flex justify-between items-center w-full">
                   <div className="flex flex-col space-y-2">
-                     <p className="text-lg flex items-center gap-2 font-semibold text-slate-900 dark:text-slate-400">
-                        <div className="w-7 h-7 border rounded-full border-slate-400 flex items-center justify-center">
+                     <p className="text-lg flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-400">
+                        <div className="w-7 h-7 border rounded-full border-neutral-400 flex items-center justify-center">
                            <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="1.2rem"
@@ -93,7 +93,7 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
                   <Badge
                      onClick={scrollIntoReviewSection}
                      color="gray"
-                     className="py-4 px-6 text-base cursor-pointer hover:bg-slate-100"
+                     className="py-4 px-6 text-base cursor-pointer hover:bg-neutral-100"
                   >
                      Availability Rooms
                   </Badge>

@@ -44,7 +44,7 @@ const InputPhoneNumber = ({onChange, value, readOnly}: Props) => {
 
     return (
         <div className="flex flex-col gap-[3px]">
-            <Label className="text-slate-800 dark:text-slate-300 text-sm">
+            <Label className="text-neutral-800 dark:text-neutral-300 text-sm">
                 Phone number <span className="text-red-500">*</span>
             </Label>
 

@@ -108,7 +108,7 @@ const SearchRoomComnponent = ({ isFetching, isLoading }: Props) => {
    }, []);
 
    return (
-      <form className="flex flex-col sm:flex-row justify-between border border-slate-200 rounded-3xl my-5">
+      <form className="flex flex-col sm:flex-row justify-between border border-neutral-200 rounded-3xl my-5">
          <TimeSearch date={dateUpdate} setDate={setDateUpdate} />
          <div className="border-b sm:border-r border-neutral-200 " />
          <GuestSearch

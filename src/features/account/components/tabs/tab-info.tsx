@@ -25,11 +25,11 @@ const TabInfo = () => {
         <div className="pt-14 sm:pt-20 pb-24 lg:pb-32">
             <div className="space-y-6 sm:space-y-8">
                 <h2 className="text-3xl font-semibold">Account infomation</h2>
-                <div className="w-14 border-b border-slate-200" />
+                <div className="w-14 border-b border-neutral-200" />
                 <div className="flex flex-col md:flex-row">
                     <div className="flex-shrink-0 flex items-start">
                         <div className="relative rounded-full overflow-hidden flex">
-                            <div className="relative flex-shrink-0 inline-flex items-center justify-center text-slate-100 uppercase font-semibold shadow-inner rounded-full w-32 h-32 ring-1 ring-white">
+                            <div className="relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full w-32 h-32 ring-1 ring-white">
                                 <Avatar className="w-full h-full">
                                     <AvatarImage
                                         src="/testimonials/client2.png"
@@ -40,7 +40,7 @@ const TabInfo = () => {
                                     </AvatarFallback>
                                 </Avatar>
                             </div>
-                            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-slate-50 cursor-pointer">
+                            <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-neutral-50 cursor-pointer">
                                 <ImagePlusIcon strokeWidth={1.5} />
                                 <span className="mt-1 text-xs">Change Image</span>
                             </div>
@@ -51,16 +51,16 @@ const TabInfo = () => {
                             <InputLabel
                                 label="Name"
                                 defaultValue={"Mr. Minh"}
-                                className="block w-full border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
+                                className="block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
                                 sizes="small"
                             />
                         </div>
                         <div>
-                            <Label className="text-sm font-medium text-slate-900">
+                            <Label className="text-sm font-medium text-neutral-900">
                                 Gender
                             </Label>
                             <Select>
-                                <SelectTrigger className="w-full border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5">
+                                <SelectTrigger className="w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5">
                                     <SelectValue placeholder="Select gender" />
                                 </SelectTrigger>
                                 <SelectContent>
@@ -76,7 +76,7 @@ const TabInfo = () => {
                             <InputLabel
                                 label="User name"
                                 defaultValue={"@eden_minh"}
-                                className="block w-full border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
+                                className="block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
                                 sizes="small"
                             />
                         </div>
@@ -84,7 +84,7 @@ const TabInfo = () => {
                             <InputLabel
                                 label="Email"
                                 defaultValue={"example@email.com"}
-                                className="block w-full border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
+                                className="block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
                                 sizes="small"
                             />
                         </div>
@@ -92,13 +92,13 @@ const TabInfo = () => {
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <div>
-                                        <Label className="text-sm font-medium text-slate-900">
+                                        <Label className="text-sm font-medium text-neutral-900">
                                             Day of birth
                                         </Label>
                                         <Button
                                             variant={"outline"}
                                             className={cn(
-                                                "w-full flex justify-between items-center border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5",
+                                                "w-full flex justify-between items-center border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5",
                                                 !date && "text-muted-foreground"
                                             )}
                                         >
@@ -129,17 +129,17 @@ const TabInfo = () => {
                             <InputLabel
                                 label="Phone number"
                                 defaultValue={"0345678910"}
-                                className="block w-full border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
+                                className="block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1.5"
                                 sizes="small"
                             />
                         </div>
                         <div>
-                            <Label className="text-sm font-medium text-slate-900">
+                            <Label className="text-sm font-medium text-neutral-900">
                                 About you
                             </Label>
                             <Textarea
                                 placeholder={"About you..."}
-                                className="block w-full border border-slate-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal min-h-[100px] px-4 py-3 mt-1.5"
+                                className="block w-full border border-neutral-200 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal min-h-[100px] px-4 py-3 mt-1.5"
                                 rows={5}
                             />
                         </div>

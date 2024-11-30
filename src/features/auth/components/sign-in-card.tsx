@@ -67,7 +67,7 @@ const SignInCard = ({ setState }: SignInCardProps) => {
 
    return (
       <div className="container mb-24 lg:mb-32">
-         <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-slate-900 dark:text-slate-200 justify-center">
+         <h2 className="my-20 flex items-center text-3xl leading-[115%] md:text-5xl md:leading-[115%] font-semibold text-neutral-900 dark:text-neutral-200 justify-center">
             Login
          </h2>
          <div className="max-w-md mx-auto space-y-6">
@@ -107,7 +107,7 @@ const SignInCard = ({ setState }: SignInCardProps) => {
                                  placeholder="********"
                                  rightLabel={
                                     <Link
-                                       className="text-sm font-normal dark:text-slate-300"
+                                       className="text-sm font-normal dark:text-neutral-300"
                                        href="#"
                                     >
                                        Forgot password?
@@ -131,10 +131,10 @@ const SignInCard = ({ setState }: SignInCardProps) => {
                   </ButtonLoading>
                </form>
             </Form>
-            <span className="block text-center text-slate-700 dark:text-slate-300">
+            <span className="block text-center text-neutral-700 dark:text-neutral-300">
                New user?{' '}
                <span
-                  className="cursor-pointer hover:text-slate-400"
+                  className="cursor-pointer hover:text-neutral-400"
                   onClick={() => setState('signUp')}
                >
                   Create an account
