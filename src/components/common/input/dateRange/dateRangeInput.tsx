@@ -1,6 +1,6 @@
 'use client';
 
-import { format } from 'date-fns';
+import { addDays, format, isBefore } from 'date-fns';
 import { Calendar as CalendarIcon } from 'lucide-react';
 import * as React from 'react';
 import { DateRange } from 'react-day-picker';
@@ -9,12 +9,13 @@ import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { setSearchGlobalDateRange } from '@/stores/features/global/global-slice';
 import {
    checkIfDateIsGreaterThanToday,
    convertStringToDate,
    getAdjustedEndDate,
+   getValidatedDate,
 } from '@/utilities/datetime';
 import { useDispatch } from 'react-redux';
 
@@ -36,7 +37,30 @@ export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivE
    // Api
 
    // Logic
+   React.useEffect(() => {
+      const today = new Date();
+      const initialFrom = getValidatedDate(searchGlobal?.startDate || today, today);
+      const initialTo = getValidatedDate(searchGlobal?.endDate || today, addDays(today, 2));
 
+      // Check if the dateRange doesn't exist or is in the past, and update if needed
+      if (
+         !searchGlobal?.startDate ||
+         !searchGlobal?.endDate ||
+         isBefore(new Date(searchGlobal.endDate), today)
+      ) {
+         dispatch(
+            setSearchGlobalDateRange({
+               startDate: format(initialFrom, 'yyyy-MM-dd'),
+               endDate: format(initialTo, 'yyyy-MM-dd'),
+            }),
+         );
+      }
+
+      setDate({
+         from: initialFrom,
+         to: initialTo,
+      });
+   }, [dispatch, searchGlobal.endDate, searchGlobal?.startDate]);
    return (
       <div className={cn('grid gap-2', className)}>
          <Popover

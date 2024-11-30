@@ -4,15 +4,13 @@ import Paragraph from '@/components/common/typography/paragraph';
 import {
    Carousel,
    CarouselContent,
-   CarouselItem,
    CarouselNext,
    CarouselPrevious,
 } from '@/components/ui/carousel';
+import { ExploreStayList } from '@/features/slice-global/explore-stay/explore-stay-list';
+import { getHotDestination } from '@/services/global';
 import { Content } from '@prismicio/client';
 import { JSXMapSerializer, PrismicRichText, SliceComponentProps } from '@prismicio/react';
-import { dataMocks, dataMocks2 } from './mock';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
 
 /**
  * Props for `ExploreStay`.
@@ -25,7 +23,9 @@ const components: JSXMapSerializer = {
 /**
  * Component for "ExploreStay" Slices.
  */
-const ExploreStay = ({ slice }: ExploreStayProps): JSX.Element => {
+const ExploreStay = async ({ slice }: ExploreStayProps): Promise<JSX.Element> => {
+   const topDestination = await getHotDestination();
+
    return (
       <Bounded
          data-slice-type={slice.slice_type}
@@ -56,37 +56,7 @@ const ExploreStay = ({ slice }: ExploreStayProps): JSX.Element => {
             </div>
 
             <CarouselContent>
-               {(slice.variation === 'default' ? dataMocks : dataMocks2).map((des, index) => (
-                  <CarouselItem className="basis-1/2 md:basis-1/5" key={index}>
-                     <Link href={'/'} className="flex flex-col">
-                        <div
-                           className={cn(
-                              'flex-shrink-0 relative w-full rounded-2xl overflow-hidden group',
-                              {
-                                 'aspect-square sm:aspect-[5/4]': slice.variation === 'default',
-                                 'aspect-square sm:aspect-[4/6]': slice.variation === 'destination',
-                              },
-                           )}
-                        >
-                           <img
-                              src={des.imageUrl}
-                              className="object-cover w-full h-full rounded-2xl"
-                              alt="nc-imgs"
-                           />
-
-                           <span className="opacity-0 group-hover:opacity-100 absolute inset-0 bg-black bg-opacity-10 transition-opacity"></span>
-                        </div>
-                        <div className="mt-4 truncate">
-                           <h2 className="text-base sm:text-lg text-neutral-900 dark:text-neutral-100 font-medium truncate">
-                              {des.title}
-                           </h2>
-                           <span className="block mt-2 text-sm text-neutral-600 dark:text-neutral-400">
-                              {des.properties} properties
-                           </span>
-                        </div>
-                     </Link>
-                  </CarouselItem>
-               ))}
+               <ExploreStayList slice={slice} topDestination={topDestination} />
             </CarouselContent>
          </Carousel>
       </Bounded>

@@ -18,6 +18,7 @@ import {
 import { IHotelDataMapHotels, IHotelSearchGeoEngineRequest } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { formatDateToYearMonthDay } from '@/utilities/datetime';
+import { addDays, isAfter, isBefore, isEqual } from 'date-fns';
 import { getDistance } from 'geolib';
 import { LayoutGrid, LayoutList } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -54,9 +55,21 @@ export const WithoutMapContainer = () => {
 
    // Logic
    const fetchDataFromApi = () => {
+      let checkin = new Date(globalSearchState.dateRange.startDate);
+      let checkout = new Date(globalSearchState.dateRange.endDate);
+
+      // Kiểm tra nếu checkout nhỏ hơn hoặc bằng checkin
+      if (isBefore(checkout, checkin) || isEqual(checkout, checkin)) {
+         checkout = addDays(checkin, 1); // Tăng checkout thêm 1 ngày
+      }
+
+      console.log(globalSearchState.dateRange);
+      console.log(checkout);
+      console.log(checkout ? checkout : addDays(new Date(), 1));
+
       const searchParams = {
-         checkin: formatDateToYearMonthDay(new Date(globalSearchState.dateRange.startDate)),
-         checkout: formatDateToYearMonthDay(new Date(globalSearchState.dateRange.endDate)),
+         checkin: formatDateToYearMonthDay(checkin),
+         checkout: formatDateToYearMonthDay(checkout ? checkout : addDays(new Date(), 1)),
          language: globalSearchState?.lang?.cca2 || 'US',
          guests: globalSearchState.people,
          currency: globalSearchState?.currency?.code || 'VND',
@@ -133,23 +146,21 @@ export const WithoutMapContainer = () => {
 
    return (
       <div className="w-full">
-         <div className="w-full grid grid-cols-12 gap-3">
-            <div className="col-span-12 md:col-span-3">
-               <div className="block w-full md:hidden">
+         <div className="w-full grid grid-cols-12 gap-5">
+            <div className="col-span-12 lg:col-span-3">
+               <div className="block w-full lg:hidden">
                   <div className="mx-auto">
                      <FilterDrawer placeData={placeData} searchGlobal={globalSearchState} />
                   </div>
                </div>
-               <div className="hidden md:block md:col-span-4 lg:col-span-3">
-                  <div className="border border-neutral-200 rounded-2xl py-3">
-                     <ListFilter placeData={placeData} searchGlobal={globalSearchState} />
-                  </div>
+               <div className="hidden lg:block lg:col-span-3">
+                  <ListFilter placeData={placeData} searchGlobal={globalSearchState} />
                </div>
             </div>
-            <div className="w-full col-span-12 md:col-span-9">
+            <div className="w-full col-span-12 lg:col-span-9">
                <Tabs defaultValue="list" className="w-full overflow-hidden">
-                  <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-3 mb-6">
-                     <div className="w-full flex flex-col md:flex-row justify-between items-center">
+                  <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-3 mb-6">
+                     <div className="w-full flex flex-col lg:flex-row justify-between items-center">
                         <div className="flex items-center justify-start gap-3">
                            <TabsList className="bg-transparent">
                               <TabsTrigger

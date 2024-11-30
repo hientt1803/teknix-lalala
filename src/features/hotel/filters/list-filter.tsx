@@ -137,11 +137,11 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                   />
                </div>
             </div> */}
-            <div>
-               <Collapsible defaultOpen className="group mx-6">
+            <div className="border border-neutral-200 rounded-xl px-6 py-8 mb-6">
+               <Collapsible defaultOpen className="group">
                   <CollapsibleTrigger asChild>
                      <div className="flex justify-between items-center cursor-pointer">
-                        <div className="text-lg font-[500] hover:underline">Filter Range</div>
+                        <div className="text-lg font-[550] hover:underline">Filter Price</div>
                         <ChevronDown className="w-5 h-5 text-neutral-600" />
                      </div>
                   </CollapsibleTrigger>
@@ -168,39 +168,15 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                      <div className="mt-4 text-neutral-700 text-sm font-normal">$0 - $500</div>
                   </CollapsibleContent>
                </Collapsible>
-
-               {/* {index !== FILTER_MOCK.length - 1 && ( */}
-               <Separator orientation="horizontal" className="my-10 bg-neutral-200" />
-               {/* )} */}
             </div>
 
-            <div>
-               <Collapsible defaultOpen className="group mx-6">
-                  <CollapsibleTrigger asChild>
-                     <div className="flex justify-between items-center cursor-pointer">
-                        <div className="text-lg font-[500] hover:underline">Map Filter</div>
-                        <ChevronDown className="w-5 h-5 text-neutral-600" />
-                     </div>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                     <div className={cn('mt-5')}>
-                        <FilterMap
-                           placeData={placeData}
-                           searchGlobal={searchGlobal}
-                           showMapPlaceHolder
-                        />
-                     </div>
-                  </CollapsibleContent>
-               </Collapsible>
-
-               {/* {index !== FILTER_MOCK.length - 1 && ( */}
-               <Separator orientation="horizontal" className="my-10 bg-neutral-200" />
-               {/* )} */}
+            <div className="border border-neutral-200 rounded-xl mb-6">
+               <FilterMap placeData={placeData} searchGlobal={searchGlobal} showMapPlaceHolder />
             </div>
 
             {FILTER_MOCK?.map((filter: FilterType, index) => (
-               <React.Fragment key={index}>
-                  <Collapsible defaultOpen className="group mx-6">
+               <div key={index} className="border border-neutral-200 rounded-xl px-6 py-8 mb-6">
+                  <Collapsible defaultOpen className="group">
                      <CollapsibleTrigger asChild>
                         <div className="flex justify-between items-center cursor-pointer">
                            <div className="text-lg font-[500] hover:underline">
@@ -227,7 +203,7 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                                        <span className="flex gap-1 items-center cursor-pointer">
                                           {item.name}
                                           {filter?.sectionName == 'Rating Star' && (
-                                             <span className="text-lg">★</span>
+                                             <span className="text-base">★</span>
                                           )}
                                        </span>
                                     </Badge>
@@ -240,7 +216,7 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                                           />
                                           <label
                                              htmlFor={item.name}
-                                             className="text-base text-black peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                                             className="text-sm text-black peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                                           >
                                              {item.name}
                                           </label>
@@ -255,11 +231,7 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                         </div>
                      </CollapsibleContent>
                   </Collapsible>
-
-                  {index !== FILTER_MOCK.length - 1 && (
-                     <Separator orientation="horizontal" className="my-10 bg-neutral-200" />
-                  )}
-               </React.Fragment>
+               </div>
             ))}
          </div>
 

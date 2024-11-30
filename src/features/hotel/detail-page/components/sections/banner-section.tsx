@@ -1,4 +1,3 @@
-import Bounded from '@/components/common/containers/bounded';
 import { IHotelReservation } from '@/stores/features/stay/type';
 import dynamic from 'next/dynamic';
 import React from 'react';
@@ -9,7 +8,7 @@ const SearchGroup = dynamic(() =>
 
 export const BannerSection = ({ data }: { data?: IHotelReservation }) => {
    return (
-      <Bounded>
+      <>
          <div
             className="relative flex justify-center items-center rounded-lg overflow-hidden"
             style={{
@@ -48,6 +47,6 @@ export const BannerSection = ({ data }: { data?: IHotelReservation }) => {
          <div className="relative -top-24 mx-2">
             <SearchGroup showBorder showTabs />
          </div>
-      </Bounded>
+      </>
    );
 };
