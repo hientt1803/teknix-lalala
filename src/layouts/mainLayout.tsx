@@ -1,3 +1,4 @@
+import CanvasCursor from '@/components/custom/canvas/canvas-cursor';
 import dynamic from 'next/dynamic';
 import React from 'react';
 
@@ -18,6 +19,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
    return (
       <>
          <Header />
+         <CanvasCursor />
          {children}
          <Footer />
          <ScrollToTopButton />

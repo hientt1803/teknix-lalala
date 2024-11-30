@@ -130,14 +130,18 @@ const CardHistory = ({ data }: Props) => {
                   <span className="text-slate-500 ">(28)</span>
                </div>
                {data.record.status === 'pending' && (
-                  <Button onClick={() => handleContinunePay(record, hotel)} className='px-6 py-5 rounded-full'>Continue pay</Button>
+                  <Button
+                     onClick={() => handleContinunePay(record, hotel)}
+                     className="px-6 py-5 rounded-full"
+                  >
+                     Continue pay
+                  </Button>
                )}
-               {data.record.status === 'canceled' ||
-                  (data.record.status === 'completed' && (
-                     <Button variant={'outline'} asChild className='px-6 py-5 rounded-full'>
-                        <Link href={`/reservation/${data.record.id}`}>Details Booking</Link>
-                     </Button>
-                  ))}
+               {data.record.status !== 'pending' && (
+                  <Button variant={'outline'} asChild className="px-6 py-5 rounded-full">
+                     <Link href={`/reservation/${data.record.id}`}>Details Booking</Link>
+                  </Button>
+               )}
             </div>
          </div>
       </Card>
