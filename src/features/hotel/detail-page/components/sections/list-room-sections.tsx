@@ -3,20 +3,21 @@
 import { Button } from '@/components/ui/button';
 import { HotelCardSkeleton } from '@/features/hotel/cards/hotel-card';
 import { cn } from '@/lib/utils';
+import { onOpen } from '@/stores/features/dialog';
 import { setReserveForm, useGetRoomActiveByHotelIdQuery } from '@/stores/features/stay';
 import { IReserveForm, Rate } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { addDays, format, formatDate } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import RoomCard from '../card-room-v2';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const ListRoomSections = ({ id }: { id: string }) => {
    // next api
    const router = useRouter();
-   const searchParams = useSearchParams();
 
    // Redux
    const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal);
@@ -26,7 +27,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
 
    // API Query
    const {
-      data: roomsData,
+      data: hotelData,
       isLoading,
       isFetching,
    } = useGetRoomActiveByHotelIdQuery({
@@ -46,17 +47,17 @@ export const ListRoomSections = ({ id }: { id: string }) => {
 
    // Logic
    const roomGroup = useMemo(() => {
-      if (!roomsData?.hotels[0]?.rates) return [];
+      if (!hotelData?.hotels[0]?.rates) return [];
 
       // Deduplicate based on `room_data_trans.main_name`
-      const uniqueRooms = roomsData.hotels[0].rates.filter(
+      const uniqueRooms = hotelData.hotels[0].rates.filter(
          (rate, index, self) =>
             index ===
             self.findIndex((r) => r.room_data_trans.main_name === rate.room_data_trans.main_name),
       );
 
       return uniqueRooms;
-   }, [roomsData?.hotels]);
+   }, [hotelData?.hotels]);
 
    // Filtered Data
    const filteredData = useMemo(() => {
@@ -98,12 +99,12 @@ export const ListRoomSections = ({ id }: { id: string }) => {
 
          router.push('/checkout');
       } else {
-         router.push(`/auth?redirect=/hotel/${id}?${searchParams.toString()}`);
+         dispatch(onOpen());
       }
    };
 
    return (
-      <div>
+      <div className="my-14">
          {/* Heading Section */}
          <div className="mb-5">
             <h1 className="text-5xl font-semibold mb-3">Our Best Rooms</h1>
@@ -114,43 +115,60 @@ export const ListRoomSections = ({ id }: { id: string }) => {
 
          {/* Filter Section */}
          <div className="flex flex-wrap gap-2 mb-14">
-            {/* "All" Filter */}
-            <div className="relative">
-               <div
-                  className={cn(
-                     'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-3xl px-6 py-4 text-sm md:text-base font-medium',
-                     selectedFilter === 'All' && 'bg-neutral-700 text-neutral-200',
-                  )}
-                  onClick={() => setSelectedFilter('All')}
-               >
-                  All
-               </div>
-               <Button
-                  size="icon"
-                  className="absolute -top-2 -right-2 rounded-full bg-neutral-900 p-0"
-               >
-                  {roomGroup.length}
-               </Button>
-            </div>
-
             {/* Room-Specific Filters */}
-            {(showAll ? roomGroup : roomGroup.slice(0, 10)).map((group) => (
-               <div
-                  className="relative"
-                  key={group.book_hash}
-                  onClick={() => setSelectedFilter(group.room_data_trans.main_name)}
-               >
-                  <div
-                     className={cn(
-                        'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-full px-6 py-4 text-sm md:text-base font-medium',
-                        selectedFilter === group.room_data_trans.main_name &&
-                           'bg-neutral-700 text-neutral-200',
-                     )}
-                  >
-                     {group.room_data_trans.main_name}
+            {isLoading || isFetching ? (
+               <>
+                  {Array(5)
+                     .fill(1)
+                     .map((_, index) => (
+                        <Skeleton
+                           key={index}
+                           className={
+                              'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-full w-44 p-6 text-sm md:text-base font-medium'
+                           }
+                        />
+                     ))}
+               </>
+            ) : (
+               <>
+                  {/* "All" Filter */}
+                  <div className="relative">
+                     <div
+                        className={cn(
+                           'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-3xl px-6 py-4 text-sm md:text-base font-medium',
+                           selectedFilter === 'All' && 'bg-neutral-700 text-neutral-200',
+                        )}
+                        onClick={() => setSelectedFilter('All')}
+                     >
+                        All
+                     </div>
+                     <Button
+                        size="icon"
+                        className="absolute -top-2 -right-2 rounded-full bg-neutral-900 p-0"
+                     >
+                        {roomGroup.length}
+                     </Button>
                   </div>
-               </div>
-            ))}
+
+                  {(showAll ? roomGroup : roomGroup.slice(0, 10)).map((group) => (
+                     <div
+                        className="relative"
+                        key={group.book_hash}
+                        onClick={() => setSelectedFilter(group.room_data_trans.main_name)}
+                     >
+                        <div
+                           className={cn(
+                              'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-full px-6 py-4 text-sm md:text-base font-medium',
+                              selectedFilter === group.room_data_trans.main_name &&
+                                 'bg-neutral-700 text-neutral-200',
+                           )}
+                        >
+                           {group.room_data_trans.main_name}
+                        </div>
+                     </div>
+                  ))}
+               </>
+            )}
 
             {/* Show More Button */}
             {roomGroup.length > 10 && (
@@ -172,12 +190,18 @@ export const ListRoomSections = ({ id }: { id: string }) => {
                ))
             ) : filteredData.length > 0 ? (
                filteredData.map((room, index) => {
-                  const selectedMap = roomsData?.map_hotels.find((item) => item.id === id);
+                  const selectedMap = hotelData?.map_hotels.find((item) => item.id === id);
+                  const roomGroup = hotelData?.map_hotels[0]?.room_groups?.find(
+                     (item) =>
+                        item?.name_struct?.main_name === room?.room_data_trans?.main_room_type,
+                  );
+
                   return (
                      selectedMap && (
                         <RoomCard
                            key={index}
-                           roomData={room}
+                           roomRate={room}
+                           roomGroup={roomGroup}
                            selectedMap={selectedMap}
                            displayType={index % 2 ? 'right' : 'left'}
                            handleReservation={handleReservation}

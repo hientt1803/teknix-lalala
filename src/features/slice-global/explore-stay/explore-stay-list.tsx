@@ -26,7 +26,7 @@ export const ExploreStayList = ({
       dispatch(
          setSearchGlobalLocation({
             name: destination?.city_name,
-            searchType: 'hotel',
+            searchType: 'region',
             hotelId: destination?.id,
             lat: Number(destination?.lat),
             lon: Number(destination?.long),
@@ -35,6 +35,7 @@ export const ExploreStayList = ({
       );
 
       setCookie('locationSearch', destination?.city_name);
+      setCookie('locationImage', destination?.image_url);
       router.push('/hotel');
    };
 

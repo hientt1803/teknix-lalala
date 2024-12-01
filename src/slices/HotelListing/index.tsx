@@ -2,6 +2,7 @@ import Bounded from '@/components/common/containers/bounded';
 import { HotelBanner } from '@/features/hotel/banner';
 import { DestinationCaroucel } from '@/features/hotel/destination-caroucel';
 import { WithoutMapContainer } from '@/features/hotel/without-map/without-map-container';
+import { getHotDestination } from '@/services/global';
 import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 

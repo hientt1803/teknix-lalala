@@ -2,9 +2,8 @@
 
 import { IHotelReservation } from '@/stores/features/stay/type';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
-import { useScrollIntoView } from '@/hooks/use-scroll';
 import { BannerSection } from './sections/banner-section';
 
 // Dynamically import sections
@@ -45,7 +44,7 @@ const MainContent = ({ data, id }: Props) => {
 
    // state
    // const [isTargetInView, setIsTargetInView] = useState(false);
-   const reviewRefSection = useRef<HTMLDivElement>(null);
+   const listRoomRefSection = useRef<HTMLDivElement>(null);
 
    // logic
    // useEffect(() => {
@@ -79,14 +78,14 @@ const MainContent = ({ data, id }: Props) => {
       });
    };
 
-   const scrollIntoReviewSection = () => {
-      scrollToSection(reviewRefSection);
+   const scrollIntoListRoomSection = () => {
+      scrollToSection(listRoomRefSection);
    };
 
    return (
       <div>
          {/* NEW HEADER */}
-         {/* <NewHeaderSection data={data} id={id} scrollIntoReviewSection={scrollIntoReviewSection} /> */}
+         {/* <NewHeaderSection data={data} id={id} scrollIntoListRoomSection={scrollIntoListRoomSection} /> */}
 
          {/* IMAGE GALLERY */}
          {/* <div className="mt-8 mb-5">
@@ -107,17 +106,17 @@ const MainContent = ({ data, id }: Props) => {
                   data={data}
                   id={id}
                   hotelReview={hotelReview}
-                  scrollIntoReviewSection={scrollIntoReviewSection}
+                  scrollIntoListRoomSection={scrollIntoListRoomSection}
                /> */}
                {/* Banner section */}
-               <BannerSection data={data} />
+               <BannerSection data={data} scrollIntoListRoomSection={scrollIntoListRoomSection} />
                {/* FACILITES */}
                <FaciliiesSection facilities={data?.serp_filters || []} />
                {/* HOTEL INFO */}
-               <HotelInfoSection data={data} scrollIntoReviewSection={scrollIntoReviewSection} />
+               <HotelInfoSection data={data} scrollIntoListRoomSection={scrollIntoListRoomSection} />
 
                {/* LIST ROOM SECTION */}
-               <div ref={reviewRefSection}>
+               <div ref={listRoomRefSection}>
                   <ListRoomSections id={id} />
                </div>
 

@@ -31,10 +31,9 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
    } = props;
 
    // next api
-   const searchParams = useSearchParams(); 
+   const searchParams = useSearchParams();
 
    // redux
-   // const globalSearchState = useAppSelector((state) => state.globalSlice.searchGlobal);
 
    // state
    const [hasMore, setHasMore] = useState(true);
@@ -99,14 +98,18 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
                const directLink = `/hotel/${hotel.hotel.hotel_id}?${searchParams.toString()}`;
 
                return (
-                  <HotelCard
-                     key={index}
-                     selectedMap={hotel.selectedMap}
-                     hotel={hotel.hotel}
-                     distance={hotel.distance}
-                     displayType={type}
-                     directLink={directLink}
-                  />
+                  <>
+                     {hotel?.selectedMap && (
+                        <HotelCard
+                           key={index}
+                           selectedMap={hotel.selectedMap}
+                           hotel={hotel.hotel}
+                           distance={hotel.distance}
+                           displayType={type}
+                           directLink={directLink}
+                        />
+                     )}
+                  </>
                );
             })}
          </div>

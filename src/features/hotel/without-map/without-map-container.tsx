@@ -18,7 +18,6 @@ import {
 import { IHotelDataMapHotels, IHotelSearchGeoEngineRequest } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { formatDateToYearMonthDay } from '@/utilities/datetime';
-import { addDays, isAfter, isBefore, isEqual } from 'date-fns';
 import { getDistance } from 'geolib';
 import { LayoutGrid, LayoutList } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -39,10 +38,6 @@ export const WithoutMapContainer = () => {
    const isSearchGlobal = useAppSelector((state) => state.staySlice.isTriggerGlobal);
    const dispatch = useDispatch();
 
-   // state
-   // const [displayType, setDisplayType] = useState<'grid' | 'list'>('list');
-   // const [filterCollapse, setFilterCollapse] = useState(false);
-
    // Api
    const [
       fetchHotelByGeo,
@@ -58,18 +53,9 @@ export const WithoutMapContainer = () => {
       let checkin = new Date(globalSearchState.dateRange.startDate);
       let checkout = new Date(globalSearchState.dateRange.endDate);
 
-      // Kiểm tra nếu checkout nhỏ hơn hoặc bằng checkin
-      if (isBefore(checkout, checkin) || isEqual(checkout, checkin)) {
-         checkout = addDays(checkin, 1); // Tăng checkout thêm 1 ngày
-      }
-
-      console.log(globalSearchState.dateRange);
-      console.log(checkout);
-      console.log(checkout ? checkout : addDays(new Date(), 1));
-
       const searchParams = {
          checkin: formatDateToYearMonthDay(checkin),
-         checkout: formatDateToYearMonthDay(checkout ? checkout : addDays(new Date(), 1)),
+         checkout: formatDateToYearMonthDay(checkout),
          language: globalSearchState?.lang?.cca2 || 'US',
          guests: globalSearchState.people,
          currency: globalSearchState?.currency?.code || 'VND',
@@ -161,8 +147,8 @@ export const WithoutMapContainer = () => {
                <Tabs defaultValue="list" className="w-full overflow-hidden">
                   <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-3 mb-6">
                      <div className="w-full flex flex-col lg:flex-row justify-between items-center">
-                        <div className="flex items-center justify-start gap-3">
-                           <TabsList className="bg-transparent">
+                        <div className="flex items-center justify-start flex-wrap gap-3">
+                           <TabsList className="bg-transparent flex gap-0 items-center">
                               <TabsTrigger
                                  value="list"
                                  className="rounded-none rounded-l-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
@@ -176,10 +162,10 @@ export const WithoutMapContainer = () => {
                                  <LayoutGrid className="w-5 h-5" />
                               </TabsTrigger>
                            </TabsList>
-                           1 - 10 of {hotelsWithMapData?.length || 0} hotels found
+                           <span>1 - 10 of {hotelsWithMapData?.length || 0} hotels found</span>
                         </div>
 
-                        <div className="flex items-center gap-1">
+                        <div className="flex items-center flex-wrap gap-1">
                            <div className="flex gap-2 items-center mr-2 cursor-pointer hover:underline">
                               Clear Filters
                            </div>

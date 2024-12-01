@@ -53,8 +53,7 @@ const HotelCard = (props: HotelCArdType) => {
                   >
                      <Image
                         src={
-                           replaceSize(selectedMap?.images[0] || '') ||
-                           '/assets/images/place-holder-image.svg'
+                           replaceSize(selectedMap?.images[0] || '')
                         }
                         className="w-full h-full object-cover rounded-md"
                         alt={selectedMap?.name}
@@ -78,7 +77,7 @@ const HotelCard = (props: HotelCArdType) => {
                className={cn(
                   'w-full h-full flex flex-col items-start justify-between bg-white z-20 rounded-[1.875rem]',
                   displayType == 'list'
-                     ? 'p-5 lg:pr-2 col-span-5 lg:col-span-3 [height:calc(100%+24px)] lg:[width:calc(100%+24px)] -mt-6 lg:mt-0 ml-0 lg:-ml-6'
+                     ? 'p-5 lg:pr-2 col-span-5 lg:col-span-3 lg:rounded-[1.875rem] [height:calc(100%+24px)] lg:h-full lg:[width:calc(100%+24px)] -mt-6 lg:mt-0 ml-0 lg:-ml-6'
                      : 'col-span-5 relative [height:calc(100%+24px)] -mt-6 p-3 rounded-[1.875rem]',
                )}
             >

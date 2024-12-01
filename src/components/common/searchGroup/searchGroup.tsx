@@ -21,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { InputSearchDateRangeSkeleton } from '../input/dateRange/input-search-date-range-skeleton';
 import { InputSearchGuestSkeleton } from '../input/guest/input-search-guest-skeleton';
 import { InputSearchLocationSkeleton } from '../input/location/inputSearchLocationSkeleton';
+import { useEffect } from 'react';
 
 const InputSearchLocation = dynamic(
    () => import('../input/location/inputSearchLocation').then((mod) => mod.InputSearchLocation),
@@ -71,6 +72,10 @@ export const SearchGroup = ({
    // State
 
    // Logic
+   useEffect(() => {
+      dispatch(setTriggerSearch(false));
+   }, []);
+
    const handleSearchDirection = () => {
       // convert data
       const startDate = formatDateToYearMonthDay(
@@ -106,25 +111,6 @@ export const SearchGroup = ({
       params.append('longtitude', String(globalState?.location?.lon) || '105.7875821');
       params.append('region', String(globalState?.location.name) || '');
 
-      // const nightCount = daysBetweenDateRange(
-      //    convertStringToDate(globalState.dateRange.startDate),
-      //    convertStringToDate(globalState.dateRange.endDate),
-      // );
-
-      // dispatch(
-      //    setMemorizeLocation({
-      //       location: globalState.location.name,
-      //    }),
-      // );
-
-      // dispatch(
-      //    setMemorizeStayInformation({
-      //       adults: adults,
-      //       childrens: childrens,
-      //       nightCount: nightCount,
-      //    }),
-      // );
-
       if (isFromHotelDetail) {
          dispatch(setTriggerSearch(true));
       } else {
@@ -137,7 +123,6 @@ export const SearchGroup = ({
 
                const searchUrl = new URLSearchParams(window.location.search);
                if (searchUrl.toString().includes('msg=notfound')) {
-                  // router.push(`/hotel?${params.toString()}`);
                   window.history.pushState({}, '', `/hotel?${params.toString()}`);
                }
 

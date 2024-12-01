@@ -152,7 +152,7 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
             </ScrollArea>
          </ModalCustom>
          <ImageViewer
-            images={images.map((image) => replaceSize(image))}
+            images={images.map((image) => replaceSize(image || 'default') || '')}
             visible={visible}
             onClose={closeImageViewer}
             indexImg={indexImg}
