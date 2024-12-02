@@ -10,18 +10,18 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
-import { setTriggerSearch } from '@/stores/features/stay';
+import { setTriggerRoomSearch, setTriggerSearch } from '@/stores/features/stay';
 import { useAppSelector } from '@/stores/hook';
 import { convertStringToDate, formatDateToYearMonthDay, formatDateUTC } from '@/utilities/datetime';
 import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { InputSearchDateRangeSkeleton } from '../input/dateRange/input-search-date-range-skeleton';
 import { InputSearchGuestSkeleton } from '../input/guest/input-search-guest-skeleton';
 import { InputSearchLocationSkeleton } from '../input/location/inputSearchLocationSkeleton';
-import { useEffect } from 'react';
 
 const InputSearchLocation = dynamic(
    () => import('../input/location/inputSearchLocation').then((mod) => mod.InputSearchLocation),
@@ -67,6 +67,7 @@ export const SearchGroup = ({
    // Redux
    const globalState = useAppSelector((state) => state.globalSlice.searchGlobal);
    const hotelSearchLoadingState = useAppSelector((state) => state.staySlice.isTriggerGlobal);
+   const roomSearchLoading = useAppSelector((state) => state.staySlice.isTriggerRoomSearch);
    const dispatch = useDispatch();
 
    // State
@@ -74,6 +75,7 @@ export const SearchGroup = ({
    // Logic
    useEffect(() => {
       dispatch(setTriggerSearch(false));
+      dispatch(setTriggerRoomSearch(false));
    }, []);
 
    const handleSearchDirection = () => {
@@ -112,7 +114,7 @@ export const SearchGroup = ({
       params.append('region', String(globalState?.location.name) || '');
 
       if (isFromHotelDetail) {
-         dispatch(setTriggerSearch(true));
+         dispatch(setTriggerRoomSearch(true));
       } else {
          if (globalState.location.searchType === 'hotel') {
             params.append('id', globalState.location.hotelId!);
@@ -191,7 +193,7 @@ export const SearchGroup = ({
                   onClick={() => handleSearchDirection()}
                   disabled={hotelSearchLoadingState && pathname == '/'}
                >
-                  {hotelSearchLoadingState && pathname == '/' ? (
+                  {hotelSearchLoadingState || roomSearchLoading ? (
                      <span className="h-4 w-4 animate-spin rounded-full border-4 border-gray-200 border-t-neutral-800" />
                   ) : (
                      <>

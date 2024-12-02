@@ -24,10 +24,10 @@ export const HotelBanner = async () => {
                   <div className="text-center font-bold text-neutral-100 text-5xl mt-24">
                      Journey with Lalala - Begin Your Story!
                   </div>
-                  <h5 className="text-center font-medium text-neutral-300 text-2xl -mt-5">
+                  <h5 className="text-center font-medium text-neutral-200 text-2xl -mt-5">
                      {locationSearch ? (
                         <span>
-                           Discover top-rated hotels in <strong>{locationSearch}</strong>, offering
+                           Discover top-rated hotels in <strong>{`"${locationSearch}"`}</strong>, offering
                            comfort, great locations, and exceptional service.
                         </span>
                      ) : (

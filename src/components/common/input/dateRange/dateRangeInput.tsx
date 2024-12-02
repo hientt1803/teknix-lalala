@@ -61,20 +61,19 @@ export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivE
          to: initialTo,
       });
    }, [dispatch, searchGlobal.endDate, searchGlobal?.startDate]);
+
+   const handleCheckedDateRange = () => {
+      dispatch(
+         setSearchGlobalDateRange({
+            startDate: format(date?.from || new Date(), 'yyyy-MM-dd'),
+            endDate: format(date?.to || addDays(new Date(), 1), 'yyyy-MM-dd'),
+         }),
+      );
+   };
+
    return (
       <div className={cn('grid gap-2', className)}>
-         <Popover
-            onOpenChange={(open) => {
-               if (open == false) {
-                  dispatch(
-                     setSearchGlobalDateRange({
-                        startDate: format(date?.from || new Date(), 'yyyy-MM-dd'),
-                        endDate: format(date?.to || new Date(), 'yyyy-MM-dd'),
-                     }),
-                  );
-               }
-            }}
-         >
+         <Popover>
             <PopoverTrigger asChild>
                <Button
                   id="date"
@@ -100,6 +99,10 @@ export function DatePickerWithRange({ className }: React.HTMLAttributes<HTMLDivE
             </PopoverTrigger>
             <PopoverContent
                onOpenAutoFocus={(e) => e.preventDefault()}
+               onCloseAutoFocus={(e) => {
+                  e.preventDefault();
+                  handleCheckedDateRange();
+               }}
                className="w-auto p-0"
                align="start"
             >

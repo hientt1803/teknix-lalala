@@ -1,19 +1,23 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { HotelCardSkeleton } from '@/features/hotel/cards/hotel-card';
 import { cn } from '@/lib/utils';
 import { onOpen } from '@/stores/features/dialog';
-import { setReserveForm, useGetRoomActiveByHotelIdQuery } from '@/stores/features/stay';
+import {
+   setReserveForm,
+   setTriggerRoomSearch,
+   useLazyGetRoomActiveByHotelIdQuery,
+} from '@/stores/features/stay';
 import { IReserveForm, Rate } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { addDays, format, formatDate } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import RoomCard from '../card-room-v2';
-import { Skeleton } from '@/components/ui/skeleton';
 
 export const ListRoomSections = ({ id }: { id: string }) => {
    // next api
@@ -22,30 +26,41 @@ export const ListRoomSections = ({ id }: { id: string }) => {
    // Redux
    const searchGlobal = useAppSelector((state) => state.globalSlice.searchGlobal);
    const user = useAppSelector((state) => state.userSlice.access_token);
-   const hotel = useAppSelector((state) => state.staySlice.reserveForm);
+   const hotel = useAppSelector((state) => state.staySlice);
    const dispatch = useDispatch();
 
    // API Query
-   const {
-      data: hotelData,
-      isLoading,
-      isFetching,
-   } = useGetRoomActiveByHotelIdQuery({
-      checkin: searchGlobal?.dateRange?.startDate || formatDate(new Date(), 'yyyy-MM-dd'),
-      checkout:
-         searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 1), 'yyyy-MM-dd'),
-      currency: searchGlobal?.currency?.code || 'USD',
-      language: searchGlobal?.lang?.cca2 || 'en',
-      guests: searchGlobal.people || [{ adults: 1, children: [] }],
-      id,
-      residency: searchGlobal?.lang?.cca2 || 'en',
-   });
+   const [fetchRoom, { data: hotelData, isLoading, isFetching }] =
+      useLazyGetRoomActiveByHotelIdQuery();
 
    // Local States
    const [showAll, setShowAll] = useState(false);
    const [selectedFilter, setSelectedFilter] = useState('All');
 
    // Logic
+   useEffect(() => {
+      dispatch(setTriggerRoomSearch(true));
+   }, []);
+
+   console.log(hotel.isTriggerRoomSearch);
+
+   useEffect(() => {
+      if (hotel.isTriggerRoomSearch) {
+         const params = {
+            checkin: searchGlobal?.dateRange?.startDate || formatDate(new Date(), 'yyyy-MM-dd'),
+            checkout:
+               searchGlobal?.dateRange?.endDate || formatDate(addDays(new Date(), 1), 'yyyy-MM-dd'),
+            currency: searchGlobal?.currency?.code || 'USD',
+            language: searchGlobal?.lang?.cca2 || 'en',
+            guests: searchGlobal.people || [{ adults: 1, children: [] }],
+            id,
+            residency: searchGlobal?.lang?.cca2 || 'en',
+         };
+
+         fetchRoom(params);
+      }
+   }, [hotel.isTriggerRoomSearch]);
+
    const roomGroup = useMemo(() => {
       if (!hotelData?.hotels[0]?.rates) return [];
 
@@ -107,7 +122,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
       <div className="my-14">
          {/* Heading Section */}
          <div className="mb-5">
-            <h1 className="text-5xl font-semibold mb-3">Our Best Rooms</h1>
+            <h1 className="text-5xl font-semibold mb-3 dark:text-neutral-200">Our Best Rooms</h1>
             <p className="text-xl font-medium text-neutral-400">
                Book online today and look forward to a relaxing stay with us
             </p>
@@ -135,8 +150,9 @@ export const ListRoomSections = ({ id }: { id: string }) => {
                   <div className="relative">
                      <div
                         className={cn(
-                           'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-3xl px-6 py-4 text-sm md:text-base font-medium',
-                           selectedFilter === 'All' && 'bg-neutral-700 text-neutral-200',
+                           'border border-neutral-200 dark:border-neutral-600  dark:text-neutral-300 cursor-pointer hover:shadow-xl rounded-3xl px-6 py-4 text-sm md:text-base font-medium',
+                           selectedFilter === 'All' &&
+                              'bg-neutral-700 dark:bg-neutral-800 text-neutral-200 dark:text-neutral-100',
                         )}
                         onClick={() => setSelectedFilter('All')}
                      >
@@ -144,7 +160,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
                      </div>
                      <Button
                         size="icon"
-                        className="absolute -top-2 -right-2 rounded-full bg-neutral-900 p-0"
+                        className="absolute -top-2 -right-2 rounded-full dark:border dark:border-neutral-500 bg-neutral-900 dark:bg-neutral-700 dark:text-neutral-200 p-0"
                      >
                         {roomGroup.length}
                      </Button>
@@ -158,9 +174,9 @@ export const ListRoomSections = ({ id }: { id: string }) => {
                      >
                         <div
                            className={cn(
-                              'border border-neutral-200 cursor-pointer hover:shadow-xl rounded-full px-6 py-4 text-sm md:text-base font-medium',
+                              'border border-neutral-200 dark:border-neutral-600 dark:text-neutral-300 cursor-pointer hover:shadow-xl rounded-full px-6 py-4 text-sm md:text-base font-medium',
                               selectedFilter === group.room_data_trans.main_name &&
-                                 'bg-neutral-700 text-neutral-200',
+                                 'bg-neutral-700 dark:bg-neutral-800 text-neutral-200 dark:text-neutral-100',
                            )}
                         >
                            {group.room_data_trans.main_name}
@@ -203,6 +219,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
                            roomRate={room}
                            roomGroup={roomGroup}
                            selectedMap={selectedMap}
+                           searchGlobal={searchGlobal}
                            displayType={index % 2 ? 'right' : 'left'}
                            handleReservation={handleReservation}
                         />

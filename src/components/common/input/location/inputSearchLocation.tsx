@@ -283,7 +283,7 @@ export const InputSearchLocation = ({ title = 'Location' }: { title?: string }) 
                            inputRef.current?.focus();
                         }}
                      >
-                        <XIcon className="text-neutral-800 cursor-pointer w-5 h-5" />
+                        <XIcon className="text-neutral-800 dark:text-neutral-200 cursor-pointer w-5 h-5" />
                      </Button>
                   )}
                </div>

@@ -11,49 +11,11 @@ import {
 import { API_URL } from '@/configs';
 import { HotDestination } from '@/services/global';
 import { setSearchGlobalLocation } from '@/stores/features/global/global-slice';
-import { setTriggerSearch } from '@/stores/features/stay';
+import { setTriggerSearch } from '@/stores/features/stay/stay-slice';
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-
-export const destinationList = [
-   {
-      name: 'Statue of Liberty',
-      hotels: 356,
-      image: 'https://images.unsplash.com/photo-1731354233513-60e9edaddc5d?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8',
-   },
-   {
-      name: 'Taj Mahal',
-      hotels: 256,
-      image: 'https://images.unsplash.com/photo-1721332150382-d4114ee27eff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D',
-   },
-   {
-      name: 'Opera House',
-      hotels: 845,
-      image: 'https://images.unsplash.com/photo-1732279446373-18714789f2ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxNnx8fGVufDB8fHx8fA%3D%3D',
-   },
-   {
-      name: 'Colosseum',
-      hotels: 243,
-      image: 'https://images.unsplash.com/photo-1732221469856-c8be04dda990?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxN3x8fGVufDB8fHx8fA%3D%3D',
-   },
-   {
-      name: 'Grand Canyon',
-      hotels: 463,
-      image: 'https://images.unsplash.com/photo-1732631592378-f5c20fcc775f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyMnx8fGVufDB8fHx8fA%3D%3D',
-   },
-   {
-      name: 'Eiffel Tower',
-      hotels: 834,
-      image: 'https://images.unsplash.com/photo-1732639535051-63870f800ab7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyN3x8fGVufDB8fHx8fA%3D%3D',
-   },
-   {
-      name: 'Great Wall',
-      hotels: 248,
-      image: 'https://images.unsplash.com/photo-1732601471603-404af59bc450?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D',
-   },
-];
 
 export const DestinationCaroucel = () => {
    // next api
@@ -106,7 +68,7 @@ export const DestinationCaroucel = () => {
    };
 
    return (
-      <div>
+      <div className='hidden md:block'>
          <Carousel
             className="w-full my-20"
             opts={{

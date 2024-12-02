@@ -151,27 +151,31 @@ export const WithoutMapContainer = () => {
                            <TabsList className="bg-transparent flex gap-0 items-center">
                               <TabsTrigger
                                  value="list"
-                                 className="rounded-none rounded-l-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
+                                 className="rounded-none rounded-l-lg py-2 px-1 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 dark:text-neutral-600 data-[state=active]:text-black dark:data-[state=active]:text-neutral-200"
                               >
                                  <LayoutList className="w-5 h-5" />
                               </TabsTrigger>
                               <TabsTrigger
                                  value="grid"
-                                 className=" rounded-none rounded-r-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
+                                 className=" rounded-none rounded-r-lg py-2 px-1 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 dark:text-neutral-600 data-[state=active]:text-black dark:data-[state=active]:text-neutral-200"
                               >
                                  <LayoutGrid className="w-5 h-5" />
                               </TabsTrigger>
                            </TabsList>
-                           <span>1 - 10 of {hotelsWithMapData?.length || 0} hotels found</span>
+                           <span className="dark:text-neutral-300">
+                              1 - 10 of {hotelsWithMapData?.length || 0} hotels found
+                           </span>
                         </div>
 
                         <div className="flex items-center flex-wrap gap-1">
-                           <div className="flex gap-2 items-center mr-2 cursor-pointer hover:underline">
+                           <div className="flex gap-2 items-center mr-2 cursor-pointer hover:underline dark:text-neutral-200">
                               Clear Filters
                            </div>
                            <Select>
-                              <div className="flex items-center border border-neutral-200 rounded-md px-1">
-                                 <div className="text-sm text-neutral-500">Show</div>
+                              <div className="flex items-center border border-neutral-200 dark:border-neutral-600 rounded-md px-1">
+                                 <div className="text-sm text-neutral-500 dark:text-neutral-300">
+                                    Show
+                                 </div>
                                  <SelectTrigger className="border-none outline-none shadow-none w-fit">
                                     <SelectValue placeholder="10" defaultValue={'10'} />
                                  </SelectTrigger>
@@ -183,8 +187,10 @@ export const WithoutMapContainer = () => {
                               </SelectContent>
                            </Select>
                            <Select>
-                              <div className="flex items-center border border-neutral-200 rounded-md px-1">
-                                 <div className="text-sm text-neutral-500">Sort by:</div>
+                              <div className="flex items-center border border-neutral-200 dark:border-neutral-600 rounded-md px-1">
+                                 <div className="text-sm text-neutral-500 dark:text-neutral-300">
+                                    Sort by:
+                                 </div>
                                  <SelectTrigger className="border-none outline-none shadow-none w-fit">
                                     <SelectValue placeholder="Name" defaultValue={'name'} />
                                  </SelectTrigger>
@@ -199,7 +205,7 @@ export const WithoutMapContainer = () => {
                      </div>
                   </div>
 
-                  <Separator className="w-full bg-neutral-200 mb-4" />
+                  <Separator className="w-full bg-neutral-200 dark:bg-neutral-400 mb-4" />
 
                   <TabsContent value="list" className="w-full">
                      <div className="grid grid-cols-12 gap-6 w-full">

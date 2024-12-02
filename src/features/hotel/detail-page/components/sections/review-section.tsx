@@ -13,7 +13,7 @@ import { useRef, useState } from 'react';
 const ReviewSection = ({ id }: { id: string }) => {
    const [allReview, setAllReview] = useState(false);
    const inputRef = useRef<HTMLInputElement>(null);
-   const { data, isLoading } = useGetReviewByStayIdQuery({
+   const { data } = useGetReviewByStayIdQuery({
       id: id,
    });
 

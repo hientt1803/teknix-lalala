@@ -5,7 +5,12 @@ import { IHotelDataHotels, IHotelDataMapHotels } from '@/stores/features/stay/ty
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import HotelCard, { HotelCardSkeleton } from '../cards/hotel-card';
+import dynamic from 'next/dynamic';
+
+const HotelCard = dynamic(() => import('../cards/hotel-card').then((mod) => mod.default));
+const HotelCardSkeleton = dynamic(() =>
+   import('../cards/hotel-card').then((mod) => mod.HotelCardSkeleton),
+);
 
 export type ListHotelWioutMapType = {
    type: 'list' | 'grid';
@@ -32,8 +37,6 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
 
    // next api
    const searchParams = useSearchParams();
-
-   // redux
 
    // state
    const [hasMore, setHasMore] = useState(true);
@@ -87,6 +90,7 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
          className="w-full h-full"
       >
          <div
+            key={'infinity-scroll-key'}
             className={cn(
                'w-full grid',
                type == 'list'

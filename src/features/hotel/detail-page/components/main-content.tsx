@@ -45,6 +45,7 @@ const MainContent = ({ data, id }: Props) => {
    // state
    // const [isTargetInView, setIsTargetInView] = useState(false);
    const listRoomRefSection = useRef<HTMLDivElement>(null);
+   const locationRefSection = useRef<HTMLDivElement>(null);
 
    // logic
    // useEffect(() => {
@@ -81,6 +82,9 @@ const MainContent = ({ data, id }: Props) => {
    const scrollIntoListRoomSection = () => {
       scrollToSection(listRoomRefSection);
    };
+   const scrollIntoLocationSection = () => {
+      scrollToSection(locationRefSection);
+   };
 
    return (
       <div>
@@ -109,11 +113,18 @@ const MainContent = ({ data, id }: Props) => {
                   scrollIntoListRoomSection={scrollIntoListRoomSection}
                /> */}
                {/* Banner section */}
-               <BannerSection data={data} scrollIntoListRoomSection={scrollIntoListRoomSection} />
+               <BannerSection
+                  data={data}
+                  scrollIntoListRoomSection={scrollIntoListRoomSection}
+                  scrollIntoLocationSection={scrollIntoLocationSection}
+               />
                {/* FACILITES */}
                <FaciliiesSection facilities={data?.serp_filters || []} />
                {/* HOTEL INFO */}
-               <HotelInfoSection data={data} scrollIntoListRoomSection={scrollIntoListRoomSection} />
+               <HotelInfoSection
+                  data={data}
+                  scrollIntoListRoomSection={scrollIntoListRoomSection}
+               />
 
                {/* LIST ROOM SECTION */}
                <div ref={listRoomRefSection}>
@@ -135,7 +146,7 @@ const MainContent = ({ data, id }: Props) => {
                {/* HOST INFORMATION */}
                {/* <HostInfoSection /> */}
                {/* LOCATION */}
-               {data && <LocationSection hotelData={data} />}
+               <div ref={locationRefSection}>{data && <LocationSection hotelData={data} />}</div>
                {/* AMENITIES */}
                <AmenitiesSection amenites={data?.amenity_groups} />
                {/* THING TO KNOW */}
@@ -156,7 +167,7 @@ const MainContent = ({ data, id }: Props) => {
                </div>
             </div> */}
             {/* RESERVE MOBILE */}
-            {/* {!isTargetInView && (
+            {/* {!isTargetInView && ( 
                <Button
                   onClick={() => {
                      scrollIntoView();
