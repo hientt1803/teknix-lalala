@@ -51,8 +51,14 @@ interface LeafletMapDataProps {
    data?: PlaceValues[];
    center?: LatLngExpression;
    wrapperClassname?: string;
+   hotelPosition?: PlaceValues;
 }
-const LeafletMapInner = ({ data, center, wrapperClassname }: LeafletMapDataProps) => {
+const LeafletMapInner = ({
+   data,
+   center,
+   wrapperClassname,
+   hotelPosition,
+}: LeafletMapDataProps) => {
    const { map } = useMapContext();
    const {
       width: viewportWidth,
@@ -132,6 +138,17 @@ const LeafletMapInner = ({ data, center, wrapperClassname }: LeafletMapDataProps
                               ))}
                            </LeafletCluster>
                         ))}
+
+                        {hotelPosition && (
+                           <LeafletCluster
+                              key={Category.HOTEL}
+                              icon={MarkerCategories[Category.HOTEL].icon}
+                              color={MarkerCategories[Category.HOTEL].color}
+                              chunkedLoading
+                           >
+                              <CustomMarker place={hotelPosition} />
+                           </LeafletCluster>
+                        )}
                      </>
                   ) : (
                      // we have to spawn at least one element to keep it happy
@@ -145,9 +162,14 @@ const LeafletMapInner = ({ data, center, wrapperClassname }: LeafletMapDataProps
    );
 };
 
-const Map = ({ data, center, wrapperClassname }: LeafletMapDataProps) => (
+const Map = ({ data, center, wrapperClassname, hotelPosition }: LeafletMapDataProps) => (
    <LeafleftMapContextProvider>
-      <LeafletMapInner data={data} center={center} wrapperClassname={wrapperClassname} />
+      <LeafletMapInner
+         data={data}
+         center={center}
+         wrapperClassname={wrapperClassname}
+         hotelPosition={hotelPosition}
+      />
    </LeafleftMapContextProvider>
 );
 

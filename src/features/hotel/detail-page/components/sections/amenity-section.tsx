@@ -12,7 +12,7 @@ const AmenitiesSecion = ({amenites}: Props) => {
     const [showAll, setShowAll] = useState(false); 
 
     return (
-        <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8">
+        <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8 my-10">
             <div>
                 <h2 className="text-2xl font-semibold">Amenities </h2>
                 <span className="block mt-2 text-neutral-500 dark:text-neutral-300">

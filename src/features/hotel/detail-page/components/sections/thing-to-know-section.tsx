@@ -17,7 +17,7 @@ const ThingToKnowSection = ({
    check_out_time,
 }: Props) => {
    return (
-      <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8">
+      <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8 my-10">
          <h2 className="text-2xl font-semibold">Things to know</h2>
          <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
 

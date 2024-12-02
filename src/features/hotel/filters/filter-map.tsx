@@ -4,9 +4,8 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { PlacesType } from '@/lib/Places';
 import { cn } from '@/lib/utils';
 import { ISearchGlobal } from '@/stores/features/global/type';
-import { MapPin, XIcon } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 
 const Map = dynamic(() => import('@/components/common/map/index').then((mod) => mod.default));
 
@@ -27,7 +26,7 @@ export const FilterMap = ({
             {showMapPlaceHolder ? (
                <div
                   className={cn(
-                     'bg-cover bg-center flex flex-col justify-center rounded-md items-center gap-2 py-10 px-5 w-full',
+                     'bg-cover bg-center flex flex-col justify-center rounded-xl items-center gap-2 py-10 px-5 w-full',
                   )}
                   style={{
                      background: `url('/assets/images/maps/map-holder.jpg') center center`,
@@ -41,7 +40,7 @@ export const FilterMap = ({
                      className="object-contain"
                   /> */}
                   {/* <MapPin className="w-6 h-6 text-neutral-700" /> */}
-                  <Button className={cn('bg-neutral-800', buttonClassName)}>
+                  <Button className={cn('bg-neutral-800 dark:bg-neutral-600 dark:text-neutral-200', buttonClassName)}>
                      <span>Show on map</span>
                   </Button>
                </div>

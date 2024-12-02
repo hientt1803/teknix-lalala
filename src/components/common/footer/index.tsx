@@ -20,7 +20,7 @@ const Footer = async () => {
       <div className="mt-8">
          <div className="flex w-full flex-nowrap">
             {dataImnage.map((img, index) => (
-               <Image key={index} src={img} className="aspect-square w-full" />
+               <Image key={index} src={img} className="aspect-square w-full" alt="" />
             ))}
          </div>
          <div className="bg-black text-neutral-100">

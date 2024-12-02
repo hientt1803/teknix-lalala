@@ -11,7 +11,7 @@ const popins = Poppins({
    weight: ['400', '500', '600', '700'],
 });
 
-const meta = {
+export const meta = {
    title: 'LaLaLa - Premium Hotels Booking Platform',
    description: 'Affordable Travel Bookings | Lalala - Your Trusted Online Travel Agency  ',
    image: `/lalala.svg`,
@@ -118,7 +118,7 @@ export const metadata: Metadata = {
    category: 'Booking platform',
 };
 
-const viewport: Viewport = {
+export const viewport: Viewport = {
    width: 'device-width',
    initialScale: 1,
    maximumScale: 1,

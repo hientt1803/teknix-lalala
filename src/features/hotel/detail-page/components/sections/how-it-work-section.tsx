@@ -33,7 +33,11 @@ const HowItWorkSection = () => {
    return (
       <div className="py-5 lg:py-16">
          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-10 items-center">
-            <Image src="https://images.pexels.com/photos/29352713/pexels-photo-29352713/free-photo-of-scenic-open-road-under-clear-blue-sky.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load" />
+            <Image
+               src="https://images.pexels.com/photos/29352713/pexels-photo-29352713/free-photo-of-scenic-open-road-under-clear-blue-sky.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load"
+               alt=""
+               className='rounded-2xl'
+            />
             <div className="flex flex-col gap-16">
                <div className="">
                   <Heading>How It Work ?</Heading>

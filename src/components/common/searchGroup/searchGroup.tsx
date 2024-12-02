@@ -10,13 +10,14 @@ import {
 } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
-import { setTriggerSearch } from '@/stores/features/stay';
+import { setTriggerRoomSearch, setTriggerSearch } from '@/stores/features/stay';
 import { useAppSelector } from '@/stores/hook';
 import { convertStringToDate, formatDateToYearMonthDay, formatDateUTC } from '@/utilities/datetime';
 import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { InputSearchDateRangeSkeleton } from '../input/dateRange/input-search-date-range-skeleton';
 import { InputSearchGuestSkeleton } from '../input/guest/input-search-guest-skeleton';
@@ -66,11 +67,17 @@ export const SearchGroup = ({
    // Redux
    const globalState = useAppSelector((state) => state.globalSlice.searchGlobal);
    const hotelSearchLoadingState = useAppSelector((state) => state.staySlice.isTriggerGlobal);
+   const roomSearchLoading = useAppSelector((state) => state.staySlice.isTriggerRoomSearch);
    const dispatch = useDispatch();
 
    // State
 
    // Logic
+   useEffect(() => {
+      dispatch(setTriggerSearch(false));
+      dispatch(setTriggerRoomSearch(false));
+   }, []);
+
    const handleSearchDirection = () => {
       // convert data
       const startDate = formatDateToYearMonthDay(
@@ -106,27 +113,8 @@ export const SearchGroup = ({
       params.append('longtitude', String(globalState?.location?.lon) || '105.7875821');
       params.append('region', String(globalState?.location.name) || '');
 
-      // const nightCount = daysBetweenDateRange(
-      //    convertStringToDate(globalState.dateRange.startDate),
-      //    convertStringToDate(globalState.dateRange.endDate),
-      // );
-
-      // dispatch(
-      //    setMemorizeLocation({
-      //       location: globalState.location.name,
-      //    }),
-      // );
-
-      // dispatch(
-      //    setMemorizeStayInformation({
-      //       adults: adults,
-      //       childrens: childrens,
-      //       nightCount: nightCount,
-      //    }),
-      // );
-
       if (isFromHotelDetail) {
-         dispatch(setTriggerSearch(true));
+         dispatch(setTriggerRoomSearch(true));
       } else {
          if (globalState.location.searchType === 'hotel') {
             params.append('id', globalState.location.hotelId!);
@@ -137,7 +125,6 @@ export const SearchGroup = ({
 
                const searchUrl = new URLSearchParams(window.location.search);
                if (searchUrl.toString().includes('msg=notfound')) {
-                  // router.push(`/hotel?${params.toString()}`);
                   window.history.pushState({}, '', `/hotel?${params.toString()}`);
                }
 
@@ -206,7 +193,7 @@ export const SearchGroup = ({
                   onClick={() => handleSearchDirection()}
                   disabled={hotelSearchLoadingState && pathname == '/'}
                >
-                  {hotelSearchLoadingState && pathname == '/' ? (
+                  {hotelSearchLoadingState || roomSearchLoading ? (
                      <span className="h-4 w-4 animate-spin rounded-full border-4 border-gray-200 border-t-neutral-800" />
                   ) : (
                      <>

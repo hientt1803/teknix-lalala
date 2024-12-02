@@ -8,7 +8,7 @@ const GroupPeopleInput = dynamic(
          <div className="w-full flex justify-start items-center gap-1">
             <User className="text-neutral-400 w-5 h-5" />
             <div className="text-neutral-600 text-sm font-medium">
-               2 adults · 0 children · 1 room
+               1 adults · 0 children · 1 room
             </div>
          </div>
       ),

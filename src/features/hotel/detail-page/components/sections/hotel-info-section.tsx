@@ -8,7 +8,7 @@ import React from 'react';
 
 type Props = {
    data?: IHotelReservation;
-   scrollIntoReviewSection: () => void;
+   scrollIntoListRoomSection: () => void;
 };
 const payments = [
    {
@@ -29,9 +29,9 @@ const payments = [
    },
 ];
 
-const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
+const HotelInfoSection = ({ data, scrollIntoListRoomSection }: Props) => {
    const plugin = React.useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
-   const { name, images, description_struct } = data!!;
+
    return (
       <div className="py-5 lg:py-16">
          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-16">
@@ -40,7 +40,7 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
                   color="white"
                   className="bg-yellow-300 py-4 px-5 text-base font-semibold w-fit"
                >
-                  Welcome to {name}
+                  Welcome to {data?.name}
                </Badge>
                <h1 className="font-semibold text-6xl leading-tight">A New Vision of Luxury</h1>
                {/* <p className="text-neutral-700 dark:text-neutral-300  lg:text-lg leading-normal">
@@ -51,7 +51,7 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
                   hospitality since its inception in 1835.
                </p> */}
                <p className="text-neutral-700 dark:text-neutral-300  lg:text-lg leading-normal">
-                  {description_struct?.slice(0, 1).map((de) => (
+                  {data?.description_struct?.slice(0, 1).map((de) => (
                      <div key={de.title}>
                         <div className="flex">
                            <h3 className="text-black dark:text-white font-semibold">{de.title}</h3>
@@ -91,7 +91,7 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
                      <p className="text-2xl font-semibold">1-800-222-8888</p>
                   </div>
                   <Badge
-                     onClick={scrollIntoReviewSection}
+                     onClick={scrollIntoListRoomSection}
                      color="gray"
                      className="py-4 px-6 text-base cursor-pointer hover:bg-neutral-100"
                   >
@@ -143,14 +143,20 @@ const HotelInfoSection = ({ data, scrollIntoReviewSection }: Props) => {
             </div>
             <div className="col-span-6 xl:col-span-5">
                <div className="relative w-full h-fit">
-                  <Image className="aspect-[3.5/5] rounded-3xl" src={replaceSize(images[0])} />
+                  <Image
+                     className="aspect-[3.5/5] rounded-3xl"
+                     src={replaceSize(data?.images[0])}
+                     alt=""
+                  />
                   <Image
                      className="aspect-square w-40 lg:w-60 rounded-3xl absolute right-5 top-5 lg:-right-10 lg:top-10"
-                     src={replaceSize(images[1])}
+                     src={replaceSize(data?.images[1])}
+                     alt=""
                   />
                   <Image
                      className="aspect-square w-40 lg:w-60 rounded-3xl absolute left-5 bottom-5 lg:-left-10 lg:-bottom-10"
-                     src={replaceSize(images[2])}
+                     src={replaceSize(data?.images[2])}
+                     alt=""
                   />
                </div>
             </div>

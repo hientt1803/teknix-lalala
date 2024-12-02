@@ -1,4 +1,5 @@
 import Bounded from '@/components/common/containers/bounded';
+import Image from '@/components/common/images/image';
 import Heading from '@/components/common/typography/heading';
 import Paragraph from '@/components/common/typography/paragraph';
 import { Content } from '@prismicio/client';
@@ -33,7 +34,7 @@ const HowItWork = ({ slice }: HowItWorkProps): JSX.Element => {
                      </div>
                   </div>
                   <div className="relative grid md:grid-cols-3 gap-20 mt-10">
-                     <img
+                     <Image
                         src="/dash.svg"
                         alt="dash"
                         className="hidden md:block absolute inset-x-0 top-10"
