@@ -54,7 +54,7 @@ const GoodToKnow = () => {
                      <path strokeLinecap="round" d="m16 24l6 6l12-12"></path>
                   </g>
                </svg>
-               No payment is required to secure this booking. You'll pay during your stay.
+               No payment is required to secure this booking. You&apos;ll pay during your stay.
             </li>
          </ul>
       </div>

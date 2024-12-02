@@ -590,7 +590,7 @@ const CheckoutFeatures = () => {
                      <div className="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 p-5 flex flex-col h-full justify-between">
                         <h4 className="text-lg font-semibold">Your payment schedule</h4>
                         <span className="text-sm text-green-600 mt-3">
-                           No payment today. You'll pay when you stay.
+                           No payment today. You&apos;ll pay when you stay.
                         </span>
                      </div>
                      <div className="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 p-5 flex flex-col h-full justify-between">

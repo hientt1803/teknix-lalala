@@ -151,13 +151,13 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
                </div>
             </ScrollArea>
          </ModalCustom>
-         <ImageViewer
-            images={images.map((image) => replaceSize(image))}
+         {/* <ImageViewer
+            images={(images.map((image) => replaceSize(image)))}
             visible={visible}
             onClose={closeImageViewer}
             indexImg={indexImg}
             onIndexChange={setIndexImg}
-         />
+         /> */}
       </>
    );
 };

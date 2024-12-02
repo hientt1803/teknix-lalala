@@ -562,7 +562,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                               <FormLabel className="space-y-1 leading-none">
                                  <span>Yes, I want free paperless confirmation (recommended)</span>
                                  <FormDescription className="font-normal">
-                                    You can manage your mobile notifications in the We'll text you a
+                                    You can manage your mobile notifications in the We&apos;ll text you a
                                     link to download our app
                                  </FormDescription>
                               </FormLabel>
@@ -592,7 +592,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                     <RadioGroupItem value="main" />
                                  </FormControl>
                                  <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
-                                    I'm the main guest
+                                    I&apos;m the main guest
                                  </FormLabel>
                               </FormItem>
                               <FormItem className="flex items-center space-x-3 space-y-0">
@@ -600,7 +600,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                     <RadioGroupItem value="someone" />
                                  </FormControl>
                                  <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
-                                    I'm booking for someone esle
+                                    I&apos;m booking for someone esle
                                  </FormLabel>
                               </FormItem>
                            </RadioGroup>
