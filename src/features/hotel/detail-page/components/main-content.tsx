@@ -2,9 +2,8 @@
 
 import { IHotelReservation } from '@/stores/features/stay/type';
 import dynamic from 'next/dynamic';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
-import { useScrollIntoView } from '@/hooks/use-scroll';
 import { BannerSection } from './sections/banner-section';
 
 // Dynamically import sections
@@ -45,7 +44,8 @@ const MainContent = ({ data, id }: Props) => {
 
    // state
    // const [isTargetInView, setIsTargetInView] = useState(false);
-   const reviewRefSection = useRef<HTMLDivElement>(null);
+   const listRoomRefSection = useRef<HTMLDivElement>(null);
+   const locationRefSection = useRef<HTMLDivElement>(null);
 
    // logic
    // useEffect(() => {
@@ -79,14 +79,17 @@ const MainContent = ({ data, id }: Props) => {
       });
    };
 
-   const scrollIntoReviewSection = () => {
-      scrollToSection(reviewRefSection);
+   const scrollIntoListRoomSection = () => {
+      scrollToSection(listRoomRefSection);
+   };
+   const scrollIntoLocationSection = () => {
+      scrollToSection(locationRefSection);
    };
 
    return (
       <div>
          {/* NEW HEADER */}
-         {/* <NewHeaderSection data={data} id={id} scrollIntoReviewSection={scrollIntoReviewSection} /> */}
+         {/* <NewHeaderSection data={data} id={id} scrollIntoListRoomSection={scrollIntoListRoomSection} /> */}
 
          {/* IMAGE GALLERY */}
          {/* <div className="mt-8 mb-5">
@@ -107,17 +110,24 @@ const MainContent = ({ data, id }: Props) => {
                   data={data}
                   id={id}
                   hotelReview={hotelReview}
-                  scrollIntoReviewSection={scrollIntoReviewSection}
+                  scrollIntoListRoomSection={scrollIntoListRoomSection}
                /> */}
                {/* Banner section */}
-               <BannerSection data={data} />
+               <BannerSection
+                  data={data}
+                  scrollIntoListRoomSection={scrollIntoListRoomSection}
+                  scrollIntoLocationSection={scrollIntoLocationSection}
+               />
                {/* FACILITES */}
                <FaciliiesSection facilities={data?.serp_filters || []} />
                {/* HOTEL INFO */}
-               <HotelInfoSection data={data} scrollIntoReviewSection={scrollIntoReviewSection} />
+               <HotelInfoSection
+                  data={data}
+                  scrollIntoListRoomSection={scrollIntoListRoomSection}
+               />
 
                {/* LIST ROOM SECTION */}
-               <div ref={reviewRefSection}>
+               <div ref={listRoomRefSection}>
                   <ListRoomSections id={id} />
                </div>
 
@@ -136,7 +146,7 @@ const MainContent = ({ data, id }: Props) => {
                {/* HOST INFORMATION */}
                {/* <HostInfoSection /> */}
                {/* LOCATION */}
-               {data && <LocationSection hotelData={data} />}
+               <div ref={locationRefSection}>{data && <LocationSection hotelData={data} />}</div>
                {/* AMENITIES */}
                <AmenitiesSection amenites={data?.amenity_groups} />
                {/* THING TO KNOW */}
@@ -157,12 +167,12 @@ const MainContent = ({ data, id }: Props) => {
                </div>
             </div> */}
             {/* RESERVE MOBILE */}
-            {/* {!isTargetInView && (
+            {/* {!isTargetInView && ( 
                <Button
                   onClick={() => {
                      scrollIntoView();
                   }}
-                  className="flex lg:hidden items-center justify-center fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-slate-900 text-white shadow-2xl rounded-full z-30 space-x-3 text-sm cursor-pointer"
+                  className="flex lg:hidden items-center justify-center fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-neutral-900 text-white shadow-2xl rounded-full z-30 space-x-3 text-sm cursor-pointer"
                >
                   <i className="text-lg las la-map-signs"></i>
                   <span>View all room</span>

@@ -42,7 +42,7 @@ export const SearchInput = ({ className }: Props) => {
          {items.map((item, index) => (
             <div
                key={index}
-               className="py-4 px-2 rounded-lg mb-1 flex items-center space-x-3 text-sm hover:bg-slate-200 dark:hover:bg-slate-800 cursor-pointer w-full"
+               className="py-4 px-2 rounded-lg mb-1 flex items-center space-x-3 text-sm hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer w-full"
                onClick={() => {
                   // if ("region_id" in item) {
                   handleSelectedDestination(item);
@@ -100,7 +100,7 @@ export const SearchInput = ({ className }: Props) => {
                      {search ? (
                         <XCircleIcon
                            strokeWidth={1.5}
-                           className="w-5 h-5 text-slate-700 dark:text-slate-300 cursor-pointer"
+                           className="w-5 h-5 text-neutral-700 dark:text-neutral-300 cursor-pointer"
                            onClick={() => setSearch('')}
                         />
                      ) : (
@@ -112,7 +112,7 @@ export const SearchInput = ({ className }: Props) => {
                            stroke="currentColor"
                            aria-hidden="true"
                            data-slot="icon"
-                           className="w-5 h-5 text-slate-700 dark:text-slate-400"
+                           className="w-5 h-5 text-neutral-700 dark:text-neutral-400"
                         >
                            <path
                               strokeLinecap="round"
@@ -149,7 +149,7 @@ export const SearchInput = ({ className }: Props) => {
                                     <ScrollArea className="h-[calc(500px-200px)]">
                                        {renderSearchResults(
                                           dataList,
-                                          <MapPinIcon className="w-5 h-5 text-slate-500 dark:text-slate-400" />,
+                                          <MapPinIcon className="w-5 h-5 text-neutral-500 dark:text-neutral-400" />,
                                        )}
                                     </ScrollArea>
                                  ) : (

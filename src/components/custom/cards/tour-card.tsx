@@ -47,7 +47,7 @@ const TourCard = ({
    type,
 }: Tour) => {
    return (
-      <div className="group relative bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-[2rem] overflow-hidden hover:shadow transition-shadow h-full">
+      <div className="group relative bg-white dark:bg-neutral-900 border border-neutral-100 dark:border-neutral-800 rounded-[2rem] overflow-hidden hover:shadow transition-shadow h-full">
          <div className="h-full w-full flex flex-col sm:items-center">
             <div className="flex-shrink-0 w-full">
                <div className="relative">
@@ -59,8 +59,8 @@ const TourCard = ({
                   </div>
                )}
             </div>
-            <div className="flex-grow relative rounded-[2rem] -mt-20 border border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-800 w-full p-7  flex flex-col items-start">
-               <div className=" absolute -top-5 right-8 bg-white dark:bg-slate-700 px-5 py-2 rounded-full shadow flex items-center space-x-1 text-sm">
+            <div className="flex-grow relative rounded-[2rem] -mt-20 border border-neutral-200 dark:border-neutral-600 bg-white dark:bg-neutral-800 w-full p-7  flex flex-col items-start">
+               <div className=" absolute -top-5 right-8 bg-white dark:bg-neutral-700 px-5 py-2 rounded-full shadow flex items-center space-x-1 text-sm">
                   <div className="pb-[2px]">
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@ const TourCard = ({
                      </svg>
                   </div>
                   <span className="font-medium">4.8</span>
-                  <span className="text-slate-500 dark:text-slate-400">(28 reviews)</span>
+                  <span className="text-neutral-500 dark:text-neutral-400">(28 reviews)</span>
                </div>
                <div className="space-y-4 w-full">
                   <div className="flex items-center space-x-2">
@@ -88,29 +88,29 @@ const TourCard = ({
                   </div>
                   <div className="space-y-2">
                      {/* <p className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-slate-700 dark:text-slate-400" />
-                        <span className="text-slate-700 dark:text-slate-400">{location}</span>
+                        <MapPin className="w-4 h-4 text-neutral-700 dark:text-neutral-400" />
+                        <span className="text-neutral-700 dark:text-neutral-400">{location}</span>
                      </p> */}
                      <div className="flex items-center gap-3">
                         <p className="flex items-center gap-2">
-                           <Clock1 className="w-4 h-4 text-slate-700 dark:text-slate-400" />
-                           <span className="text-slate-700 dark:text-slate-400">
+                           <Clock1 className="w-4 h-4 text-neutral-700 dark:text-neutral-400" />
+                           <span className="text-neutral-700 dark:text-neutral-400">
                               2 days 3 nights
                            </span>
                         </p>
                         <p className="flex items-center gap-2">
-                           <Users className="w-4 h-4 text-slate-700 dark:text-slate-400" />
-                           <span className="text-slate-700 dark:text-slate-400">4-5 guests</span>
+                           <Users className="w-4 h-4 text-neutral-700 dark:text-neutral-400" />
+                           <span className="text-neutral-700 dark:text-neutral-400">4-5 guests</span>
                         </p>
                      </div>
                   </div>
 
-                  <div className="w-14 border-b border-slate-100 dark:border-slate-800 "></div>
+                  <div className="w-14 border-b border-neutral-100 dark:border-neutral-800 "></div>
                   <div className="flex w-full justify-between items-end">
                      <Button variant="ghost">
                         <span className="text-2xl font-semibold">
                            ${pricePerPerson}
-                           <span className="text-base font-light text-slate-500 dark:text-slate-400">
+                           <span className="text-base font-light text-neutral-500 dark:text-neutral-400">
                               {' '}
                               / person
                            </span>
@@ -125,7 +125,7 @@ const TourCard = ({
          </div>
          <div
             className={cn(
-               'w-8 h-8 flex items-center justify-center rounded-full cursor-pointer    bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 hover:bg-opacity-70 text-slate-600 dark:text-slate-400 absolute right-5 top-5 sm:right-3 sm:top-3',
+               'w-8 h-8 flex items-center justify-center rounded-full cursor-pointer    bg-neutral-100 dark:bg-neutral-700 hover:bg-neutral-200 hover:bg-opacity-70 text-neutral-600 dark:text-neutral-400 absolute right-5 top-5 sm:right-3 sm:top-3',
                {
                   'text-red-600': isFavorite,
                },

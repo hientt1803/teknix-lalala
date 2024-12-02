@@ -128,10 +128,10 @@ export const FilterCollapseContent = ({ isOpen }: { isOpen: boolean }) => {
                <div className="grid grid-cols-6 gap-5">
                   {FILTER_MOCK[0].filters.map((item, index) => (
                      <div key={index} className="flex items-center gap-2">
-                        <Checkbox id={item.id + ''} className="bg-slate-200 border-slate-200" />
+                        <Checkbox id={item.id + ''} className="bg-neutral-200 border-neutral-200" />
                         <Label
                            htmlFor={item.id + ''}
-                           className="text-sm text-slate-700 font-normal leading-none"
+                           className="text-sm text-neutral-700 font-normal leading-none"
                         >
                            {item.name}
                         </Label>

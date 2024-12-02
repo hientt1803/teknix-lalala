@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useProgressStore } from '@/hooks/use-progress';
 import { Category } from '@/lib/MarkerCategories';
 import { PlaceValues } from '@/lib/Places';
 import {
@@ -18,7 +19,6 @@ import {
 import { IHotelDataMapHotels, IHotelSearchGeoEngineRequest } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 import { formatDateToYearMonthDay } from '@/utilities/datetime';
-import { addDays, isAfter, isBefore, isEqual } from 'date-fns';
 import { getDistance } from 'geolib';
 import { LayoutGrid, LayoutList } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -31,17 +31,15 @@ const ListHotelWithoutMap = dynamic(() =>
 const FilterDrawer = dynamic(() =>
    import('../filters/filter-drawer').then((mod) => mod.FilterDrawer),
 );
-const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter));
+const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter), {
+   ssr: false,
+});
 
 export const WithoutMapContainer = () => {
    // redux
    const globalSearchState = useAppSelector((state) => state.globalSlice.searchGlobal);
    const isSearchGlobal = useAppSelector((state) => state.staySlice.isTriggerGlobal);
    const dispatch = useDispatch();
-
-   // state
-   // const [displayType, setDisplayType] = useState<'grid' | 'list'>('list');
-   // const [filterCollapse, setFilterCollapse] = useState(false);
 
    // Api
    const [
@@ -53,23 +51,17 @@ export const WithoutMapContainer = () => {
       },
    ] = useLazyGetListHotelByGeoSearchEngineQuery();
 
+   // Hook
+   const { start, done } = useProgressStore();
+
    // Logic
    const fetchDataFromApi = () => {
       let checkin = new Date(globalSearchState.dateRange.startDate);
       let checkout = new Date(globalSearchState.dateRange.endDate);
 
-      // Kiểm tra nếu checkout nhỏ hơn hoặc bằng checkin
-      if (isBefore(checkout, checkin) || isEqual(checkout, checkin)) {
-         checkout = addDays(checkin, 1); // Tăng checkout thêm 1 ngày
-      }
-
-      console.log(globalSearchState.dateRange);
-      console.log(checkout);
-      console.log(checkout ? checkout : addDays(new Date(), 1));
-
       const searchParams = {
          checkin: formatDateToYearMonthDay(checkin),
-         checkout: formatDateToYearMonthDay(checkout ? checkout : addDays(new Date(), 1)),
+         checkout: formatDateToYearMonthDay(checkout),
          language: globalSearchState?.lang?.cca2 || 'US',
          guests: globalSearchState.people,
          currency: globalSearchState?.currency?.code || 'VND',
@@ -87,6 +79,14 @@ export const WithoutMapContainer = () => {
          fetchDataFromApi();
       }
    }, [isSearchGlobal]);
+
+   useEffect(() => {
+      if (searchHotelGeoLoading || searchHotelGeoFetching) {
+         start();
+      } else {
+         done();
+      }
+   }, [searchHotelGeoLoading, searchHotelGeoFetching]);
 
    useEffect(() => {
       dispatch(setTriggerSearch(true));
@@ -161,31 +161,35 @@ export const WithoutMapContainer = () => {
                <Tabs defaultValue="list" className="w-full overflow-hidden">
                   <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-3 mb-6">
                      <div className="w-full flex flex-col lg:flex-row justify-between items-center">
-                        <div className="flex items-center justify-start gap-3">
-                           <TabsList className="bg-transparent">
+                        <div className="flex items-center justify-start flex-wrap gap-3">
+                           <TabsList className="bg-transparent flex gap-0 items-center">
                               <TabsTrigger
                                  value="list"
-                                 className="rounded-none rounded-l-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
+                                 className="rounded-none rounded-l-lg py-2 px-1 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 dark:text-neutral-600 data-[state=active]:text-black dark:data-[state=active]:text-neutral-200"
                               >
                                  <LayoutList className="w-5 h-5" />
                               </TabsTrigger>
                               <TabsTrigger
                                  value="grid"
-                                 className=" rounded-none rounded-r-lg py-2 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 data-[state=active]:text-black"
+                                 className=" rounded-none rounded-r-lg py-2 px-1 data-[state=active]:shadow-none data-[state=active]:border-none text-neutral-400 dark:text-neutral-600 data-[state=active]:text-black dark:data-[state=active]:text-neutral-200"
                               >
                                  <LayoutGrid className="w-5 h-5" />
                               </TabsTrigger>
                            </TabsList>
-                           1 - 10 of {hotelsWithMapData?.length || 0} hotels found
+                           <span className="dark:text-neutral-300">
+                              1 - 10 of {hotelsWithMapData?.length || 0} hotels found
+                           </span>
                         </div>
 
-                        <div className="flex items-center gap-1">
-                           <div className="flex gap-2 items-center mr-2 cursor-pointer hover:underline">
+                        <div className="flex items-center flex-wrap gap-1">
+                           <div className="flex gap-2 items-center mr-2 cursor-pointer hover:underline dark:text-neutral-200">
                               Clear Filters
                            </div>
                            <Select>
-                              <div className="flex items-center border border-neutral-200 rounded-md px-1">
-                                 <div className="text-sm text-neutral-500">Show</div>
+                              <div className="flex items-center border border-neutral-200 dark:border-neutral-600 rounded-md px-1">
+                                 <div className="text-sm text-neutral-500 dark:text-neutral-300">
+                                    Show
+                                 </div>
                                  <SelectTrigger className="border-none outline-none shadow-none w-fit">
                                     <SelectValue placeholder="10" defaultValue={'10'} />
                                  </SelectTrigger>
@@ -197,8 +201,10 @@ export const WithoutMapContainer = () => {
                               </SelectContent>
                            </Select>
                            <Select>
-                              <div className="flex items-center border border-neutral-200 rounded-md px-1">
-                                 <div className="text-sm text-neutral-500">Sort by:</div>
+                              <div className="flex items-center border border-neutral-200 dark:border-neutral-600 rounded-md px-1">
+                                 <div className="text-sm text-neutral-500 dark:text-neutral-300">
+                                    Sort by:
+                                 </div>
                                  <SelectTrigger className="border-none outline-none shadow-none w-fit">
                                     <SelectValue placeholder="Name" defaultValue={'name'} />
                                  </SelectTrigger>
@@ -213,7 +219,7 @@ export const WithoutMapContainer = () => {
                      </div>
                   </div>
 
-                  <Separator className="w-full bg-neutral-200 mb-4" />
+                  <Separator className="w-full bg-neutral-200 dark:bg-neutral-400 mb-4" />
 
                   <TabsContent value="list" className="w-full">
                      <div className="grid grid-cols-12 gap-6 w-full">

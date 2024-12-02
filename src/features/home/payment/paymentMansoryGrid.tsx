@@ -125,7 +125,7 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
                   )}
                >
                   <Badge
-                     className="bg-[#f2f4f6] py-4 px-5 text-slate-900 text-sm font-medium mb-5"
+                     className="bg-[#f2f4f6] py-4 px-5 text-neutral-900 text-sm font-medium mb-5"
                      color="gray"
                   >
                      {slice.primary.tag || ''}

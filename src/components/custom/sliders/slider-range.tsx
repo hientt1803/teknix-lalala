@@ -24,7 +24,7 @@ const SliderRange = React.forwardRef<
             <React.Fragment>
                {initialValue.map((value, index) => (
                   <React.Fragment key={index}>
-                     <SliderPrimitive.Thumb className="block h-3 w-3 rounded-full border-2 border-slate-500 bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer" />
+                     <SliderPrimitive.Thumb className="block h-3 w-3 rounded-full border-2 border-neutral-500 bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 cursor-pointer" />
                   </React.Fragment>
                ))}
             </React.Fragment>

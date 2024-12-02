@@ -23,12 +23,12 @@ const VideoSection = ({ videos }: VideoSectionProps) => {
          {/* <MediaModal isModalOpen={open} setModalOpen={setOpen} videoSrc={video?.link?.url} /> */}
          {/* )} */}
          {/* BACKGROUND */}
-         <div className="absolute -top-4 -bottom-4 -right-4 w-3/4 rounded-2xl bg-teal-600/10 bg-opacity-40 z-0  md:top-0 md:bottom-0 md:right-0 xl:w-2/3 dark:bg-slate-800 dark:bg-opacity-40" />
+         <div className="absolute -top-4 -bottom-4 -right-4 w-3/4 rounded-2xl bg-teal-600/10 bg-opacity-40 z-0  md:top-0 md:bottom-0 md:right-0 xl:w-2/3 dark:bg-neutral-800 dark:bg-opacity-40" />
 
          {/* MAIN VIDEO */}
          <div className="flex-grow relative pb-2 sm:pb-4 lg:pb-0 lg:pr-5 xl:pr-6">
             <div
-               className="group aspect-[5/5] bg-slate-800 rounded-3xl overflow-hidden border-4 border-white dark:border-slate-900  sm:border-[10px]"
+               className="group aspect-[5/5] bg-neutral-800 rounded-3xl overflow-hidden border-4 border-white dark:border-neutral-900  sm:border-[10px]"
                title={videos.primary.videos[0]?.title || ''}
             >
                <div className="w-full h-full relative">
@@ -44,7 +44,7 @@ const VideoSection = ({ videos }: VideoSectionProps) => {
                   >
                      <div className="absolute inset-0 flex items-center justify-center z-10 cursor-pointer">
                         <div className="rounded-full w-20 h-20 p-3 lg:w-52 lg:h-52 lg:p-12">
-                           <div className="w-full h-full bg-white rounded-full text-slate-900 relative">
+                           <div className="w-full h-full bg-white rounded-full text-neutral-900 relative">
                               <span className="absolute inset-0 flex items-center justify-center">
                                  <svg
                                     className="w-8 h-8 md:w-12 md:h-12"
@@ -100,7 +100,7 @@ const VideoSection = ({ videos }: VideoSectionProps) => {
                   >
                      <div className="absolute inset-0 flex items-center justify-center z-10">
                         <div className="bg-white relative rounded-full shadow-inner w-10 h-10">
-                           <span className="absolute inset-0 flex items-center justify-center text-slate-900">
+                           <span className="absolute inset-0 flex items-center justify-center text-neutral-900">
                               <svg
                                  className="w-5 h-5"
                                  width="24"
@@ -133,7 +133,7 @@ const VideoSection = ({ videos }: VideoSectionProps) => {
                         <h3 className="font-semibold text-xl transition-colors duration-200 group:hover:text-blue-700 cursor-pointer">
                            The Burj Al Arab Dubai, UAE
                         </h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">8 Resorts, 24 Rooms</p>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400">8 Resorts, 24 Rooms</p>
                      </div>
                   </div>
                </div>

@@ -10,24 +10,24 @@ const FacilitiesSection = ({ facilities }: FacilityProps) => {
    return (
       <div className="grid grid-cols-1 lg:grid-cols-5 justify-between gap-8 py-5 lg:py-16">
          <div className="col-span-2">
-            <div className="p-4 flex items-center gap-5 bg-yellow-50 border border-slate-200 rounded-2xl">
+            <div className="p-4 flex items-center gap-5 bg-yellow-50 border border-neutral-200 rounded-2xl">
                <div className="flex -space-x-4 rtl:space-x-reverse">
                   <Image
-                     className="w-16 h-16 border-2 border-white rounded-full dark:border-slate-800"
+                     className="w-16 h-16 border-2 border-white rounded-full dark:border-neutral-800"
                      src="https://travila-nextjs.vercel.app/assets/imgs/page/homepage5/author.png"
                      alt=""
                   />
                   <Image
-                     className="w-16 h-16 border-2 border-white rounded-full dark:border-slate-800"
+                     className="w-16 h-16 border-2 border-white rounded-full dark:border-neutral-800"
                      src="https://travila-nextjs.vercel.app/assets/imgs/page/homepage5/author2.png"
                      alt=""
                   />
                   <Image
-                     className="w-16 h-16 border-2 border-white rounded-full dark:border-slate-800"
+                     className="w-16 h-16 border-2 border-white rounded-full dark:border-neutral-800"
                      src="https://travila-nextjs.vercel.app/assets/imgs/page/homepage5/author3.png"
                      alt=""
                   />
-                  <Button className="w-16 h-16 text-xs font-medium bg-yellow-300 border-2 border-white rounded-full hover:bg-yellow-400 text-slate-950 dark:border-slate-800 z-[1]">
+                  <Button className="w-16 h-16 text-xs font-medium bg-yellow-300 border-2 border-white rounded-full hover:bg-yellow-400 text-neutral-950 dark:border-neutral-800 z-[1]">
                      <Plus className="w-6 h-6" />
                   </Button>
                </div>
@@ -41,7 +41,7 @@ const FacilitiesSection = ({ facilities }: FacilityProps) => {
             <div className="grid grid-cols-4 items-start gap-5">
                {facilities.map((facility, index) => (
                   <div key={index} className="flex flex-col gap-2 justify-center items-center">
-                     {getAmenityIcon(facility, 'size-8 stroke-[1.5] text-slate-800 dark:text-slate-400')}
+                     {getAmenityIcon(facility, 'size-8 stroke-[1.5] text-neutral-800 dark:text-neutral-400')}
                      <span className="capitalize text-sm text-center">
                         {facility.replaceAll('_', ' ')}
                      </span>

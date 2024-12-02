@@ -41,13 +41,13 @@ const Image: React.FC<ImageProps> = ({
             />
          ) : (
             // Hiển thị fallback khi xảy ra lỗi
-            <div className="flex items-center justify-center w-full h-full border border-slate-100 rounded-2xl">
+            <div className="flex items-center justify-center w-full h-full border border-neutral-100 dark:border-neutral-800 rounded">
                {fallback ? (
                   fallback
                ) : (
-                  <div className="h-full w-full flex flex-1 justify-center items-center bg-slate-100">
+                  <div className="h-full w-full flex flex-1 justify-center items-center bg-neutral-100 dark:bg-neutral-700">
                      <svg
-                        className="w-32 h-32 text-white"
+                        className="w-32 h-32 text-white dark:text-neutral-400"
                         xmlns="http://www.w3.org/2000/svg"
                         width="1em"
                         height="1em"

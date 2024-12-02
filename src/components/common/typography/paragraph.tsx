@@ -18,7 +18,7 @@ const Paragraph = ({
       <Component
          {...restProps}
          className={cn(
-            'mt-2 md:mt-3 font-normal block text-slate-500 dark:text-slate-400',
+            'mt-2 md:mt-3 font-normal block text-neutral-500 dark:text-neutral-400',
             size === 'xl' && 'text-xl md:text-3xl',
             size === 'lg' && 'text-lg md:text-2xl',
             size === 'md' && 'text-base sm:text-xl',

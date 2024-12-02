@@ -5,9 +5,9 @@ import {CalendarIcon, CircleCheckIcon, ClockIcon, MessageSquareIcon} from "lucid
 
 const HostInfoSection = () => {
     return (
-        <div className="border border-slate-200 dark:border-slate-700 p-4 rounded-2xl space-y-8">
+        <div className="border border-neutral-200 dark:border-neutral-700 p-4 rounded-2xl space-y-8">
             <h2 className="text-2xl font-semibold">Host Infomation</h2>
-            <div className="w-14 border-b border-slate-200 dark:border-slate-700"></div>
+            <div className="w-14 border-b border-neutral-200 dark:border-neutral-700"></div>
             <div className="flex items-center space-x-4">
                 <div className="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full h-10 w-10 ring-1 ring-white ">
                     <Avatar>
@@ -23,7 +23,7 @@ const HostInfoSection = () => {
                 </div>
                 <div>
                     <span className="block text-xl font-medium">Kevlin Francis</span>
-                    <div className="mt-1.5 flex items-center text-sm text-slate-500 dark:text-slate-200">
+                    <div className="mt-1.5 flex items-center text-sm text-neutral-500 dark:text-neutral-200">
                         <div className="flex items-center space-x-1 text-sm">
                             <div className="pb-[2px]">
                                 <StarFilledIcon
@@ -32,7 +32,7 @@ const HostInfoSection = () => {
                                 />
                             </div>
                             <span className="font-medium">4.5</span>
-                            <span className="text-slate-500 dark:text-slate-400">
+                            <span className="text-neutral-500 dark:text-neutral-400">
                                 (112)
                             </span>
                         </div>
@@ -41,12 +41,12 @@ const HostInfoSection = () => {
                     </div>
                 </div>
             </div>
-            <span className="block text-slate-600 dark:text-slate-50">
+            <span className="block text-neutral-600 dark:text-neutral-50">
                 Providing lake views, The Symphony 9 Tam Coc in Ninh Binh provides
                 accommodation, an outdoor swimming pool, a bar, a shared lounge, a garden
                 and barbecue facilities...
             </span>
-            <div className="block text-slate-500 dark:text-slate-50 space-y-2.5">
+            <div className="block text-neutral-500 dark:text-neutral-50 space-y-2.5">
                 <div className="flex items-center space-x-3">
                     <CalendarIcon />
                     <span>Joined in March 2016</span>
@@ -60,9 +60,9 @@ const HostInfoSection = () => {
                     <span>Fast response - within a few hours</span>
                 </div>
             </div>
-            <div className="w-14 border-b border-border-200 dark:border-slate-700"></div>
+            <div className="w-14 border-b border-border-200 dark:border-neutral-700"></div>
             <div>
-                <Button className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base px-4 py-3 sm:px-6  font-medium border bg-white border-slate-200 text-slate-700 hover:text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 ">
+                <Button className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base px-4 py-3 sm:px-6  font-medium border bg-white border-neutral-200 text-neutral-700 hover:text-neutral-800 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 ">
                     See host profile
                 </Button>
             </div>

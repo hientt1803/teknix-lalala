@@ -91,14 +91,14 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                   <div className="absolute hidden md:flex items-center gap-2 left-6 bottom-3">
                      <Button
                         onClick={handleOpen}
-                        className="md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-yellow-400 text-black hover:bg-slate-200 hover:text-slate-800 z-10"
+                        className="md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-yellow-400 text-black hover:bg-neutral-200 hover:text-neutral-800 z-10"
                      >
                         <LayoutGridIcon className="w-5 h-5 mr-1" />
                         See all photos
                      </Button>
                      <Button
                         onClick={handleOpen}
-                        className=" md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-neutral-100 text-black hover:bg-slate-200 hover:text-slate-800 z-10"
+                        className=" md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-neutral-100 text-black hover:bg-neutral-200 hover:text-neutral-800 z-10"
                      >
                         <div className="border border-neutral-800 rounded-full p-1 flex justify-center items-center">
                            <Play className="w-5 h-5" />

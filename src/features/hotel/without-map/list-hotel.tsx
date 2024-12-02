@@ -5,7 +5,12 @@ import { IHotelDataHotels, IHotelDataMapHotels } from '@/stores/features/stay/ty
 import { useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
-import HotelCard, { HotelCardSkeleton } from '../cards/hotel-card';
+import dynamic from 'next/dynamic';
+
+const HotelCard = dynamic(() => import('../cards/hotel-card').then((mod) => mod.default));
+const HotelCardSkeleton = dynamic(() =>
+   import('../cards/hotel-card').then((mod) => mod.HotelCardSkeleton),
+);
 
 export type ListHotelWioutMapType = {
    type: 'list' | 'grid';
@@ -31,10 +36,7 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
    } = props;
 
    // next api
-   const searchParams = useSearchParams(); 
-
-   // redux
-   // const globalSearchState = useAppSelector((state) => state.globalSlice.searchGlobal);
+   const searchParams = useSearchParams();
 
    // state
    const [hasMore, setHasMore] = useState(true);
@@ -88,6 +90,7 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
          className="w-full h-full"
       >
          <div
+            key={'infinity-scroll-key'}
             className={cn(
                'w-full grid',
                type == 'list'
@@ -99,14 +102,18 @@ export const ListHotelWithoutMap = (props: ListHotelWioutMapType) => {
                const directLink = `/hotel/${hotel.hotel.hotel_id}?${searchParams.toString()}`;
 
                return (
-                  <HotelCard
-                     key={index}
-                     selectedMap={hotel.selectedMap}
-                     hotel={hotel.hotel}
-                     distance={hotel.distance}
-                     displayType={type}
-                     directLink={directLink}
-                  />
+                  <>
+                     {hotel?.selectedMap && (
+                        <HotelCard
+                           key={index}
+                           selectedMap={hotel.selectedMap}
+                           hotel={hotel.hotel}
+                           distance={hotel.distance}
+                           displayType={type}
+                           directLink={directLink}
+                        />
+                     )}
+                  </>
                );
             })}
          </div>

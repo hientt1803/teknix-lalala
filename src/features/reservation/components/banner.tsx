@@ -11,7 +11,7 @@ import { Home } from 'lucide-react';
 
 const Banner = () => {
    return (
-      <div className="px-16 flex justify-between items-center bg-slate-200 rounded-3xl">
+      <div className="px-16 flex justify-between items-center bg-neutral-200 rounded-3xl">
          <div className="flex flex-col gap-2">
             <div className="text-neutral-400 text-sm">
                <Breadcrumb>

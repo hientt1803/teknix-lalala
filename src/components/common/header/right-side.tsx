@@ -51,7 +51,7 @@ const RightSiderHeader = () => {
          <LanguageButton />
          {/* <Button
             asChild
-            className="rounded-full px-5 py-5 ring-1 ring-slate-700 dark:ring-slate-200 dark:text-slate-200 text-base hover:ring-0"
+            className="rounded-full px-5 py-5 ring-1 ring-neutral-700 dark:ring-neutral-200 dark:text-neutral-200 text-base hover:ring-0"
             variant="ghost"
          >
             <Link href="#">List your property</Link>

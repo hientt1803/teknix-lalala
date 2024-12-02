@@ -48,7 +48,7 @@ export const NewHeaderSection = ({ data, id, scrollIntoReviewSection }: Props) =
             </div>
 
             <div className="flow-root mt-4 md:mt-0">
-               <div className="flex text-slate-700 dark:text-slate-50 text-sm gap-2">
+               <div className="flex text-neutral-700 dark:text-neutral-50 text-sm gap-2">
                   <Button
                      variant="outline"
                      className="py-1.5 px-3 flex items-center gap-0 rounded-full cursor-pointer"

@@ -13,17 +13,17 @@ import { useRef, useState } from 'react';
 const ReviewSection = ({ id }: { id: string }) => {
    const [allReview, setAllReview] = useState(false);
    const inputRef = useRef<HTMLInputElement>(null);
-   const { data, isLoading } = useGetReviewByStayIdQuery({
+   const { data } = useGetReviewByStayIdQuery({
       id: id,
    });
 
    return (
-      <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-lg space-y-8">
+      <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8">
          <h2 className="text-2xl font-semibold">Reviews</h2>
          <div className="text-md font-semibold text-neutral-600">
             ({data?.reviews && data?.reviews?.length > 0 ? data?.reviews?.length : 'No'} reviews)
          </div>
-         <div className="w-14 border-b border-slate-200 dark:border-slate-700" />
+         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {data?.detailed_ratings && (
                <>
@@ -67,14 +67,14 @@ const ReviewSection = ({ id }: { id: string }) => {
             )}
          </div>
 
-         <div className="w-14 border-b border-neutral-200 dark:border-slate-700" />
+         <div className="w-14 border-b border-neutral-200 dark:border-neutral-700" />
          <div className="space-y-5">
             <Rating rating={5} />
             <div className="relative h-16 text-sm">
                <Input
                   ref={inputRef}
                   placeholder="Share your thoughts..."
-                  className="h-16 block w-full border-slate-200 dark:border-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:bg-slate-800 rounded-3xl px-4 py-3"
+                  className="h-16 block w-full border-neutral-200 dark:border-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white dark:bg-neutral-800 rounded-3xl px-4 py-3"
                />
                <Button
                   size={'icon'}
@@ -84,7 +84,7 @@ const ReviewSection = ({ id }: { id: string }) => {
                </Button>
             </div>
          </div>
-         <div className="divide-y divide-slate-100 dark:divide-slate-700">
+         <div className="divide-y divide-neutral-100 dark:divide-neutral-700">
             {data?.reviews?.slice(0, allReview ? data.reviews.length : 5).map((review, index) => (
                <div key={index} className="flex space-x-4 py-8">
                   <div className="pt-0.5">
@@ -98,7 +98,7 @@ const ReviewSection = ({ id }: { id: string }) => {
                            <div className="text-sm font-semibold">
                               <span>{review.author}</span>
                            </div>
-                           <span className="text-sm text-slate-500 dark:text-slate-300 mt-0.5">
+                           <span className="text-sm text-neutral-500 dark:text-neutral-300 mt-0.5">
                               Reviewed: {review.created}
                            </span>
                         </div>
@@ -115,7 +115,7 @@ const ReviewSection = ({ id }: { id: string }) => {
 
                                  return (
                                     <div className="flex flex-col gap-2" key={index}>
-                                       <span className="text-xs capitalize text-slate-500 dark:text-slate-400">
+                                       <span className="text-xs capitalize text-neutral-500 dark:text-neutral-400">
                                           {detail}
                                        </span>
                                        <Rating size={15} rating={ratingValue} disabled />
@@ -130,7 +130,7 @@ const ReviewSection = ({ id }: { id: string }) => {
                               })}
                         </div>
                      </div>
-                     <span className="block mt-3 text-slate-600 dark:text-white">
+                     <span className="block mt-3 text-neutral-600 dark:text-white">
                         {review.review_plus}
                      </span>
                   </div>
@@ -140,7 +140,7 @@ const ReviewSection = ({ id }: { id: string }) => {
             {!data?.reviews || data.reviews.length <= 0 ? (
                <>
                   <div
-                     className="flex justify-center items-center gap-2 text-slate-500 dark:text-slate-300 cursor-pointer"
+                     className="flex justify-center items-center gap-2 text-neutral-500 dark:text-neutral-300 cursor-pointer"
                      onClick={() => inputRef.current && inputRef.current.focus()}
                   >
                      <EditIcon strokeWidth={1.5} className="w-5 h-5" />
@@ -152,7 +152,7 @@ const ReviewSection = ({ id }: { id: string }) => {
                   <div className="pt-8">
                      <Button
                         onClick={() => setAllReview((o) => !o)}
-                        className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base px-4 py-3 sm:px-6  font-medium border bg-white border-slate-200 text-slate-700 hover:text-slate-800 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 "
+                        className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base px-4 py-3 sm:px-6  font-medium border bg-white border-neutral-200 text-neutral-700 hover:text-neutral-800 hover:bg-neutral-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 "
                      >
                         {allReview ? 'Hide' : 'View more reviews'}
                      </Button>

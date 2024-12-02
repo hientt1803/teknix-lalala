@@ -168,7 +168,7 @@ export const ListHotel = ({ type = 'list', visibleItem = 10 }: ListHotelWioutMap
                         <h2 className="text-4xl font-semibold leading-snug line-clamp-1">
                            Stays in New York
                         </h2>
-                        <span className="block text-slate-500 dark:text-slate-400 mt-3">
+                        <span className="block text-neutral-500 dark:text-neutral-400 mt-3">
                            120 stays
                            <span className="mx-2">·</span>
                            Oct 18 - Oct 30
@@ -257,7 +257,7 @@ export const ListHotel = ({ type = 'list', visibleItem = 10 }: ListHotelWioutMap
                   </Pagination>
                </div>
                <Dialog>
-                  <DialogTrigger className="flex xl:hidden items-center justify-center fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-slate-900 text-white shadow-2xl rounded-full z-30  space-x-3 text-sm cursor-pointer">
+                  <DialogTrigger className="flex xl:hidden items-center justify-center fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-2 bg-neutral-900 text-white shadow-2xl rounded-full z-30  space-x-3 text-sm cursor-pointer">
                      <i className="text-lg las la-map"></i>
                      <span>Show map</span>
                   </DialogTrigger>

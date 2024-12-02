@@ -53,7 +53,7 @@ export const FacilitiCaroucel = ({
                               field={des.type}
                               components={{
                                  paragraph: ({ children }) => (
-                                    <Paragraph className="font-[500] !text-sm text-slate-800 mb-2 pointer-events-none">
+                                    <Paragraph className="font-[500] !text-sm text-neutral-800 mb-2 pointer-events-none">
                                        {children}
                                     </Paragraph>
                                  ),
@@ -82,8 +82,8 @@ export const FacilitiCaroucel = ({
                   </CarouselItem>
                ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-3 w-10 h-10 bg-slate-800 hover:bg-slate-900 border-0 bg-opacity-20 text-white hover:text-slate-100" />
-            <CarouselNext className="-right-0 w-10 h-10 bg-slate-800 hover:bg-slate-900 border-0 bg-opacity-20 text-white hover:text-slate-100" />
+            <CarouselPrevious className="-left-3 w-10 h-10 bg-neutral-800 hover:bg-neutral-900 border-0 bg-opacity-20 text-white hover:text-neutral-100" />
+            <CarouselNext className="-right-0 w-10 h-10 bg-neutral-800 hover:bg-neutral-900 border-0 bg-opacity-20 text-white hover:text-neutral-100" />
          </Carousel>
       </Card>
    );

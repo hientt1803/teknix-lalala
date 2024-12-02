@@ -20,8 +20,39 @@ export interface HotDestination {
    image_url: string;
 }
 
+export type listFaqType = {
+   id: string;
+   user_created: string;
+   date_created: string;
+   user_updated?: string;
+   date_updated?: string;
+   question: string;
+   answer: string;
+   priority: number;
+   is_featured?: boolean;
+   tags?: string[];
+   visibility_status: string;
+   category: string;
+};
+
 export const getHotDestination = async (): Promise<HotDestination[] | null> => {
    const res = await fetch(`${API_URL}/api/global/hot_destinations`, {
+      method: 'GET',
+      headers: {
+         'Content-Type': 'application/json',
+      },
+   });
+
+   if (!res.ok) {
+      return null;
+   }
+
+   const data = await res.json();
+   return data;
+};
+
+export const getListFAQs = async (): Promise<listFaqType[] | null> => {
+   const res = await fetch(`${API_URL}/api/global/contents/faq`, {
       method: 'GET',
       headers: {
          'Content-Type': 'application/json',

@@ -64,7 +64,7 @@ const Header = async () => {
                   </div>
 
                   {/* USER BUTTON & NOTIFICATION & MENU HUMBUGER */}
-                  <div className="flex flex-shrink-0 items-center justify-end flex-1 space-x-2 lg:flex-none text-slate-700">
+                  <div className="flex flex-shrink-0 items-center justify-end flex-1 space-x-2 lg:flex-none text-neutral-700">
                      <div className="hidden md:block">
                         <RightSiderHeaderLazy />
                      </div>

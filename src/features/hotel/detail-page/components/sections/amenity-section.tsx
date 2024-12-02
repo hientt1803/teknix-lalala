@@ -12,15 +12,15 @@ const AmenitiesSecion = ({amenites}: Props) => {
     const [showAll, setShowAll] = useState(false); 
 
     return (
-        <div className="border border-slate-200 dark:border-slate-700 p-6 rounded-lg space-y-8">
+        <div className="border border-neutral-200 dark:border-neutral-700 p-6 rounded-lg space-y-8 my-10">
             <div>
                 <h2 className="text-2xl font-semibold">Amenities </h2>
-                <span className="block mt-2 text-slate-500 dark:text-slate-300">
+                <span className="block mt-2 text-neutral-500 dark:text-neutral-300">
                     {" "}
                     About the property&apos;s amenities and services
                 </span>
             </div>
-            <div className="w-14 border-b border-slate-200" />
+            <div className="w-14 border-b border-neutral-200" />
 
             {(showAll && amenites ? amenites : amenites?.slice(0, 4))?.map(
                 (amenity, index) => (
@@ -29,7 +29,7 @@ const AmenitiesSecion = ({amenites}: Props) => {
                             <h3 className="font-medium mb-5">{amenity.group_name}</h3>
                             <div
                                 key={amenity.group_name}
-                                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 text-sm text-slate-700 dark:text-slate-400"
+                                className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 text-sm text-neutral-700 dark:text-neutral-400"
                             >
                                 {amenity.amenities.map((item, index) => (
                                     <div
@@ -42,7 +42,7 @@ const AmenitiesSecion = ({amenites}: Props) => {
                                 ))}
                             </div>
                         </div>
-                        <div className="border-b border-slate-200 dark:border-slate-700" />
+                        <div className="border-b border-neutral-200 dark:border-neutral-700" />
                     </div>
                 )
             )}
@@ -92,11 +92,11 @@ const AmenitiesSecion = ({amenites}: Props) => {
                     <span className=" ">la-umbrella-beach</span>
                 </div> */}
 
-            {/* <div className="w-14 border-b border-slate-200" /> */}
+            {/* <div className="w-14 border-b border-neutral-200" /> */}
             <div>
                 <Button
                     onClick={() => setShowAll((o) => !o)}
-                    className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6 border bg-white border-slate-200 text-slate-700 hover:text-slate-900  hover:bg-slate-100   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 "
+                    className="relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium px-4 py-3 sm:px-6 border bg-white border-neutral-200 text-neutral-700 hover:text-neutral-900  hover:bg-neutral-100   focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 "
                 >
                     {!showAll ? "View more amenities" : "Hide"}
                 </Button>

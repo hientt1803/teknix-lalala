@@ -110,7 +110,7 @@ export const CustomMarker = ({place}: CustomMarkerProps) => {
                 handlePopupClose={handlePopupClose}
                 searchParams={searchParams}
             />
-            {place.id !== "user_location" && (
+            {place.id !== "user_location" && place.price !== 0 && (
                 <LeafletTooltip
                     direction="top"
                     permanent

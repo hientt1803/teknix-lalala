@@ -74,7 +74,7 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
                                 />
                             </Button>
                             <div className="flow-root">
-                                <div className="flex text-slate-700 dark:text-slate-50 text-sm -mx-3 -my-1.5">
+                                <div className="flex text-neutral-700 dark:text-neutral-50 text-sm -mx-3 -my-1.5">
                                     <Button
                                         variant="ghost"
                                         className="py-1.5 px-3 flex rounded-lg cursor-pointer"
@@ -152,7 +152,7 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
             </ScrollArea>
          </ModalCustom>
          <ImageViewer
-            images={images.map((image) => replaceSize(image))}
+            images={images.map((image) => replaceSize(image || 'default') || '')}
             visible={visible}
             onClose={closeImageViewer}
             indexImg={indexImg}

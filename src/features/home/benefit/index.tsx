@@ -17,7 +17,7 @@ const BenefitSection = ({ benefit }: BenefitSectionProps) => {
                   <div className="flex flex-col gap-10 z-10">
                      <div className="flex flex-col gap-2">
                         <h3 className="text-2xl font-semibold">24/7 Support</h3>
-                        <p className="text-slate-700">
+                        <p className="text-neutral-700">
                            We are here to help, before, during, and even after your trip.
                         </p>
                      </div>
@@ -40,7 +40,7 @@ const BenefitSection = ({ benefit }: BenefitSectionProps) => {
                      <div className="flex flex-col gap-10 z-10">
                         <div className="flex flex-col gap-2">
                            <h3 className="text-2xl font-semibold">Best Price</h3>
-                           <p className="text-slate-700">
+                           <p className="text-neutral-700">
                               Price match within 48 hours of order confirmation
                            </p>
                         </div>
@@ -56,7 +56,7 @@ const BenefitSection = ({ benefit }: BenefitSectionProps) => {
                      <div className="flex flex-col gap-10 z-10">
                         <div className="flex flex-col gap-2">
                            <h3 className="text-2xl font-semibold">Save your time!</h3>
-                           <p className="text-slate-700">
+                           <p className="text-neutral-700">
                               Explore, Book, Soar: Your Journey Awaits!
                            </p>
                         </div>

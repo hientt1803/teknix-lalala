@@ -36,7 +36,7 @@ const StayCard = ({ imageUrl, name, location, pricePerNight }: StayCardProps) =>
                   ></path>
                </svg>
             </div>
-            <div className=" absolute -bottom-5 right-10 bg-white dark:bg-slate-800 px-5 py-2 rounded-full shadow flex items-center space-x-1 text-sm">
+            <div className=" absolute -bottom-5 right-10 bg-white dark:bg-neutral-800 px-5 py-2 rounded-full shadow flex items-center space-x-1 text-sm">
                <div className="pb-[2px]">
                   <svg
                      xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +54,7 @@ const StayCard = ({ imageUrl, name, location, pricePerNight }: StayCardProps) =>
                   </svg>
                </div>
                <span className="font-medium">4.8</span>
-               <span className="text-slate-500 dark:text-slate-400">(28 reviews)</span>
+               <span className="text-neutral-500 dark:text-neutral-400">(28 reviews)</span>
             </div>
             {/* <div
                className="nc-SaleOffBadge flex items-center justify-center text-xs py-0.5 px-3 bg-red-700 text-red-50 rounded-full absolute left-3 top-3"
@@ -66,7 +66,7 @@ const StayCard = ({ imageUrl, name, location, pricePerNight }: StayCardProps) =>
          <Link href="/">
             <div className="p-4 pt-7 space-y-4">
                <div className="space-y-2">
-                  {/* <span className="text-sm text-slate-500 dark:text-slate-400">
+                  {/* <span className="text-sm text-neutral-500 dark:text-neutral-400">
                             Entire cabin · 10 beds
                         </span> */}
                   <div className="flex items-center space-x-2">
@@ -77,7 +77,7 @@ const StayCard = ({ imageUrl, name, location, pricePerNight }: StayCardProps) =>
                         <span className="line-clamp-1">{name}</span>
                      </h2>
                   </div>
-                  <div className="flex items-center text-slate-500 dark:text-slate-400 text-base space-x-2">
+                  <div className="flex items-center text-neutral-500 dark:text-neutral-400 text-base space-x-2">
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-5 w-5"
@@ -101,11 +101,11 @@ const StayCard = ({ imageUrl, name, location, pricePerNight }: StayCardProps) =>
                      <span className="">{location}</span>
                   </div>
                </div>
-               <div className="w-14 border-b border-slate-100 dark:border-slate-800"></div>
+               <div className="w-14 border-b border-neutral-100 dark:border-neutral-800"></div>
                <div className="flex justify-between items-center">
                   <span className="text-2xl font-semibold">
                      $ {pricePerNight}
-                     <span className="text-sm text-slate-500 dark:text-slate-400 font-normal">
+                     <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
                         /person
                      </span>
                   </span>

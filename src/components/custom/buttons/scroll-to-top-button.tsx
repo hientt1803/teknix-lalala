@@ -80,9 +80,9 @@ const ScrollToTopButton = () => {
          {scrollProgress > 5 && (
             <div
                className={cn(
-                  'fixed right-0 bottom-14 w-10 h-10 bg-white bg-opacity-70 cursor-pointer group rounded-full transition-all z-40 flex items-center justify-center',
+                  'fixed right-14 bottom-14 w-10 h-10 bg-white bg-opacity-70 cursor-pointer group rounded-full transition-all z-40 flex items-center justify-center',
                )}
-               style={{ right: `${rightPosition}px` }}
+               // style={{ right: `${rightPosition}px` }}
                onClick={handleScrollTop}
             >
                {/* SVG Circle for Progress Indicator */}

@@ -43,6 +43,7 @@ const initialState: IHotelSlice = {
       coupon_code: '',
    },
    isTriggerGlobal: false,
+   isTriggerRoomSearch: false,
 };
 
 export const StaySlice = createSlice({
@@ -61,6 +62,9 @@ export const StaySlice = createSlice({
       setTriggerSearch: (state, action) => {
          state.isTriggerGlobal = action.payload;
       },
+      setTriggerRoomSearch: (state, action) => {
+         state.isTriggerRoomSearch = action.payload;
+      },
    },
    extraReducers(builder) {
       builder.addMatcher(
@@ -76,12 +80,16 @@ export const StaySlice = createSlice({
             state.isTriggerGlobal = false;
          },
       );
-      builder.addMatcher(
-         endpoints.getListHotelByGeoSearchEngine.matchRejected,
-         (state, action) => {
-            state.isTriggerGlobal = false;
-         },
-      );
+      builder.addMatcher(endpoints.getListHotelByGeoSearchEngine.matchRejected, (state, action) => {
+         state.isTriggerGlobal = false;
+      });
+      builder.addMatcher(endpoints.getRoomActiveByHotelId.matchFulfilled, (state, action) => {
+         // state.hotels = action.payload;
+         state.isTriggerRoomSearch = false;
+      });
+      builder.addMatcher(endpoints.getRoomActiveByHotelId.matchRejected, (state, action) => {
+         state.isTriggerRoomSearch = false;
+      });
       // builder.addMatcher(
       //   endpoints.getHotelByHotelId.matchFulfilled,
       //   (state, action) => {
@@ -103,6 +111,7 @@ export const StaySlice = createSlice({
    },
 });
 
-export const { setHotels, setHotelSearch, setReserveForm, setTriggerSearch } = StaySlice.actions;
+export const { setHotels, setHotelSearch, setReserveForm, setTriggerSearch, setTriggerRoomSearch } =
+   StaySlice.actions;
 
 export default StaySlice.reducer;

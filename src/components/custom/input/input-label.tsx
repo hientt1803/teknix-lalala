@@ -3,18 +3,22 @@ import { Input, InputProps } from '@/components/ui/input';
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
 import { Mail } from 'lucide-react';
+import { boolean, optional } from 'zod';
 
 interface InputLabelProps extends InputProps {
    label?: string;
    rightLabel?: React.ReactNode;
    sizes?: 'small' | 'medium';
+   requiredLabel?: boolean;
 }
 
 const InputLabel = ({
    label,
-   required,
+   required = false,
+   requiredLabel = false,
    rightLabel,
    sizes = 'medium',
+   className,
    id,
    ...props
 }: InputLabelProps) => {
@@ -24,26 +28,33 @@ const InputLabel = ({
    return (
       <div className="block">
          {label && (
-            <span className="flex justify-between items-center text-slate-800 mb-1">
+            <span className="flex justify-between items-center text-neutral-800 mb-1">
                <Label
-                  className={cn('text-slate-900 dark:text-slate-300', {
+                  className={cn('text-neutral-900 dark:text-neutral-300', {
                      'text-sm font-medium': sizes === 'small',
                      'text-base': sizes === 'medium',
                   })}
                   htmlFor={inputId}
                >
                   {label} {required && <span className="text-red-500">*</span>}
+                  {!required && requiredLabel && (
+                     <span className="text-xs font-normal text-neutral-500 dark:text-neutral-400">
+                        (optional)
+                     </span>
+                  )}
                </Label>
                {rightLabel}
             </span>
          )}
 
-            <Input
-               id={inputId}
-               className="block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1"
-               {...props}
-            />
-         
+         <Input
+            id={inputId}
+            className={cn(
+               'block w-full border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal min-h-11 h-11 px-4 py-3 mt-1',
+               className,
+            )}
+            {...props}
+         />
       </div>
    );
 };

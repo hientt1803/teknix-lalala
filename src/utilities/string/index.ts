@@ -10,8 +10,8 @@
  * `size` string parameter. It replaces any occurrence of '{size}' in the `value` string with the
  * provided `size` parameter or '640x400' if no `size` parameter is provided.
  */
-export const replaceSize = (value: string, size?: string) => {
-   return value.replaceAll('{size}', size || '640x400');
+export const replaceSize = (value?: string, size?: '640x400' | '1024x768') => {
+   return value && value.replaceAll('{size}', size || '640x400');
 };
 
 /* The `convertKebabToTitleCase` function is taking a string in kebab-case

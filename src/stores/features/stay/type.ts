@@ -508,6 +508,7 @@ export interface IHotelSlice {
    activeHotel: IActiveRoom | null;
    reserveForm: IReserveForm;
    isTriggerGlobal: boolean;
+   isTriggerRoomSearch: boolean;
 }
 
 export interface IReserveSlice {

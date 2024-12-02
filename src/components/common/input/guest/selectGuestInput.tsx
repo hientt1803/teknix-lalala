@@ -1,7 +1,7 @@
 'use client';
 
 import { User } from 'lucide-react';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useMediaQuery } from '@/hooks/use-media-query';
@@ -41,15 +41,6 @@ export const GroupPeopleInput = React.memo(() => {
    const matches = useMediaQuery('(min-width:768px)');
 
    // Logic
-   // useEffect(() => {
-   //    if (!matches) {
-   //       const params = new URLSearchParams(window.location.search);
-   //       if (params.get('showSelectPeople') && params.get('fromChooseDateRange')) {
-   //          setOpened(true);
-   //       }
-   //    }
-   // }, [matches]);
-
    const handleStorePeopleToStorage = useCallback(() => {
       const newPeople = listRoom.map((room) => ({
          adults: room.adults,
@@ -137,61 +128,42 @@ export const GroupPeopleInput = React.memo(() => {
    } room${listRoom.length > 1 ? 's' : ''}`;
 
    return (
-      <div>
-         <Popover
-            open={opened}
-            onOpenChange={(isOpen) => {
-               setOpened(isOpen);
-               if (isOpen == false) {
-                  handleStorePeopleToStorage();
-               }
+      <Popover open={opened} onOpenChange={setOpened}>
+         <PopoverTrigger
+            onClick={() => {
+               setOpened(true);
             }}
+            asChild
          >
-            <PopoverTrigger
-               onClick={() => {
-                  setOpened(true);
-               }}
-               asChild
-            >
-               <div className="flex justify-start items-center gap-2">
-                  <User className="text-slate-400 w-5 h-5" />
-                  <span className="min-w-[9.375rem] w-full text-sm text-slate-700 dark:text-slate-50 font-medium line-clamp-1">
-                     {inputPlaceHolderValue}
-                  </span>
-               </div>
-            </PopoverTrigger>
-            <PopoverContent
-               onOpenAutoFocus={(e) => {
-                  e.preventDefault();
-               }}
-               className="w-[25rem]"
-            >
-               <GroupInputSelectDrawerContent
-                  listRoom={listRoom}
-                  handleDeleteChildren={handleDeleteChildren}
-                  handleOnChangeChildren={handleOnChangeChildren}
-                  handleOnChangeAdults={handleOnChangeAdults}
-                  close={handleCloseInputSelect}
-                  open={() => setOpened(true)}
-                  addNewRoom={addNewRoom}
-                  deleteRoom={deleteRoom}
-               />
-            </PopoverContent>
-         </Popover>
-
-         {/* <Drawer open={opened} onClose={handleCloseInputSelect}>
-               <GroupInputSelectDrawerContent
-                  listRoom={listRoom}
-                  handleDeleteChildren={handleDeleteChildren}
-                  handleOnChangeChildren={handleOnChangeChildren}
-                  handleOnChangeAdults={handleOnChangeAdults}
-                  close={handleCloseInputSelect}
-                  open={() => setOpened(true)}
-                  addNewRoom={addNewRoom}
-                  deleteRoom={deleteRoom}
-               />
-            </Drawer> */}
-      </div>
+            <div className="flex justify-start items-center gap-2">
+               <User className="text-neutral-400 w-5 h-5" />
+               <span className="min-w-[9.375rem] w-full text-sm text-neutral-700 dark:text-neutral-50 font-medium line-clamp-1">
+                  {inputPlaceHolderValue}
+               </span>
+            </div>
+         </PopoverTrigger>
+         <PopoverContent
+            onOpenAutoFocus={(e) => {
+               e.preventDefault();
+            }}
+            onCloseAutoFocus={(e) => {
+               e.preventDefault();
+               handleStorePeopleToStorage();
+            }}
+            className="w-[25rem]"
+         >
+            <GroupInputSelectDrawerContent
+               listRoom={listRoom}
+               handleDeleteChildren={handleDeleteChildren}
+               handleOnChangeChildren={handleOnChangeChildren}
+               handleOnChangeAdults={handleOnChangeAdults}
+               close={handleCloseInputSelect}
+               open={() => setOpened(true)}
+               addNewRoom={addNewRoom}
+               deleteRoom={deleteRoom}
+            />
+         </PopoverContent>
+      </Popover>
    );
 });
 

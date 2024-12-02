@@ -25,7 +25,7 @@ const FlightCard = ({ data, index }: Props) => {
                     <div className="flex font-semibold">
                         <div>
                             <span>{data.departureTime}</span>
-                            <span className="flex items-center text-sm text-slate-500 font-normal mt-0.5">
+                            <span className="flex items-center text-sm text-neutral-500 font-normal mt-0.5">
                                 {data.route.substring(0, 3)}
                             </span>
                         </div>
@@ -34,12 +34,12 @@ const FlightCard = ({ data, index }: Props) => {
                         </span>
                         <div>
                             <span>{data.arrivalTime}</span>
-                            <span className="flex items-center text-sm text-slate-500 font-normal mt-0.5">
+                            <span className="flex items-center text-sm text-neutral-500 font-normal mt-0.5">
                                 {data.route.substring(5, data.route.length)}
                             </span>
                         </div>
                     </div>
-                    <div className="text-sm text-slate-500 font-normal mt-0.5">
+                    <div className="text-sm text-neutral-500 font-normal mt-0.5">
                         <span className="VG3hNb">{data.stops}</span>
                         <span className="mx-2">·</span>
                         <span>{data.flightDuration}</span>
@@ -54,21 +54,21 @@ const FlightCard = ({ data, index }: Props) => {
                         {data.departureTime} - {data.arrivalTime}
                     </div>
                     {/* Air line */}
-                    <div className="text-sm text-slate-500 font-normal mt-0.5">
+                    <div className="text-sm text-neutral-500 font-normal mt-0.5">
                         {data.airline}
                     </div>
                 </div>
                 <div className="hidden lg:block flex-[4] whitespace-nowrap">
                     {/* Route EX: HND - SIN */}
                     <div className="font-medium text-lg">{data.route}</div>
-                    <div className="text-sm text-slate-500 font-normal mt-0.5">
+                    <div className="text-sm text-neutral-500 font-normal mt-0.5">
                         {data.flightDuration}
                     </div>
                 </div>
                 {/* STOP */}
                 <div className="hidden lg:block flex-[4] whitespace-nowrap">
                     <div className="font-medium text-lg">{data.stops}</div>
-                    <div className="text-sm text-slate-500 font-normal mt-0.5">
+                    <div className="text-sm text-neutral-500 font-normal mt-0.5">
                         {data.stops && data.stops !== "Nonstop"
                             ? "2 hours 15 minutes BKK"
                             : "Trip none stop"}
@@ -80,7 +80,7 @@ const FlightCard = ({ data, index }: Props) => {
                             ${data.price}
                         </span>
                     </div>
-                    <div className="text-xs sm:text-sm text-slate-500 font-normal mt-0.5">
+                    <div className="text-xs sm:text-sm text-neutral-500 font-normal mt-0.5">
                         {data.flightType}
                     </div>
                 </div>
@@ -88,7 +88,7 @@ const FlightCard = ({ data, index }: Props) => {
             {/* </Link> */}
         </AccordionHeader>
         <AccordionPanel>
-            <div className="p-4 md:p-8 border border-slate-200 dark:border-slate-700 rounded-2xl ">
+            <div className="p-4 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl ">
 
                 {/* START */}
                 <div>
@@ -98,31 +98,31 @@ const FlightCard = ({ data, index }: Props) => {
                         </div>
                         <div className="flex my-5 md:my-0">
                             <div className="flex-shrink-0 flex flex-col items-center py-2">
-                                <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
-                                <span className="block flex-grow border-l border-slate-400 border-dashed my-1"></span>
-                                <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
+                                <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
+                                <span className="block flex-grow border-l border-neutral-400 border-dashed my-1"></span>
+                                <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
                             </div>
                             <div className="ml-4 space-y-10 text-sm">
                                 <div className="flex flex-col space-y-1">
-                                    <span className=" text-slate-500">
+                                    <span className=" text-neutral-500">
                                         {data.details[0].departureDate}
                                     </span>
-                                    <span className=" font-semibold text-slate-400">
+                                    <span className=" font-semibold text-neutral-400">
                                         {data.details[0].departureAirport}
                                     </span>
                                 </div>
                                 <div className="flex flex-col space-y-1">
-                                    <span className=" text-slate-500">
+                                    <span className=" text-neutral-500">
                                         {data.details[0].arrivalDate}
                                     </span>
-                                    <span className=" font-semibold text-slate-400">
+                                    <span className=" font-semibold text-neutral-400">
                                         {data.details[0].arrivalAirport}
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <div className="border-l border-slate-200 dark:border-slate-600 md:mx-6 lg:mx-10"></div>
-                        <ul className="text-sm text-slate-500 space-y-1 md:space-y-2">
+                        <div className="border-l border-neutral-200 dark:border-neutral-600 md:mx-6 lg:mx-10"></div>
+                        <ul className="text-sm text-neutral-500 space-y-1 md:space-y-2">
                             <li>Trip time: {data.details[0].tripTime}</li>
                             <li>
                                 {data.details[0].airline} ·{" "}
@@ -137,15 +137,15 @@ const FlightCard = ({ data, index }: Props) => {
                 <div className="my-7 md:my-10 space-y-5 md:pl-24">
                     {data.details[0].transit && (
                         <>
-                            <div className="border-t border-slate-200" />
-                            <div className="text-slate-700 text-sm md:text-base">
+                            <div className="border-t border-neutral-200" />
+                            <div className="text-neutral-700 text-sm md:text-base">
                                 Transit time:{" "}
                                 {data.details[0].transit.stopDuration} -{" "}
                                 {data.details[0].transit.stopPoint}
                             </div>
                         </>
                     )}
-                    <div className="border-t border-slate-200" />
+                    <div className="border-t border-neutral-200" />
                 </div>
                 {/* GO HOME */}
                 {!data.details[1] ||
@@ -161,31 +161,31 @@ const FlightCard = ({ data, index }: Props) => {
                                 </div>
                                 <div className="flex my-5 md:my-0">
                                     <div className="flex-shrink-0 flex flex-col items-center py-2">
-                                        <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
-                                        <span className="block flex-grow border-l border-slate-400 border-dashed my-1"></span>
-                                        <span className="block w-6 h-6 rounded-full border border-slate-400"></span>
+                                        <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
+                                        <span className="block flex-grow border-l border-neutral-400 border-dashed my-1"></span>
+                                        <span className="block w-6 h-6 rounded-full border border-neutral-400"></span>
                                     </div>
                                     <div className="ml-4 space-y-10 text-sm">
                                         <div className="flex flex-col space-y-1">
-                                            <span className=" text-slate-500">
+                                            <span className=" text-neutral-500">
                                                 {data.details[1].departureDate}
                                             </span>
-                                            <span className=" font-semibold text-slate-400">
+                                            <span className=" font-semibold text-neutral-400">
                                                 {data.details[1].departureAirport}
                                             </span>
                                         </div>
                                         <div className="flex flex-col space-y-1">
-                                            <span className=" text-slate-500">
+                                            <span className=" text-neutral-500">
                                                 {data.details[1].arrivalDate}
                                             </span>
-                                            <span className=" font-semibold text-slate-400">
+                                            <span className=" font-semibold text-neutral-400">
                                                 {data.details[1].arrivalAirport}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="border-l border-slate-200 md:mx-6 lg:mx-10"></div>
-                                <ul className="text-sm text-slate-500 space-y-1 md:space-y-2">
+                                <div className="border-l border-neutral-200 md:mx-6 lg:mx-10"></div>
+                                <ul className="text-sm text-neutral-500 space-y-1 md:space-y-2">
                                     <li>Trip time: {data.details[1].tripTime}</li>
                                     <li>
                                         {data.details[1].airline} ·{" "}

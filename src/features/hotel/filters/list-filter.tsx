@@ -1,24 +1,20 @@
 'use client';
 
-import { MainButton } from '@/components/common/button/mainButton';
 import Badge from '@/components/custom/badges/badge';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Slider } from '@/components/ui/slider';
 import { PlacesType } from '@/lib/Places';
 import { cn } from '@/lib/utils';
 import { FILTER_MOCK } from '@/slices/HotelListing/mock';
-import { useAppSelector } from '@/stores/hook';
 import { setSearchGlobalLocationRadius } from '@/stores/features/global/global-slice';
 import { ISearchGlobal } from '@/stores/features/global/type';
 import { setTriggerSearch } from '@/stores/features/stay/stay-slice';
+import { useAppSelector } from '@/stores/hook';
+import { ChevronDown } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 
 const FilterMap = dynamic(() => import('../filters/filter-map').then((mod) => mod.FilterMap));
 
@@ -96,19 +92,7 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
 
    return (
       <React.Fragment>
-         <div>
-            <div className="group mb-10 mx-6">
-               {/* <div className="text-lg font-[600] mb-2">Show on map</div> */}
-               {/* <div className="flex items-center space-x-2">
-                  <FilterMap
-                     placeData={placeData}
-                     searchGlobal={searchGlobal}
-                     buttonClassName="min-w-full"
-                     showMapPlaceHolder
-                  />
-               </div> */}
-            </div>
-            {/* <div className="group mb-10 mx-6">
+         {/* <div className="group mb-10 mx-6">
                <div className="text-lg font-[600]">Location</div>
                <div className="text-sm font-normal text-neutral-500 flex gap-2 items-center mb-2">
                   <svg width="16" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -137,114 +121,107 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
                   />
                </div>
             </div> */}
-            <div className="border border-neutral-200 rounded-xl px-6 py-8 mb-6">
+         <div className="border border-neutral-200 dark:border-neutral-600 dark:bg-neutral-900 rounded-3xl px-6 py-8 mb-6">
+            <Collapsible defaultOpen className="group">
+               <CollapsibleTrigger asChild>
+                  <div className="flex justify-between items-center cursor-pointer">
+                     <div className="text-lg font-[550] hover:underline">Filter Price</div>
+                     <ChevronDown className="w-5 h-5 text-neutral-600" />
+                  </div>
+               </CollapsibleTrigger>
+               <CollapsibleContent>
+                  <div className={cn('mt-5')}>
+                     <div>
+                        <Slider
+                           defaultValue={[10]}
+                           max={100}
+                           step={10}
+                           className="bg-neutral-400 rounded-xl"
+                        />
+                     </div>
+                     <div className="mt-6">
+                        <Slider
+                           defaultValue={[100]}
+                           max={100}
+                           step={10}
+                           className="bg-neutral-400 rounded-xl"
+                        />
+                     </div>
+                  </div>
+
+                  <div className="mt-4 text-neutral-700 dark:text-neutral-200 text-sm font-normal">
+                     $0 - $500
+                  </div>
+               </CollapsibleContent>
+            </Collapsible>
+         </div>
+
+         <div className="border border-neutral-200 dark:border-neutral-600 dark:bg-neutral-900 rounded-3xl mb-6">
+            <FilterMap placeData={placeData} searchGlobal={searchGlobal} showMapPlaceHolder />
+         </div>
+
+         {FILTER_MOCK?.map((filter: FilterType, index) => (
+            <div
+               key={index}
+               className="border border-neutral-200 dark:border-neutral-600 dark:bg-neutral-900 rounded-3xl px-6 py-8 mb-6"
+            >
                <Collapsible defaultOpen className="group">
                   <CollapsibleTrigger asChild>
                      <div className="flex justify-between items-center cursor-pointer">
-                        <div className="text-lg font-[550] hover:underline">Filter Price</div>
+                        <div className="text-lg font-[500] hover:underline">
+                           {filter?.sectionName}
+                        </div>
                         <ChevronDown className="w-5 h-5 text-neutral-600" />
                      </div>
                   </CollapsibleTrigger>
                   <CollapsibleContent>
-                     <div className={cn('mt-5')}>
-                        <div>
-                           <Slider
-                              defaultValue={[10]}
-                              max={100}
-                              step={10}
-                              className="bg-neutral-400 rounded-xl"
-                           />
-                        </div>
-                        <div className="mt-6">
-                           <Slider
-                              defaultValue={[100]}
-                              max={100}
-                              step={10}
-                              className="bg-neutral-400 rounded-xl"
-                           />
-                        </div>
+                     <div
+                        className={cn(
+                           'flex justify-start items-start gap-2 flex-wrap mt-5',
+                           filter?.sectionName == 'Rating Star' ||
+                              filter?.sectionName == 'Customer Rating'
+                              ? 'flex-row'
+                              : 'flex-col',
+                        )}
+                     >
+                        {filter?.filters?.map((item) => (
+                           <div className="w-full flex items-center space-x-2" key={item.id}>
+                              {filter?.sectionName == 'Rating Star' ||
+                              filter?.sectionName == 'Customer Rating' ? (
+                                 <Badge color="gray" className="rounded-md p-2">
+                                    <span className="flex gap-1 items-center cursor-pointer">
+                                       {item.name}
+                                       {filter?.sectionName == 'Rating Star' && (
+                                          <span className="text-base">★</span>
+                                       )}
+                                    </span>
+                                 </Badge>
+                              ) : (
+                                 <div className="w-full flex justify-between items-center">
+                                    <div className="flex gap-2 items-center">
+                                       <Checkbox
+                                          id={item.name}
+                                          className="border-neutral-300 rounded-md w-5 h-5"
+                                       />
+                                       <label
+                                          htmlFor={item.name}
+                                          className="text-sm text-black dark:text-neutral-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                                       >
+                                          {item.name}
+                                       </label>
+                                    </div>
+                                    <div className="bg-neutral-200 dark:bg-neutral-600 dark:text-neutral-100 p-2 rounded-md text-xs">
+                                       13
+                                    </div>
+                                 </div>
+                              )}
+                           </div>
+                        ))}
                      </div>
-
-                     <div className="mt-4 text-neutral-700 text-sm font-normal">$0 - $500</div>
                   </CollapsibleContent>
                </Collapsible>
             </div>
-
-            <div className="border border-neutral-200 rounded-xl mb-6">
-               <FilterMap placeData={placeData} searchGlobal={searchGlobal} showMapPlaceHolder />
-            </div>
-
-            {FILTER_MOCK?.map((filter: FilterType, index) => (
-               <div key={index} className="border border-neutral-200 rounded-xl px-6 py-8 mb-6">
-                  <Collapsible defaultOpen className="group">
-                     <CollapsibleTrigger asChild>
-                        <div className="flex justify-between items-center cursor-pointer">
-                           <div className="text-lg font-[500] hover:underline">
-                              {filter?.sectionName}
-                           </div>
-                           <ChevronDown className="w-5 h-5 text-neutral-600" />
-                        </div>
-                     </CollapsibleTrigger>
-                     <CollapsibleContent>
-                        <div
-                           className={cn(
-                              'flex justify-start items-start gap-2 flex-wrap mt-5',
-                              filter?.sectionName == 'Rating Star' ||
-                                 filter?.sectionName == 'Customer Rating'
-                                 ? 'flex-row'
-                                 : 'flex-col',
-                           )}
-                        >
-                           {filter?.filters?.map((item) => (
-                              <div className="w-full flex items-center space-x-2" key={item.id}>
-                                 {filter?.sectionName == 'Rating Star' ||
-                                 filter?.sectionName == 'Customer Rating' ? (
-                                    <Badge color="gray" className="rounded-md p-2">
-                                       <span className="flex gap-1 items-center cursor-pointer">
-                                          {item.name}
-                                          {filter?.sectionName == 'Rating Star' && (
-                                             <span className="text-base">★</span>
-                                          )}
-                                       </span>
-                                    </Badge>
-                                 ) : (
-                                    <div className="w-full flex justify-between items-center">
-                                       <div className="flex gap-2 items-center">
-                                          <Checkbox
-                                             id={item.name}
-                                             className="border-neutral-300 rounded-md w-5 h-5"
-                                          />
-                                          <label
-                                             htmlFor={item.name}
-                                             className="text-sm text-black peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
-                                          >
-                                             {item.name}
-                                          </label>
-                                       </div>
-                                       <div className="bg-neutral-200 p-2 rounded-md text-xs">
-                                          13
-                                       </div>
-                                    </div>
-                                 )}
-                              </div>
-                           ))}
-                        </div>
-                     </CollapsibleContent>
-                  </Collapsible>
-               </div>
-            ))}
-         </div>
-
-         {/* <div className="flex justify-between items-center mt-5 mx-6">
-            <span className="text-neutral-800 text-sm cursor-pointer font-semibold">Clear all</span>
-            <MainButton
-               variant="default"
-               color="#212121"
-               className="bg-neutral-800 hover:bg-neutral-900 text-white hover:text-white text-sm px-4 py-2 rounded-md"
-            >
-               Filter Result
-            </MainButton>
-         </div> */}
+         ))}
       </React.Fragment>
    );
 };

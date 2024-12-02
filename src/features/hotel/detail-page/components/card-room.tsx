@@ -194,7 +194,7 @@ const RoomCard = ({ data, active, id }: Props) => {
                                              </div>
                                           ))}
                                        </div>
-                                       {/* <div className="border-b xl:border-b-0 xl:border-r xl:h-16 border-slate-100 dark:border-slate-700" /> */}
+                                       {/* <div className="border-b xl:border-b-0 xl:border-r xl:h-16 border-neutral-100 dark:border-neutral-700" /> */}
                                        <div className="space-y-1 flex-1 xl:p-3">
                                           {!rate.payment_options.payment_types[0]
                                              .cancellation_penalties.free_cancellation_before ? (
@@ -223,7 +223,7 @@ const RoomCard = ({ data, active, id }: Props) => {
                                     </div>
                                     <div className="flex flex-col xl:flex-row xl:p-3 justify-between">
                                        <span className="flex flex-col text-lg font-semibold text-yellow-700 text-center xl:text-left">
-                                          <span className="text-xs text-slate-500 font-light px-1 line-through">
+                                          <span className="text-xs text-neutral-500 font-light px-1 line-through">
                                              {formatCurrencyWithCodeAsSuffix(
                                                 rate.payment_options.payment_types[0]?.show_amount,
                                                 rate.payment_options.payment_types[0]
@@ -331,7 +331,7 @@ const RoomCard = ({ data, active, id }: Props) => {
                                              </div>
                                           ))}
                                        </div>
-                                       {/* <div className="border-b xl:border-b-0 xl:border-r xl:h-16 border-slate-100 dark:border-slate-700" /> */}
+                                       {/* <div className="border-b xl:border-b-0 xl:border-r xl:h-16 border-neutral-100 dark:border-neutral-700" /> */}
                                        <div className="space-y-1 flex-1 xl:p-3">
                                           {!rate.payment_options.payment_types[0]
                                              .cancellation_penalties.free_cancellation_before ? (
@@ -360,7 +360,7 @@ const RoomCard = ({ data, active, id }: Props) => {
                                     </div>
                                     <div className="flex flex-col xl:flex-row xl:p-3 justify-between">
                                        <span className="flex flex-col text-lg font-semibold text-orange-500 text-center xl:text-left">
-                                          <span className="text-xs text-slate-500 font-light px-1 line-through">
+                                          <span className="text-xs text-neutral-500 font-light px-1 line-through">
                                              {formatCurrencyWithCodeAsSuffix(
                                                 rate.payment_options.payment_types[0]?.show_amount,
                                                 rate.payment_options.payment_types[0]

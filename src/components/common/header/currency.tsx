@@ -77,7 +77,7 @@ const CurrencyButton = () => {
                 title={currency.name}
                 onClick={() => handleAddCurrency(currency)}
                 href="#"
-                className="flex items-center gap-2 p-2 -m-3 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-700"
+                className="flex items-center gap-2 p-2 -m-3 rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700"
              >
                 <Avatar className="w-8 h-8">
                    <AvatarFallback className="w-full h-full text-xs bg-transparent">
@@ -92,7 +92,7 @@ const CurrencyButton = () => {
  
     return (
        <Popover open={open} onOpenChange={setOpen}>
-          <PopoverTrigger className="w-8 h-8 lg:w-12 lg:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 flex justify-center items-center cursor-pointer">
+          <PopoverTrigger className="w-8 h-8 lg:w-12 lg:h-12 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 flex justify-center items-center cursor-pointer">
              <span className="font-medium lg:text-base text-sm">{currency?.code}</span>
           </PopoverTrigger>
  
@@ -109,24 +109,24 @@ const CurrencyButton = () => {
                    onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <i
-                   className={`las ${searchTerm ? 'la-times-circle' : 'la-money-bill'} text-2xl cursor-pointer text-slate-500 absolute right-3 top-1/2 -translate-y-1/2`}
+                   className={`las ${searchTerm ? 'la-times-circle' : 'la-money-bill'} text-2xl cursor-pointer text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2`}
                    onClick={() => setSearchTerm('')}
                 ></i>
              </div>
-             <div className="border-b border-b-slate-100 dark:border-b-slate-800" />
+             <div className="border-b border-b-neutral-100 dark:border-b-neutral-800" />
              <ScrollArea className="h-[320px] lg:h-[512px]">
                 {debounceSearch ? (
                    <div className="py-3 px-5 space-y-5">{renderCurrencyList(listCurrency)}</div>
                 ) : (
                    <>
                       <div className="py-3 px-5 space-y-5">
-                         <h3 className="text-sm text-slate-500 dark:text-slate-400">
+                         <h3 className="text-sm text-neutral-500 dark:text-neutral-400">
                             Popular currencies
                          </h3>
                          {renderCurrencyList(popularCurrency)}
                       </div>
                       <div className="py-3 px-5 space-y-5">
-                         <h3 className="text-sm text-slate-500 dark:text-slate-400">
+                         <h3 className="text-sm text-neutral-500 dark:text-neutral-400">
                             All currencies
                          </h3>
                          {renderCurrencyList(allCurrencies)}

@@ -40,7 +40,7 @@ export const FacilitiesContainer = ({ slice }: { slice: Content.FacilitiesSectio
                            className: 'text-yellow-600',
                         })}
                      </span>
-                     <span className="text-slate-600 dark:text-slate-400">{facility.name}</span>
+                     <span className="text-neutral-600 dark:text-neutral-400">{facility.name}</span>
                   </div>
                ))}
             </div>

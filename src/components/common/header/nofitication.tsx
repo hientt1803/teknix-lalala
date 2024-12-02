@@ -43,12 +43,12 @@ const Notification = () => {
             baseTheme: resolvedTheme === 'dark' ? dark : undefined,
             animations: true,
             elements: {
-               dropdownContent: 'dark:bg-slate-900',
-               channelsContainer: 'dark:bg-slate-900',
-               channelsContainerCollapsible: 'dark:bg-slate-900',
-               workflowContainer: 'dark:bg-slate-900',
-               preferencesContainer: 'dark:bg-slate-900',
-               inboxContent: 'dark:bg-slate-900',
+               dropdownContent: 'dark:bg-neutral-900',
+               channelsContainer: 'dark:bg-neutral-900',
+               channelsContainerCollapsible: 'dark:bg-neutral-900',
+               workflowContainer: 'dark:bg-neutral-900',
+               preferencesContainer: 'dark:bg-neutral-900',
+               inboxContent: 'dark:bg-neutral-900',
             },
          }}
       >
@@ -58,7 +58,7 @@ const Notification = () => {
                   renderBell={(unreadCount) => (
                      <Button
                         variant="ghost"
-                        className="relative w-12 h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
+                        className="relative w-12 h-12 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none flex items-center justify-center"
                         size={'icon'}
                      >
                         {unreadCount > 0 && (
@@ -76,20 +76,20 @@ const Notification = () => {
                      <div className="relative grid gap-8 p-7">
                         <div
                            onClick={!notification.isRead ? notification.read : () => {}}
-                           className="flex p-2 pr-8 -m-3 cursor-pointer transition duration-150 ease-in-out rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800  focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 relative"
+                           className="flex p-2 pr-8 -m-3 cursor-pointer transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-800  focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50 relative"
                         >
                            <Avatar className="h-12 w-12">
                               <AvatarImage src={notification.avatar || '/lalala.svg'} />
                               <AvatarFallback>A</AvatarFallback>
                            </Avatar>
                            <div className="ml-3 sm:ml-4 space-y-1">
-                              <p className="text-sm font-medium text-slate-900 dark:text-slate-200">
+                              <p className="text-sm font-medium text-neutral-900 dark:text-neutral-200">
                                  Lalala Notification
                               </p>
-                              <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                              <p className="text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
                                  {notification.body}
                               </p>
-                              <p className="text-xs text-slate-400 dark:text-slate-400">
+                              <p className="text-xs text-neutral-400 dark:text-neutral-400">
                                  {formatDistanceToNowStrict(new Date(notification.createdAt), {
                                     addSuffix: true,
                                  })}

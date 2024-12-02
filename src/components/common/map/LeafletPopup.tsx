@@ -78,9 +78,9 @@ const LeafletPopup = ({
                         </svg>
                      </span>
                      <span className="font-medium">{star}</span>
-                     <span className="text-slate-500 dark:text-slate-400">(28)</span>
+                     <span className="text-neutral-500 dark:text-neutral-400">(28)</span>
                   </span>
-                  <span>{formatCurrencyWithCodeAsSuffix(price, 'VND')}</span>
+                  {price !== 0 && <span>{formatCurrencyWithCodeAsSuffix(price, 'VND')}</span>}
                </p>
             </div>
             {/* todo: new component for button group */}

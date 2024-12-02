@@ -9,9 +9,9 @@ const CardListing = () => {
          <div className="flex flex-col p-6 border space-y-8 rounded-3xl">
             <div>
                <h2 className="text-2xl font-semibold">History Booking</h2>
-               <span className="block mt-2 text-slate-500 ">View your reservation history.</span>
+               <span className="block mt-2 text-neutral-500 ">View your reservation history.</span>
             </div>
-            <div className="w-14 border-b border-slate-200" />
+            <div className="w-14 border-b border-neutral-200" />
             {/* HISRORY */}
             <HistoryListing />
          </div>

@@ -39,13 +39,15 @@ import { IHotelReservation, IReserveForm } from '@/stores/features/stay/type';
 import { ErrorType } from '@/types/error';
 import { generateTimeSlotsFromNow, timeFormatString } from '@/utilities/time';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Country, isValidPhoneNumber } from 'react-phone-number-input';
 import { useDispatch } from 'react-redux';
 import * as z from 'zod';
 import { PhoneInput } from './phone-input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const formSchema = z.object({
    email: z.string().email({ message: "Oops, that email won't work, please enter a valid one." }),
@@ -56,6 +58,15 @@ const formSchema = z.object({
    message: z.string(),
    arrive: z.string().min(1, { message: 'Arrival time is required' }),
    specialRequest: z.string(),
+   freePaperless: z.boolean().default(false).optional(),
+   bookingFor: z.enum(['main', 'someone']),
+   areYouWork: z.enum(['yes', 'no']),
+   company: z
+      .object({
+         companyName: z.string().optional(),
+         vatNumber: z.string().optional(),
+      })
+      .optional(),
 });
 
 type FormInfoProps = {
@@ -73,6 +84,7 @@ type CountryType = {
 const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormInfoProps) => {
    //   next api
    const router = useRouter();
+   const pathname = usePathname();
 
    // redux
    const hotel = useAppSelector((state) => state.staySlice.reserveForm);
@@ -99,6 +111,8 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
          message: '',
          arrive: '',
          specialRequest: '',
+         bookingFor: 'main',
+         areYouWork: 'yes',
       },
       resolver: zodResolver(formSchema),
    });
@@ -184,6 +198,9 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      variant: 'success',
                   });
                   setIsConfirm(true);
+                  history.pushState(null, '', `/checkout?reservation=${res.id}`);
+                  //   window.location.
+                  //   router.push(`/checkout?reservation=${res.id}`, { scroll: true });
 
                   scrollIntoView();
                }
@@ -275,7 +292,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                   />
                </div>
                {/* LAST & FIRST NAME */}
-               <div className="flex space-x-5  ">
+               <div className="flex space-x-5">
                   <div className="flex-1 space-y-1">
                      <FormField
                         control={form.control}
@@ -338,7 +355,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      name="phoneNumber"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
                               Phone number <span className="text-red-500">*</span>
                            </FormLabel>
 
@@ -348,7 +365,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  international
                                  readOnly={isConfirm}
                                  defaultCountry={(form.getValues().citizenship as Country) || 'VN'}
-                                 className="w-full !rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11"
+                                 className="w-full rounded-lg border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 bg-white text-sm font-normal h-11"
                                  {...field}
                                  onCountryChange={(c) => form.setValue('citizenship', c || '')}
                               />
@@ -364,7 +381,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      name="citizenship"
                      render={({ field }) => (
                         <FormItem className="flex flex-col justify-start items-start gap-1">
-                           <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
                               Country <span className="text-red-500">*</span>
                            </FormLabel>
 
@@ -385,7 +402,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  disabled={isConfirm}
                               >
                                  <FormControl>
-                                    <SelectTrigger className="w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1">
+                                    <SelectTrigger className="w-full border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white rounded-2xl text-sm font-normal h-11 px-4 py-3 mt-1">
                                        <SelectValue
                                           placeholder="Select your country"
                                           defaultValue={field.value}
@@ -418,14 +435,18 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                                )?.label
                                              : 'Select your country...'
                                        }
-                                       className="text-start rounded-lg cursor-pointer min-h-12"
+                                       className="text-start rounded-lg cursor-pointer border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal min-h-11 px-4 py-3"
                                        onClick={() => {
                                           setCountryInputOpened(!countryInputOpened);
                                        }}
                                     />
                                  </PopoverTrigger>
-                                 <PopoverContent className="w-fit p-0" align="start">
-                                    <Command className="w-fit">
+                                 <PopoverContent
+                                    className="p-0"
+                                    align="start"
+                                    style={{ width: 'var(--radix-popover-trigger-width)' }}
+                                 >
+                                    <Command className="w-full">
                                        <CommandInput placeholder="Find your country" />
                                        <CommandList>
                                           <CommandEmpty>No results found.</CommandEmpty>
@@ -463,7 +484,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      name="arrive"
                      render={({ field }) => (
                         <FormItem className="flex flex-col gap-0">
-                           <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
                               Arrival time <span className="text-red-500">*</span>
                            </FormLabel>
                            <Select
@@ -472,10 +493,10 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                               disabled={isConfirm}
                            >
                               <FormControl>
-                                 <SelectTrigger className="w-full rounded-lg border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1">
+                                 <SelectTrigger className="w-full rounded-lg border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1">
                                     <SelectValue
-                                    // placeholder="Select a time"
-                                    // defaultValue={field.value}
+                                       placeholder="Select arrival time"
+                                       // defaultValue={field.value}
                                     />
                                  </SelectTrigger>
                               </FormControl>
@@ -506,7 +527,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      name="specialRequest"
                      render={({ field }) => (
                         <FormItem>
-                           <FormLabel className="text-slate-800 dark:text-slate-300 text-sm">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
                               Message
                            </FormLabel>
                            <FormControl>
@@ -514,12 +535,12 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                                  placeholder="Message"
                                  rows={4}
                                  readOnly={isConfirm}
-                                 className="min-h-[150px] rounded-lg block w-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1"
+                                 className="min-h-[150px] rounded-lg block w-full border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1"
                                  {...field}
                               />
                            </FormControl>
                            <FormDescription>
-                              <span className="text-sm text-slate-500 block">
+                              <span className="text-sm text-neutral-500 block">
                                  Write a few sentences about yourself.
                               </span>
                            </FormDescription>
@@ -528,6 +549,154 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      )}
                   />
                </div>
+               <div className="space-y-1">
+                  <FormField
+                     control={form.control}
+                     name="freePaperless"
+                     render={({ field }) => (
+                        <FormItem className="flex flex-col gap-0">
+                           <div className="flex items-center space-x-2">
+                              <FormControl>
+                                 <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                              </FormControl>
+                              <FormLabel className="space-y-1 leading-none">
+                                 <span>Yes, I want free paperless confirmation (recommended)</span>
+                                 <FormDescription className="font-normal">
+                                    You can manage your mobile notifications in the We&apos;ll text you a
+                                    link to download our app
+                                 </FormDescription>
+                              </FormLabel>
+                           </div>
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+               </div>
+               <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+               <div className="space-y-1">
+                  <FormField
+                     control={form.control}
+                     name="bookingFor"
+                     render={({ field }) => (
+                        <FormItem className="flex flex-col gap-0">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
+                              Who are you booking for?
+                           </FormLabel>
+                           <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="flex flex-col space-y-1"
+                           >
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value="main" />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    I&apos;m the main guest
+                                 </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value="someone" />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    I&apos;m booking for someone esle
+                                 </FormLabel>
+                              </FormItem>
+                           </RadioGroup>
+
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+               </div>
+               <div className="space-y-1">
+                  <FormField
+                     control={form.control}
+                     name="areYouWork"
+                     render={({ field }) => (
+                        <FormItem className="flex flex-col gap-0">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
+                              Are you traveling for work?
+                           </FormLabel>
+                           <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="flex space-x-1"
+                           >
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value={'yes'} />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    Yes
+                                 </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value="no" />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    No
+                                 </FormLabel>
+                              </FormItem>
+                           </RadioGroup>
+
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+               </div>
+               {form.getValues('areYouWork') === 'yes' && (
+                  <div className="flex space-x-5">
+                     <div className="flex-1 space-y-1">
+                        <FormField
+                           control={form.control}
+                           name="company.companyName"
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormControl>
+                                    <InputLabel
+                                       sizes="small"
+                                       requiredLabel
+                                       label="Company Name"
+                                       type="text"
+                                       readOnly={isConfirm}
+                                       placeholder="Ex: Texnik Comporation"
+                                       className="rounded-lg"
+                                       {...field}
+                                    />
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                     </div>
+                     <div className="flex-1 space-y-1">
+                        <FormField
+                           control={form.control}
+                           name="company.vatNumber"
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormControl>
+                                    <InputLabel
+                                       sizes="small"
+                                       label="Vat Number"
+                                       requiredLabel
+                                       type="text"
+                                       readOnly={isConfirm}
+                                       placeholder="000 000"
+                                       className="rounded-lg"
+                                       {...field}
+                                    />
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                     </div>
+                  </div>
+               )}
             </div>
 
             <div className="pt-8 flex flex-1 justify-end">

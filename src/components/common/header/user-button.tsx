@@ -36,7 +36,7 @@ const UserButton = () => {
             <div className="relative w-12 h-12 flex items-center justify-center">
                <Button
                   variant="ghost"
-                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
+                  className="w-10 h-10 lg:w-12 lg:h-12 rounded-full text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 focus:outline-none flex items-center justify-center"
                   size={'icon'}
                >
                   <Avatar>

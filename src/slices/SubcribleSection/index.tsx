@@ -24,13 +24,13 @@ const SubcribleSection = ({ slice }: SubcribleSectionProps): JSX.Element => {
          data-slice-variation={slice.variation}
          className="block py-16"
       >
-         <div className="w-full h-full relative bg-[#eff0f1] rounded-lg flex justify-center items-center">
+         <div className="w-full h-full relative bg-[#eff0f1] dark:bg-neutral-900 rounded-lg flex justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-6 px-5 py-20 md:p-20">
                <PrismicRichText
                   field={slice.primary.heading}
                   components={{
                      heading2: ({ children }) => (
-                        <Heading className="w-full md:max-w-[37.5rem] mx-auto dark:text-black text-center font-bold text-4xl md:!text-5xl">
+                        <Heading className="w-full md:max-w-[37.5rem] mx-auto dark:text-neutral-100 text-center font-bold text-4xl md:!text-5xl">
                            {children}
                         </Heading>
                      ),
@@ -44,7 +44,7 @@ const SubcribleSection = ({ slice }: SubcribleSectionProps): JSX.Element => {
                         type="email"
                         placeholder="Enter your email"
                         required
-                        className="border-none outline-none shadow-none focus:ring-0 placeholder:text-slate-400 placeholder:text-lg"
+                        className="border-none outline-none shadow-none focus:ring-0 placeholder:text-neutral-400 placeholder:text-lg"
                      />
 
                      <Button className="rounded-lg font-medium text-lg py-6 px-5 dark:bg-neutral-900 dark:text-neutral-200">
