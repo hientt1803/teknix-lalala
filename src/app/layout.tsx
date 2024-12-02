@@ -14,7 +14,7 @@ const popins = Poppins({
 const meta = {
    title: 'LaLaLa - Premium Hotels Booking Platform',
    description: 'Affordable Travel Bookings | Lalala - Your Trusted Online Travel Agency  ',
-   image: `/assets/favicon/lalala.svg`,
+   image: `/lalala.svg`,
 };
 
 export const metadata: Metadata = {
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
       yandex: 'yandex',
       yahoo: 'yahoo',
       other: {
-         me: ['tronghientran18@gmail.com', 'https://tranhien-portfolio.vercel.app/'],
+         me: ['tronghientran18@gmail.com', 'https://teknix-lalala.vercel.app/'],
       },
    },
    appLinks: {
