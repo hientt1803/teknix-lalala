@@ -11,7 +11,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import FormInfomation from './components/form';
 import Payment from './components/payment';
-import { CircleHelpIcon, Clock10, MapPin } from 'lucide-react';
+import { AlarmClock, CircleHelpIcon, Clock, Clock10, MapPin } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 import {
@@ -28,6 +28,8 @@ import { getAmenityIcon } from '../hotel/detail-page/components/sections/most-fa
 import { convertSnakeToTitleCase, replaceSize } from '@/utilities/string';
 import { cn } from '@/lib/utils';
 import { useGetReviewByStayIdQuery } from '@/stores/features/review';
+import GoodToKnow from './components/good-to-know';
+import AddYourStay from './components/add-your-stay';
 
 const CheckoutFeatures = () => {
    // next api
@@ -123,11 +125,12 @@ const CheckoutFeatures = () => {
 
             <div className="relative mt-11 mb-24 lg:mb-32 flex flex-col-reverse lg:flex-row">
                {/* MAIN SECTION */}
-               <div className="w-full lg:w-3/5 xl:w-2/3 lg:pr-10">
-                  <div className="w-full flex flex-col mb-3 rounded-lg border border-neutral-200 dark:border-neutral-700 space-y-8 p-5">
+               <div className="w-full lg:w-3/4 xl:w-10/12 lg:pr-10 flex-grow">
+                  {/* INFO */}
+                  <div className="w-full flex flex-col mb-3 rounded-lg border-0 lg:border border-neutral-200 dark:border-neutral-700 space-y-8 p-0 lg:p-5">
                      <div className="flex justify-between items-center gap-5">
                         {/* LINE */}
-                        <div className="h-full flex-shrink">
+                        <div className="hidden lg:block h-full flex-shrink">
                            <div className="h-full flex flex-col justify-between items-center py-5">
                               {/* Top circle */}
                               <div className="w-3 h-3 rounded-full bg-neutral-900 dark:bg-neutral-600"></div>
@@ -238,141 +241,140 @@ const CheckoutFeatures = () => {
                      </div>
                   </div>
 
-                  <div className="w-full flex flex-col sm:rounded-lg sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-5 xl:p-5 mb-3">
+                  {/* FORM */}
+                  <div className="w-full flex flex-col sm:rounded-lg sm:border border-neutral-200 dark:border-neutral-700 px-0 sm:p-5 mb-3">
                      {/* <h2 className="text-3xl lg:text-4xl font-semibold">Confirm and payment</h2> */}
                      {/* <div className="border-b border-neutral-200 dark:border-neutral-700" /> */}
-                     <div>
-                        {/* DETAIL MOBILE */}
-                        <div className="block rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 lg:hidden flex-grow">
-                           <div className="bg-neutral-200 px-5 py-5">
-                              <h3 className="text-2xl font-semibold">Price & Fee</h3>
-                           </div>
-                           <div className="flex flex-col space-y-4 px-5 pb-5">
-                              <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
-                                 <span>
-                                    {formatCurrencyWithCodeAsSuffix(
+
+                     {/* DETAIL MOBILE */}
+                     <div className="block rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 lg:hidden flex-grow">
+                        <div className="bg-neutral-200 px-5 py-5">
+                           <h3 className="text-2xl font-semibold">Price & Fee</h3>
+                        </div>
+                        <div className="flex flex-col space-y-4 px-5 pb-5">
+                           <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    hotel.rate?.payment_options.payment_types[0].show_amount || 0,
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}{' '}
+                                 x {totalDay} day
+                              </span>
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    Number.parseFloat(
                                        hotel.rate?.payment_options.payment_types[0].show_amount ||
-                                          0,
-                                       hotel?.rate?.payment_options?.payment_types[0]
-                                          ?.show_currency_code,
-                                    )}{' '}
-                                    x {totalDay} day
-                                 </span>
-                                 <span>
-                                    {formatCurrencyWithCodeAsSuffix(
-                                       Number.parseFloat(
-                                          hotel.rate?.payment_options.payment_types[0]
-                                             .show_amount || '0',
-                                       ) * totalDay,
+                                          '0',
+                                    ) * totalDay,
 
-                                       hotel?.rate?.payment_options?.payment_types[0]
-                                          ?.show_currency_code,
-                                    )}
-                                 </span>
-                              </div>
-                              <div className="flex justify-between text-neutral-600  dark:text-neutral-50">
-                                 <span>Service charge</span>
-                                 <span>
-                                    {formatCurrencyWithCodeAsSuffix(
-                                       0,
-                                       hotel?.rate?.payment_options?.payment_types[0]
-                                          ?.show_currency_code,
-                                    )}
-                                 </span>
-                              </div>
-                              <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-                              <div className="flex justify-between font-semibold text-xl">
-                                 <span>Total</span>
-                                 <span>
-                                    {formatCurrencyWithCodeAsSuffix(
-                                       Number.parseFloat(
-                                          hotel.rate?.payment_options.payment_types[0]
-                                             .show_amount || '0',
-                                       ) * totalDay,
-                                       hotel?.rate?.payment_options?.payment_types[0]
-                                          ?.show_currency_code,
-                                    )}
-                                 </span>
-                              </div>
-                              <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-
-                              <div className="flex justify-between items-start space-x-5">
-                                 <p className="text-sm text-neutral-800  dark:text-neutral-400">
-                                    Approximate price in VND: the currency rate might change at the
-                                    time of payment.
-                                 </p>
-
-                                 {/* Tooltip wrapper cho CircleHelpIcon */}
-                                 <TooltipProvider>
-                                    <Tooltip>
-                                       <TooltipTrigger asChild>
-                                          <span className="cursor-pointer">
-                                             <CircleHelpIcon className="w-4 h-4" />
-                                          </span>
-                                       </TooltipTrigger>
-                                       <TooltipContent
-                                          side="top"
-                                          align="center"
-                                          className="max-w-xs"
-                                       >
-                                          <p>
-                                             This is an estimate and the final amount might vary
-                                             depending on the currency exchange rate at the time of
-                                             payment.
-                                          </p>
-                                       </TooltipContent>
-                                    </Tooltip>
-                                 </TooltipProvider>
-                              </div>
-                              {taxes.includedTaxes.map((tax, index) => (
-                                 <div
-                                    className="flex justify-between text-neutral-600  dark:text-neutral-50"
-                                    key={index}
-                                 >
-                                    <span className="capitalize text-sm">
-                                       {tax.name.replaceAll('_', ' ')}
-                                    </span>
-                                    <span>
-                                       {formatCurrencyWithCodeAsSuffix(
-                                          Number.parseFloat(tax.amount),
-                                          hotel?.rate?.payment_options?.payment_types[0]
-                                             ?.show_currency_code,
-                                       )}
-                                    </span>
-                                 </div>
-                              ))}
-                              <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-                              <p className="text-base font-medium text-neutral-800  dark:text-neutral-400">
-                                 To be paid upon arrival
-                              </p>
-                              {taxes.notIncludedTaxes.map((tax, index) => (
-                                 <div
-                                    className="flex justify-between text-neutral-600  dark:text-neutral-50"
-                                    key={index}
-                                 >
-                                    <span className="capitalize text-sm">
-                                       {tax.name.replaceAll('_', ' ')}
-                                    </span>
-                                    <span>
-                                       {formatCurrencyWithCodeAsSuffix(
-                                          Number.parseFloat(tax.amount),
-                                          hotel?.rate?.payment_options?.payment_types[0]
-                                             ?.show_currency_code,
-                                       )}
-                                    </span>
-                                 </div>
-                              ))}
-                              <div className="border-b border-neutral-200"></div>
-                              <p className="text-sm text-neutral-500  dark:text-neutral-400">
-                                 Please note You&apos;ll have to pay taxes and fees in the local
-                                 currency VND.
-                              </p>
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}
+                              </span>
                            </div>
+                           <div className="flex justify-between text-neutral-600  dark:text-neutral-50">
+                              <span>Service charge</span>
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    0,
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}
+                              </span>
+                           </div>
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                           <div className="flex justify-between font-semibold text-xl">
+                              <span>Total</span>
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    Number.parseFloat(
+                                       hotel.rate?.payment_options.payment_types[0].show_amount ||
+                                          '0',
+                                    ) * totalDay,
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}
+                              </span>
+                           </div>
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+
+                           <div className="flex justify-between items-start space-x-5">
+                              <p className="text-sm text-neutral-800  dark:text-neutral-400">
+                                 Approximate price in VND: the currency rate might change at the
+                                 time of payment.
+                              </p>
+
+                              {/* Tooltip wrapper cho CircleHelpIcon */}
+                              <TooltipProvider>
+                                 <Tooltip>
+                                    <TooltipTrigger asChild>
+                                       <span className="cursor-pointer">
+                                          <CircleHelpIcon className="w-4 h-4" />
+                                       </span>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="top" align="center" className="max-w-xs">
+                                       <p>
+                                          This is an estimate and the final amount might vary
+                                          depending on the currency exchange rate at the time of
+                                          payment.
+                                       </p>
+                                    </TooltipContent>
+                                 </Tooltip>
+                              </TooltipProvider>
+                           </div>
+                           {taxes.includedTaxes.map((tax, index) => (
+                              <div
+                                 className="flex justify-between text-neutral-600  dark:text-neutral-50"
+                                 key={index}
+                              >
+                                 <span className="capitalize text-sm">
+                                    {tax.name.replaceAll('_', ' ')}
+                                 </span>
+                                 <span>
+                                    {formatCurrencyWithCodeAsSuffix(
+                                       Number.parseFloat(tax.amount),
+                                       hotel?.rate?.payment_options?.payment_types[0]
+                                          ?.show_currency_code,
+                                    )}
+                                 </span>
+                              </div>
+                           ))}
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                           <p className="text-base font-medium text-neutral-800  dark:text-neutral-400">
+                              To be paid upon arrival
+                           </p>
+                           {taxes.notIncludedTaxes.map((tax, index) => (
+                              <div
+                                 className="flex justify-between text-neutral-600  dark:text-neutral-50"
+                                 key={index}
+                              >
+                                 <span className="capitalize text-sm">
+                                    {tax.name.replaceAll('_', ' ')}
+                                 </span>
+                                 <span>
+                                    {formatCurrencyWithCodeAsSuffix(
+                                       Number.parseFloat(tax.amount),
+                                       hotel?.rate?.payment_options?.payment_types[0]
+                                          ?.show_currency_code,
+                                    )}
+                                 </span>
+                              </div>
+                           ))}
+                           <div className="border-b border-neutral-200"></div>
+                           <p className="text-sm text-neutral-500  dark:text-neutral-400">
+                              Please note You&apos;ll have to pay taxes and fees in the local
+                              currency VND.
+                           </p>
                         </div>
                      </div>
+
                      {/* <div className="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8 p-5"> */}
                      <div>
-                        <h3 className="text-xl font-semibold">Enter your Details</h3>
+                        <h3 className="text-xl font-semibold">Enter your details</h3>
+                        <span className="text-sm text-neutral-400 mt-3">
+                           Please enter your detail to continune pay
+                        </span>
                         <FormInfomation
                            data={data}
                            isConfirm={isConfirm}
@@ -384,6 +386,16 @@ const CheckoutFeatures = () => {
                      {/* Trigger scroll */}
                   </div>
 
+                  {/* THING TO KNOW */}
+                  <div className="w-full flex flex-col sm:rounded-lg sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-5 xl:p-5 mb-3">
+                     <GoodToKnow />
+                  </div>
+                  {/* ADD YOUR STAY */}
+                  <div className="w-full flex flex-col sm:rounded-lg sm:border border-neutral-200 dark:border-neutral-700 space-y-8 px-0 sm:p-5 xl:p-5 mb-3">
+                     <AddYourStay />
+                  </div>
+
+                  {/* PAYMENT */}
                   {isConfirm && (
                      <div
                         ref={targetRef}
@@ -395,9 +407,10 @@ const CheckoutFeatures = () => {
                </div>
 
                {/* DETAILS */}
-               <div className="hidden lg:block flex-grow">
-                  <div className="sticky top-28 w-full flex flex-col rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8">
-                     {/* <div className="flex flex-col sm:flex-row sm:items-center">
+               <div className="hidden lg:block flex-shrink">
+                  <div className="sticky top-28 space-y-3">
+                     <div className="w-full flex flex-col rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 space-y-6 sm:space-y-8">
+                        {/* <div className="flex flex-col sm:flex-row sm:items-center">
                         <div className="flex-shrink-0 w-full sm:w-40">
                            <div className="aspect-square relative rounded-2xl overflow-hidden">
                               <Image
@@ -429,7 +442,7 @@ const CheckoutFeatures = () => {
                            </div>
                         </div>
                      </div> */}
-                     {/* <div className="border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y divide-solid sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700  overflow-hidden z-10">
+                        {/* <div className="border border-neutral-200 dark:border-neutral-700 rounded-3xl flex flex-col sm:flex-row divide-y divide-solid sm:divide-x sm:divide-y-0 divide-neutral-200 dark:divide-neutral-700  overflow-hidden z-10">
                         <div
                            className="text-left flex-1 p-5 flex justify-between space-x-5 hover:bg-neutral-50 dark:hover:bg-neutral-700"
                            
@@ -455,116 +468,149 @@ const CheckoutFeatures = () => {
                            </div>
                          </div>
                      </div> */}
-                     <div className="bg-neutral-200 dark:bg-neutral-800 px-5 py-5">
-                        <h3 className="text-2xl font-semibold">Price & Fee</h3>
-                     </div>
-                     <div className="flex flex-col space-y-4 px-5 pb-5">
-                        <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
-                           <span>
-                              {formatCurrencyWithCodeAsSuffix(
-                                 hotel.rate?.payment_options.payment_types[0].show_amount || 0,
-                                 hotel?.rate?.payment_options?.payment_types[0]?.show_currency_code,
-                              )}{' '}
-                              x {totalDay} day
-                           </span>
-                           <span>
-                              {formatCurrencyWithCodeAsSuffix(
-                                 Number.parseFloat(
-                                    hotel.rate?.payment_options.payment_types[0].show_amount || '0',
-                                 ) * totalDay,
+                        <div className="bg-neutral-200 dark:bg-neutral-800 px-5 py-5">
+                           <h3 className="text-2xl font-semibold">Price & Fee</h3>
+                        </div>
+                        <div className="flex flex-col space-y-4 px-5 pb-5">
+                           <div className="flex justify-between text-neutral-600 dark:text-neutral-50">
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    hotel.rate?.payment_options.payment_types[0].show_amount || 0,
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}{' '}
+                                 x {totalDay} day
+                              </span>
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    Number.parseFloat(
+                                       hotel.rate?.payment_options.payment_types[0].show_amount ||
+                                          '0',
+                                    ) * totalDay,
 
-                                 hotel?.rate?.payment_options?.payment_types[0]?.show_currency_code,
-                              )}
-                           </span>
-                        </div>
-                        <div className="flex justify-between text-neutral-600  dark:text-neutral-50">
-                           <span>Service charge</span>
-                           <span>
-                              {formatCurrencyWithCodeAsSuffix(
-                                 0,
-                                 hotel?.rate?.payment_options?.payment_types[0]?.show_currency_code,
-                              )}
-                           </span>
-                        </div>
-                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-                        <div className="flex justify-between font-semibold text-xl">
-                           <span>Total</span>
-                           <span>
-                              {formatCurrencyWithCodeAsSuffix(
-                                 Number.parseFloat(
-                                    hotel.rate?.payment_options.payment_types[0].show_amount || '0',
-                                 ) * totalDay,
-                                 hotel?.rate?.payment_options?.payment_types[0]?.show_currency_code,
-                              )}
-                           </span>
-                        </div>
-                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}
+                              </span>
+                           </div>
+                           <div className="flex justify-between text-neutral-600  dark:text-neutral-50">
+                              <span>Service charge</span>
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    0,
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}
+                              </span>
+                           </div>
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                           <div className="flex justify-between font-semibold text-xl">
+                              <span>Total</span>
+                              <span>
+                                 {formatCurrencyWithCodeAsSuffix(
+                                    Number.parseFloat(
+                                       hotel.rate?.payment_options.payment_types[0].show_amount ||
+                                          '0',
+                                    ) * totalDay,
+                                    hotel?.rate?.payment_options?.payment_types[0]
+                                       ?.show_currency_code,
+                                 )}
+                              </span>
+                           </div>
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
 
-                        <div className="flex justify-between items-start space-x-5">
-                           <p className="text-sm text-neutral-800  dark:text-neutral-400">
-                              Approximate price in VND: the currency rate might change at the time
-                              of payment.
+                           <div className="flex justify-between items-start space-x-5">
+                              <p className="text-sm text-neutral-800  dark:text-neutral-400">
+                                 Approximate price in VND: the currency rate might change at the
+                                 time of payment.
+                              </p>
+
+                              {/* Tooltip wrapper cho CircleHelpIcon */}
+                              <TooltipProvider>
+                                 <Tooltip>
+                                    <TooltipTrigger asChild>
+                                       <span className="cursor-pointer">
+                                          <CircleHelpIcon className="w-4 h-4" />
+                                       </span>
+                                    </TooltipTrigger>
+                                    <TooltipContent side="top" align="center" className="max-w-xs">
+                                       <p>
+                                          This is an estimate and the final amount might vary
+                                          depending on the currency exchange rate at the time of
+                                          payment.
+                                       </p>
+                                    </TooltipContent>
+                                 </Tooltip>
+                              </TooltipProvider>
+                           </div>
+                           {taxes.includedTaxes.map((tax, index) => (
+                              <div
+                                 className="flex justify-between text-neutral-600  dark:text-neutral-50"
+                                 key={index}
+                              >
+                                 <span className="capitalize text-sm">
+                                    {tax.name.replaceAll('_', ' ')}
+                                 </span>
+                                 <span>
+                                    {formatCurrencyWithCodeAsSuffix(
+                                       Number.parseFloat(tax.amount),
+                                       tax.currency_code,
+                                    )}
+                                 </span>
+                              </div>
+                           ))}
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+                           <p className="text-base font-medium text-neutral-800  dark:text-neutral-400">
+                              To be paid upon arrival
                            </p>
+                           {taxes.notIncludedTaxes.map((tax, index) => (
+                              <div
+                                 className="flex justify-between text-neutral-600  dark:text-neutral-50"
+                                 key={index}
+                              >
+                                 <span className="capitalize text-sm">
+                                    {tax.name.replaceAll('_', ' ')}
+                                 </span>
+                                 <span>
+                                    {formatCurrencyWithCodeAsSuffix(
+                                       Number.parseFloat(tax.amount),
+                                       tax.currency_code,
+                                    )}
+                                 </span>
+                              </div>
+                           ))}
+                           <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
 
-                           {/* Tooltip wrapper cho CircleHelpIcon */}
-                           <TooltipProvider>
-                              <Tooltip>
-                                 <TooltipTrigger asChild>
-                                    <span className="cursor-pointer">
-                                       <CircleHelpIcon className="w-4 h-4" />
-                                    </span>
-                                 </TooltipTrigger>
-                                 <TooltipContent side="top" align="center" className="max-w-xs">
-                                    <p>
-                                       This is an estimate and the final amount might vary depending
-                                       on the currency exchange rate at the time of payment.
-                                    </p>
-                                 </TooltipContent>
-                              </Tooltip>
-                           </TooltipProvider>
+                           <p className="text-sm text-neutral-500  dark:text-neutral-400">
+                              Please note You&apos;ll have to pay taxes and fees in the local
+                              currency VND.
+                           </p>
                         </div>
-                        {taxes.includedTaxes.map((tax, index) => (
-                           <div
-                              className="flex justify-between text-neutral-600  dark:text-neutral-50"
-                              key={index}
-                           >
-                              <span className="capitalize text-sm">
-                                 {tax.name.replaceAll('_', ' ')}
-                              </span>
-                              <span>
-                                 {formatCurrencyWithCodeAsSuffix(
-                                    Number.parseFloat(tax.amount),
-                                    tax.currency_code,
-                                 )}
+                     </div>
+                     <div className="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 p-5 flex flex-col h-full justify-between">
+                        <h4 className="text-lg font-semibold">Your payment schedule</h4>
+                        <span className="text-sm text-green-600 mt-3">
+                           No payment today. You'll pay when you stay.
+                        </span>
+                     </div>
+                     <div className="rounded-lg overflow-hidden border border-neutral-200 dark:border-neutral-700 p-5 flex flex-col h-full justify-between">
+                        <h4 className="text-lg font-semibold">How much will it cost to cancel?</h4>
+                        <span className="text-sm text-green-600 mt-3">
+                           Free cancellation anytime
+                        </span>
+                     </div>
+                     <div className="rounded-lg overflow-hidden border border-rose-700 bg-rose-50 dark:border-neutral-700 p-5 flex flex-col h-full justify-between">
+                        <div className="flex items-start gap-4">
+                           <div className="flex-shrink">
+                              <AlarmClock className="text-rose-700 size-7" />
+                           </div>
+                           <div className="flex-grow">
+                              <h4 className="text-lg text-neutral-900 font-semibold">Lucky find for your dates!</h4>
+                              <span className="text-sm text-neutral-600 mt-3">
+                                 176 four-star hotels like this are already unavailable on our site
                               </span>
                            </div>
-                        ))}
-                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-                        <p className="text-base font-medium text-neutral-800  dark:text-neutral-400">
-                           To be paid upon arrival
-                        </p>
-                        {taxes.notIncludedTaxes.map((tax, index) => (
-                           <div
-                              className="flex justify-between text-neutral-600  dark:text-neutral-50"
-                              key={index}
-                           >
-                              <span className="capitalize text-sm">
-                                 {tax.name.replaceAll('_', ' ')}
-                              </span>
-                              <span>
-                                 {formatCurrencyWithCodeAsSuffix(
-                                    Number.parseFloat(tax.amount),
-                                    tax.currency_code,
-                                 )}
-                              </span>
-                           </div>
-                        ))}
-                        <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
-
-                        <p className="text-sm text-neutral-500  dark:text-neutral-400">
-                           Please note You&apos;ll have to pay taxes and fees in the local currency
-                           VND.
-                        </p>
+                        </div>
                      </div>
                   </div>
                </div>

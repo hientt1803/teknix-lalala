@@ -3,16 +3,19 @@ import { Input, InputProps } from '@/components/ui/input';
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
 import { Mail } from 'lucide-react';
+import { boolean, optional } from 'zod';
 
 interface InputLabelProps extends InputProps {
    label?: string;
    rightLabel?: React.ReactNode;
    sizes?: 'small' | 'medium';
+   requiredLabel?: boolean;
 }
 
 const InputLabel = ({
    label,
-   required,
+   required = false,
+   requiredLabel = false,
    rightLabel,
    sizes = 'medium',
    className,
@@ -34,6 +37,11 @@ const InputLabel = ({
                   htmlFor={inputId}
                >
                   {label} {required && <span className="text-red-500">*</span>}
+                  {!required && requiredLabel && (
+                     <span className="text-xs font-normal text-neutral-500 dark:text-neutral-400">
+                        (optional)
+                     </span>
+                  )}
                </Label>
                {rightLabel}
             </span>

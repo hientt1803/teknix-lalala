@@ -41,7 +41,7 @@ const Image: React.FC<ImageProps> = ({
             />
          ) : (
             // Hiển thị fallback khi xảy ra lỗi
-            <div className="flex items-center justify-center w-full h-full border border-neutral-100 dark:border-neutral-800 rounded-2xl">
+            <div className="flex items-center justify-center w-full h-full border border-neutral-100 dark:border-neutral-800 rounded">
                {fallback ? (
                   fallback
                ) : (
