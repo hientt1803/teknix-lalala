@@ -27,6 +27,7 @@ export const DestinationCaroucel = () => {
    // State
    const [listDestination, setListDestination] = useState<HotDestination[]>([]);
 
+   // Logic
    useEffect(() => {
       const fetchData = async () => {
          const res = await fetch(`${API_URL}/api/global/hot_destinations`, {

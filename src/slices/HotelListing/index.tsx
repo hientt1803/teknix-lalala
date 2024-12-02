@@ -29,7 +29,7 @@ export const WithoutMapContainer = dynamic(
    {
       ssr: false,
    },
-);
+); 
 
 /**
  * Props for `HotelListing`.

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Bounded from '@/components/common/containers/bounded';
 import TabInfo from './components/tabs/tab-info';
 import TabSaved from './components/tabs/tab-saved';
@@ -18,30 +18,24 @@ import {
 import { Home } from 'lucide-react';
 import Image from '@/components/common/images/image';
 import { Button } from '@/components/ui/button';
+import TabSettings from './components/tabs/tab-setting';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 const tabs = [
    {
       label: 'Account Info',
       value: 'account',
       icon: (
-         <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="size-5"
-         >
+         <svg xmlns="http://www.w3.org/2000/svg" className="size-5" viewBox="0 0 24 24">
             <path
+               fill="none"
+               stroke="currentColor"
                strokeLinecap="round"
                strokeLinejoin="round"
-               d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
-            />
-            <path
-               strokeLinecap="round"
-               strokeLinejoin="round"
-               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-            />
+               strokeWidth={1.5}
+               d="M5 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1m-7-8a4 4 0 1 0 0-8a4 4 0 0 0 0 8"
+            ></path>
          </svg>
       ),
    },
@@ -105,22 +99,63 @@ const tabs = [
          </svg>
       ),
    },
+   {
+      label: 'Settings',
+      value: 'setting',
+      icon: (
+         <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="size-5"
+         >
+            <path
+               strokeLinecap="round"
+               strokeLinejoin="round"
+               d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 011.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.56.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.893.149c-.425.07-.765.383-.93.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 01-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.397.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 01-.12-1.45l.527-.737c.25-.35.273-.806.108-1.204-.165-.397-.505-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.107-1.204l-.527-.738a1.125 1.125 0 01.12-1.45l.773-.773a1.125 1.125 0 011.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894z"
+            />
+            <path
+               strokeLinecap="round"
+               strokeLinejoin="round"
+               d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+         </svg>
+      ),
+   },
 ];
 const AccountFeatures = () => {
    const [currentTab, setCurrentTab] = useState('account');
+   const searchParams = useSearchParams();
+
+   useEffect(() => {
+      const tab = searchParams.get('tab');
+      if (tab) {
+         setCurrentTab(tab);
+      }
+   }, [searchParams]);
    return (
       <Bounded className="relative py-16">
          <Breadcrumb className="mt-12 ">
             <BreadcrumbList>
                <BreadcrumbItem>
-                  <BreadcrumbLink href="/" className="flex items-center">
-                     <Home className="w-3 h-3 me-2" />
-                     Home
+                  <BreadcrumbLink asChild>
+                     <Link href="/" className="flex items-center">
+                        <Home className="w-3 h-3 me-2" />
+                        Home
+                     </Link>
                   </BreadcrumbLink>
                </BreadcrumbItem>
                <BreadcrumbSeparator>•</BreadcrumbSeparator>
                <BreadcrumbItem>
-                  <BreadcrumbPage>Profile</BreadcrumbPage>
+                  <BreadcrumbLink asChild>
+                     <Link href="/profile">Profile</Link>
+                  </BreadcrumbLink>
+               </BreadcrumbItem>
+               <BreadcrumbSeparator>•</BreadcrumbSeparator>
+               <BreadcrumbItem>
+                  <BreadcrumbPage className="capitalize">{currentTab}</BreadcrumbPage>
                </BreadcrumbItem>
             </BreadcrumbList>
          </Breadcrumb>
@@ -160,6 +195,7 @@ const AccountFeatures = () => {
             {currentTab === 'saved' && <TabSaved />}
             {currentTab === 'pass' && <TabChangePassword />}
             {currentTab === 'bill' && <TabChangeBill />}
+            {currentTab === 'setting' && <TabSettings />}
          </div>
       </Bounded>
    );

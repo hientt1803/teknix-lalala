@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useProgressStore } from '@/hooks/use-progress';
 import { Category } from '@/lib/MarkerCategories';
 import { PlaceValues } from '@/lib/Places';
 import {
@@ -30,7 +31,9 @@ const ListHotelWithoutMap = dynamic(() =>
 const FilterDrawer = dynamic(() =>
    import('../filters/filter-drawer').then((mod) => mod.FilterDrawer),
 );
-const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter));
+const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter), {
+   ssr: false,
+});
 
 export const WithoutMapContainer = () => {
    // redux
@@ -47,6 +50,9 @@ export const WithoutMapContainer = () => {
          isFetching: searchHotelGeoFetching,
       },
    ] = useLazyGetListHotelByGeoSearchEngineQuery();
+
+   // Hook
+   const { start, done } = useProgressStore();
 
    // Logic
    const fetchDataFromApi = () => {
@@ -73,6 +79,14 @@ export const WithoutMapContainer = () => {
          fetchDataFromApi();
       }
    }, [isSearchGlobal]);
+
+   useEffect(() => {
+      if (searchHotelGeoLoading || searchHotelGeoFetching) {
+         start();
+      } else {
+         done();
+      }
+   }, [searchHotelGeoLoading, searchHotelGeoFetching]);
 
    useEffect(() => {
       dispatch(setTriggerSearch(true));

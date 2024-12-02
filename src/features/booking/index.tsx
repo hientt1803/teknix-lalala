@@ -69,7 +69,7 @@ const BookingFeatures = () => {
                </div>
             </div>
          </div>
-         <main className=" mt-12 mb-24 lg:mb-32 flex flex-col lg:flex-row">
+         <main className="mt-12 mb-24 lg:mb-32 flex flex-col lg:flex-row">
             {/* INFOMATION */}
             <CardInfoUser />
             {/* FEATURES & HISTORY*/}

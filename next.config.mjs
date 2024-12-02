@@ -6,7 +6,8 @@ const nextConfig = {
           "date-fns",
           "leaflet",
           "framer-motion",
-          "@novu/notification-center"
+          "@novu/notification-center",
+          "@mantine/core"
         ],
       },
 };

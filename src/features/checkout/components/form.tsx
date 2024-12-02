@@ -46,6 +46,8 @@ import { Country, isValidPhoneNumber } from 'react-phone-number-input';
 import { useDispatch } from 'react-redux';
 import * as z from 'zod';
 import { PhoneInput } from './phone-input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
 
 const formSchema = z.object({
    email: z.string().email({ message: "Oops, that email won't work, please enter a valid one." }),
@@ -56,6 +58,15 @@ const formSchema = z.object({
    message: z.string(),
    arrive: z.string().min(1, { message: 'Arrival time is required' }),
    specialRequest: z.string(),
+   freePaperless: z.boolean().default(false).optional(),
+   bookingFor: z.enum(['main', 'someone']),
+   areYouWork: z.enum(['yes', 'no']),
+   company: z
+      .object({
+         companyName: z.string().optional(),
+         vatNumber: z.string().optional(),
+      })
+      .optional(),
 });
 
 type FormInfoProps = {
@@ -100,6 +111,8 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
          message: '',
          arrive: '',
          specialRequest: '',
+         bookingFor: 'main',
+         areYouWork: 'yes',
       },
       resolver: zodResolver(formSchema),
    });
@@ -279,7 +292,7 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                   />
                </div>
                {/* LAST & FIRST NAME */}
-               <div className="flex space-x-5  ">
+               <div className="flex space-x-5">
                   <div className="flex-1 space-y-1">
                      <FormField
                         control={form.control}
@@ -482,8 +495,8 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                               <FormControl>
                                  <SelectTrigger className="w-full rounded-lg border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50 bg-white text-sm font-normal h-11 px-4 py-3 mt-1">
                                     <SelectValue
-                                    // placeholder="Select a time"
-                                    // defaultValue={field.value}
+                                       placeholder="Select arrival time"
+                                       // defaultValue={field.value}
                                     />
                                  </SelectTrigger>
                               </FormControl>
@@ -536,6 +549,154 @@ const FormInfomation = ({ data, isConfirm, setIsConfirm, scrollIntoView }: FormI
                      )}
                   />
                </div>
+               <div className="space-y-1">
+                  <FormField
+                     control={form.control}
+                     name="freePaperless"
+                     render={({ field }) => (
+                        <FormItem className="flex flex-col gap-0">
+                           <div className="flex items-center space-x-2">
+                              <FormControl>
+                                 <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                              </FormControl>
+                              <FormLabel className="space-y-1 leading-none">
+                                 <span>Yes, I want free paperless confirmation (recommended)</span>
+                                 <FormDescription className="font-normal">
+                                    You can manage your mobile notifications in the We&apos;ll text you a
+                                    link to download our app
+                                 </FormDescription>
+                              </FormLabel>
+                           </div>
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+               </div>
+               <div className="border-b border-neutral-200 dark:border-neutral-700"></div>
+               <div className="space-y-1">
+                  <FormField
+                     control={form.control}
+                     name="bookingFor"
+                     render={({ field }) => (
+                        <FormItem className="flex flex-col gap-0">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
+                              Who are you booking for?
+                           </FormLabel>
+                           <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="flex flex-col space-y-1"
+                           >
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value="main" />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    I&apos;m the main guest
+                                 </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value="someone" />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    I&apos;m booking for someone esle
+                                 </FormLabel>
+                              </FormItem>
+                           </RadioGroup>
+
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+               </div>
+               <div className="space-y-1">
+                  <FormField
+                     control={form.control}
+                     name="areYouWork"
+                     render={({ field }) => (
+                        <FormItem className="flex flex-col gap-0">
+                           <FormLabel className="text-neutral-800 dark:text-neutral-300 text-sm">
+                              Are you traveling for work?
+                           </FormLabel>
+                           <RadioGroup
+                              onValueChange={field.onChange}
+                              defaultValue={field.value}
+                              className="flex space-x-1"
+                           >
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value={'yes'} />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    Yes
+                                 </FormLabel>
+                              </FormItem>
+                              <FormItem className="flex items-center space-x-3 space-y-0">
+                                 <FormControl>
+                                    <RadioGroupItem value="no" />
+                                 </FormControl>
+                                 <FormLabel className="font-light text-neutral-600 dark:text-neutral-400 text-sm">
+                                    No
+                                 </FormLabel>
+                              </FormItem>
+                           </RadioGroup>
+
+                           <FormMessage />
+                        </FormItem>
+                     )}
+                  />
+               </div>
+               {form.getValues('areYouWork') === 'yes' && (
+                  <div className="flex space-x-5">
+                     <div className="flex-1 space-y-1">
+                        <FormField
+                           control={form.control}
+                           name="company.companyName"
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormControl>
+                                    <InputLabel
+                                       sizes="small"
+                                       requiredLabel
+                                       label="Company Name"
+                                       type="text"
+                                       readOnly={isConfirm}
+                                       placeholder="Ex: Texnik Comporation"
+                                       className="rounded-lg"
+                                       {...field}
+                                    />
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                     </div>
+                     <div className="flex-1 space-y-1">
+                        <FormField
+                           control={form.control}
+                           name="company.vatNumber"
+                           render={({ field }) => (
+                              <FormItem>
+                                 <FormControl>
+                                    <InputLabel
+                                       sizes="small"
+                                       label="Vat Number"
+                                       requiredLabel
+                                       type="text"
+                                       readOnly={isConfirm}
+                                       placeholder="000 000"
+                                       className="rounded-lg"
+                                       {...field}
+                                    />
+                                 </FormControl>
+                                 <FormMessage />
+                              </FormItem>
+                           )}
+                        />
+                     </div>
+                  </div>
+               )}
             </div>
 
             <div className="pt-8 flex flex-1 justify-end">

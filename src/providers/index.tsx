@@ -11,6 +11,10 @@ export const ScrollToTopButton = dynamic(
    },
 );
 
+const NProgressbarLazy = dynamic(() => import('@/components/custom/nprogress'), {
+   ssr: false,
+});
+
 interface ApplicationProps {
    children: React.ReactNode;
 }
@@ -23,6 +27,7 @@ const AppProvider = ({ children }: ApplicationProps) => {
                <MainLayout>{children}</MainLayout>
                <Toaster />
                <ScrollToTopButton />
+               <NProgressbarLazy />
             </div>
          </StoreProvider>
       </ThemeProvider>

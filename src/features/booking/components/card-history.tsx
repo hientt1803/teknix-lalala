@@ -1,13 +1,22 @@
 import Image from '@/components/common/images/image';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import {
+   Dialog,
+   DialogClose,
+   DialogContent,
+   DialogDescription,
+   DialogHeader,
+   DialogTitle,
+   DialogTrigger,
+} from '@/components/ui/dialog';
 import { MapHotel, Record } from '@/stores/features/reservation';
 import { setReserveForm } from '@/stores/features/stay';
 import { IReserveForm } from '@/stores/features/stay/type';
-import { formatCurrency } from '@/utilities/currency';
+import { formatCurrency, formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 import { StarFilledIcon } from '@radix-ui/react-icons';
-import { format } from 'date-fns';
-import { Eye } from 'lucide-react';
+import { format, formatDate } from 'date-fns';
+import { BookmarkCheck, CircleDollarSign, Clock, Eye, Sparkles, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -131,12 +140,55 @@ const CardHistory = ({ data }: Props) => {
                   <span className="text-neutral-500 ">(28)</span>
                </div>
                {data.record?.status === 'pending' && (
-                  <Button
-                     onClick={() => handleContinunePay(record, hotel)}
-                     className="px-6 py-5 rounded-full"
-                  >
-                     Continue pay
-                  </Button>
+                  <Dialog>
+                     <DialogTrigger asChild>
+                        <Button
+                           variant="destructive"
+                           //    onClick={() => handleContinunePay(record, hotel)}
+                           className="px-6 py-5 rounded-full"
+                        >
+                           Cancel Order
+                        </Button>
+                     </DialogTrigger>
+                     <DialogContent>
+                        <DialogHeader>
+                           <DialogTitle>Are you sure you want to delete this card?</DialogTitle>
+                           <DialogDescription>This booking will be deleted!</DialogDescription>
+                        </DialogHeader>
+                        <div className="p-5 rounded-lg bg-neutral-100 grid grid-cols-1 gap-3">
+                           <div className="flex gap-2 items-center text-sm">
+                              <BookmarkCheck className="size-5" />
+                              Booking
+                           </div>
+                           <div className="flex gap-2 items-center text-sm">
+                              <Sparkles className="size-5" />
+                              Status: {data.record.status.toLocaleUpperCase()}
+                           </div>
+                           <div className="flex gap-2 items-center text-sm">
+                              <Users className="size-5" />
+                              Guests: {data.record.num_guests}
+                           </div>
+                           <div className="flex gap-2 items-center text-sm">
+                              <Clock className="size-5" />
+                              Created: {formatDate(data.record.date_created, 'PPPP')}
+                           </div>
+                           <div className="flex gap-2 items-center text-sm">
+                              <CircleDollarSign className="size-5" />
+                              Price: {formatCurrency(data.record.total_price)}
+                           </div>
+                        </div>
+                        <div className="flex justify-end items-end gap-4">
+                           <DialogClose asChild>
+                              <Button variant="outline" className="py-5 px-6">
+                                 Close
+                              </Button>
+                           </DialogClose>
+                           <Button className="py-5 px-6" variant="destructive">
+                              Delete
+                           </Button>
+                        </div>
+                     </DialogContent>
+                  </Dialog>
                )}
                {data.record?.status !== 'pending' && (
                   <Button variant={'outline'} asChild className="px-6 py-5 rounded-full">

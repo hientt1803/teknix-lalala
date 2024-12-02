@@ -45,9 +45,9 @@ const links = [
    //       icon: <Bell className="w-5 h-5" strokeWidth={1.5} />,
    //    },
    {
-      label: 'Bookmark',
+      label: 'Booking',
       description: '7 tours, 2 moons',
-      href: '#',
+      href: '/booking',
       icon: <Bookmark className="w-5 h-5" strokeWidth={1.5} />,
    },
    {
@@ -78,7 +78,7 @@ const links = [
    {
       label: 'Settings',
       description: 'Your account',
-      href: '/profile',
+      href: '/profile?tab=setting',
       icon: <Settings className="w-5 h-5" strokeWidth={1.5} />,
    },
 ];
@@ -142,7 +142,7 @@ const MobileMenu = () => {
                <SheetDescription></SheetDescription>
             </SheetHeader>
             <ScrollArea className="h-[calc(100%-50px)]">
-               <div className="p-5 md:p-0 space-y-8">
+               <div className="p-0 space-y-8">
                   <div className="p-3 py-4 dark:bg-neutral-800 border rounded-xl flex items-center justify-between">
                      <div className="flex items-center gap-2">
                         <Avatar className="w-12 h-12">
@@ -194,7 +194,8 @@ const MobileMenu = () => {
                                     className={cn(
                                        'flex items-center justify-start gap-2 group cursor-pointer hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-lg p-2',
                                        {
-                                          'bg-neutral-100 dark:bg-neutral-800': link.href === pathname,
+                                          'bg-neutral-100 dark:bg-neutral-800':
+                                             link.href === pathname,
                                        },
                                     )}
                                  >

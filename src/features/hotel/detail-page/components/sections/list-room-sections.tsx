@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import RoomCard from '../card-room-v2';
+import { useProgressStore } from '@/hooks/use-progress';
 
 export const ListRoomSections = ({ id }: { id: string }) => {
    // next api
@@ -33,16 +34,25 @@ export const ListRoomSections = ({ id }: { id: string }) => {
    const [fetchRoom, { data: hotelData, isLoading, isFetching }] =
       useLazyGetRoomActiveByHotelIdQuery();
 
-   // Local States
+   // States
    const [showAll, setShowAll] = useState(false);
    const [selectedFilter, setSelectedFilter] = useState('All');
+
+   // hook
+   const { start, done } = useProgressStore();
 
    // Logic
    useEffect(() => {
       dispatch(setTriggerRoomSearch(true));
    }, []);
 
-   console.log(hotel.isTriggerRoomSearch);
+   useEffect(() => {
+      if (isLoading || isFetching) {
+         start();
+      } else {
+         done();
+      }
+   }, [isLoading, isFetching]);
 
    useEffect(() => {
       if (hotel.isTriggerRoomSearch) {

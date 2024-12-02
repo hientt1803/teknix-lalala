@@ -4,7 +4,9 @@ import { PlacesType } from '@/lib/Places';
 import { ISearchGlobal } from '@/stores/features/global/type';
 import dynamic from 'next/dynamic';
 
-const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter));
+const ListFilter = dynamic(() => import('../filters/list-filter').then((mod) => mod.ListFilter), {
+   ssr: false,
+});
 
 export const FilterDrawer = ({
    placeData,
@@ -15,7 +17,7 @@ export const FilterDrawer = ({
 }) => {
    return (
       <Sheet>
-         <SheetTrigger asChild className='w-full'>
+         <SheetTrigger asChild className="w-full">
             <Button variant={'default'} className="rounded-md dark:bg-neutral-100">
                Show Filter
             </Button>
