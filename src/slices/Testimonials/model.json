@@ -1,0 +1,94 @@
+{
+  "id": "testimonials",
+  "type": "SharedSlice",
+  "name": "Testimonials",
+  "description": "Testimonials",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "grid",
+      "name": "Grid",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        },
+        "tag": {
+          "type": "Text",
+          "config": {
+            "label": "tag",
+            "placeholder": ""
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "supports": {
+          "type": "Group",
+          "config": {
+            "label": "supports",
+            "repeat": true,
+            "fields": {
+              "heading": {
+                "type": "Text",
+                "config": {
+                  "label": "heading",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "Description",
+                  "placeholder": ""
+                }
+              },
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "icon",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

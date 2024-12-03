@@ -24,7 +24,7 @@ const SubcribleSection = ({ slice }: SubcribleSectionProps): JSX.Element => {
          data-slice-variation={slice.variation}
          className="block py-16"
       >
-         <div className="w-full h-full relative bg-[#eff0f1] dark:bg-neutral-900 rounded-lg flex justify-center items-center">
+         <div className="w-full h-full relative bg-[#eff0f1] dark:bg-neutral-800 rounded-lg flex justify-center items-center">
             <div className="flex flex-col justify-center items-center gap-6 px-5 py-20 md:p-20">
                <PrismicRichText
                   field={slice.primary.heading}

@@ -23,7 +23,7 @@ const Footer = async () => {
                <Image key={index} src={img} className="aspect-square w-full" alt="" />
             ))}
          </div>
-         <div className="bg-black text-neutral-100">
+         <div className="bg-[#0f0f0f] text-neutral-100">
             <Bounded as="footer" className="divide-y divide-neutral-800 ">
                <div className="flex flex-col md:flex-row justify-between items-center md:items-end space-y-3 py-8">
                   <PrismicImage field={settings.data.logo} className="w-20" />

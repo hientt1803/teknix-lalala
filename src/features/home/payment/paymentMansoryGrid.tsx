@@ -16,7 +16,7 @@ export const PaymentCaroucel = dynamic(
    },
 );
 const components: JSXMapSerializer = {
-   heading2: ({ children }) => <Heading className='text-4xl'>{children}</Heading>,
+   heading2: ({ children }) => <Heading className="text-4xl">{children}</Heading>,
    paragraph: ({ children }) => <Paragraph>{children}</Paragraph>,
 };
 export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSlice }) => {
@@ -143,21 +143,22 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
 
                   <div className="my-10">
                      <div className="grid grid-cols-12 gap-3">
-                        {slice.primary.benefits.map((bene, index) => (
-                           <div
-                              className={cn(
-                                 slice.variation == 'default' ? 'col-span-6' : 'col-span-12',
-                              )}
-                              key={index}
-                           >
-                              <div className="flex gap-2 items-center">
-                                 <CheckIcon className="w-5 h-5 text-green-600" />
-                                 <span className="text-sm text-black dark:text-neutral-200">
-                                    {bene.text}
-                                 </span>
+                        {slice?.variation !== 'withBackground' &&
+                           slice?.primary?.benefits?.map((bene, index) => (
+                              <div
+                                 className={cn(
+                                    slice.variation === 'default' ? 'col-span-6' : 'col-span-12',
+                                 )}
+                                 key={index}
+                              >
+                                 <div className="flex gap-2 items-center">
+                                    <CheckIcon className="w-5 h-5 text-green-600" />
+                                    <span className="text-sm text-black dark:text-neutral-200">
+                                       {bene.text}
+                                    </span>
+                                 </div>
                               </div>
-                           </div>
-                        ))}
+                           ))}
                      </div>
                   </div>
 
@@ -171,7 +172,9 @@ export const PaymentMansoryGrid = ({ slice }: { slice: Content.PaymentSectionSli
                   )}
 
                   <div
-                     className={slice.variation == 'default' ? 'mt-4 max-w-lg' : 'mt-8 max-w-[25rem]'}
+                     className={
+                        slice.variation == 'default' ? 'mt-4 max-w-lg' : 'mt-8 max-w-[25rem]'
+                     }
                   >
                      <PaymentCaroucel payments={slice.primary.payments} />
                   </div>

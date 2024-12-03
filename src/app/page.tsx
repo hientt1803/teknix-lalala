@@ -3,6 +3,7 @@ import { SliceZone } from '@prismicio/react';
 
 import { createClient } from '@/prismicio';
 import { components } from '@/slices';
+import { meta } from './layout';
 
 export default async function Page() {
    const client = createClient();
@@ -16,11 +17,36 @@ export default async function Page() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-   const client = createClient();
-   const page = await client.getSingle('homepage');
+   // const client = createClient();
+   // const page = await client.getSingle('homepage');
+
+   // return {
+   //    title: page.data.meta_title,
+   //    description: page.data.meta_description,
+   // };
 
    return {
-      title: page.data.meta_title,
-      description: page.data.meta_description,
+      title: {
+         template: '%s',
+         default: meta.title,
+      },
+      description: meta.description,
+      openGraph: {
+         title: meta.title,
+         description: meta.description,
+         url: '/',
+         locale: 'en-US',
+         siteName: meta.title,
+         type: 'website',
+         images: [
+            {
+               url: meta.image,
+            },
+         ],
+      },
+      alternates: {
+         canonical: `/`,
+      },
+      manifest: `/manifest.json`,
    };
 }

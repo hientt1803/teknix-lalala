@@ -1,10 +1,8 @@
-import { MainButton } from '@/components/common/button/mainButton';
 import { Button } from '@/components/ui/button';
 import { newComponent } from '@/slices/NewsSection';
 import { Content } from '@prismicio/client';
 import { PrismicRichText } from '@prismicio/react';
 import { ArrowRight } from 'lucide-react';
-import React from 'react';
 
 export const NewHeader = ({ slice }: { slice: Content.NewsSectionSlice }) => {
    return (
@@ -13,7 +11,7 @@ export const NewHeader = ({ slice }: { slice: Content.NewsSectionSlice }) => {
             <PrismicRichText field={slice.primary.heading} components={newComponent} />
             <PrismicRichText field={slice.primary.body} components={newComponent} />
          </div>
-         <Button className='py-5 px-5 rounded-full'>
+         <Button className='py-6 px-7 rounded-full'>
             View more <ArrowRight className="w-5 h-5" />
          </Button>
       </div>

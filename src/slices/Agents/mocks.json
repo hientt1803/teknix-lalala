@@ -1,0 +1,60 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"button_text": {
+				"__TYPE__": "FieldContent",
+				"value": "tell",
+				"type": "Text"
+			},
+			"button_link": {
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://slicemachine.dev",
+					"text": "struck"
+				}
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Almost"
+						}
+					}
+				]
+			},
+			"description": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Irure tempor sunt fugiat ea esse anim culpa ullamco sint reprehenderit dolore. Irure eiusmod reprehenderit nulla est esse do anim."
+						}
+					}
+				]
+			},
+			"need_help": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading3",
+						"content": {
+							"text": "Seeing"
+						}
+					}
+				]
+			},
+			"phone_number": {
+				"__TYPE__": "FieldContent",
+				"value": "stopped",
+				"type": "Text"
+			}
+		},
+		"items": []
+	}
+]

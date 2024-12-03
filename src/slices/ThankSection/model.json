@@ -1,0 +1,35 @@
+{
+  "id": "thank_section",
+  "type": "SharedSlice",
+  "name": "ThankSection",
+  "description": "ThankSection",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "main_image": {
+          "type": "Image",
+          "config": {
+            "label": "Main Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "sub_image": {
+          "type": "Image",
+          "config": {
+            "label": "Sub Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
