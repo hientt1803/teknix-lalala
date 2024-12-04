@@ -1,9 +1,9 @@
 type InfomationPagesLayoutProps = {
-   children: React.ReactNode;
+  children: React.ReactNode;
 };
 
 const InfomationPagesLayout = ({ children }: InfomationPagesLayoutProps) => {
-   return <>{children}</>;
+  return <>{children}</>;
 };
 
 export default InfomationPagesLayout;

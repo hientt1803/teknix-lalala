@@ -1,22 +1,23 @@
-import Image from '@/components/common/images/image';
 import React from 'react';
 
-export const PaymentBackground = () => {
-   return (
-      <>
-         {/* Main Background */}
-         <Image
-            src="/assets/images/home/payment-background.png"
-            alt="Payment Image"
-            className="absolute bottom-0 left-0 md:left-60 w-full md:w-fit h-[50%] md:h-fit object-cover z-[2] transform transition-transform group-hover:scale-110 duration-300"
-         />
+import Image from '@/components/common/images/image';
 
-         {/* Top Right Background*/}
-         <Image
-            src="/assets/images/home/bg-payment-plane.svg"
-            alt="Payment Image"
-            className="absolute top-10 md:top-40 right-20 md:right-44 w-fit h-fit object-cover z-[2] transform transition-transform group-hover:scale-110 duration-300"
-         />
-      </>
-   );
+export const PaymentBackground = () => {
+  return (
+    <>
+      {/* Main Background */}
+      <Image
+        src="/assets/images/home/payment-background.png"
+        alt="Payment Image"
+        className="absolute bottom-0 left-0 z-[2] h-[50%] w-full transform object-cover transition-transform duration-300 group-hover:scale-110 md:left-60 md:h-fit md:w-fit"
+      />
+
+      {/* Top Right Background*/}
+      <Image
+        src="/assets/images/home/bg-payment-plane.svg"
+        alt="Payment Image"
+        className="absolute right-20 top-10 z-[2] h-fit w-fit transform object-cover transition-transform duration-300 group-hover:scale-110 md:right-44 md:top-40"
+      />
+    </>
+  );
 };

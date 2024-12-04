@@ -23,12 +23,7 @@
                 "config": {
                   "label": "Icon",
                   "placeholder": "",
-                  "options": [
-                    "security",
-                    "customer",
-                    "policy",
-                    "affiliation"
-                  ]
+                  "options": ["security", "customer", "policy", "affiliation"]
                 }
               },
               "title": {

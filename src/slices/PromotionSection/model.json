@@ -129,10 +129,7 @@
                 "config": {
                   "label": "Type",
                   "placeholder": "",
-                  "options": [
-                    "left",
-                    "right"
-                  ],
+                  "options": ["left", "right"],
                   "default_value": "left"
                 }
               },

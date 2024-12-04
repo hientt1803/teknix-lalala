@@ -36,6 +36,22 @@
             "label": "Address",
             "placeholder": ""
           }
+        },
+        "use_button": {
+          "type": "Boolean",
+          "config": {
+            "label": "use Button",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "button_text": {
+          "type": "Text",
+          "config": {
+            "label": "button text",
+            "placeholder": ""
+          }
         }
       },
       "items": {}

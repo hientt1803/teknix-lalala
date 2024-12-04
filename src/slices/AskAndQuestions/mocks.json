@@ -1,95 +1,150 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"heading": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Older"
-						}
-					}
-				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Consequat ipsum et irure non velit in velit qui. Dolore ipsum labore ex amet mollit nostrud cupidatat. Incididunt elit adipisicing irure."
-						}
-					}
-				]
-			},
-			"services": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"name",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "party",
-									"type": "Text"
-								}
-							],
-							[
-								"icon",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "property",
-									"type": "Select"
-								}
-							]
-						]
-					}
-				]
-			},
-			"questions": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"question",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "heading4",
-											"content": {
-												"text": "Truck"
-											}
-										}
-									]
-								}
-							],
-							[
-								"ask",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Dolore adipisicing laboris sunt eu velit veniam adipisicing eiusmod consequat velit anim. Ea anim magna laboris duis sint dolore proident sit laborum aliquip enim aute anim reprehenderit cupidatat. Tempor sint do cillum ad incididunt sunt ea anim non veniam."
-											}
-										}
-									]
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": []
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Older"
+            }
+          }
+        ]
+      },
+      "body": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Consequat ipsum et irure non velit in velit qui. Dolore ipsum labore ex amet mollit nostrud cupidatat. Incididunt elit adipisicing irure."
+            }
+          }
+        ]
+      },
+      "services": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "name",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "party",
+                  "type": "Text"
+                }
+              ],
+              [
+                "icon",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "property",
+                  "type": "Select"
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "questions": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "question",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "heading4",
+                      "content": {
+                        "text": "Truck"
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "ask",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "paragraph",
+                      "content": {
+                        "text": "Dolore adipisicing laboris sunt eu velit veniam adipisicing eiusmod consequat velit anim. Ea anim magna laboris duis sint dolore proident sit laborum aliquip enim aute anim reprehenderit cupidatat. Tempor sint do cillum ad incididunt sunt ea anim non veniam."
+                      }
+                    }
+                  ]
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "items": []
+  },
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "grid",
+    "primary": {
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Harbor"
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Sint eiusmod fugiat mollit cillum ipsum dolore laboris officia officia eiusmod occaecat quis reprehenderit."
+            }
+          }
+        ]
+      },
+      "image": {
+        "__TYPE__": "ImageContent",
+        "origin": {
+          "id": "main",
+          "url": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+          "width": 3648,
+          "height": 4560
+        },
+        "url": "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2",
+        "width": 3648,
+        "height": 4560,
+        "edit": {
+          "zoom": 1,
+          "crop": {
+            "x": 0,
+            "y": 0
+          },
+          "background": "transparent"
+        },
+        "thumbnails": {}
+      }
+    },
+    "items": [
+      {
+        "__TYPE__": "GroupItemContent",
+        "value": []
+      }
+    ]
+  }
 ]

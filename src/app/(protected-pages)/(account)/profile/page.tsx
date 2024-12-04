@@ -1,7 +1,7 @@
 import AccountFeatures from '@/features/account';
 
 const AcountPage = () => {
-   return <AccountFeatures />;
+  return <AccountFeatures />;
 };
 
 export default AcountPage;

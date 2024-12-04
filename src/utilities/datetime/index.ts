@@ -1,17 +1,17 @@
 import {
-   parse,
-   differenceInDays,
-   format,
-   addHours,
-   isSameDay,
-   addDays,
-   toDate,
-   startOfDay,
-   isAfter,
-   parseISO,
-   isValid,
-   add,
-   isBefore,
+  add,
+  addDays,
+  addHours,
+  differenceInDays,
+  format,
+  isAfter,
+  isBefore,
+  isSameDay,
+  isValid,
+  parse,
+  parseISO,
+  startOfDay,
+  toDate,
 } from 'date-fns';
 
 /**
@@ -24,15 +24,18 @@ import {
  * @returns The function `countTotalDaysInRange` returns the total number of days between the
  * `startDate` and `endDate`, including both the start and end dates.
  */
-export const countTotalDaysInRange = (startDate: string, endDate: string): number => {
-   const format = 'yyyy-MM-dd'; // Date format yyyy/mm/dd
+export const countTotalDaysInRange = (
+  startDate: string,
+  endDate: string,
+): number => {
+  const format = 'yyyy-MM-dd'; // Date format yyyy/mm/dd
 
-   // Parse the date strings into Date objects
-   const start = parse(startDate, format, new Date());
-   const end = parse(endDate, format, new Date());
+  // Parse the date strings into Date objects
+  const start = parse(startDate, format, new Date());
+  const end = parse(endDate, format, new Date());
 
-   // Calculate the difference in days
-   return differenceInDays(end, start); // +1 to include both start and end dates
+  // Calculate the difference in days
+  return differenceInDays(end, start); // +1 to include both start and end dates
 };
 
 /**
@@ -43,12 +46,12 @@ export const countTotalDaysInRange = (startDate: string, endDate: string): numbe
  * (e.g., '7:00 AM', '8:00 PM').
  */
 export const formatTime = (timeString: string): string => {
-   // Parse the time string into a Date object
-   const parsedTime = parse(timeString, 'HH:mm:ss', new Date());
-   // console.log(parsedTime);
+  // Parse the time string into a Date object
+  const parsedTime = parse(timeString, 'HH:mm:ss', new Date());
+  // console.log(parsedTime);
 
-   // Format the time to 'h:mm a' (e.g., '7:00 AM', '8:00 PM')
-   return format(parsedTime, 'HH:mm a');
+  // Format the time to 'h:mm a' (e.g., '7:00 AM', '8:00 PM')
+  return format(parsedTime, 'HH:mm a');
 };
 
 /**
@@ -62,14 +65,14 @@ export const formatTime = (timeString: string): string => {
  * end of the time part. The final formatted time string is returned by the function.
  */
 export function timeFormatString(arriveTime: string) {
-   // Tách chuỗi nếu có chứa ký tự đặc biệt "Oct" hoặc bất kỳ chữ cái nào
-   const timePart = arriveTime.split(' ')[0];
+  // Tách chuỗi nếu có chứa ký tự đặc biệt "Oct" hoặc bất kỳ chữ cái nào
+  const timePart = arriveTime.split(' ')[0];
 
-   // Đảm bảo định dạng hh:mm có đúng 5 ký tự
-   let formattedTime = timePart.length === 5 ? timePart : timePart.substring(0, 5);
+  // Đảm bảo định dạng hh:mm có đúng 5 ký tự
+  let formattedTime = timePart.length === 5 ? timePart : timePart.slice(0, 5);
 
-   // Thêm ":00" cho giây
-   return `${formattedTime}:00`;
+  // Thêm ":00" cho giây
+  return `${formattedTime}:00`;
 }
 
 /**
@@ -80,7 +83,7 @@ export function timeFormatString(arriveTime: string) {
  * abbreviation followed by the day of the month.
  */
 export const formatDateMonth = (value: string | Date) => {
-   return format(value, 'MMM dd');
+  return format(value, 'MMM dd');
 };
 
 /**
@@ -103,25 +106,25 @@ export const formatDateMonth = (value: string | Date) => {
  * `startTime`, or 'HH:mm MMM d' if it falls on a different day.
  */
 export function generateTimeSlotsFromNow(
-   startTime: string,
-   maxSlots: number = 20,
-   intervalHours: number = 1,
+  startTime: string,
+  maxSlots: number = 20,
+  intervalHours: number = 1,
 ): string[] {
-   const slots: string[] = [];
-   const startDate = new Date(startTime);
+  const slots: string[] = [];
+  const startDate = new Date(startTime);
 
-   for (let i = 0; i < maxSlots; i++) {
-      const slotDate = addHours(startDate, i);
+  for (let index = 0; index < maxSlots; index++) {
+    const slotDate = addHours(startDate, index);
 
-      // Kiểm tra xem ngày có trùng với ngày bắt đầu hay không
-      const formattedTime = isSameDay(startDate, slotDate)
-         ? format(slotDate, 'HH:mm')
-         : format(slotDate, 'HH:mm MMM d');
+    // Kiểm tra xem ngày có trùng với ngày bắt đầu hay không
+    const formattedTime = isSameDay(startDate, slotDate)
+      ? format(slotDate, 'HH:mm')
+      : format(slotDate, 'HH:mm MMM d');
 
-      slots.push(formattedTime);
-   }
+    slots.push(formattedTime);
+  }
 
-   return slots;
+  return slots;
 }
 
 /**
@@ -132,12 +135,12 @@ export function generateTimeSlotsFromNow(
  * @returns Ngày hợp lệ (không nằm trong quá khứ).
  */
 export const getValidatedDate = (
-   date?: string | Date,
-   fallbackDate: Date = addDays(new Date(), 2),
-   currentDate: Date = new Date(),
+  date?: string | Date,
+  fallbackDate: Date = addDays(new Date(), 2),
+  currentDate: Date = new Date(),
 ): Date => {
-   const parsedDate = date ? toDate(date) : fallbackDate;
-   return parsedDate < currentDate ? fallbackDate : parsedDate;
+  const parsedDate = date ? toDate(date) : fallbackDate;
+  return parsedDate < currentDate ? fallbackDate : parsedDate;
 };
 
 /**
@@ -148,7 +151,7 @@ export const getValidatedDate = (
  * @returns The function `formatDateMMM` is returning a formatted date string in the format "MMM d".
  */
 export const formatDateMMM = (date: Date | string): string => {
-   return format(date, 'MMM d');
+  return format(date, 'MMM d');
 };
 
 /**
@@ -159,7 +162,7 @@ export const formatDateMMM = (date: Date | string): string => {
  * @returns The function `formatDated` is returning the formatted date in the "d" format.
  */
 export const formatDated = (date: Date | string): string => {
-   return format(date, 'd');
+  return format(date, 'd');
 };
 
 /**
@@ -170,10 +173,12 @@ export const formatDated = (date: Date | string): string => {
  * after today or the same as today, or it returns today's date if the input date is before today.
  */
 export const checkIfDateIsGreaterThanToday = (date: Date) => {
-   const today = startOfDay(new Date());
-   const inputDate = startOfDay(date);
+  const today = startOfDay(new Date());
+  const inputDate = startOfDay(date);
 
-   return isAfter(inputDate, today) || isSameDay(inputDate, today) ? inputDate : today;
+  return isAfter(inputDate, today) || isSameDay(inputDate, today)
+    ? inputDate
+    : today;
 };
 
 /**
@@ -191,19 +196,19 @@ export const checkIfDateIsGreaterThanToday = (date: Date) => {
  * same as the start date, the end date is adjusted to be one
  */
 export const getAdjustedEndDate = (
-   startDateStr: string | undefined,
-   endDateStr: string | undefined,
+  startDateString: string | undefined,
+  endDateString: string | undefined,
 ) => {
-   const startDate = startDateStr
-      ? checkIfDateIsGreaterThanToday(parseISO(startDateStr))
-      : new Date();
-   const endDate = endDateStr
-      ? checkIfDateIsGreaterThanToday(parseISO(endDateStr))
-      : addDays(startDate, 1);
+  const startDate = startDateString
+    ? checkIfDateIsGreaterThanToday(parseISO(startDateString))
+    : new Date();
+  const endDate = endDateString
+    ? checkIfDateIsGreaterThanToday(parseISO(endDateString))
+    : addDays(startDate, 1);
 
-   return isAfter(startDate, endDate) || isSameDay(startDate, endDate)
-      ? addDays(startDate, 1)
-      : endDate;
+  return isAfter(startDate, endDate) || isSameDay(startDate, endDate)
+    ? addDays(startDate, 1)
+    : endDate;
 };
 
 /**
@@ -231,15 +236,15 @@ export const convertDateToString = (date: Date) => date.toDateString();
  * representing the year, month, and day of the input date.
  */
 export const formatDateToYearMonthDay = (date: Date): string => {
-   if (!date || !isValid(date)) {
-      date = new Date(); // Use current date if input is invalid
-   }
+  if (!date || !isValid(date)) {
+    date = new Date(); // Use current date if input is invalid
+  }
 
-   const year = date.getFullYear();
-   const month = String(date.getMonth() + 1).padStart(2, '0');
-   const day = String(date.getDate()).padStart(2, '0');
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
 
-   return `${year}-${month}-${day}`;
+  return `${year}-${month}-${day}`;
 };
 
 /**
@@ -248,22 +253,33 @@ export const formatDateToYearMonthDay = (date: Date): string => {
  * @param {Date} endDate - The ending date in UTC.
  * @returns The number of days between `startDate` and `endDate` in UTC time.
  */
-export const daysBetweenDateRange = (startDate: Date, endDate: Date): number => {
-   // Validate and default to current date if invalid
-   if (!isValid(startDate)) {
-      startDate = new Date();
-   }
-   if (!isValid(endDate)) {
-      endDate = new Date();
-   }
+export const daysBetweenDateRange = (
+  startDate: Date,
+  endDate: Date,
+): number => {
+  // Validate and default to current date if invalid
+  if (!isValid(startDate)) {
+    startDate = new Date();
+  }
+  if (!isValid(endDate)) {
+    endDate = new Date();
+  }
 
-   // Calculate the difference in days using date-fns
-   const daysDifference = differenceInDays(
-      new Date(Date.UTC(startDate.getFullYear(), startDate.getMonth(), startDate.getDate())),
-      new Date(Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate())),
-   );
+  // Calculate the difference in days using date-fns
+  const daysDifference = differenceInDays(
+    new Date(
+      Date.UTC(
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate(),
+      ),
+    ),
+    new Date(
+      Date.UTC(endDate.getFullYear(), endDate.getMonth(), endDate.getDate()),
+    ),
+  );
 
-   return Math.abs(daysDifference); // Return the absolute value to avoid negative differences
+  return Math.abs(daysDifference); // Return the absolute value to avoid negative differences
 };
 
 /**
@@ -274,15 +290,15 @@ export const daysBetweenDateRange = (startDate: Date, endDate: Date): number => 
  * YYYY".
  */
 export const formatDateUTC = (date: Date | null | undefined): string => {
-   if (!date || !isValid(date)) {
-      date = new Date(); // Use the current date if invalid or null
-   }
+  if (!date || !isValid(date)) {
+    date = new Date(); // Use the current date if invalid or null
+  }
 
-   // Add 1 day (86400 seconds)
-   const newDate = add(date, { seconds: 86400 });
+  // Add 1 day (86400 seconds)
+  const newDate = add(date, { seconds: 86_400 });
 
-   // Format the date as "MMM D, YYYY"
-   return format(newDate, 'MMM d, yyyy');
+  // Format the date as "MMM D, YYYY"
+  return format(newDate, 'MMM d, yyyy');
 };
 
 /**
@@ -293,19 +309,19 @@ export const formatDateUTC = (date: Date | null | undefined): string => {
  * @throws Error nếu checkout date không hợp lệ
  */
 export function calculateNightsAndDays(
-   checkinDate: string,
-   checkoutDate: string,
+  checkinDate: string,
+  checkoutDate: string,
 ): { nights: number; days: number } {
-   const checkin = parseISO(checkinDate); // Chuyển chuỗi ISO thành Date
-   const checkout = parseISO(checkoutDate);
+  const checkin = parseISO(checkinDate); // Chuyển chuỗi ISO thành Date
+  const checkout = parseISO(checkoutDate);
 
-   // Kiểm tra nếu ngày checkout trước hoặc bằng ngày checkin
-   if (isBefore(checkout, checkin) || checkin.getTime() === checkout.getTime()) {
-      throw new Error('Checkout date must be after checkin date');
-   }
+  // Kiểm tra nếu ngày checkout trước hoặc bằng ngày checkin
+  if (isBefore(checkout, checkin) || checkin.getTime() === checkout.getTime()) {
+    throw new Error('Checkout date must be after checkin date');
+  }
 
-   const nights = differenceInDays(checkout, checkin); // Tính số đêm
-   const days = nights + 1; // Tính số ngày (nights + 1)
+  const nights = differenceInDays(checkout, checkin); // Tính số đêm
+  const days = nights + 1; // Tính số ngày (nights + 1)
 
-   return { nights, days };
+  return { nights, days };
 }

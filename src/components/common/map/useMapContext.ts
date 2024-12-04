@@ -1,15 +1,20 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import { MapContext } from './LeafletMapContextProvider'
+import { MapContext } from './LeafletMapContextProvider';
 
 const useMapContext = () => {
-  const mapInstance = useContext(MapContext)
-  const map = mapInstance?.map
-  const setMap = mapInstance?.setMap
-  const leafletLib = mapInstance?.leafletLib
-  const setLeafletLib = mapInstance?.setLeafletLib
+  const mapInstance = useContext(MapContext);
+  const map = mapInstance?.map;
+  const setMap = mapInstance?.setMap;
+  const leafletLibrary = mapInstance?.leafletLib;
+  const setLeafletLibrary = mapInstance?.setLeafletLib;
 
-  return { map, setMap, leafletLib, setLeafletLib }
-}
+  return {
+    map,
+    setMap,
+    leafletLib: leafletLibrary,
+    setLeafletLib: setLeafletLibrary,
+  };
+};
 
-export default useMapContext
+export default useMapContext;

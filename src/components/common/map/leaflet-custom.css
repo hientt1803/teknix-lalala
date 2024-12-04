@@ -3,20 +3,20 @@
 */
 
 .leaflet-marker-icon.leaflet-div-icon {
-    background: none;
-    border: none !important;
+  background: none;
+  border: none !important;
 }
 
 .leaflet-cluster-anim .leaflet-marker-icon,
 .leaflet-cluster-anim .leaflet-marker-shadow {
-    transition:
-        transform 0.25s ease-out,
-        opacity 0.25s ease-in;
+  transition:
+    transform 0.25s ease-out,
+    opacity 0.25s ease-in;
 }
 
 .leaflet-popup-content {
-    width: 1px !important;
-    height: 1px !important;
+  width: 1px !important;
+  height: 1px !important;
 }
 
 .leaflet-popup-content p,
@@ -24,39 +24,39 @@
 .leaflet-popup-tip-container,
 .leaflet-popup-tip,
 .leaflet-popup-content {
-    background: initial;
-    color: initial;
-    box-shadow: initial;
-    position: initial;
-    left: initial;
-    margin-top: initial;
-    margin-left: initial;
-    overflow: initial;
-    pointer-events: initial;
-    margin: initial;
-    line-height: initial;
-    font-size: initial;
-    font-size: initial;
-    min-height: initial;
+  background: initial;
+  color: initial;
+  box-shadow: initial;
+  position: initial;
+  left: initial;
+  margin-top: initial;
+  margin-left: initial;
+  overflow: initial;
+  pointer-events: initial;
+  margin: initial;
+  line-height: initial;
+  font-size: initial;
+  font-size: initial;
+  min-height: initial;
 }
 
 /* GEO SEARCH CONTROL */
 .leaflet-touch .leaflet-geosearch-bar {
-    @apply relative;
+  @apply relative;
 }
 .leaflet-touch .leaflet-geosearch-bar form {
-    @apply rounded-2xl h-12 w-full flex justify-between items-center gap-2 bg-white;
+  @apply flex h-12 w-full items-center justify-between gap-2 rounded-2xl bg-white;
 }
 
 .leaflet-control-geosearch form input {
-    @apply block h-full !w-[calc(100%-32px)] !min-w-[calc(100%-32px)] flex-grow   rounded-2xl !text-base font-normal;
+  @apply block h-full !w-[calc(100%-32px)] !min-w-[calc(100%-32px)] flex-grow rounded-2xl !text-base font-normal;
 }
 .leaflet-control-geosearch form button {
-    @apply !w-8 !h-8 !relative;
+  @apply !relative !h-8 !w-8;
 }
 .leaflet-control-geosearch form .results {
-    @apply absolute w-full top-[calc(100%+2px)] left-0 rounded-b-2xl !border-0 p-0;
+  @apply absolute left-0 top-[calc(100%+2px)] w-full rounded-b-2xl !border-0 p-0;
 }
 .leaflet-control-geosearch form .results div {
-    @apply px-3 py-3 text-sm border-0 hover:bg-neutral-50 text-black;
+  @apply border-0 px-3 py-3 text-sm text-black hover:bg-neutral-50;
 }

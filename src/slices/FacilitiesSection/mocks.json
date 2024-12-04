@@ -1,153 +1,153 @@
 [
-	{
-		"__TYPE__": "SharedSliceContent",
-		"variation": "default",
-		"primary": {
-			"heading": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "heading2",
-						"content": {
-							"text": "Learn"
-						}
-					}
-				]
-			},
-			"body": {
-				"__TYPE__": "StructuredTextContent",
-				"value": [
-					{
-						"type": "paragraph",
-						"content": {
-							"text": "Irure non ea ullamco enim reprehenderit excepteur magna non duis sunt. Consectetur commodo ad occaecat ipsum tempor magna duis cillum reprehenderit cillum. Occaecat elit occaecat adipisicing anim labore adipisicing ullamco elit reprehenderit."
-						}
-					}
-				]
-			},
-			"button_text": {
-				"__TYPE__": "FieldContent",
-				"value": "suddenly",
-				"type": "Text"
-			},
-			"button_link": {
-				"__TYPE__": "LinkContent",
-				"value": {
-					"__TYPE__": "ExternalLink",
-					"url": "https://slicemachine.dev",
-					"text": "suggest"
-				}
-			},
-			"facilities": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"name",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "month",
-									"type": "Text"
-								}
-							],
-							[
-								"icon",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "gym",
-									"type": "Select"
-								}
-							]
-						]
-					}
-				]
-			},
-			"destinations": {
-				"__TYPE__": "GroupContentType",
-				"value": [
-					{
-						"__TYPE__": "GroupItemContent",
-						"value": [
-							[
-								"image",
-								{
-									"origin": {
-										"id": "main",
-										"url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb",
-										"width": 3958,
-										"height": 3958
-									},
-									"url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb",
-									"width": 3958,
-									"height": 3958,
-									"edit": {
-										"zoom": 1,
-										"crop": {
-											"x": 0,
-											"y": 0
-										},
-										"background": "transparent"
-									},
-									"credits": null,
-									"alt": null,
-									"__TYPE__": "ImageContent",
-									"thumbnails": {}
-								}
-							],
-							[
-								"type",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "paragraph",
-											"content": {
-												"text": "Reprehenderit pariatur cupidatat elit nulla irure elit excepteur aliquip culpa ad commodo esse sint. Est ad do nostrud mollit excepteur adipisicing anim fugiat dolore ad adipisicing ut mollit minim proident."
-											}
-										}
-									]
-								}
-							],
-							[
-								"name",
-								{
-									"__TYPE__": "StructuredTextContent",
-									"value": [
-										{
-											"type": "heading3",
-											"content": {
-												"text": "Truck"
-											}
-										}
-									]
-								}
-							],
-							[
-								"button_text",
-								{
-									"__TYPE__": "FieldContent",
-									"value": "mind",
-									"type": "Text"
-								}
-							],
-							[
-								"button_link",
-								{
-									"__TYPE__": "LinkContent",
-									"value": {
-										"__TYPE__": "ExternalLink",
-										"url": "http://google.com",
-										"text": "happily"
-									}
-								}
-							]
-						]
-					}
-				]
-			}
-		},
-		"items": []
-	}
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "heading2",
+            "content": {
+              "text": "Learn"
+            }
+          }
+        ]
+      },
+      "body": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Irure non ea ullamco enim reprehenderit excepteur magna non duis sunt. Consectetur commodo ad occaecat ipsum tempor magna duis cillum reprehenderit cillum. Occaecat elit occaecat adipisicing anim labore adipisicing ullamco elit reprehenderit."
+            }
+          }
+        ]
+      },
+      "button_text": {
+        "__TYPE__": "FieldContent",
+        "value": "suddenly",
+        "type": "Text"
+      },
+      "button_link": {
+        "__TYPE__": "LinkContent",
+        "value": {
+          "__TYPE__": "ExternalLink",
+          "url": "https://slicemachine.dev",
+          "text": "suggest"
+        }
+      },
+      "facilities": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "name",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "month",
+                  "type": "Text"
+                }
+              ],
+              [
+                "icon",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "gym",
+                  "type": "Select"
+                }
+              ]
+            ]
+          }
+        ]
+      },
+      "destinations": {
+        "__TYPE__": "GroupContentType",
+        "value": [
+          {
+            "__TYPE__": "GroupItemContent",
+            "value": [
+              [
+                "image",
+                {
+                  "origin": {
+                    "id": "main",
+                    "url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb",
+                    "width": 3958,
+                    "height": 3958
+                  },
+                  "url": "https://images.unsplash.com/photo-1579931794097-0ad001e51edb",
+                  "width": 3958,
+                  "height": 3958,
+                  "edit": {
+                    "zoom": 1,
+                    "crop": {
+                      "x": 0,
+                      "y": 0
+                    },
+                    "background": "transparent"
+                  },
+                  "credits": null,
+                  "alt": null,
+                  "__TYPE__": "ImageContent",
+                  "thumbnails": {}
+                }
+              ],
+              [
+                "type",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "paragraph",
+                      "content": {
+                        "text": "Reprehenderit pariatur cupidatat elit nulla irure elit excepteur aliquip culpa ad commodo esse sint. Est ad do nostrud mollit excepteur adipisicing anim fugiat dolore ad adipisicing ut mollit minim proident."
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "name",
+                {
+                  "__TYPE__": "StructuredTextContent",
+                  "value": [
+                    {
+                      "type": "heading3",
+                      "content": {
+                        "text": "Truck"
+                      }
+                    }
+                  ]
+                }
+              ],
+              [
+                "button_text",
+                {
+                  "__TYPE__": "FieldContent",
+                  "value": "mind",
+                  "type": "Text"
+                }
+              ],
+              [
+                "button_link",
+                {
+                  "__TYPE__": "LinkContent",
+                  "value": {
+                    "__TYPE__": "ExternalLink",
+                    "url": "http://google.com",
+                    "text": "happily"
+                  }
+                }
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "items": []
+  }
 ]

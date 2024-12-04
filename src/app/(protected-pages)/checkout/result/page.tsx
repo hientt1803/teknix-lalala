@@ -1,15 +1,15 @@
 import dynamic from 'next/dynamic';
 
 const CheckoutResultFeature = dynamic(() => import('@/features/result'), {
-   ssr: false,
+  ssr: false,
 });
 
 const CheckoutResultPage = () => {
-   return (
-      <div className="py-16">
-         <CheckoutResultFeature />
-      </div>
-   );
+  return (
+    <div className="py-16">
+      <CheckoutResultFeature />
+    </div>
+  );
 };
 
 export default CheckoutResultPage;
