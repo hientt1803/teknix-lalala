@@ -1,68 +1,68 @@
 import { API_URL } from '@/configs';
 
 export interface HotDestination {
-   id: string;
-   user_created: string;
-   date_created: string;
-   user_updated: string;
-   date_updated: string;
-   city_name: string;
-   activity_url: any;
-   country_name: string;
-   country_name_english: string;
-   city_name_english: string;
-   hotel_count: number;
-   property_text: string;
-   place_id: string;
-   address_type: string;
-   lat: string;
-   long: string;
-   image_url: string;
+  id: string;
+  user_created: string;
+  date_created: string;
+  user_updated: string;
+  date_updated: string;
+  city_name: string;
+  activity_url: any;
+  country_name: string;
+  country_name_english: string;
+  city_name_english: string;
+  hotel_count: number;
+  property_text: string;
+  place_id: string;
+  address_type: string;
+  lat: string;
+  long: string;
+  image_url: string;
 }
 
 export type listFaqType = {
-   id: string;
-   user_created: string;
-   date_created: string;
-   user_updated?: string;
-   date_updated?: string;
-   question: string;
-   answer: string;
-   priority: number;
-   is_featured?: boolean;
-   tags?: string[];
-   visibility_status: string;
-   category: string;
+  id: string;
+  user_created: string;
+  date_created: string;
+  user_updated?: string;
+  date_updated?: string;
+  question: string;
+  answer: string;
+  priority: number;
+  is_featured?: boolean;
+  tags?: string[];
+  visibility_status: string;
+  category: string;
 };
 
 export const getHotDestination = async (): Promise<HotDestination[] | null> => {
-   const res = await fetch(`${API_URL}/api/global/hot_destinations`, {
-      method: 'GET',
-      headers: {
-         'Content-Type': 'application/json',
-      },
-   });
+  const res = await fetch(`${API_URL}/api/global/hot_destinations`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-   if (!res.ok) {
-      return null;
-   }
+  if (!res.ok) {
+    return null;
+  }
 
-   const data = await res.json();
-   return data;
+  const data = await res.json();
+  return data;
 };
 
 export const getListFAQs = async (): Promise<listFaqType[] | null> => {
-   const res = await fetch(`${API_URL}/api/global/contents/faq`, {
-      method: 'GET',
-      headers: {
-         'Content-Type': 'application/json',
-      },
-   });
+  const res = await fetch(`${API_URL}/api/global/contents/faq`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
-   if (!res.ok) {
-      return null;
-   }
+  if (!res.ok) {
+    return null;
+  }
 
-   const data = await res.json();
-   return data;
+  const data = await res.json();
+  return data;
 };

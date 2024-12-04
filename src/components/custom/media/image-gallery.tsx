@@ -1,118 +1,132 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { LayoutGridIcon, Play } from 'lucide-react';
 import { useState } from 'react';
-import ModalShowAllGalley from './image-modal';
+
 import Image from '@/components/common/images/image';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+import ModalShowAllGalley from './image-modal';
 
 // const CredenzaImages = dynamic(() => import("./credenza-images"), {
 //     ssr: false,
 // });
 type ImageGalleryProps = {
-   type: 'default' | 'tour' | 'car' | 'flight';
-   images: string[];
+  type: 'default' | 'tour' | 'car' | 'flight';
+  images: string[];
 };
 
 const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
-   const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-   const handleOpen = () => {
-      setOpen(true);
-   };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-   return (
-      <div className="no-scrollbar">
-         <div className="rounded-md sm:rounded-xl w-full">
-            {type === 'default' && (
-               <div
-                  onClick={handleOpen}
-                  className="relative grid grid-cols-1 sm:grid-cols-4 gap-1 sm:gap-2"
-               >
-                  <div className="col-span-2 row-span-3 sm:row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer">
-                     <Image
-                        src={images[0]?.replace('{size}', '640x400') || '/location.png'}
-                        className={cn(
-                           'absolute inset-0 object-cover object-center rounded-md w-full h-full sm:rounded-xl bg-gray-200',
-                        )}
-                        alt="gallery-image"
-                        loading="lazy"
-                     />
-                  </div>
-                  <div className="relative rounded-md sm:rounded-xl overflow-hidden bg-gray-200">
-                     <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <Image
-                           src={images[1]?.replace('{size}', '640x400') || '/location.png'}
-                           className={cn(
-                              'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
-                           )}
-                           alt="gallery-image"
-                           loading="lazy"
-                        />
-                     </div>
-                  </div>
-                  <div className="relative rounded-md sm:rounded-xl overflow-hidden bg-gray-200">
-                     <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <Image
-                           src={images[2]?.replace('{size}', '640x400') || '/location.png'}
-                           className={cn(
-                              'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
-                           )}
-                           alt="gallery-image"
-                           loading="lazy"
-                        />
-                     </div>
-                  </div>
-                  <div className="relative rounded-md sm:rounded-xl overflow-hidden bg-gray-200">
-                     <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <Image
-                           src={images[3]?.replace('{size}', '640x400') || '/location.png'}
-                           className={cn(
-                              'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
-                           )}
-                           alt="gallery-image"
-                           loading="lazy"
-                        />
-                     </div>
-                  </div>
-                  <div className="relative rounded-md sm:rounded-xl overflow-hidden hidden sm:block bg-gray-200">
-                     <div className="aspect-[4/3] sm:aspect-[6/5]">
-                        <Image
-                           src={images[4]?.replace('{size}', '640x400') || '/location.png'}
-                           className={cn(
-                              'absolute inset-0 object-cover object-center rounded-md sm:rounded-xl w-full h-full bg-gray-200',
-                           )}
-                           alt="gallery-image"
-                           loading="lazy"
-                        />
-                     </div>
-                  </div>
-                  <div className="absolute hidden md:flex items-center gap-2 left-6 bottom-3">
-                     <Button
-                        onClick={handleOpen}
-                        className="md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-yellow-400 text-black hover:bg-neutral-200 hover:text-neutral-800 z-10"
-                     >
-                        <LayoutGridIcon className="w-5 h-5 mr-1" />
-                        See all photos
-                     </Button>
-                     <Button
-                        onClick={handleOpen}
-                        className=" md:flex md:items-center md:justify-center text-base px-6 py-6 rounded-full bg-neutral-100 text-black hover:bg-neutral-200 hover:text-neutral-800 z-10"
-                     >
-                        <div className="border border-neutral-800 rounded-full p-1 flex justify-center items-center">
-                           <Play className="w-5 h-5" />
-                        </div>
-                        Video Clips
-                     </Button>
-                  </div>
+  return (
+    <div className="no-scrollbar">
+      <div className="w-full rounded-md sm:rounded-xl">
+        {type === 'default' && (
+          <div
+            onClick={handleOpen}
+            className="relative grid grid-cols-1 gap-1 sm:grid-cols-4 sm:gap-2"
+          >
+            <div className="relative col-span-2 row-span-3 cursor-pointer overflow-hidden rounded-md sm:row-span-2 sm:rounded-xl">
+              <Image
+                src={images[0]?.replace('{size}', '640x400') || '/location.png'}
+                className={cn(
+                  'absolute inset-0 h-full w-full rounded-md bg-gray-200 object-cover object-center sm:rounded-xl',
+                )}
+                alt="gallery-image"
+                loading="lazy"
+              />
+            </div>
+            <div className="relative overflow-hidden rounded-md bg-gray-200 sm:rounded-xl">
+              <div className="aspect-[4/3] sm:aspect-[6/5]">
+                <Image
+                  src={
+                    images[1]?.replace('{size}', '640x400') || '/location.png'
+                  }
+                  className={cn(
+                    'absolute inset-0 h-full w-full rounded-md bg-gray-200 object-cover object-center sm:rounded-xl',
+                  )}
+                  alt="gallery-image"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-md bg-gray-200 sm:rounded-xl">
+              <div className="aspect-[4/3] sm:aspect-[6/5]">
+                <Image
+                  src={
+                    images[2]?.replace('{size}', '640x400') || '/location.png'
+                  }
+                  className={cn(
+                    'absolute inset-0 h-full w-full rounded-md bg-gray-200 object-cover object-center sm:rounded-xl',
+                  )}
+                  alt="gallery-image"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="relative overflow-hidden rounded-md bg-gray-200 sm:rounded-xl">
+              <div className="aspect-[4/3] sm:aspect-[6/5]">
+                <Image
+                  src={
+                    images[3]?.replace('{size}', '640x400') || '/location.png'
+                  }
+                  className={cn(
+                    'absolute inset-0 h-full w-full rounded-md bg-gray-200 object-cover object-center sm:rounded-xl',
+                  )}
+                  alt="gallery-image"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="relative hidden overflow-hidden rounded-md bg-gray-200 sm:block sm:rounded-xl">
+              <div className="aspect-[4/3] sm:aspect-[6/5]">
+                <Image
+                  src={
+                    images[4]?.replace('{size}', '640x400') || '/location.png'
+                  }
+                  className={cn(
+                    'absolute inset-0 h-full w-full rounded-md bg-gray-200 object-cover object-center sm:rounded-xl',
+                  )}
+                  alt="gallery-image"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="absolute bottom-3 left-6 hidden items-center gap-2 md:flex">
+              <Button
+                onClick={handleOpen}
+                className="z-10 rounded-full bg-yellow-400 px-6 py-6 text-base text-black hover:bg-neutral-200 hover:text-neutral-800 md:flex md:items-center md:justify-center"
+              >
+                <LayoutGridIcon className="mr-1 h-5 w-5" />
+                See all photos
+              </Button>
+              <Button
+                onClick={handleOpen}
+                className="z-10 rounded-full bg-neutral-100 px-6 py-6 text-base text-black hover:bg-neutral-200 hover:text-neutral-800 md:flex md:items-center md:justify-center"
+              >
+                <div className="flex items-center justify-center rounded-full border border-neutral-800 p-1">
+                  <Play className="h-5 w-5" />
+                </div>
+                Video Clips
+              </Button>
+            </div>
 
-                  <ModalShowAllGalley opened={open} setOpen={setOpen} images={images} />
-                  {/* <CredenzaImages open={open} setOpen={setOpen} /> */}
-                  {/* <Modal open={open} setOpen={setOpen} /> */}
-               </div>
-            )}
-            {/* {type === "flight" && (
+            <ModalShowAllGalley
+              opened={open}
+              setOpen={setOpen}
+              images={images}
+            />
+            {/* <CredenzaImages open={open} setOpen={setOpen} /> */}
+            {/* <Modal open={open} setOpen={setOpen} /> */}
+          </div>
+        )}
+        {/* {type === "flight" && (
                     <div className="relative grid grid-cols-4 gap-1 sm:gap-2">
                         <div className="col-span-2 row-span-2 relative rounded-md sm:rounded-xl overflow-hidden cursor-pointer">
                             <img
@@ -244,9 +258,9 @@ const ImageGalleryComp = ({ type, images }: ImageGalleryProps) => {
                         <ButtonShowAll />
                     </div>
                 )} */}
-         </div>
       </div>
-   );
+    </div>
+  );
 };
 
 export default ImageGalleryComp;

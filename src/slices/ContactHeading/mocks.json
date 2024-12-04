@@ -1,0 +1,45 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Duis ullamco laboris amet adipisicing duis consectetur ut qui velit culpa laborum ea consectetur."
+            }
+          }
+        ]
+      },
+      "description": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Lorem adipisicing deserunt incididunt. Irure culpa aute commodo ut excepteur quis commodo elit veniam qui laborum. Exercitation dolore ipsum nostrud veniam nostrud nulla."
+            }
+          }
+        ]
+      },
+      "address": {
+        "__TYPE__": "FieldContent",
+        "value": "while",
+        "type": "Text"
+      },
+      "use_button": {
+        "__TYPE__": "BooleanContent",
+        "value": true
+      },
+      "button_text": {
+        "__TYPE__": "FieldContent",
+        "value": "fast",
+        "type": "Text"
+      }
+    },
+    "items": []
+  }
+]

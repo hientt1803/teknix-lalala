@@ -1,0 +1,54 @@
+[
+  {
+    "__TYPE__": "SharedSliceContent",
+    "variation": "default",
+    "primary": {
+      "image": {
+        "origin": {
+          "id": "main",
+          "url": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8",
+          "width": 3456,
+          "height": 3456
+        },
+        "url": "https://images.unsplash.com/photo-1576662712957-9c79ae1280f8",
+        "width": 3456,
+        "height": 3456,
+        "edit": {
+          "zoom": 1,
+          "crop": {
+            "x": 0,
+            "y": 0
+          },
+          "background": "transparent"
+        },
+        "credits": null,
+        "alt": null,
+        "__TYPE__": "ImageContent",
+        "thumbnails": {}
+      },
+      "heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Irure Lorem eu in est eu irure magna dolor amet in sunt irure magna nulla. Officia dolore in ad ut esse exercitation reprehenderit adipisicing. Ut pariatur consequat nostrud duis enim amet fugiat consequat."
+            }
+          }
+        ]
+      },
+      "sub_heading": {
+        "__TYPE__": "StructuredTextContent",
+        "value": [
+          {
+            "type": "paragraph",
+            "content": {
+              "text": "Et labore fugiat consectetur minim sit aliquip eiusmod laboris est fugiat. Elit duis voluptate ad occaecat pariatur tempor sint dolor cupidatat. Excepteur non cillum consequat nostrud sit esse duis id veniam nulla ad velit quis incididunt deserunt."
+            }
+          }
+        ]
+      }
+    },
+    "items": []
+  }
+]

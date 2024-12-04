@@ -1,0 +1,179 @@
+{
+  "id": "why_book_at_lalala",
+  "type": "SharedSlice",
+  "name": "WhyBookAtLalala",
+  "description": "WhyBookAtLalala",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "main_image": {
+          "type": "Image",
+          "config": {
+            "label": "main_image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "button_link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null,
+            "allowText": true
+          }
+        },
+        "button_text": {
+          "type": "Text",
+          "config": {
+            "label": "button_text",
+            "placeholder": ""
+          }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "em,strong,paragraph"
+          }
+        },
+        "heading_desc": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading_desc",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "sub_heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Sub Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "button_image": {
+          "type": "Image",
+          "config": {
+            "label": "button_image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "withoutImage",
+      "name": "Without Image",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "button_link",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "select": null,
+            "allowText": true
+          }
+        },
+        "button_text": {
+          "type": "Text",
+          "config": {
+            "label": "button_text",
+            "placeholder": ""
+          }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        },
+        "heading_desc": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading_desc",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "ads": {
+          "type": "Group",
+          "config": {
+            "label": "ads",
+            "repeat": true,
+            "fields": {
+              "digit": {
+                "type": "Text",
+                "config": {
+                  "label": "digit",
+                  "placeholder": ""
+                }
+              },
+              "text": {
+                "type": "Text",
+                "config": {
+                  "label": "text",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "features": {
+          "type": "Group",
+          "config": {
+            "label": "features",
+            "repeat": true,
+            "fields": {
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "title",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "Text",
+                "config": {
+                  "label": "description",
+                  "placeholder": ""
+                }
+              },
+              "icon": {
+                "type": "Image",
+                "config": {
+                  "label": "icon",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

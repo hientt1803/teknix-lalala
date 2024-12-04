@@ -11,29 +11,29 @@
  * provided `size` parameter or '640x400' if no `size` parameter is provided.
  */
 export const replaceSize = (value?: string, size?: '640x400' | '1024x768') => {
-   return value && value.replaceAll('{size}', size || '640x400');
+  return value && value.replaceAll('{size}', size || '640x400');
 };
 
 /* The `convertKebabToTitleCase` function is taking a string in kebab-case
 format (words separated by hyphens) and converting it to title case format
 (each word capitalized with spaces between words). */
-export const convertKebabToTitleCase = (str: string): string => {
-   if (!str) return '';
-   return str
-      .split('-') // Split the string by the hyphen
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-      .join(' '); // Join the words with a space
+export const convertKebabToTitleCase = (string_: string): string => {
+  if (!string_) return '';
+  return string_
+    .split('-') // Split the string by the hyphen
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+    .join(' '); // Join the words with a space
 };
 
 /* The `convertSnakeToTitleCase` function takes a string in snake_case
 format (words separated by underscores) and converts it to title case 
 (each word capitalized with spaces between words). */
-export const convertSnakeToTitleCase = (str: string): string => {
-   if (!str) return '';
-   return str
-      .split('_') // Split the string by underscores
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
-      .join(' '); // Join the words with a space
+export const convertSnakeToTitleCase = (string_: string): string => {
+  if (!string_) return '';
+  return string_
+    .split('_') // Split the string by underscores
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
+    .join(' '); // Join the words with a space
 };
 
 /**
@@ -48,10 +48,12 @@ export const convertSnakeToTitleCase = (str: string): string => {
  * resulting title case
  */
 export function convertToTitleCase(input: string): string {
-   return input
-      .split('_')
-      .map((word, index) =>
-         index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word.toLowerCase(),
-      )
-      .join(' ');
+  return input
+    .split('_')
+    .map((word, index) =>
+      index === 0
+        ? word.charAt(0).toUpperCase() + word.slice(1)
+        : word.toLowerCase(),
+    )
+    .join(' ');
 }

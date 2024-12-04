@@ -8,7 +8,8 @@
       "start": "next start",
       "lint": "next lint",
       "slicemachine": "start-slicemachine",
-      "format": "prettier . --write"
+      "format": "prettier --write .",
+      "type-check": "tsc -b"
    },
    "dependencies": {
       "@hookform/resolvers": "^3.9.1",
@@ -37,7 +38,9 @@
       "@radix-ui/react-toast": "^1.2.2",
       "@radix-ui/react-tooltip": "^1.1.4",
       "@reduxjs/toolkit": "^2.3.0",
+      "@tailwindcss/typography": "^0.5.15",
       "class-variance-authority": "^0.7.0",
+      "prettier-plugin-tailwindcss": "^0.6.9",
       "clsx": "^2.1.1",
       "cmdk": "1.0.0",
       "cookies-next": "^5.0.2",

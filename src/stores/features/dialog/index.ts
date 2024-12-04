@@ -1,1 +1,1 @@
-export * from './dialog-slice'
+export * from './dialog-slice';

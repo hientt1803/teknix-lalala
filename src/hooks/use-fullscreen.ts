@@ -1,33 +1,31 @@
-import {useCallback, useRef, useState} from "react";
+import { useCallback, useRef, useState } from 'react';
 
 function useFullscreen<T extends HTMLElement = any>() {
-    const [fullscreen, setFullscreen] = useState(false);
-    const elementRef = useRef<T | null>(null);
+  const [fullscreen, setFullscreen] = useState(false);
+  const elementRef = useRef<T | null>(null);
 
-    const handleChange = () => {
-        setFullscreen(!!document.fullscreenElement);
-    };
+  const handleChange = () => {
+    setFullscreen(!!document.fullscreenElement);
+  };
 
-    const toggle = useCallback(async () => {
-        if (!elementRef.current) return;
+  const toggle = useCallback(async () => {
+    if (!elementRef.current) return;
 
-        if (!document.fullscreenElement) {
-            await elementRef.current.requestFullscreen();
-        } else {
-            await document.exitFullscreen();
-        }
-    }, []);
+    await (document.fullscreenElement
+      ? document.exitFullscreen()
+      : elementRef.current.requestFullscreen());
+  }, []);
 
-    const ref = useCallback((element: T | null) => {
-        if (element) {
-            elementRef.current = element;
-            document.addEventListener("fullscreenchange", handleChange);
-        } else {
-            document.removeEventListener("fullscreenchange", handleChange);
-        }
-    }, []);
+  const ref = useCallback((element: T | null) => {
+    if (element) {
+      elementRef.current = element;
+      document.addEventListener('fullscreenchange', handleChange);
+    } else {
+      document.removeEventListener('fullscreenchange', handleChange);
+    }
+  }, []);
 
-    return {ref, toggle, fullscreen};
+  return { ref, toggle, fullscreen };
 }
 
 export default useFullscreen;

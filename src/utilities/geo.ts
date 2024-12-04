@@ -8,12 +8,12 @@
  * `${kilometers.toFixed(3)} km`.
  */
 export function calculateKilometerDistance(meters: number | string): string {
-   const distanceInMeters = Number(meters);
+  const distanceInMeters = Number(meters);
 
-   if (distanceInMeters >= 500) {
-      const kilometers = distanceInMeters / 1000;
-      return `${kilometers.toFixed(1)} km`;
-   } else {
-      return `${distanceInMeters.toFixed(0)} m`;
-   }
+  if (distanceInMeters >= 500) {
+    const kilometers = distanceInMeters / 1000;
+    return `${kilometers.toFixed(1)} km`;
+  } else {
+    return `${distanceInMeters.toFixed(0)} m`;
+  }
 }

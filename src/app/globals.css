@@ -3,170 +3,170 @@
 @tailwind utilities;
 
 body {
-   font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
-   .text-balance {
-      text-wrap: balance;
-   }
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 @layer base {
-   :root {
-      --background: 0 0% 100%;
-      --foreground: 0 0% 3.9%;
-      --card: 0 0% 100%;
-      --card-foreground: 0 0% 3.9%;
-      --popover: 0 0% 100%;
-      --popover-foreground: 0 0% 3.9%;
-      --primary: 0 0% 9%;
-      --primary-foreground: 0 0% 98%;
-      --secondary: 0 0% 96.1%;
-      --secondary-foreground: 0 0% 9%;
-      --muted: 0 0% 96.1%;
-      --muted-foreground: 0 0% 45.1%;
-      --accent: 0 0% 96.1%;
-      --accent-foreground: 0 0% 9%;
-      --destructive: 0 84.2% 60.2%;
-      --destructive-foreground: 0 0% 98%;
-      --border: 0 0% 89.8%;
-      --input: 0 0% 89.8%;
-      --ring: 0 0% 3.9%;
-      --radius: 0.95remrem;
-   }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --radius: 0.5rem;
+  }
 
-   .dark {
-      --background: 0 0% 3.9%;
-      --foreground: 0 0% 98%;
-      --card: 0 0% 3.9%;
-      --card-foreground: 0 0% 98%;
-      --popover: 0 0% 3.9%;
-      --popover-foreground: 0 0% 98%;
-      --primary: 0 0% 98%;
-      --primary-foreground: 0 0% 9%;
-      --secondary: 0 0% 14.9%;
-      --secondary-foreground: 0 0% 98%;
-      --muted: 0 0% 14.9%;
-      --muted-foreground: 0 0% 63.9%;
-      --accent: 0 0% 14.9%;
-      --accent-foreground: 0 0% 98%;
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
-      --border: 0 0% 14.9%;
-      --input: 0 0% 14.9%;
-      --ring: 0 0% 83.1%;
-   }
+  .dark {
+    --background: 0 0% 9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 9.8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 9.8%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9.8%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
 }
 
 @layer base {
-   * {
-      @apply border-border;
-   }
-   body {
-      @apply bg-background text-foreground;
-   }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
-   -ms-overflow-style: none; /* IE and Edge */
-   scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 /* From Uiverse.io by xXJollyHAKERXx */
 .spinner {
-   background-image: linear-gradient(rgb(186, 66, 255) 35%, rgb(0, 225, 255));
-   width: 100px;
-   height: 100px;
-   animation: spinning82341 1.7s linear infinite;
-   text-align: center;
-   border-radius: 50px;
-   filter: blur(1px);
-   box-shadow:
-      0px -5px 20px 0px rgb(186, 66, 255),
-      0px 5px 20px 0px rgb(0, 225, 255);
+  background-image: linear-gradient(rgb(186, 66, 255) 35%, rgb(0, 225, 255));
+  width: 100px;
+  height: 100px;
+  animation: spinning82341 1.7s linear infinite;
+  text-align: center;
+  border-radius: 50px;
+  filter: blur(1px);
+  box-shadow:
+    0px -5px 20px 0px rgb(186, 66, 255),
+    0px 5px 20px 0px rgb(0, 225, 255);
 }
 
 .spinner1 {
-   background-color: rgb(255, 255, 255);
-   width: 100px;
-   height: 100px;
-   border-radius: 50px;
-   filter: blur(10px);
+  background-color: rgb(255, 255, 255);
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  filter: blur(10px);
 }
 
 @keyframes spinning82341 {
-   to {
-      transform: rotate(360deg);
-   }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* FIXME: find a way to reset styles of leaflet in components */
 .leaflet-marker-icon.leaflet-div-icon {
-   background: none;
-   border: none !important;
+  background: none;
+  border: none !important;
 }
 
 .leaflet-cluster-anim .leaflet-marker-icon,
 .leaflet-cluster-anim .leaflet-marker-shadow {
-   -webkit-transition:
-      -webkit-transform 0.3s ease-out,
-      opacity 0.3s ease-in;
-   -moz-transition:
-      -moz-transform 0.3s ease-out,
-      opacity 0.3s ease-in;
-   -o-transition:
-      -o-transform 0.3s ease-out,
-      opacity 0.3s ease-in;
-   transition:
-      transform 0.3s ease-out,
-      opacity 0.3s ease-in;
+  -webkit-transition:
+    -webkit-transform 0.3s ease-out,
+    opacity 0.3s ease-in;
+  -moz-transition:
+    -moz-transform 0.3s ease-out,
+    opacity 0.3s ease-in;
+  -o-transition:
+    -o-transform 0.3s ease-out,
+    opacity 0.3s ease-in;
+  transition:
+    transform 0.3s ease-out,
+    opacity 0.3s ease-in;
 }
 
 .leaflet-cluster-spider-leg {
-   /* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
-   -webkit-transition:
-      -webkit-stroke-dashoffset 0.3s ease-out,
-      -webkit-stroke-opacity 0.3s ease-in;
-   -moz-transition:
-      -moz-stroke-dashoffset 0.3s ease-out,
-      -moz-stroke-opacity 0.3s ease-in;
-   -o-transition:
-      -o-stroke-dashoffset 0.3s ease-out,
-      -o-stroke-opacity 0.3s ease-in;
-   transition:
-      stroke-dashoffset 0.3s ease-out,
-      stroke-opacity 0.3s ease-in;
+  /* stroke-dashoffset (duration and function) should match with leaflet-marker-icon transform in order to track it exactly */
+  -webkit-transition:
+    -webkit-stroke-dashoffset 0.3s ease-out,
+    -webkit-stroke-opacity 0.3s ease-in;
+  -moz-transition:
+    -moz-stroke-dashoffset 0.3s ease-out,
+    -moz-stroke-opacity 0.3s ease-in;
+  -o-transition:
+    -o-stroke-dashoffset 0.3s ease-out,
+    -o-stroke-opacity 0.3s ease-in;
+  transition:
+    stroke-dashoffset 0.3s ease-out,
+    stroke-opacity 0.3s ease-in;
 }
 
 /* ANIMATION */
 @keyframes floater {
-   0% {
-      transform: translateY(-10%);
-      transition: ease 0.5s;
-   }
+  0% {
+    transform: translateY(-10%);
+    transition: ease 0.5s;
+  }
 
-   50% {
-      transform: translateY(10%);
-      transition: ease 0.5s;
-   }
+  50% {
+    transform: translateY(10%);
+    transition: ease 0.5s;
+  }
 }
 
 .float-area {
-   height: fit-content;
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .floating-img {
-   transform: translateY(-10%);
-   animation: floater 2s infinite;
-   transition: ease 0.5s;
-   width: 80px;
-   height: 80px;
+  transform: translateY(-10%);
+  animation: floater 2s infinite;
+  transition: ease 0.5s;
+  width: 80px;
+  height: 80px;
 }
 
 /* TRAVILLA PALATE COLOR */

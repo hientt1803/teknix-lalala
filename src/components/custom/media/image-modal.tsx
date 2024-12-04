@@ -2,10 +2,12 @@
 
 import 'react-photo-view/dist/react-photo-view.css';
 
+import { Dispatch, SetStateAction, useState } from 'react';
+
 import Image from '@/components/common/images/image';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { replaceSize } from '@/utilities/string';
-import { Dispatch, SetStateAction, useState } from 'react';
+
 import ModalCustom from '../modals/modal';
 import ImageViewer from './image-viewer';
 
@@ -42,23 +44,23 @@ import ImageViewer from './image-viewer';
 // ];
 
 type Props = {
-   opened: boolean;
-   setOpen: Dispatch<SetStateAction<boolean>>;
-   images: string[];
+  opened: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  images: string[];
 };
 
 const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
-   const [visible, setVisible] = useState(false);
-   const [indexImg, setIndexImg] = useState(0);
+  const [visible, setVisible] = useState(false);
+  const [indexImg, setIndexImg] = useState(0);
 
-   const closeImageViewer = () => {
-      setVisible(false);
-      setOpen(true); // Ensures both ImageViewer and modal close
-   };
+  const closeImageViewer = () => {
+    setVisible(false);
+    setOpen(true); // Ensures both ImageViewer and modal close
+  };
 
-   return (
-      <>
-         {/* <Dialog open={opened} onOpenChange={setOpen} modal={false}>
+  return (
+    <>
+      {/* <Dialog open={opened} onOpenChange={setOpen} modal={false}>
                 <DialogContent className="max-w-screen h-screen">
                     <DialogHeader>
                         <div className="p-4 xl:px-10 flex items-center justify-between">
@@ -126,40 +128,40 @@ const ModalShowAllGalley = ({ setOpen, opened, images }: Props) => {
                     </ScrollArea>
                 </DialogContent>
             </Dialog> */}
-         <ModalCustom opened={opened} onClose={() => setOpen(false)}>
-            <ScrollArea className="w-full h-[calc(100vh-200px)]">
-               <div className="w-full max-w-screen-lg mx-auto transform p-4 pt-0 text-left transition-all">
-                  <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
-                     {images.map((img, index) => (
-                        <div
-                           key={index}
-                           onClick={() => {
-                              setIndexImg(index);
-                              setVisible(true);
-                           }}
-                           className="group relative mb-5 block w-full cursor-zoom-in after:content after:pointer-events-none after:absolute after:inset-0 after:rounded-lg after:shadow-highlight focus:outline-none"
-                        >
-                           <Image
-                              src={replaceSize(img)}
-                              className="transform rounded-lg brightness-90 transition will-change-auto group-hover:brightness-110 focus:outline-none"
-                              loading="eager"
-                              alt=""
-                           />
-                        </div>
-                     ))}
-                  </div>
-               </div>
-            </ScrollArea>
-         </ModalCustom>
-         <ImageViewer
-            images={images.map((image) => replaceSize(image || 'default') || '')}
-            visible={visible}
-            onClose={closeImageViewer}
-            indexImg={indexImg}
-            onIndexChange={setIndexImg}
-         />
-      </>
-   );
+      <ModalCustom opened={opened} onClose={() => setOpen(false)}>
+        <ScrollArea className="h-[calc(100vh-200px)] w-full">
+          <div className="mx-auto w-full max-w-screen-lg transform p-4 pt-0 text-left transition-all">
+            <div className="columns-1 gap-4 sm:columns-2 xl:columns-3">
+              {images.map((img, index) => (
+                <div
+                  key={index}
+                  onClick={() => {
+                    setIndexImg(index);
+                    setVisible(true);
+                  }}
+                  className="after:content after:shadow-highlight group relative mb-5 block w-full cursor-zoom-in after:pointer-events-none after:absolute after:inset-0 after:rounded-lg focus:outline-none"
+                >
+                  <Image
+                    src={replaceSize(img)}
+                    className="transform rounded-lg brightness-90 transition will-change-auto focus:outline-none group-hover:brightness-110"
+                    loading="eager"
+                    alt=""
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </ScrollArea>
+      </ModalCustom>
+      <ImageViewer
+        images={images.map(image => replaceSize(image || 'default') || '')}
+        visible={visible}
+        onClose={closeImageViewer}
+        indexImg={indexImg}
+        onIndexChange={setIndexImg}
+      />
+    </>
+  );
 };
 
 export default ModalShowAllGalley;

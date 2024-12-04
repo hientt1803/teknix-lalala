@@ -1,0 +1,59 @@
+{
+  "id": "privacy",
+  "type": "SharedSlice",
+  "name": "Privacy",
+  "description": "Privacy",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "tag": {
+          "type": "Text",
+          "config": {
+            "label": "tag",
+            "placeholder": ""
+          }
+        },
+        "heading": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Heading",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading1"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "last_update": {
+          "type": "Date",
+          "config": {
+            "label": "Last update",
+            "placeholder": ""
+          }
+        },
+        "hide_article": {
+          "type": "Boolean",
+          "config": {
+            "label": "Hide Article",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
