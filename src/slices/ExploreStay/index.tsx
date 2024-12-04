@@ -14,8 +14,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { ExploreStayList } from '@/features/slice-global/explore-stay/explore-stay-list';
 import { getHotDestination } from '@/services/global';
+import dynamic from 'next/dynamic';
+
+const ExploreStayList = dynamic(() =>
+  import('@/features/slice-global/explore-stay/explore-stay-list').then(
+    mob => mob.ExploreStayList,
+  ),
+);
 
 /**
  * Props for `ExploreStay`.

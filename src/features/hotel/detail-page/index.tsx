@@ -1,5 +1,3 @@
-import { TooltipTrigger } from '@radix-ui/react-tooltip';
-import { ArrowLeftIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import Bounded from '@/components/common/containers/bounded';
@@ -10,12 +8,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { buttonVariants } from '@/components/ui/button';
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-} from '@/components/ui/tooltip';
 import { getHotelDetail } from '@/services/hotel';
 import { IHotelReservation } from '@/stores/features/stay/type';
 import { convertToTitleCase } from '@/utilities/string';
@@ -31,7 +23,7 @@ const HotelDetailFeature = async ({ id }: HotelDetailFeatureProps) => {
 
   return (
     <Bounded className="relative">
-      <div className="flex items-center justify-start py-4 md:hidden md:py-8">
+      {/* <div className="flex items-center justify-start py-4 md:hidden md:py-8">
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
@@ -49,7 +41,7 @@ const HotelDetailFeature = async ({ id }: HotelDetailFeatureProps) => {
             <TooltipContent>Back</TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      </div>
+      </div> */}
 
       <div className="mb-10 mt-20">
         <Breadcrumb>

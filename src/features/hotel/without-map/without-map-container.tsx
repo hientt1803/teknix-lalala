@@ -35,11 +35,8 @@ const ListHotelWithoutMap = dynamic(() =>
 const FilterDrawer = dynamic(() =>
   import('../filters/filter-drawer').then(module_ => module_.FilterDrawer),
 );
-const ListFilter = dynamic(
-  () => import('../filters/list-filter').then(module_ => module_.ListFilter),
-  {
-    ssr: false,
-  },
+const ListFilter = dynamic(() =>
+  import('../filters/list-filter').then(module_ => module_.ListFilter),
 );
 
 export const WithoutMapContainer = () => {

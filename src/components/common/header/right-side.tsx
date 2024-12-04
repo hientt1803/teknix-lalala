@@ -1,17 +1,23 @@
 'use client';
 
-// import {NavigationMenuComp} from "./navigation";
 import { KeyTextField, LinkField, RichTextField } from '@prismicio/client';
+import { useAppSelector } from '@/stores/hook';
+import dynamic from 'next/dynamic';
 
-// import {useAppSelector} from "@/stores";
-import { useAppSelector } from '@/stores';
-
-import { ModeToggleMenu } from '../themes/mode-menu';
-import CurrencyButton from './currency';
-import LanguageButton from './languages';
-import LoginButton from './login-button';
-import NovuNotificationV2 from './novu-v2';
-import UserButton from './user-button';
+const UserButton = dynamic(() => import('./user-button'));
+const NovuNotificationV2 = dynamic(() => import('./novu-v2'));
+const ModeToggleMenu = dynamic(() =>
+  import('../themes/mode-menu').then(mob => mob.ModeToggleMenu),
+);
+const CurrencyButton = dynamic(() =>
+  import('./currency').then(mob => mob.default),
+);
+const LanguageButton = dynamic(() =>
+  import('./languages').then(mob => mob.default),
+);
+const LoginButton = dynamic(() =>
+  import('./login-button').then(mob => mob.default),
+);
 
 type Props = {
   navigation: {

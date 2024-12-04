@@ -12,7 +12,6 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <React.Fragment>
       <Header />
-      {/* <CanvasCursor /> */}
       {children}
       <Footer />
     </React.Fragment>

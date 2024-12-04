@@ -9,7 +9,15 @@ import {
   University,
   XIcon,
 } from 'lucide-react';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
@@ -29,8 +37,12 @@ import { useAppSelector } from '@/stores/hook';
 
 export const InputSearchLocation = ({
   title = 'Location',
+  locationPopoverState,
+  setLocationPopoverOpen,
 }: {
   title?: string;
+  locationPopoverState: boolean;
+  setLocationPopoverOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   // redux
   const searchGlobal = useAppSelector(state => state.globalSlice.searchGlobal);
@@ -66,6 +78,12 @@ export const InputSearchLocation = ({
   ] = useLazyGetListHoteStayByLocationKeyWordQuery();
 
   // logic
+  useEffect(() => {
+    // Open popover if location is not available
+    setOpen(locationPopoverState);
+    locationPopoverState && inputRef?.current?.focus();
+  }, [locationPopoverState]);
+
   useEffect(() => {
     fetchGeo({
       query: debouncedSearchValue.replaceAll(' ', '+') || 'Can Tho',
@@ -112,6 +130,7 @@ export const InputSearchLocation = ({
         }),
       );
       setOpen(false);
+      setLocationPopoverOpen(false);
 
       if (searchGlobal.location.radius) {
         // dispatch(
@@ -275,7 +294,13 @@ export const InputSearchLocation = ({
         {title}
       </div>
 
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover
+        open={open}
+        onOpenChange={open => {
+          setOpen(open);
+          !open && setLocationPopoverOpen(false);
+        }}
+      >
         <PopoverTrigger
           onClick={e => {
             if (open) {

@@ -15,11 +15,11 @@ const GroupPeopleInput = dynamic(
   },
 );
 
-export const InputSearchGuest = () => {
+export const InputSearchGuest = ({ title = 'Guest' }: { title?: string }) => {
   return (
     <div className="flex flex-col items-start justify-start gap-2">
       <div className="text-sm font-medium text-neutral-600 dark:text-neutral-300">
-        Guest
+        {title}
       </div>
 
       {/* Custom guest input */}

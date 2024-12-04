@@ -1,7 +1,7 @@
 'use client';
 
 import { setCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -20,6 +20,7 @@ import { setTriggerSearch } from '@/stores/features/stay/stay-slice';
 
 export const DestinationCaroucel = () => {
   // next api
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   // redux
@@ -66,7 +67,9 @@ export const DestinationCaroucel = () => {
 
     dispatch(setTriggerSearch(true));
 
-    router.push('/hotel');
+    router.push('/hotel?' + searchParams?.toString(), {
+      scroll: false,
+    });
   };
 
   return (

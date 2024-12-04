@@ -10,6 +10,11 @@ import { CarouselItem } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { HotDestination } from '@/services/global';
 import { setSearchGlobalLocation } from '@/stores/features/global/global-slice';
+import { useAppSelector } from '@/stores/hook';
+import {
+  convertStringToDate,
+  formatDateToYearMonthDay,
+} from '@/utilities/datetime';
 
 export const ExploreStayList = ({
   slice,
@@ -21,6 +26,7 @@ export const ExploreStayList = ({
   const router = useRouter();
 
   // redux
+  const globalState = useAppSelector(state => state.globalSlice.searchGlobal);
   const dispatch = useDispatch();
 
   const handleDirectAndSearch = (destination: HotDestination) => {
@@ -37,7 +43,49 @@ export const ExploreStayList = ({
 
     setCookie('locationSearch', destination?.city_name);
     setCookie('locationImage', destination?.image_url);
-    router.push('/hotel');
+
+    // convert data
+    const startDate = formatDateToYearMonthDay(
+      convertStringToDate(globalState.dateRange.startDate),
+    );
+    const endDate = formatDateToYearMonthDay(
+      convertStringToDate(globalState.dateRange.endDate),
+    );
+
+    let adults = 0;
+    globalState.people
+      ? globalState.people.forEach(item => {
+          adults += item.adults;
+        })
+      : [];
+
+    const params = new URLSearchParams({
+      checkin: startDate,
+      checkout: endDate,
+      language: 'en',
+      adults: adults.toString(),
+      currency: 'VND',
+    });
+
+    let childrens = 0;
+    globalState.people.map(item => {
+      item.children.forEach((child, index) => {
+        childrens++;
+        params.append(`childrens[${index}]`, String(child));
+      });
+    });
+
+    params.append(
+      'latitude',
+      String(globalState?.location?.lat) || '10.0364634',
+    );
+    params.append(
+      'longtitude',
+      String(globalState?.location?.lon) || '105.7875821',
+    );
+    params.append('region', String(globalState?.location.name) || '');
+
+    router.push(`/hotel?${params.toString()}`);
   };
 
   return (

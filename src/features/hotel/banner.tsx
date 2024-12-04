@@ -4,14 +4,16 @@ import { cookies } from 'next/headers';
 import Bounded from '@/components/common/containers/bounded';
 import { Skeleton } from '@/components/ui/skeleton';
 
-const SearchGroup = dynamic(() =>
-  import('@/components/common/searchGroup/searchGroup').then(
-    module_ => module_.SearchGroup,
-  ),
+const SearchGroup = dynamic(
+  () =>
+    import('@/components/common/searchGroup/searchGroup').then(
+      module_ => module_.SearchGroup,
+    ),
+  { ssr: false },
 );
 
 export const HotelBanner = async () => {
-  const cookieStore = await cookies();
+  const cookieStore = cookies();
   const locationSearch =
     cookieStore.get('locationSearch')?.value || 'Top destinations';
   const locationImage =

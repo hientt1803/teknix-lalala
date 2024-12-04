@@ -85,7 +85,7 @@ export const BannerSection = ({
       </div>
 
       <div className="relative -top-24 mx-0 lg:mx-2">
-        <SearchGroup showBorder showTabs isFromHotelDetail />
+        <SearchGroup showBorder showTabs />
       </div>
     </>
   );

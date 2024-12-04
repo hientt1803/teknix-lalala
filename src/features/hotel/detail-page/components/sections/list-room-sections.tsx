@@ -21,6 +21,11 @@ import { IReserveForm, Rate } from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 
 import RoomCard from '../card-room-v2';
+import dynamic from 'next/dynamic';
+
+const ListRoomSearchGroup = dynamic(() =>
+  import('../list-room-search-group').then(mob => mob.ListRoomSearchGroup),
+);
 
 export const ListRoomSections = ({ id }: { id: string }) => {
   // next api
@@ -155,6 +160,9 @@ export const ListRoomSections = ({ id }: { id: string }) => {
         </p>
       </div>
 
+      {/* Search ROOM */}
+      <ListRoomSearchGroup />
+
       {/* Filter Section */}
       <div className="mb-14 flex flex-wrap gap-2">
         {/* Room-Specific Filters */}
@@ -228,7 +236,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
       </div>
 
       {/* Room List Section */}
-      <div className="grid gap-5">
+      <div className="grid gap-6">
         {isLoading || isFetching ? (
           Array.from({ length: 2 }).map((_, index) => (
             <HotelCardSkeleton displayType="list" key={index} />

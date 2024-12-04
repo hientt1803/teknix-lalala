@@ -4,7 +4,7 @@ import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
@@ -62,18 +62,26 @@ interface SearchGroupType {
   typeProp?: 'hotel' | 'flight';
   className?: string;
   tabWrapperClassname?: string;
+  tabContentClassname?: string;
+  buttonClassname?: string;
   isFromHotelDetail?: boolean;
   showTabs?: boolean;
   showBorder?: boolean;
+  showLocation?: boolean;
+  showLabel?: boolean;
 }
 
 export const SearchGroup = ({
   typeProp: typeProperty = 'hotel',
   className,
   tabWrapperClassname,
+  tabContentClassname,
+  buttonClassname,
   isFromHotelDetail = false,
   showTabs = false,
   showBorder = false,
+  showLocation = true,
+  showLabel = true,
 }: SearchGroupType) => {
   // Next api
   const router = useRouter();
@@ -90,6 +98,7 @@ export const SearchGroup = ({
   const dispatch = useDispatch();
 
   // State
+  const [locationPopoverOpen, setLocationPopoverOpen] = useState(false);
 
   // Logic
   useEffect(() => {
@@ -98,6 +107,12 @@ export const SearchGroup = ({
   }, []);
 
   const handleSearchDirection = () => {
+    if (globalState?.location.name === '') {
+      setLocationPopoverOpen(true);
+      return;
+    }
+    setLocationPopoverOpen(false);
+
     // convert data
     const startDate = formatDateToYearMonthDay(
       convertStringToDate(globalState.dateRange.startDate),
@@ -147,6 +162,9 @@ export const SearchGroup = ({
         params.append('id', globalState.location.hotelId!);
         router.push(
           `/hotel/${globalState.location.hotelId}?${params.toString()}`,
+          {
+            scroll: false,
+          },
         );
       } else {
         if (pathname == '/hotel') {
@@ -201,30 +219,47 @@ export const SearchGroup = ({
     >
       {/* Hotels */}
       {type == 'hotel' && (
-        <div className="flex w-full flex-wrap items-center justify-between gap-x-3 gap-y-5">
+        <div
+          className={cn(
+            'flex w-full flex-wrap items-center justify-between gap-x-3 gap-y-5',
+            tabContentClassname,
+          )}
+        >
           {/* Location */}
-          <div className="flex-1">
-            <InputSearchLocation />
-          </div>
-
-          <div className="mx-0 h-[1px] w-full bg-neutral-200 dark:bg-neutral-700 md:mx-5 md:h-12 md:w-[1px]" />
+          {showLocation && (
+            <>
+              <div className="">
+                <InputSearchLocation
+                  title={!showLabel ? '' : 'Location'}
+                  locationPopoverState={locationPopoverOpen}
+                  setLocationPopoverOpen={setLocationPopoverOpen}
+                />
+              </div>
+              <div className="mx-0 h-[1px] w-full bg-neutral-200 dark:bg-neutral-700 md:mx-5 md:h-12 md:w-[1px]" />
+            </>
+          )}
 
           {/* Daterange */}
-          <div className="flex-1">
-            <InputSearchDateRange />
+          <div className="">
+            <InputSearchDateRange
+              title={!showLabel ? '' : 'Check-in — Check-out'}
+            />
           </div>
 
           <div className="mx-0 h-[1px] w-full bg-neutral-200 dark:bg-neutral-700 md:mx-5 md:h-12 md:w-[1px]" />
 
           {/* Guest */}
-          <div className="mr-6 flex-1">
-            <InputSearchGuest />
+          <div className="mr-6">
+            <InputSearchGuest title={!showLabel ? '' : 'Guest'} />
           </div>
 
           {/* Button */}
           <Button
             variant="default"
-            className="w-fit min-w-[9.375rem] flex-1 rounded-full bg-black px-7 py-7 text-lg font-normal text-white hover:bg-neutral-800 hover:text-white dark:bg-neutral-100 dark:text-neutral-800 xl:max-w-[9.375rem]"
+            className={cn(
+              'w-fit min-w-[9.375rem] rounded-full bg-black px-7 py-7 text-lg font-normal text-white hover:bg-neutral-800 hover:text-white dark:bg-neutral-100 dark:text-neutral-800 xl:max-w-[9.375rem]',
+              buttonClassname,
+            )}
             onClick={() => handleSearchDirection()}
             disabled={hotelSearchLoadingState || roomSearchLoading}
           >
@@ -328,14 +363,22 @@ export const SearchGroup = ({
           <div className="mt-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-5">
             {/* Location */}
             <div className="flex-[2]">
-              <InputSearchLocation title="Flying from" />
+              <InputSearchLocation
+                title="Flying from"
+                locationPopoverState={locationPopoverOpen}
+                setLocationPopoverOpen={setLocationPopoverOpen}
+              />
             </div>
 
             <div className="mx-0 h-[1px] w-full bg-neutral-200 md:mx-5 md:h-12 md:w-[1px]" />
 
             {/* Location */}
             <div className="flex-[2]">
-              <InputSearchLocation title="Flying to" />
+              <InputSearchLocation
+                title="Flying to"
+                locationPopoverState={locationPopoverOpen}
+                setLocationPopoverOpen={setLocationPopoverOpen}
+              />
             </div>
 
             <div className="mx-0 h-[1px] w-full bg-neutral-200 md:mx-5 md:h-12 md:w-[1px]" />
@@ -348,7 +391,10 @@ export const SearchGroup = ({
             {/* Button */}
             <Button
               variant="default"
-              className="w-fit min-w-[11.25rem] flex-1 rounded-lg bg-black text-xl font-normal text-white hover:bg-neutral-800 hover:text-white dark:bg-neutral-100 dark:text-neutral-800 xl:max-w-[11.25rem]"
+              className={cn(
+                'w-fit min-w-[9.375rem] rounded-full bg-black px-7 py-7 text-lg font-normal text-white hover:bg-neutral-800 hover:text-white dark:bg-neutral-100 dark:text-neutral-800 xl:max-w-[9.375rem]',
+                buttonClassname,
+              )}
             >
               <Search className="h-5 w-5 text-neutral-200 dark:text-neutral-800" />
               Search

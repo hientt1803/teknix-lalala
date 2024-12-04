@@ -15,24 +15,16 @@ export const HotelBanner = dynamic(
     ),
   },
 );
-export const DestinationCaroucel = dynamic(
-  () =>
-    import('@/features/hotel/destination-caroucel').then(
-      module_ => module_.DestinationCaroucel,
-    ),
-  {
-    ssr: false,
-  },
+export const DestinationCaroucel = dynamic(() =>
+  import('@/features/hotel/destination-caroucel').then(
+    module_ => module_.DestinationCaroucel,
+  ),
 );
 
-export const WithoutMapContainer = dynamic(
-  () =>
-    import('@/features/hotel/without-map/without-map-container').then(
-      module_ => module_.WithoutMapContainer,
-    ),
-  {
-    ssr: false,
-  },
+export const WithoutMapContainer = dynamic(() =>
+  import('@/features/hotel/without-map/without-map-container').then(
+    module_ => module_.WithoutMapContainer,
+  ),
 );
 
 /**

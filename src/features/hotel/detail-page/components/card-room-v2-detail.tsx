@@ -292,7 +292,7 @@ export const CardRoomV2Detail = ({
         </CredenzaHeader>
         <CredenzaBody className="overflow-hidden">
           <div
-            className="mb-3 h-[70vh] overflow-y-scroll"
+            className="mb-3 h-[75vh] overflow-y-scroll"
             ref={mobileScrollRef}
             style={{
               scrollbarWidth: 'none',
@@ -307,7 +307,7 @@ export const CardRoomV2Detail = ({
                   }}
                 >
                   {listImages?.length == 0 ? (
-                    <div className="mt-32 text-center text-2xl font-medium">
+                    <div className="mt-32 text-center text-2xl max-w-[31.25rem] mx-auto font-medium">
                       We {`don't`} have any infomation about these images. Hotel
                       does not provide images
                     </div>
@@ -329,6 +329,7 @@ export const CardRoomV2Detail = ({
                             )}
                             alt=""
                             className="h-full w-full"
+                            loading="lazy"
                           />
                         </div>
                       ))}

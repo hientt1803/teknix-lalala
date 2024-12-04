@@ -5,7 +5,7 @@ import { Poppins } from 'next/font/google';
 
 import { HOST_URL } from '@/configs';
 import { cn } from '@/lib/utils';
-import AppProvider from '@/providers';
+import AppProvider from '@/providers/index';
 
 const popins = Poppins({
   subsets: ['latin'],
