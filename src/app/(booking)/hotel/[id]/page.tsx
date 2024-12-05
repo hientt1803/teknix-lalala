@@ -1,18 +1,21 @@
 import { Metadata, ResolvingMetadata } from 'next';
 
 import HotelDetailFeature from '@/features/hotel/detail-page/index';
-import { getHotelDetail } from '@/services/hotel';
+import {
+  getHotelDetail,
+  preloadHotelDetail
+} from '@/services/hotel';
 
 type Props = {
   params: Promise<{ id: string }>;
   searchParams: Promise<URLSearchParams>;
 };
 
+export const dynamic = 'force-dynamic'
 export async function generateMetadata(
   { params, searchParams }: Props,
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  // read route params
   const { id } = await params;
 
   // fetch data
@@ -93,6 +96,7 @@ const HotelDetailPage = async ({
   params: Promise<{ id: string }>;
 }) => {
   const { id } = await params;
+  preloadHotelDetail(id);
 
   return <HotelDetailFeature id={id} />;
 };

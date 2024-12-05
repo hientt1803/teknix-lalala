@@ -1,14 +1,7 @@
 'use client';
 
-import { StarFilledIcon } from '@radix-ui/react-icons';
 import { format } from 'date-fns';
-import {
-  AlarmClock,
-  CircleHelpIcon,
-  Clock,
-  Clock10,
-  MapPin,
-} from 'lucide-react';
+import { AlarmClock, CircleHelpIcon, Clock10 } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
@@ -43,10 +36,20 @@ import { convertSnakeToTitleCase, replaceSize } from '@/utilities/string';
 import { countTotalDaysInRange } from '@/utilities/time';
 
 import { getAmenityIcon } from '../hotel/detail-page/components/sections/most-facilities';
-import AddYourStay from './components/add-your-stay';
-import FormInfomation from './components/form';
-import GoodToKnow from './components/good-to-know';
-import Payment from './components/payment';
+import dynamic from 'next/dynamic';
+
+const FormInfomation = dynamic(() =>
+  import('./components/form').then(module_ => module_.default),
+);
+const AddYourStay = dynamic(() =>
+  import('./components/add-your-stay').then(module_ => module_.default),
+);
+const GoodToKnow = dynamic(() =>
+  import('./components/good-to-know').then(module_ => module_.default),
+);
+const Payment = dynamic(() =>
+  import('./components/payment').then(module_ => module_.default),
+);
 
 const CheckoutFeatures = () => {
   // next api
@@ -65,7 +68,7 @@ const CheckoutFeatures = () => {
   const [isConfirm, setIsConfirm] = useState(false);
 
   // API
-  const { data } = useGetStaylDataByIdQuery({
+  const { data, isLoading, isFetching } = useGetStaylDataByIdQuery({
     id: hotel.hotel_id,
   });
   const { data: hotelReview } = useGetReviewByStayIdQuery({
@@ -154,7 +157,7 @@ const CheckoutFeatures = () => {
           {/* MAIN SECTION */}
           <div className="w-full flex-grow lg:w-3/4 lg:pr-10 xl:w-10/12">
             {/* INFO */}
-            <div className="mb-3 flex w-full flex-col space-y-8 rounded-lg border-0 border-neutral-200 p-0 dark:border-neutral-700 lg:border lg:p-5">
+            <div className="mb-10 md:mb-3 flex w-full flex-col space-y-8 rounded-lg border-0 border-neutral-200 p-0 dark:border-neutral-700 lg:border lg:p-5">
               <div className="flex items-center justify-between gap-5">
                 {/* LINE */}
                 <div className="hidden h-full flex-shrink lg:block">
@@ -168,117 +171,172 @@ const CheckoutFeatures = () => {
                   </div>
                 </div>
                 {/* INFO */}
-                <div className="flex-grow">
-                  {/* CheckIn */}
-                  <div className="flex items-center justify-start gap-6">
-                    <div className="flex flex-col items-center justify-center gap-1">
-                      <div className="flex items-center gap-1 dark:text-neutral-100">
-                        <Clock10 className="h-4 w-4" />
-                        <span className="text-sm font-medium">
-                          {data?.check_in_time}
-                        </span>
+                {isLoading || isFetching ? (
+                  <div className="flex-grow">
+                    {/* Skeleton CheckIn */}
+                    <div className="flex items-center justify-start gap-6">
+                      <div className="flex flex-col items-center justify-center gap-1">
+                        <div className="flex items-center gap-1">
+                          <div className="h-4 w-4 animate-pulse rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                          <div className="h-4 w-12 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
+                        </div>
+                        <div className="h-4 w-20 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
                       </div>
-                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                        {formatDateUTC(
-                          convertStringToDate(hotel?.checkin_date || ''),
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-start justify-start gap-2">
-                      <span className="text-xl font-medium">{data?.name}</span>
-                      <div className="flex items-center">
-                        <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                          {data?.address}
-                        </span>
+                      <div className="flex flex-col items-start justify-start gap-2">
+                        <div className="h-6 w-40 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
+                        <div className="h-4 w-32 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
                       </div>
-                    </div>
-                  </div>
+                    </div> 
 
-                  {/* Main content */}
-                  <div className="my-4 rounded-lg border border-neutral-300 p-5 dark:border-neutral-600">
-                    <div className="flex flex-col">
-                      <div
-                        className={cn(
-                          'mb-3 w-fit cursor-pointer rounded-lg border border-neutral-200 px-3 py-2 text-sm font-medium hover:shadow-lg dark:border-neutral-600',
-                        )}
-                      >
-                        ⭐ {data?.star_rating.toFixed(1) || 0}{' '}
-                        <span className="text-sm font-normal text-neutral-500 dark:text-neutral-400">
-                          ({hotelReview?.data?.length || 0} reviews)
-                        </span>
+                    {/* Skeleton Main Content */}
+                    <div className="my-4 rounded-lg border border-neutral-300 p-5 dark:border-neutral-600">
+                      <div className="flex flex-col gap-3">
+                        <div className="h-6 w-24 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
+                        <div className="h-8 w-60 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
+                        <div className="h-4 w-40 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
                       </div>
-
-                      <span className="text-2xl font-medium">
-                        {hotel?.rate?.room_name}
-                      </span>
-
-                      <span className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
-                        Total length of stay:{' '}
-                        <strong>
-                          {daysBetweenDateRange(
-                            convertStringToDate(hotel?.checkin_date),
-                            convertStringToDate(hotel?.checkout_date),
-                          )}{' '}
-                          nights
-                        </strong>
-                      </span>
-                    </div>
-
-                    <div className="my-6">
-                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                        {data?.serp_filters?.map((item, index) => (
-                          <div
-                            className="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300"
-                            key={index}
-                          >
-                            <span>
-                              {getAmenityIcon(
-                                item,
-                                'w-4 h-4 text-neutral-700 dark:text-neutral-300',
-                              )}
-                            </span>
-                            <span>{convertSnakeToTitleCase(item)}</span>
+                      <div className="my-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {[...Array(4)].map((_, index) => (
+                          <div key={index} className="flex items-center gap-2">
+                            <div className="h-4 w-4 animate-pulse rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                            <div className="h-4 w-28 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
                           </div>
                         ))}
                       </div>
                     </div>
-                  </div>
 
-                  {/* Checkout */}
-                  <div className="flex items-center justify-start gap-6">
-                    <div className="flex flex-col items-center justify-center gap-1">
-                      <div className="flex items-center gap-1 dark:text-neutral-100">
-                        <Clock10 className="h-4 w-4" />
-                        <span className="text-sm font-medium">
-                          {data?.check_out_time}
-                        </span>
+                    {/* Skeleton Checkout */}
+                    <div className="flex items-center justify-start gap-6">
+                      <div className="flex flex-col items-center justify-center gap-1">
+                        <div className="flex items-center gap-1">
+                          <div className="h-4 w-4 animate-pulse rounded-full bg-neutral-300 dark:bg-neutral-700"></div>
+                          <div className="h-4 w-12 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
+                        </div>
+                        <div className="h-4 w-20 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
                       </div>
-                      <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                        {formatDateUTC(
-                          convertStringToDate(hotel?.checkout_date || ''),
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-start justify-start gap-2">
-                      <span className="text-xl font-medium">{data?.name}</span>
-                      <div className="flex items-center">
-                        <span className="text-sm text-neutral-600 dark:text-neutral-400">
-                          {data?.address}
-                        </span>
+                      <div className="flex flex-col items-start justify-start gap-2">
+                        <div className="h-6 w-40 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
+                        <div className="h-4 w-32 animate-pulse rounded bg-neutral-300 dark:bg-neutral-700"></div>
                       </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="flex-grow">
+                    {/* CheckIn */}
+                    <div className="flex items-center justify-start gap-6">
+                      <div className="flex flex-col items-center justify-center gap-1">
+                        <div className="flex items-center gap-1 dark:text-neutral-100">
+                          <Clock10 className="h-4 w-4" />
+                          <span className="text-sm font-medium">
+                            {data?.check_in_time}
+                          </span>
+                        </div>
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                          {formatDateUTC(
+                            convertStringToDate(hotel?.checkin_date || ''),
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-start justify-start gap-2">
+                        <span className="text-xl font-medium">
+                          {data?.name}
+                        </span>
+                        <div className="flex items-center">
+                          <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                            {data?.address}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Main content */}
+                    <div className="my-4 rounded-lg border border-neutral-300 p-5 dark:border-neutral-600">
+                      <div className="flex flex-col">
+                        <div
+                          className={cn(
+                            'mb-3 w-fit cursor-pointer rounded-lg border border-neutral-200 px-3 py-2 text-sm font-medium hover:shadow-lg dark:border-neutral-600',
+                          )}
+                        >
+                          ⭐ {data?.star_rating.toFixed(1) || 0}{' '}
+                          <span className="text-sm font-normal text-neutral-500 dark:text-neutral-400">
+                            ({hotelReview?.data?.length || 0} reviews)
+                          </span>
+                        </div>
+
+                        <span className="text-2xl font-medium">
+                          {hotel?.rate?.room_name}
+                        </span>
+
+                        <span className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                          Total length of stay:{' '}
+                          <strong>
+                            {daysBetweenDateRange(
+                              convertStringToDate(hotel?.checkin_date),
+                              convertStringToDate(hotel?.checkout_date),
+                            )}{' '}
+                            nights
+                          </strong>
+                        </span>
+                      </div>
+
+                      <div className="my-6">
+                        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                          {data?.serp_filters?.map((item, index: number) => (
+                            <div
+                              className="flex items-center gap-2 text-sm text-neutral-700 dark:text-neutral-300"
+                              key={index}
+                            >
+                              <span>
+                                {getAmenityIcon(
+                                  item,
+                                  'w-4 h-4 text-neutral-700 dark:text-neutral-300',
+                                )}
+                              </span>
+                              <span>{convertSnakeToTitleCase(item)}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Checkout */}
+                    <div className="flex items-center justify-start gap-6">
+                      <div className="flex flex-col items-center justify-center gap-1">
+                        <div className="flex items-center gap-1 dark:text-neutral-100">
+                          <Clock10 className="h-4 w-4" />
+                          <span className="text-sm font-medium">
+                            {data?.check_out_time}
+                          </span>
+                        </div>
+                        <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                          {formatDateUTC(
+                            convertStringToDate(hotel?.checkout_date || ''),
+                          )}
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-start justify-start gap-2">
+                        <span className="text-xl font-medium">
+                          {data?.name}
+                        </span>
+                        <div className="flex items-center">
+                          <span className="text-sm text-neutral-600 dark:text-neutral-400">
+                            {data?.address}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
 
             {/* FORM */}
-            <div className="mb-3 flex w-full flex-col border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5">
+            <div className="mb-10 md:mb-3 flex w-full flex-col border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5">
               {/* <h2 className="text-3xl lg:text-4xl font-semibold">Confirm and payment</h2> */}
               {/* <div className="border-b border-neutral-200 dark:border-neutral-700" /> */}
 
               {/* DETAIL MOBILE */}
-              <div className="block flex-grow space-y-6 overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 sm:space-y-8 lg:hidden">
+              <div className="mb-10 md:mb-0 block flex-grow space-y-6 overflow-hidden rounded-lg border border-neutral-200 dark:border-neutral-700 sm:space-y-8 lg:hidden">
                 <div className="bg-neutral-200 px-5 py-5">
                   <h3 className="text-2xl font-semibold">Price & Fee</h3>
                 </div>
@@ -423,11 +481,12 @@ const CheckoutFeatures = () => {
             </div>
 
             {/* THING TO KNOW */}
-            <div className="mb-3 flex w-full flex-col space-y-8 border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5 xl:p-5">
+            <div className="mb-10 md:mb-3 flex w-full flex-col space-y-8 border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5 xl:p-5">
               <GoodToKnow />
             </div>
+
             {/* ADD YOUR STAY */}
-            <div className="mb-3 flex w-full flex-col space-y-8 border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5 xl:p-5">
+            <div className="mb-10 md:mb-3 flex w-full flex-col space-y-8 border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5 xl:p-5">
               <AddYourStay />
             </div>
 
@@ -435,7 +494,7 @@ const CheckoutFeatures = () => {
             {isConfirm && (
               <div
                 ref={targetRef}
-                className="flex w-full flex-col space-y-8 border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5 xl:p-5"
+                className="mb-10 md:mb-0 flex w-full flex-col space-y-8 border-neutral-200 px-0 dark:border-neutral-700 sm:rounded-lg sm:border sm:p-5 xl:p-5"
               >
                 <Payment isConfirm={isConfirm} hotel={hotel} />
               </div>

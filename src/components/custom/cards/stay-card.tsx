@@ -3,14 +3,6 @@ import Link from 'next/link';
 import Image from '@/components/common/images/image';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselDots,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 import { Property } from '@/slices/StaySection/mock';
 
 interface StayCardProps extends Property {}
@@ -27,6 +19,8 @@ const StayCard = ({
           <Image
             src={imageUrl[0]}
             className="h-full w-full rounded-[2rem] object-cover"
+            alt=""
+            loading='lazy'
           />
         </div>
         <div

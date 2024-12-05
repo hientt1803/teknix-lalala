@@ -8,13 +8,24 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 import Bounded from '@/components/common/containers/bounded';
-import Loading from '@/components/custom/loaders/app-loading';
+import Image from '@/components/common/images/image';
 import { Button, buttonVariants } from '@/components/ui/button';
 import { useGetReservationByIdQuery } from '@/stores/features/reservation';
 import { useLazyGetStaylDataByIdQuery } from '@/stores/features/stay';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 import { replaceSize } from '@/utilities/string';
 import { countTotalDaysInRange } from '@/utilities/time';
+import dynamic from 'next/dynamic';
+
+const GlobalLoading = dynamic(
+  () =>
+    import('@/components/custom/loading/global').then(
+      module_ => module_.default,
+    ),
+  {
+    ssr: false,
+  },
+);
 
 const CheckoutResultFeature = () => {
   const searchParameter = useSearchParams();
@@ -30,9 +41,11 @@ const CheckoutResultFeature = () => {
       setOrderId(orderId);
     }
   }, [searchParameter]);
+
   const { data, isLoading } = useGetReservationByIdQuery({
     id: orderId,
   });
+
   const [getHotel, { data: dataHotel, isLoading: isLoadingHotel }] =
     useLazyGetStaylDataByIdQuery();
 
@@ -43,6 +56,7 @@ const CheckoutResultFeature = () => {
       });
     }
   }, [data]);
+
   const totalDay = useMemo(() => {
     let total = countTotalDaysInRange(
       formatDate((data && data.checkin_date) || new Date(), 'yyyy-MM-dd'),
@@ -51,7 +65,7 @@ const CheckoutResultFeature = () => {
     return total;
   }, [data]);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <GlobalLoading open />;
 
   return (
     <Bounded className="relative py-8">
@@ -72,7 +86,7 @@ const CheckoutResultFeature = () => {
                   <div className="flex flex-col sm:flex-row sm:items-center">
                     <div className="w-full flex-shrink-0 sm:w-40">
                       <div className="relative aspect-square overflow-hidden rounded-2xl">
-                        <img
+                        <Image
                           alt=""
                           className="absolute inset-0 h-full object-cover"
                           src={replaceSize(dataHotel?.images[0] || '')}
@@ -191,7 +205,7 @@ const CheckoutResultFeature = () => {
                 {isSuccess ? (
                   <div className="flex items-center justify-end gap-5">
                     <Link
-                      href={`/profile`}
+                      href={`/reservation/${data?.id}`}
                       className={buttonVariants({
                         variant: 'outline',
                         className:
@@ -201,7 +215,7 @@ const CheckoutResultFeature = () => {
                       View details
                     </Link>
                     <Link
-                      href={'/'}
+                      href={'/hotel'}
                       className={buttonVariants({
                         variant: 'default',
                         className:
@@ -221,11 +235,10 @@ const CheckoutResultFeature = () => {
                       <Link href={`/`}>Back to home</Link>
                     </Button>
                     <Button
-                      // color="red.9"
                       asChild
                       className="focus:ring-primary-600 relative inline-flex h-auto items-center justify-center rounded-full px-4 py-3 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:bg-opacity-70 sm:px-6 sm:text-base"
                     >
-                      <Link href={`/`}>Try again</Link>
+                      <Link href={`/hotel/${data?.hotel_id}`}>Try again</Link>
                     </Button>
                   </div>
                 )}

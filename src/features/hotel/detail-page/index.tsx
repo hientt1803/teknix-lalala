@@ -11,8 +11,11 @@ import {
 import { getHotelDetail } from '@/services/hotel';
 import { IHotelReservation } from '@/stores/features/stay/type';
 import { convertToTitleCase } from '@/utilities/string';
+import dynamic from 'next/dynamic';
 
-import MainContent from './components/main-content';
+const MainContent = dynamic(() =>
+  import('./components/main-content').then(module_ => module_.default),
+);
 
 interface HotelDetailFeatureProps {
   id: string;

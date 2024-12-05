@@ -10,15 +10,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { logOutUser, useLazyGetCurrentUserQuery } from '@/stores/features/user';
 
 const UserButton = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const user = useAppSelector(state => state.userSlice.currentUser);
-  const [getData, { data, isLoading, isFetching }] =
-    useLazyGetCurrentUserQuery();
+  const [getData, { data }] = useLazyGetCurrentUserQuery();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -36,6 +35,7 @@ const UserButton = () => {
   const handleClosePopover = () => {
     setOpen(false);
   };
+  
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>

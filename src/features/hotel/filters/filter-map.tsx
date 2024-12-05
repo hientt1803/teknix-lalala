@@ -13,8 +13,10 @@ import { PlacesType } from '@/lib/Places';
 import { cn } from '@/lib/utils';
 import { ISearchGlobal } from '@/stores/features/global/type';
 
-const Map = dynamic(() =>
-  import('@/components/common/map/index').then(module_ => module_.default),
+const Map = dynamic(
+  () =>
+    import('@/components/common/map/index').then(module_ => module_.default),
+  { ssr: false },
 );
 
 export const FilterMap = ({

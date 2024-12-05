@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
-
 import { Skeleton } from '@/components/ui/skeleton';
+
 const CheckoutFeaturesLazy = dynamic(() => import('@/features/checkout'), {
   ssr: false,
   loading: () => <CheckoutPageSkeleton />,

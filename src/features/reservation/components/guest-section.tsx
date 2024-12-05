@@ -1,15 +1,5 @@
 import InputLabel from '@/components/custom/input/input-label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { cn } from '@/lib/utils';
 import { MetaData } from '@/stores/features/reservation';
 const data = [
   {

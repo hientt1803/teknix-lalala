@@ -20,6 +20,7 @@ import { setSearchGlobalLocationRadius } from '@/stores/features/global/global-s
 import { ISearchGlobal } from '@/stores/features/global/type';
 import { setTriggerSearch } from '@/stores/features/stay/stay-slice';
 import { useAppSelector } from '@/stores/hook';
+import { Input } from '@/components/ui/input';
 
 const FilterMap = dynamic(() =>
   import('../filters/filter-map').then(module_ => module_.FilterMap),
@@ -80,7 +81,7 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
 
     triggerSearchTimeout = setTimeout(() => {
       dispatch(setTriggerSearch(true));
-    }, 1000);
+    }, 2000);
   };
 
   const handleOnChangeSlider = (value: number) => {
@@ -98,40 +99,12 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
 
     triggerSearchTimeout = setTimeout(() => {
       dispatch(setTriggerSearch(true));
-    }, 1000);
+    }, 2000);
   };
 
   return (
     <React.Fragment>
-      {/* <div className="group mb-10 mx-6">
-               <div className="text-lg font-[600]">Location</div>
-               <div className="text-sm font-normal text-neutral-500 flex gap-2 items-center mb-2">
-                  <svg width="16" height="18" xmlns="http://www.w3.org/2000/svg">
-                     <path
-                        d="M4.4 17.6L0 3.4c0-.3 0-.6.4-.7.3-.1.6 0 .7.4l4.3 14.1c.1.3 0 .7-.3.8-.3 0-.6-.1-.7-.4zM12.7 5a.5.5 0 00.3.5c1.2.7 2.2 1.7 2.9 2.4.2.3 0 .8-.4.8-2.3.1-4 2.8-6.7 2.4a.5.5 0 01-.4-.3l-.1-.5a.5.5 0 00-.2-.2c-.6-.6-2.3.3-3.1.9a.5.5 0 01-.7-.3L1.7 2.9a.5.5 0 01.2-.5c.7-.5 2.6-1.7 3.4-1l.1.2.2.5.4.3c2.8.4 4.6-2.8 7.3-2.4.3 0 .5.4.4.6-.3 1-.9 3.1-1 4.5z"
-                        fill="#008cb9"
-                        fill-rule="evenodd"
-                     />
-                  </svg>{' '}
-                  <span>from the city center</span>
-               </div>
-               <div className="flex justify-end items-center gap-2">
-                  <Slider
-                     value={[locationGeoRange]}
-                     onValueChange={(value) => handleOnChangeSlider(value[0])}
-                     defaultValue={[30000]}
-                     min={1000}
-                     max={30000}
-                     className="flex-1"
-                  />
-                  <Input
-                     value={`${(locationGeoRange / 1000).toFixed(0)} km`}
-                     onChange={handleChangeLocationGeoRangeByInput}
-                     className="max-w-[5rem] px-2 py-1 border border-gray-300 rounded-md"
-                     placeholder="Enter range"
-                  />
-               </div>
-            </div> */}
+      {/* FILTER PRICE */}
       <div className="mb-6 rounded-3xl border border-neutral-200 px-6 py-8 dark:border-neutral-600 dark:bg-neutral-900">
         <Collapsible defaultOpen className="group">
           <CollapsibleTrigger asChild>
@@ -169,6 +142,7 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
         </Collapsible>
       </div>
 
+      {/* MAP */}
       <div className="mb-6 rounded-3xl border border-neutral-200 dark:border-neutral-600 dark:bg-neutral-900">
         <FilterMap
           placeData={placeData}
@@ -177,10 +151,42 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
         />
       </div>
 
+      {/* LOCATION RANGE */}
+      <div className="mb-6 rounded-3xl border border-neutral-200 px-6 py-8 dark:border-neutral-600 dark:bg-neutral-900">
+        <div className="text-lg font-[600]">Location</div>
+        <div className="mb-2 flex items-center gap-2 text-sm font-normal text-neutral-500">
+          <svg width="16" height="18" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M4.4 17.6L0 3.4c0-.3 0-.6.4-.7.3-.1.6 0 .7.4l4.3 14.1c.1.3 0 .7-.3.8-.3 0-.6-.1-.7-.4zM12.7 5a.5.5 0 00.3.5c1.2.7 2.2 1.7 2.9 2.4.2.3 0 .8-.4.8-2.3.1-4 2.8-6.7 2.4a.5.5 0 01-.4-.3l-.1-.5a.5.5 0 00-.2-.2c-.6-.6-2.3.3-3.1.9a.5.5 0 01-.7-.3L1.7 2.9a.5.5 0 01.2-.5c.7-.5 2.6-1.7 3.4-1l.1.2.2.5.4.3c2.8.4 4.6-2.8 7.3-2.4.3 0 .5.4.4.6-.3 1-.9 3.1-1 4.5z"
+              fill="#008cb9"
+              fillRule="evenodd"
+            />
+          </svg>{' '}
+          <span>from the city center</span>
+        </div>
+        <div className="flex items-center justify-end gap-2">
+          <Slider
+            value={[locationGeoRange]}
+            onValueChange={value => handleOnChangeSlider(value[0])}
+            defaultValue={[30000]}
+            min={1000}
+            max={30000}
+            className="flex-1"
+          />
+          <Input
+            value={`${(locationGeoRange / 1000).toFixed(0)} km`}
+            onChange={handleChangeLocationGeoRangeByInput}
+            className="max-w-[5rem] rounded-md border border-gray-300 px-2 py-1"
+            placeholder="Enter range"
+          />
+        </div>
+      </div>
+
+      {/* MOCKUP DATA */}
       {FILTER_MOCK?.map((filter: FilterType, index) => (
         <div
           key={index}
-          className="mb-6 rounded-3xl border border-neutral-200 px-6 py-8 dark:border-neutral-600 dark:bg-neutral-900"
+          className="mb-6 w-full rounded-3xl border border-neutral-200 px-6 py-8 dark:border-neutral-600 dark:bg-neutral-900"
         >
           <Collapsible defaultOpen className="group">
             <CollapsibleTrigger asChild>
@@ -194,11 +200,11 @@ export const ListFilter = ({ placeData, searchGlobal }: ListFilterType) => {
             <CollapsibleContent>
               <div
                 className={cn(
-                  'mt-5 flex flex-wrap items-start justify-start gap-2',
+                  'mt-5 w-full flex flex-wrap items-start justify-start gap-2',
                   filter?.sectionName == 'Rating Star' ||
                     filter?.sectionName == 'Customer Rating'
-                    ? 'flex-row'
-                    : 'flex-col',
+                    ? '!flex-row'
+                    : '!flex-col',
                 )}
               >
                 {filter?.filters?.map(item => (

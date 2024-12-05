@@ -292,7 +292,10 @@ export const CardRoomV2Detail = ({
         </CredenzaHeader>
         <CredenzaBody className="overflow-hidden">
           <div
-            className="mb-3 h-[75vh] overflow-y-scroll"
+            className={cn(
+              'mb-3 h-[75vh] overflow-y-scroll',
+              listImages?.length == 1 && '!h-fit',
+            )}
             ref={mobileScrollRef}
             style={{
               scrollbarWidth: 'none',
@@ -301,31 +304,38 @@ export const CardRoomV2Detail = ({
             <div className="grid h-full grid-cols-12 gap-3">
               <div className="order-2 col-span-12 h-full md:col-span-8 lg:order-1">
                 <div
-                  className="h-full overflow-y-scroll lg:h-[77vh]"
+                  className={cn(
+                    'h-full overflow-y-scroll lg:h-[75vh]',
+                    listImages?.length == 1 && '!h-fit',
+                  )}
                   style={{
                     scrollbarWidth: 'none',
                   }}
                 >
                   {listImages?.length == 0 ? (
-                    <div className="mt-32 text-center text-2xl max-w-[31.25rem] mx-auto font-medium">
+                    <div className="mx-auto mt-32 max-w-[31.25rem] text-center text-2xl font-medium">
                       We {`don't`} have any infomation about these images. Hotel
                       does not provide images
                     </div>
                   ) : (
                     <div className="relative grid grid-cols-2 gap-3">
-                      {listImages?.map((image, index) => (
+                      {listImages?.map((image, index: number) => (
                         <div
                           key={index}
                           className={`col-span-2 w-full ${
-                            (index + 1) % 8 === 3
+                            listImages.length === 1
                               ? 'col-span-2'
-                              : 'col-span-2 lg:col-span-1'
-                          } aspect-square h-full overflow-hidden rounded-lg`}
+                              : (index + 1) % 8 === 3
+                                ? 'col-span-2'
+                                : 'col-span-2 lg:col-span-1'
+                          } aspect-auto h-full overflow-hidden rounded-lg`}
                         >
                           <Image
                             src={replaceSize(
                               image,
-                              (index + 1) % 8 === 3 ? '1024x768' : '640x400',
+                              listImages.length === 1 || (index + 1) % 8 === 3
+                                ? '1024x768'
+                                : '640x400',
                             )}
                             alt=""
                             className="h-full w-full"
@@ -353,7 +363,15 @@ export const CardRoomV2Detail = ({
                 </div>
               </div>
               <div className="order-1 col-span-12 h-full rounded-lg bg-neutral-100 p-2 dark:bg-neutral-800 md:col-span-4 lg:order-2">
-                <ScrollArea className="h-full lg:h-[77vh]">
+                <div
+                  className={cn(
+                    'h-full lg:h-[73vh]',
+                    listImages?.length == 1 && '!h-fit',
+                  )}
+                  style={{
+                    scrollbarWidth: 'none',
+                  }}
+                >
                   <div className="p-2">
                     <h2
                       className={cn(
@@ -461,7 +479,7 @@ export const CardRoomV2Detail = ({
                       Book now <CreditCard className="size-4" />
                     </Button>
                   </div>
-                </ScrollArea>
+                </div>
               </div>
             </div>
           </div>

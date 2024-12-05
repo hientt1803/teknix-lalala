@@ -6,6 +6,7 @@ import { Poppins } from 'next/font/google';
 import { HOST_URL } from '@/configs';
 import { cn } from '@/lib/utils';
 import AppProvider from '@/providers/index';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const popins = Poppins({
   subsets: ['latin'],
@@ -138,6 +139,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn(popins.className)}>
         <AppProvider>{children}</AppProvider>
+        <SpeedInsights />
       </body>
     </html>
   );

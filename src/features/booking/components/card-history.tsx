@@ -61,6 +61,7 @@ const CardHistory = ({ data }: Props) => {
     dispatch(setReserveForm(dataReserve));
     router.push(`/checkout?reservation=${record.id}`);
   };
+  
   return (
     <Card className="relative grid cursor-pointer grid-cols-1 overflow-hidden rounded-3xl hover:shadow-xl lg:flex lg:flex-row">
       <div className="absolute right-4 top-4 z-10">

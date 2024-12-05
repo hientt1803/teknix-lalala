@@ -47,7 +47,7 @@ const HotelInfoSection = ({ data, scrollIntoListRoomSection }: Props) => {
           <h1 className="text-6xl font-semibold leading-tight">
             A New Vision of Luxury
           </h1>
-          <p className="leading-normal text-neutral-700 dark:text-neutral-300 lg:text-lg">
+          <div className="leading-normal text-neutral-700 dark:text-neutral-300 lg:text-lg">
             {data?.description_struct?.slice(0, 1).map(de => (
               <div key={de.title}>
                 <div className="flex">
@@ -55,7 +55,7 @@ const HotelInfoSection = ({ data, scrollIntoListRoomSection }: Props) => {
                     {de.title}
                   </h3>
                 </div>
-                <p className="font-normal text-neutral-600 dark:text-neutral-400">
+                <span className="font-normal text-neutral-600 dark:text-neutral-400">
                   {de.paragraphs.map((pa, index) => (
                     <span key={index}>
                       <span>{pa}</span>
@@ -63,15 +63,15 @@ const HotelInfoSection = ({ data, scrollIntoListRoomSection }: Props) => {
                       <br />
                     </span>
                   ))}
-                </p>
+                </span>
                 <br />
               </div>
             ))}
-          </p>
+          </div>
           <div className="rounded-full border-b border-b-neutral-200 dark:border-b-neutral-700"></div>
           <div className="flex w-full items-center justify-between">
             <div className="flex flex-col space-y-2">
-              <p className="flex items-center gap-2 text-lg font-semibold text-neutral-900 dark:text-neutral-400">
+              <div className="flex items-center gap-2 text-lg font-semibold text-neutral-900 dark:text-neutral-400">
                 <div className="flex h-7 w-7 items-center justify-center rounded-full border border-neutral-400">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ const HotelInfoSection = ({ data, scrollIntoListRoomSection }: Props) => {
                   </svg>
                 </div>
                 Need help? Call us
-              </p>
+              </div>
               <p className="text-2xl font-semibold">1-800-222-8888</p>
             </div>
             <Badge
@@ -137,11 +137,13 @@ const HotelInfoSection = ({ data, scrollIntoListRoomSection }: Props) => {
         </div>
         <div className="col-span-6 xl:col-span-5">
           <div className="relative h-fit w-full">
-            <Image
-              className="aspect-[3.5/5] rounded-3xl"
-              src={replaceSize(data?.images[0])}
-              alt=""
-            />
+            <div className="aspect-[1/1.5]">
+              <Image
+                className="h-full w-full rounded-3xl object-cover"
+                src={replaceSize(data?.images[0], '1024x768')}
+                alt=""
+              />
+            </div>
             <Image
               className="absolute right-5 top-5 aspect-square w-40 rounded-3xl lg:-right-10 lg:top-10 lg:w-60"
               src={replaceSize(data?.images[1])}

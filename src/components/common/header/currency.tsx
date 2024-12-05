@@ -12,7 +12,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import useDebouncedValue from '@/hooks/use-debounced';
 import curs from '@/lib/currencies.json';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { setSearchGlobalCurrency } from '@/stores/features/global/global-slice';
 export type CurrencyType = {
   code: string;

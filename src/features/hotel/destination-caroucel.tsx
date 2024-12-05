@@ -1,7 +1,6 @@
 'use client';
 
 import { setCookie } from 'cookies-next';
-import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -15,16 +14,20 @@ import {
 } from '@/components/ui/carousel';
 import { API_URL } from '@/configs';
 import { HotDestination } from '@/services/global';
+import { useAppSelector } from '@/stores';
 import { setSearchGlobalLocation } from '@/stores/features/global/global-slice';
 import { setTriggerSearch } from '@/stores/features/stay/stay-slice';
+import {
+  convertStringToDate,
+  formatDateToYearMonthDay,
+} from '@/utilities/datetime';
 
 export const DestinationCaroucel = () => {
   // next api
-  const searchParams = useSearchParams();
-  const router = useRouter();
 
   // redux
   const dispatch = useDispatch();
+  const globalState = useAppSelector(state => state.globalSlice.searchGlobal);
 
   // State
   const [listDestination, setListDestination] = useState<HotDestination[]>([]);
@@ -65,11 +68,47 @@ export const DestinationCaroucel = () => {
     setCookie('locationSearch', destination?.city_name);
     setCookie('locationImage', destination?.image_url);
 
+    // convert data
+    const startDate = formatDateToYearMonthDay(
+      convertStringToDate(globalState.dateRange.startDate),
+    );
+    const endDate = formatDateToYearMonthDay(
+      convertStringToDate(globalState.dateRange.endDate),
+    );
+
+    let adults = 0;
+    globalState.people
+      ? globalState.people.forEach(item => {
+          adults += item.adults;
+        })
+      : [];
+
+    const params = new URLSearchParams({
+      checkin: startDate,
+      checkout: endDate,
+      language: 'en',
+      adults: adults.toString(),
+      currency: 'VND',
+    });
+
+    let childrens = 0;
+    globalState.people.map(item => {
+      item.children.forEach((child, index) => {
+        childrens++;
+        params.append(`childrens[${index}]`, String(child));
+      });
+    });
+
+    params.append('latitude', String(destination?.lat) || '10.0364634');
+    params.append('longtitude', String(destination?.long) || '105.7875821');
+    params.append('region', String(destination?.city_name) || '');
+
     dispatch(setTriggerSearch(true));
 
-    router.push('/hotel?' + searchParams?.toString(), {
-      scroll: false,
-    });
+    globalThis.history.pushState({}, '', `/hotel?${params.toString()}`);
+    // router.push('/hotel?' + params?.toString(), {
+    //   scroll: false,
+    // });
   };
 
   return (

@@ -7,7 +7,6 @@ import { Rating } from '@/components/custom/rating/rating';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Slider } from '@/components/ui/slider';
 import { useGetReviewByStayIdQuery } from '@/stores/features/review';
 import { convertStringToDate, formatDateUTC } from '@/utilities/datetime';
 

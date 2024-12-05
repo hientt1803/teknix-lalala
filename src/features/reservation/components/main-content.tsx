@@ -6,6 +6,7 @@ import PriceSection from './price-section';
 
 const MainContent = async ({ id }: { id: string }) => {
   const data = await getReservationHistoryData(id);
+  
   const {
     rate_meta_data,
     checkin_date,
@@ -16,6 +17,7 @@ const MainContent = async ({ id }: { id: string }) => {
     meta_data,
     total_discount,
   } = data;
+  
   return (
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
       <div className="col-span-2 flex flex-col gap-5">

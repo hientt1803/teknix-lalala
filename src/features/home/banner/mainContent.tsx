@@ -64,12 +64,12 @@ export const MainContent = ({ slice }: { slice: Content.HeroSlice }) => {
         </div>
 
         {/* button section */}
-        <div className="mt-6 flex items-center justify-start gap-4 xl:mt-8">
+        <div className="mt-6 flex items-center justify-center md:justify-start flex-wrap gap-4 xl:mt-8">
           <PrismicNextLink field={slice?.primary?.button_link}>
             <MainButton
               text={slice.primary.button_text || ''}
               rightIcon={<ArrowRight className="ml-1 h-5 w-5" />}
-              className="text-base text-black"
+              className="text-sm md:text-base text-black"
             />
           </PrismicNextLink>
           <MainButton

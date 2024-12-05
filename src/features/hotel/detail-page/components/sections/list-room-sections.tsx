@@ -17,17 +17,29 @@ import {
   setTriggerRoomSearch,
   useLazyGetRoomActiveByHotelIdQuery,
 } from '@/stores/features/stay';
-import { IReserveForm, Rate } from '@/stores/features/stay/type';
+import {
+  IHotelReservation,
+  IReserveForm,
+  Rate,
+} from '@/stores/features/stay/type';
 import { useAppSelector } from '@/stores/hook';
 
 import RoomCard from '../card-room-v2';
 import dynamic from 'next/dynamic';
+import { setSearchGlobalLocation } from '@/stores/features/global/global-slice';
+import { useLazyGetListLocaltionByOpenStreetMapAPIQuery } from '@/stores/features/openstreetmap';
 
 const ListRoomSearchGroup = dynamic(() =>
   import('../list-room-search-group').then(mob => mob.ListRoomSearchGroup),
 );
 
-export const ListRoomSections = ({ id }: { id: string }) => {
+export const ListRoomSections = ({
+  id,
+  data,
+}: {
+  id: string;
+  data?: IHotelReservation;
+}) => {
   // next api
   const router = useRouter();
 
@@ -40,6 +52,7 @@ export const ListRoomSections = ({ id }: { id: string }) => {
   // API Query
   const [fetchRoom, { data: hotelData, isLoading, isFetching }] =
     useLazyGetRoomActiveByHotelIdQuery();
+  const [fetchGeo] = useLazyGetListLocaltionByOpenStreetMapAPIQuery();
 
   // States
   const [showAll, setShowAll] = useState(false);
@@ -147,6 +160,30 @@ export const ListRoomSections = ({ id }: { id: string }) => {
       dispatch(onOpen());
     }
   };
+
+  // handle set location
+  useEffect(() => {
+    const resetLocationData = async () => {
+      if (searchGlobal.location.searchType == 'hotel') {
+        const nomimatim = await fetchGeo({
+          query: data?.region?.name.replaceAll(' ', '+') || 'Can Tho',
+        });
+
+        dispatch(
+          setSearchGlobalLocation({
+            name: (nomimatim?.data && nomimatim?.data[0]?.name) || 'Can Tho',
+            searchType: 'region',
+            hotelId: id,
+            lat: data?.latitude || 0,
+            lon: data?.longitude || 0,
+            placeId: (nomimatim.data && nomimatim?.data[0]?.place_id) || 0,
+          }),
+        );
+      }
+    };
+
+    resetLocationData();
+  }, []);
 
   return (
     <div className="my-14">

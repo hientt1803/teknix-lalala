@@ -2,8 +2,16 @@ import { Content } from '@prismicio/client';
 import { SliceComponentProps } from '@prismicio/react';
 
 import Bounded from '@/components/common/containers/bounded';
-import PromotionCarousel from '@/features/home/promotion/carousel';
-import Promotion from '@/features/home/promotion/promotion';
+import dynamic from 'next/dynamic';
+
+export const PromotionCarousel = dynamic(() =>
+  import('@/features/home/promotion/carousel').then(module_ => module_.default),
+);
+export const Promotion = dynamic(() =>
+  import('@/features/home/promotion/promotion').then(
+    module_ => module_.default,
+  ),
+);
 
 /**
  * Props for `PromotionSection`.

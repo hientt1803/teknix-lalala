@@ -28,14 +28,10 @@ export const MainContent = dynamic(() =>
     module_ => module_.MainContent,
   ),
 );
-export const SearchGroup = dynamic(
-  () =>
-    import('@/components/common/searchGroup/searchGroup').then(
-      module_ => module_.SearchGroup,
-    ),
-  {
-    ssr: false,
-  },
+export const SearchGroup = dynamic(() =>
+  import('@/components/common/searchGroup/searchGroup').then(
+    module_ => module_.SearchGroup,
+  ),
 );
 
 /**

@@ -1,17 +1,14 @@
 'use client';
+
 import {
   ArrowRight,
-  Bell,
   Bookmark,
-  Dot,
   Grip,
   PercentCircle,
   Settings,
-  Sun,
   Ticket,
   Users,
   Wallet,
-  X,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
@@ -31,7 +28,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { cn } from '@/lib/utils';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { onClose, onOpen } from '@/stores/features/dialog';
 import {
   logOutUser,
@@ -40,7 +37,11 @@ import {
 } from '@/stores/features/user';
 
 import Image from '../images/image';
-import { ModeToggleText } from '../themes/mode-text';
+import dynamic from 'next/dynamic';
+
+const ModeToggleText = dynamic(() =>
+  import('../themes/mode-text').then(mob => mob.ModeToggleText),
+);
 
 const links = [
   //    {

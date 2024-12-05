@@ -5,6 +5,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { IHotelReservation } from '@/stores/features/stay/type';
+import { replaceSize } from '@/utilities/string';
 
 const SearchGroup = dynamic(() =>
   import('@/components/common/searchGroup/searchGroup').then(
@@ -24,10 +25,9 @@ export const BannerSection = ({
   return (
     <>
       <div
-        className="relative flex items-center justify-center overflow-hidden rounded-lg"
+        className="relative flex items-center justify-center object-cover overflow-hidden rounded-lg"
         style={{
-          background:
-            "url('/assets/images/checkout/banner-hotel.png') center center",
+          background: `url('${replaceSize(data?.images[0], '1024x768') || '/assets/images/checkout/banner-hotel.png'}') center center`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           minHeight: '550px',
@@ -84,7 +84,7 @@ export const BannerSection = ({
         </div>
       </div>
 
-      <div className="relative -top-24 mx-0 lg:mx-2">
+      <div className="relative -top-24 mx-0 lg:mx-1">
         <SearchGroup showBorder showTabs />
       </div>
     </>

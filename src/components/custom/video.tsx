@@ -1,9 +1,8 @@
 'use client';
+
 import { Content } from '@prismicio/client';
 import { PrismicNextImage } from '@prismicio/next';
 import { useState } from 'react';
-
-import { MediaModal } from './modal-media';
 
 interface VideoSectionProps {
   videos: Content.VideoSectionSlice;

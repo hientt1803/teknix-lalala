@@ -11,7 +11,7 @@ interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 
 const Image: React.FC<ImageProps> = ({
   src,
-  alt,
+  alt = '',
   fallback,
   className, // className dành cho div
   classNameImage,

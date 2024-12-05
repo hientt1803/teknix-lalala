@@ -1,7 +1,4 @@
-// 'use client';
 import { CircleHelpIcon } from 'lucide-react';
-import { useMemo } from 'react';
-
 import Badge from '@/components/custom/badges/badge';
 import {
   Tooltip,
@@ -10,36 +7,44 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
-import { PaymentOptions } from '@/stores/features/reservation';
+import { PaymentOptions, TaxData } from '@/stores/features/reservation';
 import { formatCurrencyWithCodeAsSuffix } from '@/utilities/currency';
 
 interface PriceSectionProps {
   paymentOptions: PaymentOptions;
   total_discount: number;
 }
+
+function processTaxes(tax_data: TaxData) {
+  if (!tax_data || !Array.isArray(tax_data.taxes)) {
+    return {
+      includedTaxes: [],
+      notIncludedTaxes: [],
+    };
+  }
+
+  const taxes = tax_data.taxes || [];
+  const includedTaxes = taxes.filter(tax => tax.included_by_supplier === true);
+  const notIncludedTaxes = taxes.filter(
+    tax => tax.included_by_supplier === false,
+  );
+
+  return {
+    includedTaxes,
+    notIncludedTaxes,
+  };
+}
+
 const PriceSection = ({
   paymentOptions,
   total_discount,
 }: PriceSectionProps) => {
   const { tax_data, show_amount, show_currency_code } =
     paymentOptions.payment_types[0];
+    
   const totalPrice = Number(show_amount) - total_discount;
+  const taxes = processTaxes(tax_data);
 
-  const taxes = useMemo(() => {
-    const taxes = tax_data?.taxes || [];
-
-    const includedTaxes = taxes.filter(
-      tax => tax.included_by_supplier === true,
-    );
-    const notIncludedTaxes = taxes.filter(
-      tax => tax.included_by_supplier === false,
-    );
-
-    return {
-      includedTaxes,
-      notIncludedTaxes,
-    };
-  }, [paymentOptions]);
   return (
     <div className="rounded-2xl border border-neutral-50 shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
       <h1 className="p-5 text-xl font-bold">Price Summary</h1>

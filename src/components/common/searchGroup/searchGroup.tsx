@@ -4,7 +4,7 @@ import { setCookie } from 'cookies-next';
 import { Search, User } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
@@ -36,7 +36,6 @@ const InputSearchLocation = dynamic(
     ),
   {
     loading: () => <InputSearchLocationSkeleton />,
-    ssr: false,
   },
 );
 const InputSearchDateRange = dynamic(
@@ -263,7 +262,7 @@ export const SearchGroup = ({
             onClick={() => handleSearchDirection()}
             disabled={hotelSearchLoadingState || roomSearchLoading}
           >
-            {hotelSearchLoadingState || roomSearchLoading ? (
+            {hotelSearchLoadingState || roomSearchLoading && !isFromHotelDetail ? (
               <span className="h-4 w-4 animate-spin rounded-full border-4 border-gray-200 border-t-neutral-800" />
             ) : (
               <>

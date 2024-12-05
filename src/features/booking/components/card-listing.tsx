@@ -1,7 +1,7 @@
-'use client';
+import dynamic from 'next/dynamic';
 
-import CardReview from './card-reviews';
-import HistoryListing from './history-listing';
+const HistoryListing = dynamic(() => import('./history-listing'));
+const CardReview = dynamic(() => import('./card-reviews'));
 
 const CardListing = () => {
   return (

@@ -102,10 +102,10 @@ export function DatePickerWithRange({
             <CalendarIcon className="h-5 w-5 text-neutral-400" />
             {date?.from ? (
               date.to ? (
-                <>
+                <span className='line-clamp-1'>
                   {format(date.from, 'LLL dd, y')} -{' '}
                   {format(date.to, 'LLL dd, y')}
-                </>
+                </span>
               ) : (
                 format(date.from, 'LLL dd, y')
               )

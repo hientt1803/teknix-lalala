@@ -1,20 +1,20 @@
 'use client';
 
-import React, { useMemo } from 'react';
-
 import { Button } from '@/components/ui/button';
 import {
   MapHotel,
   useGetReservationHistoryQuery,
 } from '@/stores/features/reservation';
-
-import CardHistory from './card-history';
+import { useMemo } from 'react';
 import CardHistorySkeleton from './card-history-skeleton';
-const data = [
-  { label: 'Stays', value: 'stay' },
-  { label: 'Experiences', value: 'exp' },
-  { label: 'Car For Rent', value: 'car' },
-];
+import dynamic from 'next/dynamic';
+// const data = [
+//   { label: 'Stays', value: 'stay' },
+//   { label: 'Experiences', value: 'exp' },
+//   { label: 'Car For Rent', value: 'car' },
+// ];
+
+const CardHistory = dynamic(() => import('./card-history'));
 
 const HistoryListing = () => {
   const {

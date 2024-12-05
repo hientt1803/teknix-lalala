@@ -8,7 +8,14 @@ import {
 import Bounded from '@/components/common/containers/bounded';
 import Heading from '@/components/common/typography/heading';
 import Paragraph from '@/components/common/typography/paragraph';
-import VideoSectionComp from '@/components/custom/video';
+import dynamic from 'next/dynamic';
+
+export const VideoSectionComp = dynamic(
+  () => import('@/components/custom/video').then(module_ => module_.default),
+  {
+    ssr: false,
+  },
+);
 
 /**
  * Props for `VideoSection`.

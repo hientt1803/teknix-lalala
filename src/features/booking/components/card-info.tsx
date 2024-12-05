@@ -3,9 +3,7 @@
 import { StarFilledIcon } from '@radix-ui/react-icons';
 import { EditIcon, Loader2 } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
@@ -15,12 +13,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { useLazyGetCurrentUserQuery } from '@/stores/features/user';
 
 const CardInfoUser = () => {
-  const router = useRouter();
-  const dispatch = useDispatch();
   const userInfo = useAppSelector(state => state.userSlice.currentUser);
   const [getData, { data, isLoading, isFetching }] =
     useLazyGetCurrentUserQuery();

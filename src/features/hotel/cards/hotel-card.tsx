@@ -60,7 +60,7 @@ const HotelCard = (props: HotelCArdType) => {
             <div
               className={cn(
                 displayType == 'list'
-                  ? 'm-0 aspect-video p-0 lg:aspect-[7/6]'
+                  ? 'm-0 aspect-video p-0 lg:aspect-square'
                   : 'm-0 aspect-video p-0 lg:aspect-auto',
               )}
             >
@@ -132,11 +132,11 @@ const HotelCard = (props: HotelCArdType) => {
                     convertToTitleCase(hotel?.hotel_id || '')}
                 </h3>
               </Link>
-              <p className="flex items-center gap-2">
-                <MapPin className="size-4 text-neutral-700 dark:text-neutral-300" />
+              <p className="flex items-start gap-2">
+                <MapPin className="size-4 text-neutral-700 dark:text-neutral-300 mt-[3px]" />
                 <span
                   className={cn(
-                    'text-base text-neutral-700 dark:text-neutral-400',
+                    'text-base line-clamp-2 text-neutral-700 dark:text-neutral-400',
                     displayType == 'list' ? '' : 'text-sm',
                   )}
                 >

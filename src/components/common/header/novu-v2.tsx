@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { NOVU_IDENTIFY, NOVU_SUBSCRIBER_ID } from '@/configs';
 import { cn } from '@/lib/utils';
 import { useAppSelector } from '@/stores/hook';
+import { useTheme } from 'next-themes';
 
 const CustomBell = ({ unseenCount }: { unseenCount: number }) => {
   return (
@@ -63,11 +64,11 @@ const RenderCustomNotification = ({
           {/* Right side */}
           <div className="flex-1">
             <div className="flex min-w-full flex-wrap items-center justify-between gap-2">
-              <div className="line-clamp-1 flex-1 text-xs font-bold">
+              <div className="line-clamp-1 flex-1 text-xs font-bold dark:text-neutral-200">
                 {(notification?.payload?.subject?.toString() as string) || ''}
               </div>
               <div className="flex gap-1">
-                <div className="line-clamp-1 text-xs font-semibold">
+                <div className="line-clamp-1 text-xs font-semibold dark:text-neutral-500">
                   {formatDistanceToNowStrict(
                     new Date(notification?.createdAt),
                     {
@@ -84,13 +85,13 @@ const RenderCustomNotification = ({
                 </div>
               </div>
             </div>
-            <div className="line-clamp-3 text-xs text-neutral-600">
+            <div className="line-clamp-3 text-xs text-neutral-600 dark:text-neutral-300">
               {(notification?.payload?.body?.toString() as string) || ''}
             </div>
           </div>
         </div>
       </div>
-      <div className="my-2 border-t border-neutral-200" />
+      <div className="my-2 border-t border-neutral-200 dark:border-neutral-700" />
     </div>
   );
 };
@@ -99,6 +100,7 @@ const NovuNotificationV2 = ({ userId }: { userId: string }) => {
   //    console.log("USERID", userId);
   //    console.log("NOVU_IDENTIFY", NOVU_IDENTIFY);
   //    console.log("NOVU_SUBSCRIBER_ID", NOVU_SUBSCRIBER_ID);
+  const { theme } = useTheme();
 
   return (
     <NovuProvider
@@ -108,7 +110,7 @@ const NovuNotificationV2 = ({ userId }: { userId: string }) => {
       <PopoverNotificationCenter
         position="bottom-end"
         offset={20}
-        colorScheme="light"
+        colorScheme={theme == 'light' ? 'light' : 'dark'}
         footer={() => <></>}
         showUserPreferences={false}
         listItem={(notification, handleNotificationClick) => (

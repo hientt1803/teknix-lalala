@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { IHotelReservation } from '@/stores/features/stay/type';
 
 // Dynamically import sections
@@ -12,7 +12,9 @@ const AmenitiesSection = dynamic(() => import('./sections/amenity-section'));
 const ReviewSection = dynamic(() => import('./sections/review-section'), {
   ssr: false,
 });
-const LocationSection = dynamic(() => import('./sections/location-section'));
+const LocationSection = dynamic(() => import('./sections/location-section'), {
+  ssr: false,
+});
 const ThingToKnowSection = dynamic(
   () => import('./sections/thing-to-know-section'),
   { ssr: false },
@@ -74,7 +76,6 @@ const MainContent = ({ data, id }: Props) => {
   //       }
   //    };
   // }, [targetRef]);
-
   const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
     window.scrollTo({
       top: ref?.current?.offsetTop,
@@ -111,7 +112,7 @@ const MainContent = ({ data, id }: Props) => {
 
         {/* LIST ROOM SECTION */}
         <div ref={listRoomRefSection}>
-          <ListRoomSections id={id} />
+          <ListRoomSections id={id} data={data} />
         </div>
 
         {/* HOW IT WORKS */}

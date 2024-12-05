@@ -1,12 +1,8 @@
-import dynamic from 'next/dynamic';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import AuthDialogScreen from '@/features/auth/components/auth-dialog';
-import AuthScreen from '@/features/auth/components/auth-screen';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { onClose, onOpen } from '@/stores/features/dialog';
 // const AuthScreen = dynamic(import('@/features/auth/components/auth-screen'), {
 //     ssr: false,

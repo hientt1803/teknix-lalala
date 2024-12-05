@@ -12,7 +12,7 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import useDebouncedValue from '@/hooks/use-debounced';
 import langs from '@/lib/countries.json';
-import { useAppSelector } from '@/stores';
+import { useAppSelector } from '@/stores/hook';
 import { setSearchGlobalLanguage } from '@/stores/features/global/global-slice';
 
 export type CountryType = {

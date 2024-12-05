@@ -11,7 +11,6 @@ import {
 } from 'lucide-react';
 import React, {
   Dispatch,
-  MutableRefObject,
   SetStateAction,
   useCallback,
   useEffect,
@@ -85,15 +84,51 @@ export const InputSearchLocation = ({
   }, [locationPopoverState]);
 
   useEffect(() => {
-    fetchGeo({
-      query: debouncedSearchValue.replaceAll(' ', '+') || 'Can Tho',
-    });
+    if (open) {
+      fetchGeo({
+        query: debouncedSearchValue.replaceAll(' ', '+') || 'Can Tho',
+      });
 
-    fetchLocation({
-      query: debouncedSearchValue || 'Can Tho',
-      language: 'en',
-    });
+      fetchLocation({
+        query: debouncedSearchValue || 'Can Tho',
+        language: 'en',
+      });
+    }
   }, [debouncedSearchValue, fetchGeo, fetchLocation]);
+
+  useEffect(() => {
+    const handleFunction = async () => {
+      const searchUrl = new URLSearchParams(window.location.search);
+
+      if (
+        searchUrl.toString().includes('region') &&
+        searchGlobal.location.name == ''
+      ) {
+        setInputSearch(searchUrl?.get('region')?.toString() || '');
+
+        const data = await fetchGeo({
+          query:
+            searchUrl?.get('region')?.toString().replaceAll(' ', '+') ||
+            'Can Tho',
+        }).unwrap();
+
+        if (data) {
+          dispatch(
+            setSearchGlobalLocation({
+              name: data[0].name,
+              searchType: 'region',
+              hotelId: searchGlobal.location.hotelId,
+              lat: Number(data[0].lat) || 0,
+              lon: Number(data[0].lon) || 0,
+              placeId: data[0].place_id || 0,
+            }),
+          );
+        }
+      }
+    };
+
+    handleFunction();
+  }, []);
 
   const handleOpenSearch = () => {
     inputRef?.current?.focus();

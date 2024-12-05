@@ -47,6 +47,8 @@ const BookingFeatures = () => {
               <Image
                 src="/assets/images/flight/woman-guide.svg"
                 className="h-full w-full object-cover"
+                alt=""
+                loading="lazy"
               />
             </div>
             <div className="col-span-2">
@@ -65,6 +67,8 @@ const BookingFeatures = () => {
               <Image
                 src="/assets/images/flight/man-guide.svg"
                 className="h-full w-full object-cover"
+                alt=""
+                loading="lazy"
               />
             </div>
           </div>
