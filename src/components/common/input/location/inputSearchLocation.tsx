@@ -84,7 +84,7 @@ export const InputSearchLocation = ({
   }, [locationPopoverState]);
 
   useEffect(() => {
-    if (open) {
+    if (open || locationPopoverState) {
       fetchGeo({
         query: debouncedSearchValue.replaceAll(' ', '+') || 'Can Tho',
       });
@@ -94,7 +94,13 @@ export const InputSearchLocation = ({
         language: 'en',
       });
     }
-  }, [debouncedSearchValue, fetchGeo, fetchLocation]);
+  }, [
+    debouncedSearchValue,
+    open,
+    fetchGeo,
+    fetchLocation,
+    locationPopoverState,
+  ]);
 
   useEffect(() => {
     const handleFunction = async () => {
@@ -378,7 +384,7 @@ export const InputSearchLocation = ({
             e.preventDefault();
           }}
           align="start"
-          className="my-1 -ml-4 w-[25rem] rounded-lg p-4 shadow-lg"
+          className="my-1 -ml-4 w-[22rem] md:w-[25rem] rounded-lg p-4 shadow-lg"
         >
           {searchLocationData?.hotels?.length == 0 &&
           searchLocationData?.regions.length == 0 &&
